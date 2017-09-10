@@ -289,4 +289,6 @@ build/default/production/_ext/1688732426/system_tasks.o:  \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../framework/peripheral/ports/plib_ports_compatibility.h  \
  ../src/app.h  \
-../src/system_config/default/system_definitions.h 
+../src/system_config/default/system_definitions.h  \
+ ../src/debug.h  \
+../src/app.h 

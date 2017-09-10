@@ -288,5 +288,4 @@ build/default/production/_ext/1360937237/app.o:  \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../framework/peripheral/ports/plib_ports_compatibility.h  \
- ../src/app.h  \
-../src/debug.h 
+ ../src/app.h 

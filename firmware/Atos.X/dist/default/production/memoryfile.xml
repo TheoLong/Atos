@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <project>                                  
-  <executable name="dist/default/production/test_1.X.production.elf">                 
+  <executable name="dist/default/production/Atos.X.production.elf">                 
     <memory name="program">                 
       <units>bytes</units>                 
       <length>531968</length>                 
-      <used>13580</used>                     
-      <free>518388</free>                     
+      <used>11908</used>                     
+      <free>520060</free>                     
     </memory>                              
     <memory name="data">              
       <units>bytes</units>                 
       <length>131072</length>                 
-      <used>104332</used>                     
-      <free>26740</free>                     
+      <used>104320</used>                     
+      <free>26752</free>                     
     </memory>                              
   </executable>                            
 </project>                                 

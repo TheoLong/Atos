@@ -1,60 +1,6 @@
-/*******************************************************************************
-  System Initialization File
-
-  File Name:
-    system_init.c
-
-  Summary:
-    This file contains source code necessary to initialize the system.
-
-  Description:
-    This file contains source code necessary to initialize the system.  It
-    implements the "SYS_Initialize" function, defines the configuration bits,
-    and allocates any necessary global system resources, such as the
-    sysObj structure that contains the object handles to all the MPLAB Harmony
-    module objects in the system.
- *******************************************************************************/
-
-// DOM-IGNORE-BEGIN
-/*******************************************************************************
-Copyright (c) 2013-2015 released Microchip Technology Inc.  All rights reserved.
-
-Microchip licenses to you the right to use, modify, copy and distribute
-Software only when embedded on a Microchip microcontroller or digital signal
-controller that is integrated into your product or third party product
-(pursuant to the sublicense terms in the accompanying license agreement).
-
-You should refer to the license agreement accompanying this Software for
-additional information regarding your rights and obligations.
-
-SOFTWARE AND DOCUMENTATION ARE PROVIDED AS IS WITHOUT WARRANTY OF ANY KIND,
-EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
-MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
-IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
-CONTRACT, NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR
-OTHER LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
-INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
-CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
-SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
-(INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
- *******************************************************************************/
-// DOM-IGNORE-END
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Included Files
-// *****************************************************************************
-// *****************************************************************************
-
 #include "system_config.h"
 #include "system_definitions.h"
 
-
-// ****************************************************************************
-// ****************************************************************************
-// Section: Configuration Bits
-// ****************************************************************************
-// ****************************************************************************
 // <editor-fold defaultstate="collapsed" desc="Configuration Bits">
 
 /*** DEVCFG0 ***/
@@ -93,54 +39,40 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #pragma config FUSBIDIO =   ON
 #pragma config FVBUSONIO =  ON
 // </editor-fold>
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Driver Initialization Data
-// *****************************************************************************
-// *****************************************************************************
 // <editor-fold defaultstate="collapsed" desc="DRV_Timer Initialization Data">
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="DRV_USART Initialization Data">
 // </editor-fold>
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: System Data
-// *****************************************************************************
-// *****************************************************************************
-
-/* Structure to hold the object handles for the modules in the system. */
 SYSTEM_OBJECTS sysObj;
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Module Initialization Data
-// *****************************************************************************
-// *****************************************************************************
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Library/Stack Initialization Data
-// *****************************************************************************
-// *****************************************************************************
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: System Initialization
-// *****************************************************************************
-// *****************************************************************************
-
-/*******************************************************************************
-  Function:
-    void SYS_Initialize ( void *data )
-
-  Summary:
-    Initializes the board, services, drivers, application and other modules.
-
-  Remarks:
-    See prototype in system/common/sys_module.h.
- */
+//-----------------------------------init----------------------------------------
+void GPIO_ADC_TMR_init( void )
+{
+    DRV_ADC_Open();
+    DRV_TMR0_Start();
+     //pin A8-A15
+    PLIB_PORTS_PinModeSelect (PORTS_ID_0, PORTS_ANALOG_PIN_8, PORTS_PIN_MODE_DIGITAL);
+    PLIB_PORTS_PinModeSelect (PORTS_ID_0, PORTS_ANALOG_PIN_9, PORTS_PIN_MODE_DIGITAL);
+    PLIB_PORTS_PinModeSelect (PORTS_ID_0, PORTS_ANALOG_PIN_10, PORTS_PIN_MODE_DIGITAL);
+    PLIB_PORTS_PinModeSelect (PORTS_ID_0, PORTS_ANALOG_PIN_11, PORTS_PIN_MODE_DIGITAL);
+    PLIB_PORTS_PinModeSelect (PORTS_ID_0, PORTS_ANALOG_PIN_12, PORTS_PIN_MODE_DIGITAL);
+    PLIB_PORTS_PinModeSelect (PORTS_ID_0, PORTS_ANALOG_PIN_13, PORTS_PIN_MODE_DIGITAL);
+    PLIB_PORTS_PinModeSelect (PORTS_ID_0, PORTS_ANALOG_PIN_14, PORTS_PIN_MODE_DIGITAL);
+    PLIB_PORTS_PinModeSelect (PORTS_ID_0, PORTS_ANALOG_PIN_15, PORTS_PIN_MODE_DIGITAL);
+    PLIB_PORTS_DirectionOutputSet (PORTS_ID_0, PORT_CHANNEL_B, 0xFF00);
+      //pin 8-15
+    PLIB_PORTS_DirectionOutputSet (PORTS_ID_0, PORT_CHANNEL_A, 0x000C);
+    PLIB_PORTS_DirectionOutputSet (PORTS_ID_0, PORT_CHANNEL_D, 0x1018);
+    PLIB_PORTS_DirectionOutputSet (PORTS_ID_0, PORT_CHANNEL_F, 0x3000);
+    PLIB_PORTS_PinDirectionOutputSet(PORTS_ID_0, PORT_CHANNEL_C, PORTS_BIT_POS_4);
+    //pin 30-37
+    PLIB_PORTS_DirectionOutputSet (PORTS_ID_0, PORT_CHANNEL_E, 0x00FF);
+    
+    //LEDs for testing only
+    //PLIB_PORTS_PinDirectionOutputSet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    //PLIB_PORTS_PinDirectionOutputSet(PORTS_ID_0, PORT_CHANNEL_C, PORTS_BIT_POS_1);
+}
 
 void SYS_Initialize ( void* data )
 {
@@ -169,9 +101,7 @@ void SYS_Initialize ( void* data )
     /* Initialize Middleware */
 
     /* Initialize the Application */
-    ADC_Initialize();
-    TMR_Initialize();
-    APP_Initialize();
+    GPIO_ADC_TMR_init();
 }
 
 

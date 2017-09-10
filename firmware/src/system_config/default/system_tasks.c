@@ -1,7 +1,7 @@
 #include "system_config.h"
 #include "system_definitions.h"
 #include "app.h"
-
+#include "debug.h"
 // *****************************************************************************
 // *****************************************************************************
 // Section: Local Prototypes
@@ -12,12 +12,8 @@
  
 static void _SYS_Tasks ( void );
 //my task start here
-static void _ReadADC_Tasks (void); 
-static void _OutputUART_Tasks (void);
-static void _OutputGPIO_Tasks (void);
+static void _Output_Tasks (void);
 
-//reference app task
-static void _APP_Tasks(void);
 
 void SYS_Tasks ( void )
 {
@@ -25,45 +21,13 @@ void SYS_Tasks ( void )
     xTaskCreate((TaskFunction_t) _SYS_Tasks,
                 "Sys Tasks",
                 1024, NULL, 0, NULL);
-
- 
- 
-    /* Create OS Thread for APP Tasks. */
-    xTaskCreate((TaskFunction_t) _APP_Tasks,
-                "APP Tasks",
-                1024, NULL, 1, NULL);
-
     //-------------------------------milestone1 task start here----------------------------
-    xTaskCreate((TaskFunction_t) _ReadADC_Tasks,"_ReadADC_Tasks",1024, NULL, 1, NULL);
-    xTaskCreate((TaskFunction_t)_OutputUART_Tasks, "_OutputUART_Tasks", 1024, NULL, 1, NULL);
-    xTaskCreate((TaskFunction_t)_OutputGPIO_Tasks, "_OutputGPIO_Tasks", 1024, NULL, 1, NULL);
+    xTaskCreate((TaskFunction_t)_Output_Tasks, "_Output_Tasks", 1024, NULL, 1, NULL);
     
     vTaskStartScheduler(); /* This function never returns. */
 }
 
-void ADC_Initialize ( void )
-{
-     DRV_ADC_Open();
-}
-
- void TMR_Initialize ( void )
-{
-     DRV_TMR0_Start();
-}
-
-static void _ReadADC_Tasks(void)
-{
-    while(1)
-    {
-        if(DRV_ADC_SamplesAvailable())
-        {
-            int adc_value;
-            adc_value = DRV_ADC_SamplesRead(8);
-        }
-    }
-}
-
-static void _OutputUART_Tasks(void)
+static void _Output_Tasks(void)
 {
     while(1)
     {
@@ -71,17 +35,11 @@ static void _OutputUART_Tasks(void)
         {
             DRV_USART0_WriteByte('g');
         }
-    }
-}
-
-static void _OutputGPIO_Tasks(void)
-{
-    while(1)
-    {
         
+       //sent some number 
+        write_port(1, 120);
     }
 }
-
 
 
 static void _SYS_Tasks ( void)
@@ -94,20 +52,10 @@ static void _SYS_Tasks ( void)
     DRV_USART_TasksTransmit(sysObj.drvUsart0);
     DRV_USART_TasksError (sysObj.drvUsart0);
     DRV_USART_TasksReceive(sysObj.drvUsart0);
- 
- 
-
         /* Maintain Middleware */
 
         /* Task Delay */
     }
 }
 
-static void _APP_Tasks(void)
-{
-    while(1)
-    {
-        APP_Tasks();
-    }
-}
 

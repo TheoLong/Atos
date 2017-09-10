@@ -66,32 +66,10 @@ extern "C" {
 
 #endif
 
-typedef enum
-{
-	/* Application's state machine's initial state. */
-	APP_STATE_INIT=0,
-	APP_STATE_UART,
-    APP_STATE_NORMAL,
-
-	/* TODO: Define states used by the application state machine. */
-
-} APP_STATES;
-
-typedef struct
-{
-    /* The application's current state */
-    APP_STATES state;
-    bool ADC_data_ready;
-    int ADC_data_value;
-    /* TODO: Define any additional data used by the application. */
-
-} APP_DATA;
-
-void APP_Tasks( void );
-
 //create q
 QueueHandle_t xQueue;
 void put_in_que(unsigned int val);
+void write_port(int mode, uint32_t val);
 #endif /* _APP_H */
 
 //DOM-IGNORE-BEGIN

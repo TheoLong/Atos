@@ -6,7 +6,7 @@
 extern "C" {
 
 #endif
-    
+#include "app.h"    
 void dbgOutputVal(unsigned char outVal);
 
 void dbgUARTVal(unsigned char outVal);
