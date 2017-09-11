@@ -67,8 +67,12 @@ extern "C" {
 #endif
 
 //create q
-QueueHandle_t xQueue;
-void put_in_que(unsigned int val);
+QueueHandle_t xQueue1;
+QueueHandle_t xQueue2;
+
+void sendToQueue(unsigned int val);
+void sendToQueueFromISR(unsigned int val);
+
 void write_port(int mode, uint32_t val);
 #endif /* _APP_H */
 

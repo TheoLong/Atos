@@ -1,12 +1,20 @@
 #include "app.h"
 
 
-void put_in_que(unsigned int val)
+void sendToQueue(unsigned int val)
 {
     /* Create a queue capable of containing 100 unsigned int values. */
-    xQueue = xQueueCreate( 10, sizeof( unsigned int ) );
-    xQueueSend( xQueue, &val, 100 );
+    //xQueue = xQueueCreate( 10, sizeof( unsigned int ) );
+    xQueueSend( xQueue1, &val, 100 );
 }
+
+void sendToQueueFromISR(unsigned int val)
+{
+    /* Create a queue capable of containing 100 unsigned int values. */
+    //xQueue = xQueueCreate( 10, sizeof( unsigned int ) );
+    xQueueSendFromISR( xQueue2, &val, NULL );
+}
+
  //if mode = 0, goes to Pin AN8-15, otherwise goes to Pin 30-37
  void write_port(int mode, uint32_t val)
 {
