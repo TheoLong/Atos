@@ -62,24 +62,21 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/common/sys_common.h"
 #include "app.h"
 #include "system_definitions.h"
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
 // *****************************************************************************
 // *****************************************************************************
+ 
 
+
+
+ 
 
 void IntHandlerDrvTmrInstance0(void)
 {
-    //read in ADC raw value
-    if(DRV_ADC_SamplesAvailable())
-    {
-        int adc_value;
-        adc_value = DRV_ADC_SamplesRead(8);
-    }
-    //write_port(1, 120);
-    //clear timmer interrupt
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
+    DRV_TMR_Tasks(sysObj.drvTmr0);
 }
  /*******************************************************************************
  End of File
