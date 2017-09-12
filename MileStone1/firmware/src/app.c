@@ -126,6 +126,7 @@ void APP_Initialize ( void )
     {
         dbgHalt(HALTED_QUEUE_CREATE);
     }
+    init_pins();
 }
 
 
