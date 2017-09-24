@@ -15,10 +15,16 @@
 extern "C" {
 
 #endif
-
+struct IR_Struct 
+{
+    int Front_IR;
+    int Side_IR;
+};
+typedef struct IR_Struct IR;
 void SENSOR_CONTROL_THREAD_Initialize ( void );
 void SENSOR_CONTROL_THREAD_Tasks( void );
-
+void ReadIR(void);
+void SendToIRQueue(IR data);
 
 #endif /* _SENSOR_CONTROL_THREAD_H */
 

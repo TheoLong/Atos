@@ -258,12 +258,12 @@
       <Template dnOrder="6">
         <Name dnOrder="0">drv_adc_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/driver/adc</Path>
-        <Checksum dnOrder="2">2A002456B9A06B047F079862CD2E1A4C</Checksum>
+        <Checksum dnOrder="2">72D1FDDDA5978D94B02AB9BFE1D33FC1</Checksum>
       </Template>
       <Template dnOrder="7">
         <Name dnOrder="0">drv_adc_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/adc/src</Path>
-        <Checksum dnOrder="2">434A91175258A111B36462B48DF7BEBE</Checksum>
+        <Checksum dnOrder="2">2CE97B42E23F0B5A3AEB797AFDB632C4</Checksum>
       </Template>
       <Template dnOrder="8">
         <Name dnOrder="0">bsp.c</Name>
