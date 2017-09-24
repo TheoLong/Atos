@@ -25,7 +25,7 @@ void SENSOR_CONTROL_THREAD_Initialize ( void );
 void SENSOR_CONTROL_THREAD_Tasks( void );
 void ReadIR(void);
 void SendToIRQueue(IR data);
-
+QueueHandle_t IR_Q;
 #endif /* _SENSOR_CONTROL_THREAD_H */
 
 //DOM-IGNORE-BEGIN

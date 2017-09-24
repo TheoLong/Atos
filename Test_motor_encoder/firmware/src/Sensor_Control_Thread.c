@@ -1,6 +1,6 @@
 #include "sensor_control_thread.h"
 
-QueueHandle_t IR_Q;
+
 int df =2 ;
 int ds = 2;
 int FrontIR = 0;

@@ -70,12 +70,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
-void IntHandlerDrvAdc(void)
-{
-    /* Clear ADC Interrupt Flag */
-    ReadIR();
-    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
-}
  
 
 
@@ -104,6 +98,7 @@ void IntHandlerDrvTmrInstance2(void)
 void IntHandlerDrvTmrInstance3(void)
 {
     Read_Encoders();
+    ReadIR();
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
 }
  

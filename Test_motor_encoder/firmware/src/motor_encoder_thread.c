@@ -1,10 +1,10 @@
 #include "motor_encoder_thread.h"
 
-QueueHandle_t Encoder_Q;
+
 int left = 0;
 int right = 0;
 uint32_t Left_Encoder_data = 1;
-    uint32_t Right_Encoder_data = 1;
+uint32_t Right_Encoder_data = 1;
 //
 void MOTOR_ENCODER_THREAD_Initialize ( void )
 {
