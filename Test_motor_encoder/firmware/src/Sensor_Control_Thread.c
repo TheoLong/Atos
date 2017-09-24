@@ -1,6 +1,11 @@
 #include "sensor_control_thread.h"
 
 QueueHandle_t IR_Q;
+int df =2 ;
+int ds = 2;
+int FrontIR = 0;
+int SideIR = 0;
+
 void SENSOR_CONTROL_THREAD_Initialize ( void )
 {
     DRV_ADC_Open();
@@ -15,13 +20,26 @@ void SENSOR_CONTROL_THREAD_Tasks ( void )
 {
     while(1)
     {
+        IR data;
+        BaseType_t receive;
+        //IR data;
+        receive = xQueueReceive(IR_Q, &data, portMAX_DELAY);
+        //received data
+        if (receive == pdFALSE)
+        {
+            //sendToUART('r');
+        }
+        else
+        {
+            df = data.Front_IR;
+            ds = data.Side_IR;
+        }
     }
 }
 
 void ReadIR(void)
 {
-    int FrontIR = 0;
-    int SideIR = 0;
+    
     if (DRV_ADC_SamplesAvailable())
     {
         FrontIR = DRV_ADC_SamplesRead(0);

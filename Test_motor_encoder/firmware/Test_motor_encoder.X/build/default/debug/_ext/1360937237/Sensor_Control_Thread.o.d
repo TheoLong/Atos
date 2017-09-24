@@ -1,6 +1,6 @@
-build/default/debug/_ext/1360937237/motor_encoder_thread.o:  \
- ../src/motor_encoder_thread.c  \
-../src/motor_encoder_thread.h  \
+build/default/debug/_ext/1360937237/Sensor_Control_Thread.o:  \
+ ../src/Sensor_Control_Thread.c  \
+../src/sensor_control_thread.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../framework/peripheral/ports/plib_ports.h  \
@@ -187,5 +187,5 @@ build/default/debug/_ext/1360937237/motor_encoder_thread.o:  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/motor_encoder_thread.h  \
-../src/sensor_control_thread.h  \
- ../../../../third_party/rtos/FreeRTOS/Source/include/queue.h 
+ ../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../src/sensor_control_thread.h 

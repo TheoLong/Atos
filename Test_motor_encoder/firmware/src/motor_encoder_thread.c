@@ -3,6 +3,8 @@
 QueueHandle_t Encoder_Q;
 int left = 0;
 int right = 0;
+uint32_t Left_Encoder_data = 1;
+    uint32_t Right_Encoder_data = 1;
 //
 void MOTOR_ENCODER_THREAD_Initialize ( void )
 {
@@ -63,8 +65,7 @@ void Motor_Right_Set(bool dir, int pwm)
 
 void Read_Encoders(void)
 {
-    uint32_t Left_Encoder_data = 1;
-    uint32_t Right_Encoder_data = 1;
+    
     Encoder data;
     Left_Encoder_data = PLIB_TMR_Counter16BitGet(TMR_ID_3);
     Right_Encoder_data = PLIB_TMR_Counter16BitGet(TMR_ID_4);

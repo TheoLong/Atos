@@ -239,7 +239,7 @@
       <Template dnOrder="2">
         <Name dnOrder="0">system_interrupt_a.S</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">36B82156D7F1E3597E8EB17B8A069ABC</Checksum>
+        <Checksum dnOrder="2">5182BD3890AF48423824052E36691A9F</Checksum>
       </Template>
       <Template dnOrder="3">
         <Name dnOrder="0">drv_tmr_static.h</Name>
@@ -263,7 +263,7 @@
       <Template dnOrder="7">
         <Name dnOrder="0">drv_adc_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/adc/src</Path>
-        <Checksum dnOrder="2">2CE97B42E23F0B5A3AEB797AFDB632C4</Checksum>
+        <Checksum dnOrder="2">330C4E6F2D38EAD4B35328E0D8CB110C</Checksum>
       </Template>
       <Template dnOrder="8">
         <Name dnOrder="0">bsp.c</Name>
@@ -293,7 +293,7 @@
       <Template dnOrder="13">
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">DB53664D8DB560082AC059031E8713A9</Checksum>
+        <Checksum dnOrder="2">E8B51DE385C43F473E58950E57479EC2</Checksum>
         <ProjectFileChecksum dnOrder="3">A75B945877B767A3F6FC75D68BB5E7BC</ProjectFileChecksum>
       </Template>
       <Template dnOrder="14">
@@ -309,7 +309,7 @@
       <Template dnOrder="16">
         <Name dnOrder="0">system_init.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">87FEB4BC8EA30EA9305C310CB7DFDFFB</Checksum>
+        <Checksum dnOrder="2">370839A0FB43DC138F15E0AC2F521E02</Checksum>
       </Template>
       <Template dnOrder="17">
         <Name dnOrder="0">drv_oc_static.h</Name>

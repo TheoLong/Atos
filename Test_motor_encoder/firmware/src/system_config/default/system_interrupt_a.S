@@ -86,9 +86,9 @@ _IntHandlerDrvAdc:
 /* External Interrupt Instance 0 Interrupt */
    .extern  IntHandlerExternalInterruptInstance0
 
-   .section	.vector_7,code, keep
-   .equ     __vector_dispatch_7, IntVectorExternalInterruptInstance0
-   .global  __vector_dispatch_7
+   .section	.vector_15,code, keep
+   .equ     __vector_dispatch_15, IntVectorExternalInterruptInstance0
+   .global  __vector_dispatch_15
    .set     nomicromips
    .set     noreorder
    .set     nomips16
@@ -120,9 +120,9 @@ _IntHandlerExternalInterruptInstance0:
 /* External Interrupt Instance 1 Interrupt */
    .extern  IntHandlerExternalInterruptInstance1
 
-   .section	.vector_11,code, keep
-   .equ     __vector_dispatch_11, IntVectorExternalInterruptInstance1
-   .global  __vector_dispatch_11
+   .section	.vector_19,code, keep
+   .equ     __vector_dispatch_19, IntVectorExternalInterruptInstance1
+   .global  __vector_dispatch_19
    .set     nomicromips
    .set     noreorder
    .set     nomips16
