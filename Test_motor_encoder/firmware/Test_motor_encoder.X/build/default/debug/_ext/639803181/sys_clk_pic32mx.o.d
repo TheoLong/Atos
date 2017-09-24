@@ -154,4 +154,5 @@ build/default/debug/_ext/639803181/sys_clk_pic32mx.o:  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../src/motor_encoder_thread.h 
+ ../src/motor_encoder_thread.h  \
+ ../../../../third_party/rtos/FreeRTOS/Source/include/queue.h 

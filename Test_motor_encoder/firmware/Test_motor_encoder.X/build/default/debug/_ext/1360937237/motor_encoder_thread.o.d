@@ -155,4 +155,5 @@ build/default/debug/_ext/1360937237/motor_encoder_thread.o:  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../src/motor_encoder_thread.h 
+ ../src/motor_encoder_thread.h  \
+ ../../../../third_party/rtos/FreeRTOS/Source/include/queue.h 

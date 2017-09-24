@@ -61,6 +61,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system/common/sys_common.h"
 #include "motor_encoder_thread.h"
+#include "sensor_control_thread.h"
 #include "system_definitions.h"
 
 // *****************************************************************************
@@ -69,6 +70,22 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
+void IntHandlerDrvAdc(void)
+{
+    /* Clear ADC Interrupt Flag */
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
+}
+ 
+
+
+void IntHandlerExternalInterruptInstance0(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_1);
+}
+void IntHandlerExternalInterruptInstance1(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_2);
+}
  
 
 void IntHandlerDrvTmrInstance0(void)
@@ -77,7 +94,6 @@ void IntHandlerDrvTmrInstance0(void)
 }
 void IntHandlerDrvTmrInstance1(void)
 {
-    
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
 }
 void IntHandlerDrvTmrInstance2(void)

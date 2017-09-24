@@ -55,6 +55,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_config.h"
 #include "system_definitions.h"
 #include "motor_encoder_thread.h"
+#include "sensor_control_thread.h"
 
 
 // *****************************************************************************
@@ -69,6 +70,7 @@ static void _SYS_Tasks ( void );
  
  
 static void _MOTOR_ENCODER_THREAD_Tasks(void);
+static void _SENSOR_CONTROL_THREAD_Tasks(void);
 
 
 // *****************************************************************************
@@ -97,6 +99,11 @@ void SYS_Tasks ( void )
     /* Create OS Thread for MOTOR_ENCODER_THREAD Tasks. */
     xTaskCreate((TaskFunction_t) _MOTOR_ENCODER_THREAD_Tasks,
                 "MOTOR_ENCODER_THREAD Tasks",
+                1024, NULL, 1, NULL);
+
+    /* Create OS Thread for SENSOR_CONTROL_THREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _SENSOR_CONTROL_THREAD_Tasks,
+                "SENSOR_CONTROL_THREAD Tasks",
                 1024, NULL, 1, NULL);
 
     /**************
@@ -145,6 +152,23 @@ static void _MOTOR_ENCODER_THREAD_Tasks(void)
     while(1)
     {
         MOTOR_ENCODER_THREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _SENSOR_CONTROL_THREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of SENSOR_CONTROL_THREAD.
+*/
+
+static void _SENSOR_CONTROL_THREAD_Tasks(void)
+{
+    while(1)
+    {
+        SENSOR_CONTROL_THREAD_Tasks();
     }
 }
 
