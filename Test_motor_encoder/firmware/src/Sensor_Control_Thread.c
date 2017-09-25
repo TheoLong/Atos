@@ -49,7 +49,9 @@ void ReadIR(void)
     data.Front_IR = FrontIR;
     data.Side_IR = SideIR;
     SendToIRQueue(data);
-    
+    //
+    struct JsonRequest test = {PIC_ID,'s',0,31,0,15,0,0,0};
+    SendOverWiFi(test);
 }
 
 void SendToIRQueue(IR data)

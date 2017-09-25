@@ -62,15 +62,44 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/common/sys_common.h"
 #include "motor_encoder_thread.h"
 #include "sensor_control_thread.h"
+#include "wifireceive.h"
+#include "wifitransmit.h"
 #include "system_definitions.h"
+#include "public.h"
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
 // *****************************************************************************
 // *****************************************************************************
+void IntHandlerDrvUsartInstance0(void)
+{
+    if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT))
+    {
+        PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT);
+        ISR_UART_TRANSMIT();
+    }
+    if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_RECEIVE))
+    {
+        PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_RECEIVE);
+        ISR_UART_RECEIVE();
+    }    
+}
 
  
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
 
 
 void IntHandlerExternalInterruptInstance0(void)

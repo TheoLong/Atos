@@ -56,6 +56,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_definitions.h"
 #include "motor_encoder_thread.h"
 #include "sensor_control_thread.h"
+#include "wifireceive.h"
+#include "wifitransmit.h"
 
 
 // *****************************************************************************
@@ -71,6 +73,8 @@ static void _SYS_Tasks ( void );
  
 static void _MOTOR_ENCODER_THREAD_Tasks(void);
 static void _SENSOR_CONTROL_THREAD_Tasks(void);
+static void _WIFIRECEIVE_Tasks(void);
+static void _WIFITRANSMIT_Tasks(void);
 
 
 // *****************************************************************************
@@ -104,6 +108,16 @@ void SYS_Tasks ( void )
     /* Create OS Thread for SENSOR_CONTROL_THREAD Tasks. */
     xTaskCreate((TaskFunction_t) _SENSOR_CONTROL_THREAD_Tasks,
                 "SENSOR_CONTROL_THREAD Tasks",
+                1024, NULL, 1, NULL);
+
+    /* Create OS Thread for WIFIRECEIVE Tasks. */
+    xTaskCreate((TaskFunction_t) _WIFIRECEIVE_Tasks,
+                "WIFIRECEIVE Tasks",
+                1024, NULL, 1, NULL);
+
+    /* Create OS Thread for WIFITRANSMIT Tasks. */
+    xTaskCreate((TaskFunction_t) _WIFITRANSMIT_Tasks,
+                "WIFITRANSMIT Tasks",
                 1024, NULL, 1, NULL);
 
     /**************
@@ -169,6 +183,40 @@ static void _SENSOR_CONTROL_THREAD_Tasks(void)
     while(1)
     {
         SENSOR_CONTROL_THREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _WIFIRECEIVE_Tasks ( void )
+
+  Summary:
+    Maintains state machine of WIFIRECEIVE.
+*/
+
+static void _WIFIRECEIVE_Tasks(void)
+{
+    while(1)
+    {
+        WIFIRECEIVE_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _WIFITRANSMIT_Tasks ( void )
+
+  Summary:
+    Maintains state machine of WIFITRANSMIT.
+*/
+
+static void _WIFITRANSMIT_Tasks(void)
+{
+    while(1)
+    {
+        WIFITRANSMIT_Tasks();
     }
 }
 

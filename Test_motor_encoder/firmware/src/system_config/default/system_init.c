@@ -72,7 +72,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #pragma config IESO =       ON
 #pragma config POSCMOD =    XT
 #pragma config OSCIOFNC =   OFF
-#pragma config FPBDIV =     DIV_8
+#pragma config FPBDIV =     DIV_1
 #pragma config FCKSM =      CSECMD
 #pragma config WDTPS =      PS1048576
 #pragma config FWDTEN =     OFF
@@ -100,6 +100,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 // <editor-fold defaultstate="collapsed" desc="DRV_Timer Initialization Data">
+// </editor-fold>
+// <editor-fold defaultstate="collapsed" desc="DRV_USART Initialization Data">
 // </editor-fold>
 
 // *****************************************************************************
@@ -169,7 +171,10 @@ void SYS_Initialize ( void* data )
     /*Initialize TMR3 */
     DRV_TMR3_Initialize();
  
- 
+     sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)NULL);
+    SYS_INT_VectorPrioritySet(INT_VECTOR_UART1, INT_PRIORITY_LEVEL1);
+    SYS_INT_VectorSubprioritySet(INT_VECTOR_UART1, INT_SUBPRIORITY_LEVEL0);
+
     /* Initialize System Services */
 
     /*** Interrupt Service Initialization Code ***/
@@ -196,6 +201,8 @@ void SYS_Initialize ( void* data )
     /* Initialize the Application */
     MOTOR_ENCODER_THREAD_Initialize();
     SENSOR_CONTROL_THREAD_Initialize();
+    WIFIRECEIVE_Initialize();
+    WIFITRANSMIT_Initialize();
 }
 
 
