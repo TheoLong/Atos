@@ -22,7 +22,7 @@ void APP_Tasks ( void )
 
 void Callback(TimerHandle_t xTimer)
 {
-    struct JsonRequest jsr = {PIC_ID, 's', 15, 15, 15, 15, 15, 15, 15};
+    struct JsonRequest jsr = {PIC_ID, 'r', 15, 15, 15, 15, 15, 15, 15};
     SendOverWiFi(jsr);
 }
 

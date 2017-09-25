@@ -11,32 +11,6 @@ QueueHandle_t usartreceivequeue;
 DRV_HANDLE myUART;
 struct MessageStat msgstat = {0, 0, 0, 0, 0};
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Callback Functions
-// *****************************************************************************
-// *****************************************************************************
-
-/* TODO:  Add any necessary callback functions.
-*/
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Local Functions
-// *****************************************************************************
-// *****************************************************************************
-
-
-/* TODO:  Add any necessary local functions.
-*/
-
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Initialization and State Machine Functions
-// *****************************************************************************
-// *****************************************************************************
-
 
 void WIFIRECEIVE_Initialize ( void )
 {
@@ -87,17 +61,21 @@ void WIFIRECEIVE_Tasks ( void )
                 {
                     continue;
                 }
-                else if(index >= 255 && c != '\xFF')
+                else if(index >= 254 && c != '\xFF')
                 {
                     index = 0;
+                    continue;
                 }
                 else if(index > 4 && c == '\xFF')
                 {
                     msgstat.total++;
+                    strbuf[index] = '\xFF';
+                    strbuf[index+1] = '\0';
                     uint8_t ret = CheckString(strbuf, index);
                     if(ret == 0)
                     {
                         struct JsonResponse jsr;
+                        strbuf[index] = '\0';
                         uint8_t r = ParseJson(strbuf, &jsr);
                         if(r == 0)
                         {
@@ -118,7 +96,10 @@ void WIFIRECEIVE_Tasks ( void )
                     }
                     index = 0;
                 }
-                index++;
+                else
+                {
+                    strbuf[index++] = c;
+                }
             }
             break;
         }
@@ -151,37 +132,15 @@ uint8_t CheckString(char * str, int length)
 {
     if (length < 10)
     {
-        // msgstat.sequence++;
-        // msgstat.corrupted++;
         return INCORRECT_FORMAT;
     }
     uint32_t oldhash, newhash;
     memcpy((void*)&oldhash, (void*)(str+1), sizeof(uint32_t));
-//    oldhash = ((uint32_t) str[1] << 24) | ((uint32_t) str[2] << 16) 
-//            | ((uint32_t) str[3] << 8) | ((uint32_t) str[4]);
     newhash = hash(str + 5);
     if(oldhash != newhash)
     {
-        // msgstat.sequence++;
-        // msgstat.corrupted++;
         return CHECKSUM_MISMATCH;
     }
-    // uint16_t seq;
-    // memcpy((void*)&seq, (void*)(str+5), sizeof(uint16_t));
-    // if(seq - msgstat.sequence == 1)
-    // {
-    //     msgstat.sequence++;
-    // }
-    // else if(seq < msgstat.sequence)
-    // {
-    //     msgstat.missed += (65535 - msgstat.sequence - 1 + seq);
-    //     msgstat.sequence = seq;
-    // }
-    // else
-    // {
-    //     msgstat.missed += (msgstat.sequence - seq - 1);
-    //     msgstat.sequence = seq;
-    // }
     return 0;
 }
 
@@ -243,7 +202,8 @@ struct MessageStat GetMessageStat()
     return msgstat;
 }
 
-void Dispatch(struct JsonResponse js)
+void Dispatch(volatile struct JsonResponse js)
 {
-    
+    volatile int i = 10;
+    i++;
 }
