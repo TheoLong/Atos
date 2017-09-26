@@ -95,6 +95,26 @@ void WIFIRECEIVE_Tasks ( void )
                         msgstat.corrupted++;
                     }
                     index = 0;
+                    if((msgstat.total & 0x7) == 0)
+                    {
+                        struct JsonRequest js;
+                        js.seq = 0;
+                        js.id = PIC_ID;
+                        js.tgt = 0;
+                        js.tp = 's';
+                        js.tsk = 11;
+                        js.arg0 = msgstat.total;
+                        js.arg1 = msgstat.good;
+                        js.arg2 = msgstat.corrupted;
+                        js.arg3 = msgstat.missed;
+                        if(msgstat.corrupted + msgstat.missed > 128)
+                        {
+                            //TODO: dbgHLT
+                        }
+                        char str[256];
+                        JsonToString(js, str);
+                        SendToTransmitQueue(str);                        
+                    }
                 }
                 else
                 {
@@ -202,8 +222,7 @@ struct MessageStat GetMessageStat()
     return msgstat;
 }
 
-void Dispatch(volatile struct JsonResponse js)
+void Dispatch(struct JsonResponse js)
 {
-    volatile int i = 10;
-    i++;
+
 }
