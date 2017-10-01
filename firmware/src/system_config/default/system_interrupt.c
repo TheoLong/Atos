@@ -60,7 +60,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "system/common/sys_common.h"
+#include "WiFiReceive.h"
+#include "WiFiTransmit.h"
 #include "app.h"
+#include "public.h"
 #include "system_definitions.h"
 
 // *****************************************************************************
@@ -68,16 +71,22 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: System Interrupt Vector Functions
 // *****************************************************************************
 // *****************************************************************************
- 
-
-
-
- 
-
-void IntHandlerDrvTmrInstance0(void)
+void IntHandlerDrvUsartInstance0(void)
 {
-    DRV_TMR_Tasks(sysObj.drvTmr0);
+    if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT))
+    {
+        PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT);
+        ISR_UART_TRANSMIT();
+    }
+    if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_RECEIVE))
+    {
+        PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_RECEIVE);
+        ISR_UART_RECEIVE();
+    }        
 }
- /*******************************************************************************
+
+
+ 
+/*******************************************************************************
  End of File
 */
