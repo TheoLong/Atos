@@ -98,6 +98,8 @@ uint8_t CheckString(char * str, int length);
 
 uint8_t ParseJson(char * str, struct JsonResponse * js);
 
+void SendMessageStat(struct JsonRequest * js);
+
 void Dispatch(struct JsonResponse js);
 
 #endif /* _WIFIRECEIVE_H */

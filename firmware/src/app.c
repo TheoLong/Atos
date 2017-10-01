@@ -40,8 +40,8 @@ void Callback(TimerHandle_t xTimer)
 //    }
 //    JsonToString(js, str);
 //    SendToTransmitQueue(str);
-    struct JsonRequest jsr = {PIC_ID, 'r', 15, 15, 15, 15, 15, 15, 15};
-    SendOverWiFi(jsr);
+    // struct JsonRequest jsr = {PIC_ID, 'r', 15, 15, 15, 15, 15, 15, 15};
+    // SendOverWiFi(jsr);
 }
 
 /*******************************************************************************
