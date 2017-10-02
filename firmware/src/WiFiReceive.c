@@ -80,7 +80,7 @@ void WIFIRECEIVE_Tasks ( void )
                         if(r == 0)
                         {
                             msgstat.missed += (jsr.seq > msgstat.sequence) ? 
-                            (jsr.seq - msgstat - 1) : 0;
+                            (jsr.seq - msgstat.sequence - 1) : 0;
                             msgstat.sequence = jsr.seq;
                             msgstat.good++;
                             Dispatch(jsr);
@@ -88,7 +88,7 @@ void WIFIRECEIVE_Tasks ( void )
                         else
                         {
                             msgstat.missed += (jsr.seq > msgstat.sequence) ? 
-                            (jsr.seq - msgstat - 1) : 0;
+                            (jsr.seq - msgstat.sequence - 1) : 0;
                             msgstat.sequence = jsr.seq;            
                             msgstat.corrupted++;
                         }
@@ -99,29 +99,12 @@ void WIFIRECEIVE_Tasks ( void )
                         msgstat.corrupted++;
                     }
                     index = 0;
-                    // if((msgstat.total & 0x7) == 0)
-                    // {
-                    //     struct JsonRequest js;
-                    //     js.seq = 0;
-                    //     js.id = PIC_ID;
-                    //     js.tgt = 0;
-                    //     js.tp = 's';
-                    //     js.tsk = 11;
-                    //     js.arg0 = msgstat.total;
-                    //     js.arg1 = msgstat.good;
-                    //     js.arg2 = msgstat.corrupted;
-                    //     js.arg3 = msgstat.missed;
-                    //     if(msgstat.corrupted + msgstat.missed > 128)
-                    //     {
-                    //         //TODO: dbgHLT
-                    //     }
-                    //     char str[256];
-                    //     JsonToString(js, str);
-                    //     SendToTransmitQueue(str);                        
-                    // }
-                    struct JsonRequest j = {PIC_ID, 's', 0, 11, 0,
-                    msgstat.total, msgstat.good, msgstat.corrupted, msgstat.missed};
-                    SendOverWiFi(j);
+                    if((msgstat.total & WIFI_REPORT_RATE) == 0)
+                    {
+                        struct JsonRequest j = {PIC_ID, 's', 0, 11, 0,
+                        msgstat.total, msgstat.good, msgstat.corrupted, msgstat.missed};
+                        SendOverWiFi(j);
+                    }
                 }
                 else
                 {
