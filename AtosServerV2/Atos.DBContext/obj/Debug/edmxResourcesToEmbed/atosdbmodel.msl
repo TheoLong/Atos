@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="atosdbModelStoreContainer" CdmEntityContainer="AtosDbEntities">
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="atosdbModel.Log">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="atosdbModel.Message">
+        <MappingFragment StoreEntitySet="Message">
+          <ScalarProperty Name="Legacy" ColumnName="Legacy" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="BadMessage" ColumnName="BadMessage" />
+          <ScalarProperty Name="FromClient" ColumnName="FromClient" />
+          <ScalarProperty Name="PayloadArg3" ColumnName="PayloadArg3" />
+          <ScalarProperty Name="PayloadArg2" ColumnName="PayloadArg2" />
+          <ScalarProperty Name="PayloadArg1" ColumnName="PayloadArg1" />
+          <ScalarProperty Name="PayloadArg0" ColumnName="PayloadArg0" />
+          <ScalarProperty Name="PayloadTaskNumber" ColumnName="PayloadTaskNumber" />
+          <ScalarProperty Name="PayloadTargetId" ColumnName="PayloadTargetId" />
+          <ScalarProperty Name="PayloadType" ColumnName="PayloadType" />
+          <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
+          <ScalarProperty Name="PayloadRaw" ColumnName="PayloadRaw" />
+          <ScalarProperty Name="Hash" ColumnName="Hash" />
+          <ScalarProperty Name="Hex" ColumnName="Hex" />
+          <ScalarProperty Name="Raw" ColumnName="Raw" />
+          <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

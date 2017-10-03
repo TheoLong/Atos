@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="atosdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Message" Type="varchar(max)" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
+    <Property Name="TargetId" Type="int" Nullable="false" />
+    <Property Name="Raw" Type="varbinary" MaxLength="1024" />
+    <Property Name="Hex" Type="varchar" MaxLength="1024" />
+    <Property Name="Hash" Type="bigint" Nullable="false" />
+    <Property Name="PayloadRaw" Type="varchar" MaxLength="1024" />
+    <Property Name="SequenceNumber" Type="int" Nullable="false" />
+    <Property Name="PayloadType" Type="varchar" MaxLength="4" />
+    <Property Name="PayloadTargetId" Type="int" Nullable="false" />
+    <Property Name="PayloadTaskNumber" Type="int" Nullable="false" />
+    <Property Name="PayloadArg0" Type="int" Nullable="false" />
+    <Property Name="PayloadArg1" Type="int" Nullable="false" />
+    <Property Name="PayloadArg2" Type="int" Nullable="false" />
+    <Property Name="PayloadArg3" Type="int" Nullable="false" />
+    <Property Name="FromClient" Type="bit" Nullable="false" />
+    <Property Name="BadMessage" Type="int" />
+    <Property Name="DateTime" Type="datetime" />
+    <Property Name="Legacy" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="atosdbModelStoreContainer">
+    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

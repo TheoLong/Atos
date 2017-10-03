@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="atosdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Message" Type="varchar(max)" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="TargetId" Type="int" Nullable="false" />
+          <Property Name="Raw" Type="varbinary" MaxLength="1024" />
+          <Property Name="Hex" Type="varchar" MaxLength="1024" />
+          <Property Name="Hash" Type="bigint" Nullable="false" />
+          <Property Name="PayloadRaw" Type="varchar" MaxLength="1024" />
+          <Property Name="SequenceNumber" Type="int" Nullable="false" />
+          <Property Name="PayloadType" Type="varchar" MaxLength="4" />
+          <Property Name="PayloadTargetId" Type="int" Nullable="false" />
+          <Property Name="PayloadTaskNumber" Type="int" Nullable="false" />
+          <Property Name="PayloadArg0" Type="int" Nullable="false" />
+          <Property Name="PayloadArg1" Type="int" Nullable="false" />
+          <Property Name="PayloadArg2" Type="int" Nullable="false" />
+          <Property Name="PayloadArg3" Type="int" Nullable="false" />
+          <Property Name="FromClient" Type="bit" Nullable="false" />
+          <Property Name="BadMessage" Type="int" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="Legacy" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="atosdbModelStoreContainer">
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="atosdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AtosDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Logs" EntityType="atosdbModel.Log" />
+          <EntitySet Name="Messages" EntityType="atosdbModel.Message" />
+        </EntityContainer>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceId" Type="Int32" Nullable="false" />
+          <Property Name="TargetId" Type="Int32" Nullable="false" />
+          <Property Name="Raw" Type="Binary" MaxLength="1024" FixedLength="false" />
+          <Property Name="Hex" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="Hash" Type="Int64" Nullable="false" />
+          <Property Name="PayloadRaw" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="SequenceNumber" Type="Int32" Nullable="false" />
+          <Property Name="PayloadType" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="PayloadTargetId" Type="Int32" Nullable="false" />
+          <Property Name="PayloadTaskNumber" Type="Int32" Nullable="false" />
+          <Property Name="PayloadArg0" Type="Int32" Nullable="false" />
+          <Property Name="PayloadArg1" Type="Int32" Nullable="false" />
+          <Property Name="PayloadArg2" Type="Int32" Nullable="false" />
+          <Property Name="PayloadArg3" Type="Int32" Nullable="false" />
+          <Property Name="FromClient" Type="Boolean" Nullable="false" />
+          <Property Name="BadMessage" Type="Int32" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <Property Name="Legacy" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="atosdbModelStoreContainer" CdmEntityContainer="AtosDbEntities">
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="atosdbModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="atosdbModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Legacy" ColumnName="Legacy" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="BadMessage" ColumnName="BadMessage" />
+                <ScalarProperty Name="FromClient" ColumnName="FromClient" />
+                <ScalarProperty Name="PayloadArg3" ColumnName="PayloadArg3" />
+                <ScalarProperty Name="PayloadArg2" ColumnName="PayloadArg2" />
+                <ScalarProperty Name="PayloadArg1" ColumnName="PayloadArg1" />
+                <ScalarProperty Name="PayloadArg0" ColumnName="PayloadArg0" />
+                <ScalarProperty Name="PayloadTaskNumber" ColumnName="PayloadTaskNumber" />
+                <ScalarProperty Name="PayloadTargetId" ColumnName="PayloadTargetId" />
+                <ScalarProperty Name="PayloadType" ColumnName="PayloadType" />
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
+                <ScalarProperty Name="PayloadRaw" ColumnName="PayloadRaw" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+                <ScalarProperty Name="Hex" ColumnName="Hex" />
+                <ScalarProperty Name="Raw" ColumnName="Raw" />
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

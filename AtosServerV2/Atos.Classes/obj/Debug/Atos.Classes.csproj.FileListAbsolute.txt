@@ -1,0 +1,5 @@
+C:\Users\yuann\Google Drive\Fall2017\ECE4534\Server\AtosServerV2\Atos.Classes\bin\Debug\Atos.Classes.dll
+C:\Users\yuann\Google Drive\Fall2017\ECE4534\Server\AtosServerV2\Atos.Classes\bin\Debug\Atos.Classes.pdb
+C:\Users\yuann\Google Drive\Fall2017\ECE4534\Server\AtosServerV2\Atos.Classes\obj\Debug\Atos.Classes.csprojResolveAssemblyReference.cache
+C:\Users\yuann\Google Drive\Fall2017\ECE4534\Server\AtosServerV2\Atos.Classes\obj\Debug\Atos.Classes.dll
+C:\Users\yuann\Google Drive\Fall2017\ECE4534\Server\AtosServerV2\Atos.Classes\obj\Debug\Atos.Classes.pdb

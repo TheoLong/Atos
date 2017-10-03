@@ -1,0 +1,5 @@
+C:\Users\yuann\Google Drive\Fall2017\ECE4534\Server\AtosServerV2\Atos.DB\bin\Debug\Atos.DB.dacpac
+C:\Users\yuann\Google Drive\Fall2017\ECE4534\Server\AtosServerV2\Atos.DB\bin\Debug\Atos.DB.dll
+C:\Users\yuann\Google Drive\Fall2017\ECE4534\Server\AtosServerV2\Atos.DB\bin\Debug\Atos.DB.pdb
+C:\Users\yuann\Google Drive\Fall2017\ECE4534\Server\AtosServerV2\Atos.DB\obj\Debug\Atos.DB.dll
+C:\Users\yuann\Google Drive\Fall2017\ECE4534\Server\AtosServerV2\Atos.DB\obj\Debug\Atos.DB.pdb
