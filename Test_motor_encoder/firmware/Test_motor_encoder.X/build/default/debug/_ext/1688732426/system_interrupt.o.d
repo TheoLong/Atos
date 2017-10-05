@@ -292,11 +292,11 @@ build/default/debug/_ext/1688732426/system_interrupt.o:  \
  ../../../../framework/system/ports/sys_ports.h  \
  ../../../../framework/system/ports/sys_ports_definitions.h  \
  ../src/sensor_control_thread.h  \
-../src/wifireceive.h  \
-../src/public.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/jsmn.h  \
+ ../src/public.h  \
+../src/wifireceive.h  \
+../src/jsmn.h  \
 ../src/wifitransmit.h  \
  ../src/system_config/default/system_definitions.h  \
 ../src/public.h 

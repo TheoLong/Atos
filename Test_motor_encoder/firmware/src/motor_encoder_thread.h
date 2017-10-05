@@ -33,6 +33,7 @@ void Motor_Left_Set(bool dir, int pwm);
 void Motor_Right_Set(bool dir, int pwm);
 void Read_Encoders(void);
 void SendToQueue(Encoder data);
+int PID_module(int Speed, int set_speed, int*pwm);
 QueueHandle_t Encoder_Q;
 #endif /* _MOTOR_ENCODER_THREAD_H */
 

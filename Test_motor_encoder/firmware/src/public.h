@@ -40,8 +40,8 @@ BaseType_t SendOverWiFi(struct JsonRequest js);
 
 //when connection is good, return 1, otherwise 0
 uint8_t GetConnectionStatus();
-
-
+//YunfeiGuo's IRQueue
+void SendToIRQueue(struct JsonResponse js);
 
 
 
@@ -57,5 +57,7 @@ struct MessageStat
 };
 uint32_t hash(unsigned char * str);
 struct MessageStat GetMessageStat();
+void Left_Motor_PID(bool dir, int speed);
+void Right_Motor_PID(bool dir, int speed);
 #endif /* _EXAMPLE_FILE_NAME_H */
 

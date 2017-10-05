@@ -1,6 +1,6 @@
-build/default/production/_ext/1360937237/motor_encoder_thread.o:  \
- ../src/motor_encoder_thread.c  \
-../src/motor_encoder_thread.h  \
+build/default/production/_ext/1360937237/WiFiTransmit.o:  \
+ ../src/WiFiTransmit.c  \
+../src/WiFiTransmit.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../framework/peripheral/ports/plib_ports.h  \

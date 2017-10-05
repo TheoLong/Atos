@@ -1,6 +1,6 @@
-build/default/production/_ext/1360937237/motor_encoder_thread.o:  \
- ../src/motor_encoder_thread.c  \
-../src/motor_encoder_thread.h  \
+build/default/production/_ext/1360937237/WiFiReceive.o:  \
+ ../src/WiFiReceive.c  \
+../src/WiFiReceive.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../framework/peripheral/ports/plib_ports.h  \
@@ -297,5 +297,5 @@ build/default/production/_ext/1360937237/motor_encoder_thread.o:  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/public.h  \
 ../src/wifireceive.h  \
-../src/jsmn.h  \
-../src/wifitransmit.h 
+../src/wifitransmit.h  \
+../src/jsmn.h 

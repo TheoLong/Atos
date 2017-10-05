@@ -292,9 +292,9 @@ build/default/debug/_ext/327000265/drv_usart_static.o:  \
  ../../../../framework/system/ports/sys_ports_definitions.h  \
  ../src/motor_encoder_thread.h  \
 ../src/sensor_control_thread.h  \
- ../src/wifireceive.h  \
-../src/public.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/jsmn.h  \
+ ../src/public.h  \
+../src/wifireceive.h  \
+../src/jsmn.h  \
 ../src/wifitransmit.h 

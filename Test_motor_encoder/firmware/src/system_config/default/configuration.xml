@@ -321,7 +321,7 @@
       <Template dnOrder="15">
         <Name dnOrder="0">FreeRTOSConfig.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">49E1D79515E4FAFAF2C7B504336BD46C</Checksum>
+        <Checksum dnOrder="2">CFAABC34D7434A4F3B26066E83D8F02C</Checksum>
       </Template>
       <Template dnOrder="16">
         <Name dnOrder="0">drv_usart_static_byte_model.c</Name>
