@@ -297,4 +297,5 @@ build/default/debug/_ext/639803181/sys_clk_pic32mx.o:  \
  ../src/public.h  \
 ../src/wifireceive.h  \
 ../src/jsmn.h  \
-../src/wifitransmit.h 
+../src/wifitransmit.h  \
+ ../src/test_thread.h 

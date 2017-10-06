@@ -298,4 +298,5 @@ build/default/production/_ext/1360937237/Sensor_Control_Thread.o:  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/jsmn.h  \
-../src/wifitransmit.h 
+../src/wifitransmit.h  \
+../src/test_thread.h 

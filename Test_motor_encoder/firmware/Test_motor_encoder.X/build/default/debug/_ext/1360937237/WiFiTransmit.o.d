@@ -298,4 +298,5 @@ build/default/debug/_ext/1360937237/WiFiTransmit.o:  \
  ../src/public.h  \
 ../src/wifireceive.h  \
 ../src/jsmn.h  \
-../src/wifitransmit.h 
+../src/wifitransmit.h  \
+ ../src/test_thread.h 

@@ -1,6 +1,6 @@
-build/default/debug/_ext/1360937237/Sensor_Control_Thread.o:  \
- ../src/Sensor_Control_Thread.c  \
-../src/sensor_control_thread.h  \
+build/default/production/_ext/1360937237/Test_Thread.o:  \
+ ../src/Test_Thread.c  \
+../src/test_thread.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../framework/peripheral/ports/plib_ports.h  \
@@ -293,10 +293,10 @@ build/default/debug/_ext/1360937237/Sensor_Control_Thread.o:  \
  ../../../../framework/system/ports/sys_ports_definitions.h  \
  ../src/motor_encoder_thread.h  \
 ../src/sensor_control_thread.h  \
- ../src/wifireceive.h  \
-../src/public.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/jsmn.h  \
+ ../src/public.h  \
+../src/wifireceive.h  \
+../src/jsmn.h  \
 ../src/wifitransmit.h  \
-../src/test_thread.h 
+ ../src/test_thread.h 

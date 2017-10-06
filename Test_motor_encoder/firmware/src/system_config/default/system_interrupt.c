@@ -64,6 +64,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "sensor_control_thread.h"
 #include "wifireceive.h"
 #include "wifitransmit.h"
+#include "test_thread.h"
 #include "system_definitions.h"
 #include "public.h"
 

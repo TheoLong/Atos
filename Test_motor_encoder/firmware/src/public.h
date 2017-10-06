@@ -59,5 +59,12 @@ uint32_t hash(unsigned char * str);
 struct MessageStat GetMessageStat();
 void Left_Motor_PID(bool dir, int speed);
 void Right_Motor_PID(bool dir, int speed);
+void Left_Motor_Distance(bool dir, int speed, int distance);
+void Right_Motor_Distance(bool dir, int speed, int distance);
+bool Left_Is_Finish();
+bool Right_Is_Finish();
+void Wait();
+void Wait_Left();
+void Wait_Right();
 #endif /* _EXAMPLE_FILE_NAME_H */
 

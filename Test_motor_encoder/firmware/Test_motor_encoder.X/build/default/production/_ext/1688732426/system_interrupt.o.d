@@ -298,5 +298,6 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
 ../src/wifireceive.h  \
 ../src/jsmn.h  \
 ../src/wifitransmit.h  \
- ../src/system_config/default/system_definitions.h  \
-../src/public.h 
+ ../src/test_thread.h  \
+../src/system_config/default/system_definitions.h  \
+ ../src/public.h 

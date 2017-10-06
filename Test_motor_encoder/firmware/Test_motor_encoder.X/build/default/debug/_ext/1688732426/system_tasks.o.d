@@ -299,4 +299,5 @@ build/default/debug/_ext/1688732426/system_tasks.o:  \
  ../src/public.h  \
 ../src/wifireceive.h  \
 ../src/jsmn.h  \
-../src/wifitransmit.h 
+../src/wifitransmit.h  \
+ ../src/test_thread.h 

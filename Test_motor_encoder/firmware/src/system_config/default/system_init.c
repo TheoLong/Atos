@@ -203,6 +203,7 @@ void SYS_Initialize ( void* data )
     SENSOR_CONTROL_THREAD_Initialize();
     WIFIRECEIVE_Initialize();
     WIFITRANSMIT_Initialize();
+    TEST_THREAD_Initialize();
 }
 
 

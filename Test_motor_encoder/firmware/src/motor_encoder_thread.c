@@ -14,12 +14,22 @@ int speed_left = 0;
 int speed_right = 0;
 bool dir_left = FORWARD;
 bool dir_right = FORWARD;
-double Kp = 1.6;
+double Kp = 0.8;
 double Ki = 0;
 double Kd = 0;
 int leftpwm = 0;
 int rightpwm = 0;
+//distance control
+int left_old_distance = 0;
+int left_current_distance =0;
+int left_move_distance = 0;
+int right_old_distance = 0;
+int right_current_distance =0;
+int right_move_distance = 0;
+bool distance_mode = false;
 //
+bool left_finish = false;
+bool right_finish = false;
 void MOTOR_ENCODER_THREAD_Initialize ( void )
 {
     DRV_TMR0_Start();
@@ -39,8 +49,6 @@ void MOTOR_ENCODER_THREAD_Initialize ( void )
 
 void MOTOR_ENCODER_THREAD_Tasks ( void )
 {
-    Left_Motor_PID(BACKWARD, 45);
-    Right_Motor_PID(BACKWARD, 45);
     while(1)
     {
         Encoder data;
@@ -57,10 +65,31 @@ void MOTOR_ENCODER_THREAD_Tasks ( void )
             //perform PID with encoder data
             left = data.Encoder_Left_Speed;
             right = data.Encoder_Right_Speed;
-            int left_motor_pwm =  PID_module(left,speed_left, &leftpwm);
-            int right_motor_pwm = PID_module(right,speed_right, &rightpwm);
-            Motor_Left_Set(dir_left, left_motor_pwm);
-            Motor_Right_Set(dir_right, right_motor_pwm);
+            if(distance_mode)
+            {
+                left_current_distance = left_current_distance + left;
+                right_current_distance = right_current_distance + right;
+            }
+            if(left_current_distance > (left_old_distance+left_move_distance))
+            {
+                Motor_Left_Set(dir_left, 0);
+                left_finish = true;
+            }
+            else
+            {
+                int left_motor_pwm =  PID_module(left,speed_left, &leftpwm);
+                Motor_Left_Set(dir_left, left_motor_pwm);
+            }
+            if(right_current_distance > (right_old_distance+right_move_distance))
+            {
+                Motor_Right_Set(dir_right, 0);
+                right_finish = true;
+            }
+            else
+            {
+                int right_motor_pwm = PID_module(right,speed_right, &rightpwm);
+                Motor_Right_Set(dir_right, right_motor_pwm);
+            }
         }
     }
 }
@@ -69,14 +98,52 @@ void Left_Motor_PID(bool dir, int speed)
 {
     speed_left = speed;
     dir_left = dir;
+    left_old_distance = 0;
+    left_current_distance = 0;
+    left_move_distance = 0;
+    distance_mode = false;
 }
 
 void Right_Motor_PID(bool dir, int speed)
 {
     speed_right = speed;
     dir_right = dir;
+    right_old_distance = 0;
+    left_current_distance = 0;
+    right_move_distance = 0;
+    distance_mode = false;
+}
+//PID distance function
+void Left_Motor_Distance(bool dir, int speed, int distance)
+{
+    speed_left = speed;
+    dir_left = dir;
+    left_old_distance = 0;
+    left_current_distance = 0;
+    left_move_distance = distance;
+    distance_mode = true;
+    left_finish = false;
 }
 
+void Right_Motor_Distance(bool dir, int speed, int distance)
+{
+    speed_right = speed;
+    dir_right = dir;
+    right_old_distance = 0;
+    right_current_distance = 0;
+    right_move_distance = distance;
+    distance_mode = true;
+    right_finish = false;
+}
+
+bool Left_Is_Finish()
+{
+    return left_finish;
+}
+bool Right_Is_Finish()
+{
+    return right_finish;
+}
 
 
 int PID_module(int Speed, int set_speed, int*pwm)
@@ -104,6 +171,7 @@ int PID_module(int Speed, int set_speed, int*pwm)
      *pwm = outpwm;
      return outpwm;
 }
+
 
 void Motor_Left_Set(bool dir, int pwm)
 {

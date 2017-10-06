@@ -297,4 +297,5 @@ build/default/debug/_ext/327000265/drv_usart_static_byte_model.o:  \
  ../src/public.h  \
 ../src/wifireceive.h  \
 ../src/jsmn.h  \
-../src/wifitransmit.h 
+../src/wifitransmit.h  \
+ ../src/test_thread.h 

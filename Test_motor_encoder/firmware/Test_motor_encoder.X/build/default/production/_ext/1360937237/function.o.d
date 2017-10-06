@@ -1,6 +1,6 @@
-build/default/debug/_ext/1360937237/Sensor_Control_Thread.o:  \
- ../src/Sensor_Control_Thread.c  \
-../src/sensor_control_thread.h  \
+build/default/production/_ext/1360937237/function.o:  \
+../src/function.c  \
+ ../src/Sensor_Control_Thread.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../framework/peripheral/ports/plib_ports.h  \
@@ -299,4 +299,5 @@ build/default/debug/_ext/1360937237/Sensor_Control_Thread.o:  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/jsmn.h  \
 ../src/wifitransmit.h  \
-../src/test_thread.h 
+../src/test_thread.h  \
+ ../src/Test_Thread.h 

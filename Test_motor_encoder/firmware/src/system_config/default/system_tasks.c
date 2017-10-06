@@ -58,6 +58,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "sensor_control_thread.h"
 #include "wifireceive.h"
 #include "wifitransmit.h"
+#include "test_thread.h"
 
 
 // *****************************************************************************
@@ -75,6 +76,7 @@ static void _MOTOR_ENCODER_THREAD_Tasks(void);
 static void _SENSOR_CONTROL_THREAD_Tasks(void);
 static void _WIFIRECEIVE_Tasks(void);
 static void _WIFITRANSMIT_Tasks(void);
+static void _TEST_THREAD_Tasks(void);
 
 
 // *****************************************************************************
@@ -118,6 +120,11 @@ void SYS_Tasks ( void )
     /* Create OS Thread for WIFITRANSMIT Tasks. */
     xTaskCreate((TaskFunction_t) _WIFITRANSMIT_Tasks,
                 "WIFITRANSMIT Tasks",
+                1024, NULL, 1, NULL);
+
+    /* Create OS Thread for TEST_THREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _TEST_THREAD_Tasks,
+                "TEST_THREAD Tasks",
                 1024, NULL, 1, NULL);
 
     /**************
@@ -218,6 +225,23 @@ static void _WIFITRANSMIT_Tasks(void)
     {
         WIFITRANSMIT_Tasks();
     }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _TEST_THREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of TEST_THREAD.
+*/
+
+static void _TEST_THREAD_Tasks(void)
+{
+    //while(1)
+    //{
+        TEST_THREAD_Tasks();
+    //}
 }
 
 
