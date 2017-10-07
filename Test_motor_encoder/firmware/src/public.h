@@ -66,5 +66,8 @@ bool Right_Is_Finish();
 void Wait();
 void Wait_Left();
 void Wait_Right();
+void Left_Turn();
+void Right_Turn();
+void Move(int speed, int distance, bool dir);
 #endif /* _EXAMPLE_FILE_NAME_H */
 

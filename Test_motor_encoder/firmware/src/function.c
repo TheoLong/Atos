@@ -20,3 +20,24 @@ void Wait_Right()
     {
     }
 }
+
+void Left_Turn()
+{
+    Right_Motor_Distance(FORWARD, 45, 540);
+    Left_Motor_Distance(BACKWARD, 45, 540);
+    Wait();
+}
+
+void Right_Turn()
+{
+    Right_Motor_Distance(BACKWARD, 45, 540);
+    Left_Motor_Distance(FORWARD, 45, 540);
+    Wait();
+}
+
+void Move(int speed, int distance, bool dir)
+{
+    Left_Motor_Distance(dir, speed, distance);
+    Right_Motor_Distance(dir, speed, distance);
+    Wait();
+}
