@@ -11,11 +11,7 @@ int receive;
 void SENSOR_CONTROL_THREAD_Initialize ( void )
 {
     DRV_ADC_Open();
-//    IR_Q = xQueueCreate( 10, sizeof(IR) );
-//    if (!IR_Q)
-//    {
-//        //sendToUART('c');
-//    }
+    //init 2 software timmer
     mytimer0 = xTimerCreate("Timer0", 125, pdTRUE, (void*)0, Callback1);
     mytimer1 = xTimerCreate("Timer1", 250, pdTRUE, (void*)0, Callback2);
     receive_q = xQueueCreate(8, sizeof(struct JsonResponse));
@@ -29,32 +25,31 @@ void SENSOR_CONTROL_THREAD_Initialize ( void )
 
 void SENSOR_CONTROL_THREAD_Tasks ( void )
 {
-    while(1)
+   
+    struct JsonResponse js;
+    BaseType_t ret = xQueueReceive(receive_q, &js, portMAX_DELAY);
+    if(ret != pdTRUE)
     {
-        struct JsonResponse js;
-        BaseType_t ret = xQueueReceive(receive_q, &js, portMAX_DELAY);
-        if(ret != pdTRUE)
-        {
-            //TODO: dbgHLT
-        }
-        if(js.tsk == 31)
-        {
-            receive = js.arg0;
-            if(js.arg0 == sendFront && js.arg1 == sendSide)
-            {
-                struct JsonRequest jsr = {PIC_ID, 's', 0, 32, 0, 'p', 0, 0, 0};
-                SendOverWiFi(jsr);
-                
-            }
-            
-            
-        }
-        else if(js.tsk == 49)
-        {
-            df = js.arg0;
-            ds = js.arg1;
-        }
+        //TODO: dbgHLT
     }
+    if(js.tsk == 31)
+    {
+        receive = js.arg0;
+        if(js.arg0 == sendFront && js.arg1 == sendSide)
+        {
+            struct JsonRequest jsr = {PIC_ID, 's', 0, 32, 0, 'p', 0, 0, 0};
+            SendOverWiFi(jsr);
+
+        }
+
+
+    }
+    else if(js.tsk == 49)
+    {
+        df = js.arg0;
+        ds = js.arg1;
+    }
+   
 }
 
 void ReadIR(void)
@@ -80,6 +75,8 @@ void SendToIRQueue(struct JsonResponse js)
     portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
 }
 
+
+//----------------------------debug used-------------------------------------------------
 void Callback1(TimerHandle_t xTimer)
 {
     struct JsonRequest test = {PIC_ID,'s',0,31,0,FrontIR,SideIR,0,0};

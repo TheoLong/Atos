@@ -1,11 +1,10 @@
 #include "motor_encoder_thread.h"
 #include "public.h"
-//Public used for debug
+//Public used for debug 
 int left = 0;
 int right = 0;
 uint32_t Left_Encoder_data = 1;
 uint32_t Right_Encoder_data = 1;
-
 //public used for PID and PID API
 int integral = 0;
 int previous_error =0;
@@ -19,7 +18,7 @@ double Ki = 0;
 double Kd = 0;
 int leftpwm = 0;
 int rightpwm = 0;
-//distance control
+//distance control 
 int left_old_distance = 0;
 int left_current_distance =0;
 int left_move_distance = 0;
@@ -27,11 +26,19 @@ int right_old_distance = 0;
 int right_current_distance =0;
 int right_move_distance = 0;
 bool distance_mode = false;
-//
+//blocking flag for API
 bool left_finish = false;
 bool right_finish = false;
+
+void Callback3(TimerHandle_t xTimer)
+{
+//   Read_Encoders();
+//   ReadIR();
+}
+
 void MOTOR_ENCODER_THREAD_Initialize ( void )
 {
+    //start timer and OC
     DRV_TMR0_Start();
     DRV_TMR1_Start();
     DRV_TMR2_Start();
@@ -40,56 +47,62 @@ void MOTOR_ENCODER_THREAD_Initialize ( void )
     DRV_OC1_Start();
     //init Q to receive encoder
     Encoder_Q = xQueueCreate( 10, sizeof(Encoder) );
+    //if queue create failed
     if (!Encoder_Q)
     {
         //sendToUART('c'); 
     }
+     
+    mytimer2 = xTimerCreate("Timer2", 100, pdTRUE, (void*)0, Callback3);
+    BaseType_t ret = xTimerStart(mytimer2, (TickType_t)3);
+    
 }
 
 
 void MOTOR_ENCODER_THREAD_Tasks ( void )
 {
-    while(1)
+    Encoder data;
+    BaseType_t receive;
+    //Encoder_Struct data;
+    receive = xQueueReceive(Encoder_Q, &data, portMAX_DELAY);
+    //not received data
+    if (receive == pdFALSE)
     {
-        Encoder data;
-        BaseType_t receive;
-        //Encoder_Struct data;
-        receive = xQueueReceive(Encoder_Q, &data, portMAX_DELAY);
-        //received data
-        if (receive == pdFALSE)
+        //sendToUART('r');
+    }
+    //received data
+    else
+    {
+        //perform PID with encoder data
+        left = data.Encoder_Left_Speed;
+        right = data.Encoder_Right_Speed;
+        //using distance control or not
+        if(distance_mode)
         {
-            //sendToUART('r');
+            left_current_distance = left_current_distance + left;
+            right_current_distance = right_current_distance + right;
+        }
+        //left control
+        if(left_current_distance > (left_old_distance+left_move_distance))
+        {
+            Motor_Left_Set(dir_left, 0);
+            left_finish = true;
         }
         else
         {
-            //perform PID with encoder data
-            left = data.Encoder_Left_Speed;
-            right = data.Encoder_Right_Speed;
-            if(distance_mode)
-            {
-                left_current_distance = left_current_distance + left;
-                right_current_distance = right_current_distance + right;
-            }
-            if(left_current_distance > (left_old_distance+left_move_distance))
-            {
-                Motor_Left_Set(dir_left, 0);
-                left_finish = true;
-            }
-            else
-            {
-                int left_motor_pwm =  PID_module(left,speed_left, &leftpwm);
-                Motor_Left_Set(dir_left, left_motor_pwm);
-            }
-            if(right_current_distance > (right_old_distance+right_move_distance))
-            {
-                Motor_Right_Set(dir_right, 0);
-                right_finish = true;
-            }
-            else
-            {
-                int right_motor_pwm = PID_module(right,speed_right, &rightpwm);
-                Motor_Right_Set(dir_right, right_motor_pwm);
-            }
+            int left_motor_pwm =  PID_module(left,speed_left, &leftpwm);
+            Motor_Left_Set(dir_left, left_motor_pwm);
+        }
+        //right control
+        if(right_current_distance > (right_old_distance+right_move_distance))
+        {
+            Motor_Right_Set(dir_right, 0);
+            right_finish = true;
+        }
+        else
+        {
+            int right_motor_pwm = PID_module(right,speed_right, &rightpwm);
+            Motor_Right_Set(dir_right, right_motor_pwm);
         }
     }
 }
@@ -136,6 +149,7 @@ void Right_Motor_Distance(bool dir, int speed, int distance)
     right_finish = false;
 }
 
+//Set flag for blocking API
 bool Left_Is_Finish()
 {
     return left_finish;
@@ -145,7 +159,7 @@ bool Right_Is_Finish()
     return right_finish;
 }
 
-
+//PID control
 int PID_module(int Speed, int set_speed, int*pwm)
 {
     //PID control
@@ -192,14 +206,15 @@ void Read_Encoders(void)
 {
     
     Encoder data;
-    Left_Encoder_data = PLIB_TMR_Counter16BitGet(TMR_ID_3);
+    Left_Encoder_data = PLIB_TMR_Counter16BitGet(TMR_ID_5);
     Right_Encoder_data = PLIB_TMR_Counter16BitGet(TMR_ID_4);
-    PLIB_TMR_Counter16BitClear(TMR_ID_3);
+    PLIB_TMR_Counter16BitClear(TMR_ID_5);
     PLIB_TMR_Counter16BitClear(TMR_ID_4);
     data.Encoder_Left_Speed = Left_Encoder_data;
     data.Encoder_Right_Speed = Right_Encoder_data;
     SendToQueue(data);
 }
+
 
 void SendToQueue(Encoder data)
 {
@@ -211,3 +226,4 @@ void SendToQueue(Encoder data)
     }
     portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
 }
+

@@ -156,9 +156,9 @@ _IntHandlerDrvTmrInstance0:
 /* TMR Instance 1 Interrupt */
    .extern  IntHandlerDrvTmrInstance1
 
-   .section	.vector_12,code, keep
-   .equ     __vector_dispatch_12, IntVectorDrvTmrInstance1
-   .global  __vector_dispatch_12
+   .section	.vector_20,code, keep
+   .equ     __vector_dispatch_20, IntVectorDrvTmrInstance1
+   .global  __vector_dispatch_20
    .set     nomicromips
    .set     noreorder
    .set     nomips16
@@ -224,9 +224,9 @@ _IntHandlerDrvTmrInstance2:
 /* TMR Instance 3 Interrupt */
    .extern  IntHandlerDrvTmrInstance3
 
-   .section	.vector_20,code, keep
-   .equ     __vector_dispatch_20, IntVectorDrvTmrInstance3
-   .global  __vector_dispatch_20
+   .section	.vector_12,code, keep
+   .equ     __vector_dispatch_12, IntVectorDrvTmrInstance3
+   .global  __vector_dispatch_12
    .set     nomicromips
    .set     noreorder
    .set     nomips16

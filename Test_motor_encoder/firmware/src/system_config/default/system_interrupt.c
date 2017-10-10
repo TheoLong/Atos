@@ -68,6 +68,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_definitions.h"
 #include "public.h"
 
+int count = 0;
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
@@ -119,7 +120,8 @@ void IntHandlerDrvTmrInstance0(void)
 }
 void IntHandlerDrvTmrInstance1(void)
 {
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
+   
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
 }
 void IntHandlerDrvTmrInstance2(void)
 {
@@ -127,11 +129,19 @@ void IntHandlerDrvTmrInstance2(void)
 }
 void IntHandlerDrvTmrInstance3(void)
 {
-    Read_Encoders();
-    ReadIR();
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
-}
- 
+    if(count < 5)
+    {
+        count++;
+    }
+    else
+    {
+        count = 0;
+        Read_Encoders();
+        ReadIR();
+    }
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
+} 
+
 /*******************************************************************************
  End of File
 */

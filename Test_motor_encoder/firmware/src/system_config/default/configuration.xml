@@ -263,7 +263,7 @@
       <Template dnOrder="3">
         <Name dnOrder="0">system_interrupt_a.S</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">93A20F64173EF4394164AC2FD5DF45E0</Checksum>
+        <Checksum dnOrder="2">54CFC725B0845F3A431E23851F50A3EC</Checksum>
       </Template>
       <Template dnOrder="4">
         <Name dnOrder="0">drv_tmr_static.h</Name>
@@ -331,7 +331,7 @@
       <Template dnOrder="17">
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">4B1469A5B83BF5B8F347BDC538CD380F</Checksum>
+        <Checksum dnOrder="2">73704A328674B161518EC162B7A59062</Checksum>
         <ProjectFileChecksum dnOrder="3">A75B945877B767A3F6FC75D68BB5E7BC</ProjectFileChecksum>
       </Template>
       <Template dnOrder="18">
@@ -341,12 +341,12 @@
       <Template dnOrder="19">
         <Name dnOrder="0">drv_oc_mapping.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/oc/src</Path>
-        <Checksum dnOrder="2">5FF5CD3AD70FFFBABCA9FEE23345B070</Checksum>
+        <Checksum dnOrder="2">B8E04297A69BA1759841662039313BC4</Checksum>
       </Template>
       <Template dnOrder="20">
         <Name dnOrder="0">drv_oc_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/oc/src</Path>
-        <Checksum dnOrder="2">7016560D615F3ABA68832E110BF0ACBA</Checksum>
+        <Checksum dnOrder="2">FE490E7F349D614363678D83F6968184</Checksum>
       </Template>
       <Template dnOrder="21">
         <Name dnOrder="0">drv_usart_static.c</Name>
@@ -356,12 +356,12 @@
       <Template dnOrder="22">
         <Name dnOrder="0">system_init.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">77A5BEA89458DA3D168B954EFF9DDAC0</Checksum>
+        <Checksum dnOrder="2">4F1F10598D452E585940CD36A4FD24F3</Checksum>
       </Template>
       <Template dnOrder="23">
         <Name dnOrder="0">drv_oc_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/driver/oc</Path>
-        <Checksum dnOrder="2">0496F2F0681A9421EFECF50A8979E68E</Checksum>
+        <Checksum dnOrder="2">47DF18F12A8F47CBB19644D0CE92848E</Checksum>
       </Template>
       <Template dnOrder="24">
         <Name dnOrder="0">main.c</Name>
@@ -398,7 +398,8 @@
       <Template dnOrder="31">
         <Name dnOrder="0">system_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">B442585786A00F0DD8902F114116771E</Checksum>
+        <Checksum dnOrder="2">C94A7C89930AA79BB0FE8A1227152DC6</Checksum>
+        <ProjectFileChecksum dnOrder="3">9745DD411F3FF384160EE8BF01EFC6A9</ProjectFileChecksum>
       </Template>
       <Template dnOrder="32">
         <Name dnOrder="0">Sensor_Control_Thread.h</Name>
@@ -416,12 +417,12 @@
       <Template dnOrder="35">
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">5AF50749E819A81B9693C4C1824DFFE2</Checksum>
+        <Checksum dnOrder="2">A15B411DBF97AB9B2E2BA5DD97AB4AEE</Checksum>
       </Template>
       <Template dnOrder="36">
         <Name dnOrder="0">drv_tmr_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/tmr/src</Path>
-        <Checksum dnOrder="2">03ED92D5D4A99BED5C5D0ECF7D19F09D</Checksum>
+        <Checksum dnOrder="2">284520894A7D7DB152AFE56285C81C51</Checksum>
       </Template>
       <Template dnOrder="37">
         <Name dnOrder="0">Test_Thread.c</Name>

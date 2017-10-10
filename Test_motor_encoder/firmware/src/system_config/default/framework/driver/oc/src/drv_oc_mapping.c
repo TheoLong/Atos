@@ -71,6 +71,11 @@ SYS_MODULE_OBJ DRV_OC_Initialize(const SYS_MODULE_INDEX index,const SYS_MODULE_I
             DRV_OC1_Initialize();
             break;
         }
+        case DRV_OC_INDEX_2:
+        {
+            DRV_OC2_Initialize();
+            break;
+        }
         default:
         {
             returnValue = SYS_MODULE_OBJ_INVALID;
@@ -96,6 +101,11 @@ DRV_HANDLE DRV_OC_Start(const SYS_MODULE_INDEX drvIndex, const DRV_IO_INTENT int
             DRV_OC1_Start();
             break;
         }
+        case DRV_OC_INDEX_2:
+        {
+            DRV_OC2_Start();
+            break;
+        }
         default:
         {
             returnValue = SYS_MODULE_OBJ_INVALID;
@@ -118,6 +128,11 @@ void DRV_OC_Stop(DRV_HANDLE handle)
         case DRV_OC_INDEX_1:
         {
             DRV_OC1_Stop();
+            break;
+        }
+        case DRV_OC_INDEX_2:
+        {
+            DRV_OC2_Stop();
             break;
         }
         default:
@@ -174,6 +189,11 @@ void DRV_OC_PulseWidthSet(DRV_HANDLE handle, uint32_t pulseWidth)
             DRV_OC1_PulseWidthSet(pulseWidth);
             break;
         }
+        case DRV_OC_INDEX_2:
+        {
+            DRV_OC2_PulseWidthSet(pulseWidth);
+            break;
+        }
         default:
         {
             SYS_ASSERT(false, "The selected instance of the OC driver is not configured for the PWM mode");
@@ -196,6 +216,11 @@ bool DRV_OC_FaultHasOccurred(DRV_HANDLE handle)
         case DRV_OC_INDEX_1:
         {
             returnValue = DRV_OC1_FaultHasOccurred();
+            break;
+        }
+        case DRV_OC_INDEX_2:
+        {
+            returnValue = DRV_OC2_FaultHasOccurred();
             break;
         }
         default:
