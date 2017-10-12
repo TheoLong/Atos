@@ -57,23 +57,34 @@ struct MessageStat
 };
 uint32_t hash(unsigned char * str);
 struct MessageStat GetMessageStat();
+
+//non-blocking
 void Left_Motor_PID(bool dir, int speed);
 void Right_Motor_PID(bool dir, int speed);
-void Left_Motor_Distance(bool dir, int speed, int distance);
-void Right_Motor_Distance(bool dir, int speed, int distance);
-bool Left_Is_Finish();
-bool Right_Is_Finish();
-void Wait();
-void Wait_Left();
-void Wait_Right();
-void Left_Turn();
-void Right_Turn();
-void Move(int speed, int distance, bool dir);
-void Timing_Wait(int time);
-bool GetTimingFlag();
 void SetServo1PWM(int pwm);
 void SetServo2PWM(int pwm);
+//blocking
+void Left_Motor_Distance(bool dir, int speed, int distance);
+void Right_Motor_Distance(bool dir, int speed, int distance);
+void Move(int speed, int distance, bool dir);
+void Left_Turn();
+void Right_Turn();
+//timming
+//servo timming function
 void Wait_Time(int time);
+
+//encoder timming function
+void Wait_Left();
+void Wait_Right();
+void Wait();
+
+//wrapper, used only in special condition
+bool Left_Is_Finish();
+bool Right_Is_Finish();
+void Timing_Wait(int time);
+bool GetTimingFlag();
+
+
 
 #endif /* _EXAMPLE_FILE_NAME_H */
 

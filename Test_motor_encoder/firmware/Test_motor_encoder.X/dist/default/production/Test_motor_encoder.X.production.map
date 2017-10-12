@@ -149,14 +149,14 @@ usartreceivequeue   0x4               build/default/production/_ext/1360937237/W
 gDrvUSART0Obj       0x8               build/default/production/_ext/327000265/drv_usart_static.o
 sysObj              0x14              build/default/production/_ext/1688732426/system_init.o
 wifitransmitqueue   0x4               build/default/production/_ext/1360937237/WiFiTransmit.o
-mytimer1            0x4               build/default/production/_ext/1360937237/motor_encoder_thread.o
-mytimer0            0x4               build/default/production/_ext/1360937237/motor_encoder_thread.o
-Encoder_Q           0x4               build/default/production/_ext/1360937237/motor_encoder_thread.o
-receive_q           0x4               build/default/production/_ext/1360937237/motor_encoder_thread.o
+mytimer1            0x4               build/default/production/_ext/1047219354/drv_oc_mapping.o
+mytimer0            0x4               build/default/production/_ext/1047219354/drv_oc_mapping.o
+Encoder_Q           0x4               build/default/production/_ext/1047219354/drv_oc_mapping.o
+receive_q           0x4               build/default/production/_ext/1047219354/drv_oc_mapping.o
 usarttransmitqueue  0x4               build/default/production/_ext/1360937237/WiFiTransmit.o
 wifireceiveData     0x4               build/default/production/_ext/1360937237/WiFiReceive.o
 sendFront           0x4               build/default/production/_ext/1360937237/Sensor_Control_Thread.o
-IR_Q                0x4               build/default/production/_ext/1360937237/motor_encoder_thread.o
+IR_Q                0x4               build/default/production/_ext/1047219354/drv_oc_mapping.o
 sysDevconObj        0x8               build/default/production/_ext/340578644/sys_devcon.o
 sendSide            0x4               build/default/production/_ext/1360937237/Sensor_Control_Thread.o
 receive             0x4               build/default/production/_ext/1360937237/Sensor_Control_Thread.o
@@ -205,8 +205,8 @@ section                    address  length [bytes]      (dec)  Description
 .text.xTaskPriorityDisi 0x9d00564c           0xf8         248   
 .text.prvCopyDataToQueu 0x9d005744           0xf4         244   
 .text.xQueueGenericSend 0x9d005838           0xf0         240   
-.text.prvAddCurrentTask 0x9d005928           0xe4         228   
-.text.SYS_DEVCON_Perfor 0x9d005a0c           0xe4         228   
+.text.SYS_DEVCON_Perfor 0x9d005928           0xe4         228   
+.text.prvAddCurrentTask 0x9d005a0c           0xe4         228   
 .text.xQueueReceiveFrom 0x9d005af0           0xe0         224   
 .text.vTaskSwitchContex 0x9d005bd0           0xe0         224   
 .text.general_exception 0x9d005cb0           0xdc         220   
@@ -214,13 +214,13 @@ section                    address  length [bytes]      (dec)  Description
 .text.SENSOR_CONTROL_TH 0x9d005e60           0xd0         208   
 .rodata                 0x9d005f30           0xd0         208  Read-only const 
 .text.DRV_ADC_Initializ 0x9d006000           0xc8         200   
-.text.xQueueGenericRese 0x9d0060c8           0xc0         192   
+.text.BSP_LEDOff        0x9d0060c8           0xc0         192   
 .text.pvPortMalloc      0x9d006188           0xc0         192   
-.text.BSP_LEDOff        0x9d006248           0xc0         192   
+.text.xQueueGenericRese 0x9d006248           0xc0         192   
 .text.xTaskRemoveFromEv 0x9d006308           0xbc         188   
-.text.SENSOR_CONTROL_TH 0x9d0063c4           0xb4         180   
-.text.prvIdleTask       0x9d006478           0xb4         180   
-.text.SYS_PORTS_Initial 0x9d00652c           0xb4         180   
+.text.SYS_PORTS_Initial 0x9d0063c4           0xb4         180   
+.text.SENSOR_CONTROL_TH 0x9d006478           0xb4         180   
+.text.prvIdleTask       0x9d00652c           0xb4         180   
 .text                   0x9d0065e0           0xa8         168  App's exec code 
 .text.atoi              0x9d006688           0xa8         168   
 .text.xTaskCheckForTime 0x9d006730           0xa0         160   
@@ -231,14 +231,14 @@ section                    address  length [bytes]      (dec)  Description
 .text.xTimerGenericComm 0x9d006a30           0x94         148   
 .text.vQueueWaitForMess 0x9d006ac4           0x8c         140   
 .text.xTimerCreate      0x9d006b50           0x88         136   
-.text.jsoneq            0x9d006bd8           0x84         132   
-.text.DRV_TMR0_Initiali 0x9d006c5c           0x84         132   
+.text.DRV_TMR0_Initiali 0x9d006bd8           0x84         132   
+.text.jsoneq            0x9d006c5c           0x84         132   
 .text.DRV_TMR2_Initiali 0x9d006ce0           0x80         128   
 .rodata                 0x9d006d60           0x80         128  Read-only const 
 .text.fptoli            0x9d006de0           0x80         128   
 .text.DRV_TMR3_Initiali 0x9d006e60           0x7c         124   
-.text.DRV_TMR1_Initiali 0x9d006edc           0x78         120   
-.rodata                 0x9d006f54           0x78         120  Read-only const 
+.rodata                 0x9d006edc           0x78         120  Read-only const 
+.text.DRV_TMR1_Initiali 0x9d006f54           0x78         120   
 .text.prvInsertTimerInA 0x9d006fcc           0x74         116   
 .text.prvCheckForValidL 0x9d007040           0x74         116   
 .text.SendToTransmitQue 0x9d0070b4           0x70         112   
@@ -246,117 +246,117 @@ section                    address  length [bytes]      (dec)  Description
 .text.ISR_UART_RECEIVE  0x9d007194           0x6c         108   
 .text.ISR_UART_TRANSMIT 0x9d007200           0x6c         108   
 .text.vApplicationSetup 0x9d00726c           0x6c         108   
-.text.MOTOR_ENCODER_THR 0x9d0072d8           0x68         104   
-.text.vTaskExitCritical 0x9d007340           0x68         104   
-.text.IntHandlerDrvUsar 0x9d0073a8           0x68         104   
+.text.IntHandlerDrvUsar 0x9d0072d8           0x68         104   
+.text.MOTOR_ENCODER_THR 0x9d007340           0x68         104   
+.text.vTaskExitCritical 0x9d0073a8           0x68         104   
 .text._sprintf_cdnopuxX 0x9d007410           0x68         104   
 .text.ReadIR            0x9d007478           0x60          96   
 .text.sitofp            0x9d0074d8           0x60          96   
-.text.vListInsert       0x9d007538           0x5c          92   
-.text.xTimerCreateTimer 0x9d007594           0x5c          92   
-.text.xPortStartSchedul 0x9d0075f0           0x5c          92   
-.text.Callback1         0x9d00764c           0x58          88   
-.text.SendToIRQueue     0x9d0076a4           0x58          88   
-.text.WIFIRECEIVE_Initi 0x9d0076fc           0x58          88   
-.text.Dispatch          0x9d007754           0x58          88   
-.text.xQueueCreateMutex 0x9d0077ac           0x58          88   
-.text.SYS_DEVCON_System 0x9d007804           0x58          88   
+.text.xPortStartSchedul 0x9d007538           0x5c          92   
+.text.vListInsert       0x9d007594           0x5c          92   
+.text.xTimerCreateTimer 0x9d0075f0           0x5c          92   
+.text.SYS_DEVCON_System 0x9d00764c           0x58          88   
+.text.Callback1         0x9d0076a4           0x58          88   
+.text.SendToIRQueue     0x9d0076fc           0x58          88   
+.text.WIFIRECEIVE_Initi 0x9d007754           0x58          88   
+.text.Dispatch          0x9d0077ac           0x58          88   
+.text.xQueueCreateMutex 0x9d007804           0x58          88   
 .text.main_entry        0x9d00785c           0x54          84   
-.text.CheckString       0x9d0078b0           0x54          84   
-.rodata                 0x9d007904           0x54          84  Read-only const 
-.text.TEST_THREAD_Tasks 0x9d007958           0x54          84   
-.text.pxPortInitialiseS 0x9d0079ac           0x54          84   
-.text.vPortIncrementTic 0x9d007a00           0x54          84   
-.text.BSP_Initialize    0x9d007a54           0x54          84   
+.text.BSP_Initialize    0x9d0078b0           0x54          84   
+.text.CheckString       0x9d007904           0x54          84   
+.rodata                 0x9d007958           0x54          84  Read-only const 
+.text.TEST_THREAD_Tasks 0x9d0079ac           0x54          84   
+.text.pxPortInitialiseS 0x9d007a00           0x54          84   
+.text.vPortIncrementTic 0x9d007a54           0x54          84   
 .text.SendToQueue       0x9d007aa8           0x50          80   
 .text.prvCopyDataFromQu 0x9d007af8           0x50          80   
 .text.vTaskEnterCritica 0x9d007b48           0x50          80   
-.text.Motor_Left_Set    0x9d007b98           0x4c          76   
-.text.Motor_Right_Set   0x9d007be4           0x4c          76   
-.text.Callback2         0x9d007c30           0x4c          76   
-.text.IntHandlerDrvTmrI 0x9d007c7c           0x4c          76   
-.text.vTaskPlaceOnEvent 0x9d007cc8           0x48          72   
-.text.SYS_DEVCON_System 0x9d007d10           0x48          72   
+.text.IntHandlerDrvTmrI 0x9d007b98           0x4c          76   
+.text.Motor_Left_Set    0x9d007be4           0x4c          76   
+.text.Motor_Right_Set   0x9d007c30           0x4c          76   
+.text.Callback2         0x9d007c7c           0x4c          76   
+.text.SYS_DEVCON_System 0x9d007cc8           0x48          72   
+.text.vTaskPlaceOnEvent 0x9d007d10           0x48          72   
 .text._bootstrap_except 0x9d007d58           0x48          72   
 .vector_default         0x9d007da0           0x48          72   
-.text.uxListRemove      0x9d007de8           0x44          68   
-.text.SYS_CLK_Initializ 0x9d007e2c           0x44          68   
+.text.SYS_CLK_Initializ 0x9d007de8           0x44          68   
+.text.uxListRemove      0x9d007e2c           0x44          68   
 .text                   0x9d007e70           0x44          68  App's exec code 
-.text.Read_Encoders     0x9d007eb4           0x40          64   
-.text.DRV_OC2_Initializ 0x9d007ef4           0x40          64   
-.text.DRV_OC3_Initializ 0x9d007f34           0x40          64   
-.text._general_exceptio 0x9d007f74           0x40          64   
-.text.hash              0x9d007fb4           0x3c          60   
-.text.WIFITRANSMIT_Init 0x9d007ff0           0x3c          60   
-.text.SendOverWiFi      0x9d00802c           0x3c          60   
-.text.OSAL_MUTEX_Create 0x9d008068           0x3c          60   
-.text.uxPortSetInterrup 0x9d0080a4           0x3c          60   
-.text.DRV_OC0_Initializ 0x9d0080e0           0x3c          60   
-.text.DRV_OC1_Initializ 0x9d00811c           0x3c          60   
-.text.GetMessageStat    0x9d008158           0x38          56   
-.text.prvResetNextTaskU 0x9d008190           0x38          56   
-.text.vTaskPlaceOnEvent 0x9d0081c8           0x38          56   
-.text.DRV_TMR0_Start    0x9d008200           0x38          56   
-.text.DRV_TMR1_Start    0x9d008238           0x38          56   
-.text.DRV_TMR2_Start    0x9d008270           0x38          56   
-.text.DRV_TMR3_Start    0x9d0082a8           0x38          56   
+.text.DRV_OC2_Initializ 0x9d007eb4           0x40          64   
+.text.DRV_OC3_Initializ 0x9d007ef4           0x40          64   
+.text._general_exceptio 0x9d007f34           0x40          64   
+.text.Read_Encoders     0x9d007f74           0x40          64   
+.text.DRV_OC0_Initializ 0x9d007fb4           0x3c          60   
+.text.DRV_OC1_Initializ 0x9d007ff0           0x3c          60   
+.text.hash              0x9d00802c           0x3c          60   
+.text.WIFITRANSMIT_Init 0x9d008068           0x3c          60   
+.text.SendOverWiFi      0x9d0080a4           0x3c          60   
+.text.OSAL_MUTEX_Create 0x9d0080e0           0x3c          60   
+.text.uxPortSetInterrup 0x9d00811c           0x3c          60   
+.text.DRV_TMR0_Start    0x9d008158           0x38          56   
+.text.DRV_TMR1_Start    0x9d008190           0x38          56   
+.text.DRV_TMR2_Start    0x9d0081c8           0x38          56   
+.text.DRV_TMR3_Start    0x9d008200           0x38          56   
+.text.GetMessageStat    0x9d008238           0x38          56   
+.text.prvResetNextTaskU 0x9d008270           0x38          56   
+.text.vTaskPlaceOnEvent 0x9d0082a8           0x38          56   
 .text.DRV_USART_Initial 0x9d0082e0           0x34          52   
 .text.DRV_USART_Open    0x9d008314           0x34          52   
 .text.GetConnectionStat 0x9d008348           0x30          48   
 .text.vListInsertEnd    0x9d008378           0x30          48   
-.text.prvTaskExitError  0x9d0083a8           0x2c          44   
-.text.vApplicationStack 0x9d0083d4           0x2c          44   
-.text.vApplicationMallo 0x9d008400           0x2c          44   
+.text.vApplicationStack 0x9d0083a8           0x2c          44   
+.text.vApplicationMallo 0x9d0083d4           0x2c          44   
+.text.prvTaskExitError  0x9d008400           0x2c          44   
 .text.Wait_Time         0x9d00842c           0x28          40   
 .text.SYS_INT_ExternalI 0x9d008454           0x28          40   
 .text.pvTaskIncrementMu 0x9d00847c           0x28          40   
 .text.DRV_ADC_SamplesRe 0x9d0084a4           0x24          36   
-.text.main              0x9d0084c8           0x20          32   
-.text.vListInitialise   0x9d0084e8           0x20          32   
-.text.xTaskGetScheduler 0x9d008508           0x20          32   
-.text.DRV_ADC_Open      0x9d008528           0x20          32   
-.text.vPortClearInterru 0x9d008548           0x1c          28   
-.text.SYS_DEVCON_JTAGDi 0x9d008564           0x1c          28   
-.text._TEST_THREAD_Task 0x9d008580           0x1c          28   
-.text.Timing_Wait       0x9d00859c           0x18          24   
-.rodata                 0x9d0085b4           0x18          24  Read-only const 
-.text.IntHandlerExterna 0x9d0085cc           0x18          24   
-.text.IntHandlerExterna 0x9d0085e4           0x18          24   
+.text.DRV_ADC_Open      0x9d0084c8           0x20          32   
+.text.main              0x9d0084e8           0x20          32   
+.text.vListInitialise   0x9d008508           0x20          32   
+.text.xTaskGetScheduler 0x9d008528           0x20          32   
+.text.SYS_DEVCON_JTAGDi 0x9d008548           0x1c          28   
+.text._TEST_THREAD_Task 0x9d008564           0x1c          28   
+.text.vPortClearInterru 0x9d008580           0x1c          28   
+.text.IntHandlerExterna 0x9d00859c           0x18          24   
+.text.IntHandlerExterna 0x9d0085b4           0x18          24   
+.text.IntHandlerDrvTmrI 0x9d0085cc           0x18          24   
+.text.IntHandlerDrvTmrI 0x9d0085e4           0x18          24   
 .text.IntHandlerDrvTmrI 0x9d0085fc           0x18          24   
-.text.IntHandlerDrvTmrI 0x9d008614           0x18          24   
-.text.IntHandlerDrvTmrI 0x9d00862c           0x18          24   
-.text._WIFITRANSMIT_Tas 0x9d008644           0x18          24   
-.text._WIFIRECEIVE_Task 0x9d00865c           0x18          24   
-.text._SENSOR_CONTROL_T 0x9d008674           0x18          24   
-.text._MOTOR_ENCODER_TH 0x9d00868c           0x18          24   
+.text._WIFITRANSMIT_Tas 0x9d008614           0x18          24   
+.text._WIFIRECEIVE_Task 0x9d00862c           0x18          24   
+.text._SENSOR_CONTROL_T 0x9d008644           0x18          24   
+.text._MOTOR_ENCODER_TH 0x9d00865c           0x18          24   
+.text.Timing_Wait       0x9d008674           0x18          24   
+.rodata                 0x9d00868c           0x18          24  Read-only const 
 .text                   0x9d0086a4           0x18          24  App's exec code 
-.text.jsmn_init         0x9d0086bc           0x14          20   
-.text.SYS_INT_Initializ 0x9d0086d0           0x14          20   
-.text.vTaskSuspendAll   0x9d0086e4           0x14          20   
-.text.vTaskSetTimeOutSt 0x9d0086f8           0x14          20   
-.text.DRV_ADC_SamplesAv 0x9d00870c           0x14          20   
-.text.DRV_OC0_Start     0x9d008720           0x14          20   
-.text.DRV_OC0_PulseWidt 0x9d008734           0x14          20   
-.text.DRV_OC1_Start     0x9d008748           0x14          20   
-.text.DRV_OC1_PulseWidt 0x9d00875c           0x14          20   
-.text.DRV_OC2_Start     0x9d008770           0x14          20   
-.text.DRV_OC2_PulseWidt 0x9d008784           0x14          20   
-.text.DRV_OC3_Start     0x9d008798           0x14          20   
-.text.DRV_OC3_PulseWidt 0x9d0087ac           0x14          20   
-.text.SYS_DEVCON_Initia 0x9d0087c0           0x14          20   
+.text.DRV_ADC_SamplesAv 0x9d0086bc           0x14          20   
+.text.DRV_OC0_Start     0x9d0086d0           0x14          20   
+.text.DRV_OC0_PulseWidt 0x9d0086e4           0x14          20   
+.text.DRV_OC1_Start     0x9d0086f8           0x14          20   
+.text.DRV_OC1_PulseWidt 0x9d00870c           0x14          20   
+.text.DRV_OC2_Start     0x9d008720           0x14          20   
+.text.DRV_OC2_PulseWidt 0x9d008734           0x14          20   
+.text.DRV_OC3_Start     0x9d008748           0x14          20   
+.text.DRV_OC3_PulseWidt 0x9d00875c           0x14          20   
+.text.SYS_DEVCON_Initia 0x9d008770           0x14          20   
+.text.jsmn_init         0x9d008784           0x14          20   
+.text.SYS_INT_Initializ 0x9d008798           0x14          20   
+.text.vTaskSuspendAll   0x9d0087ac           0x14          20   
+.text.vTaskSetTimeOutSt 0x9d0087c0           0x14          20   
 .rodata                 0x9d0087d4           0x10          16  Read-only const 
 .text.vTaskMissedYield  0x9d0087e4           0x10          16   
-.text.xTaskGetTickCount 0x9d0087f4            0xc          12   
-.text.SYS_CLK_SystemFre 0x9d008800            0xc          12   
-.text.SYS_CLK_Periphera 0x9d00880c            0xc          12   
-.text.GetTimingFlag     0x9d008818            0x8           8   
-.text.SetServo2PWM      0x9d008820            0x8           8   
-.text.TEST_THREAD_Initi 0x9d008828            0x8           8   
-.text.vListInitialiseIt 0x9d008830            0x8           8   
-.rodata                 0x9d008838           0x10          16  Read-only const 
-.text.vPortFree         0x9d008848            0x8           8   
-.text.DRV_USART0_Open   0x9d008850            0x8           8   
-.text._SYS_Tasks        0x9d008858            0x8           8   
+.text.SYS_CLK_SystemFre 0x9d0087f4            0xc          12   
+.text.SYS_CLK_Periphera 0x9d008800            0xc          12   
+.text.xTaskGetTickCount 0x9d00880c            0xc          12   
+.text.DRV_USART0_Open   0x9d008818            0x8           8   
+.text._SYS_Tasks        0x9d008820            0x8           8   
+.text.GetTimingFlag     0x9d008828            0x8           8   
+.text.SetServo2PWM      0x9d008830            0x8           8   
+.text.TEST_THREAD_Initi 0x9d008838            0x8           8   
+.text.vPortFree         0x9d008840            0x8           8   
+.text.vListInitialiseIt 0x9d008848            0x8           8   
+.rodata                 0x9d008850           0x10          16  Read-only const 
 .text._on_reset         0x9d008860            0x8           8   
 .text._on_bootstrap     0x9d008868            0x8           8   
 .rodata                 0x9d008870            0x8           8  Read-only const 
@@ -466,239 +466,22 @@ Discarded input sections
  .data          0x00000000        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\debug-exception-return.o
  .bss           0x00000000        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\debug-exception-return.o
  .reginfo       0x00000000       0x18 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\debug-exception-return.o
- .text          0x00000000        0x0 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .data          0x00000000        0x0 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .bss           0x00000000        0x0 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .text.Left_Motor_PID
-                0x00000000       0x1c build/default/production/_ext/1360937237/motor_encoder_thread.o
- .text.Right_Motor_PID
-                0x00000000       0x1c build/default/production/_ext/1360937237/motor_encoder_thread.o
- .text.Left_Motor_Distance
-                0x00000000       0x24 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .text.Right_Motor_Distance
-                0x00000000       0x24 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .text.Left_Is_Finish
-                0x00000000        0x8 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .text.Right_Is_Finish
-                0x00000000        0x8 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .text.SetServo1PWM
-                0x00000000        0x8 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .text          0x00000000        0x0 build/default/production/_ext/1360937237/main.o
- .data          0x00000000        0x0 build/default/production/_ext/1360937237/main.o
- .bss           0x00000000        0x0 build/default/production/_ext/1360937237/main.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/main.o
- .text          0x00000000        0x0 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .data          0x00000000        0x0 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .bss           0x00000000        0x0 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .text          0x00000000        0x0 build/default/production/_ext/1360937237/WiFiReceive.o
- .data          0x00000000        0x0 build/default/production/_ext/1360937237/WiFiReceive.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/WiFiReceive.o
- .text          0x00000000        0x0 build/default/production/_ext/1360937237/WiFiTransmit.o
- .data          0x00000000        0x0 build/default/production/_ext/1360937237/WiFiTransmit.o
- .bss           0x00000000        0x0 build/default/production/_ext/1360937237/WiFiTransmit.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/WiFiTransmit.o
- .text          0x00000000        0x0 build/default/production/_ext/1360937237/jsmn.o
- .data          0x00000000        0x0 build/default/production/_ext/1360937237/jsmn.o
- .bss           0x00000000        0x0 build/default/production/_ext/1360937237/jsmn.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/jsmn.o
- .text          0x00000000        0x0 build/default/production/_ext/1360937237/Test_Thread.o
- .data          0x00000000        0x0 build/default/production/_ext/1360937237/Test_Thread.o
- .bss           0x00000000        0x0 build/default/production/_ext/1360937237/Test_Thread.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/Test_Thread.o
- .text          0x00000000        0x0 build/default/production/_ext/1360937237/function.o
- .data          0x00000000        0x0 build/default/production/_ext/1360937237/function.o
- .bss           0x00000000        0x0 build/default/production/_ext/1360937237/function.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/function.o
- .text.Wait     0x00000000       0x30 build/default/production/_ext/1360937237/function.o
- .text.Wait_Left
-                0x00000000       0x20 build/default/production/_ext/1360937237/function.o
- .text.Wait_Right
-                0x00000000       0x20 build/default/production/_ext/1360937237/function.o
- .text.Left_Turn
-                0x00000000       0x3c build/default/production/_ext/1360937237/function.o
- .text.Right_Turn
-                0x00000000       0x3c build/default/production/_ext/1360937237/function.o
- .text.Move     0x00000000       0x60 build/default/production/_ext/1360937237/function.o
- .text          0x00000000        0x0 build/default/production/_ext/24337685/osal_freertos.o
- .data          0x00000000        0x0 build/default/production/_ext/24337685/osal_freertos.o
- .bss           0x00000000        0x0 build/default/production/_ext/24337685/osal_freertos.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_CRIT_Enter
-                0x00000000       0x48 build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_CRIT_Leave
-                0x00000000       0x44 build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_SEM_Create
-                0x00000000       0x94 build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_SEM_Delete
-                0x00000000       0x30 build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_SEM_Pend
-                0x00000000       0x44 build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_SEM_Post
-                0x00000000       0x30 build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_SEM_PostISR
-                0x00000000       0x4c build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_SEM_GetCount
-                0x00000000       0x2c build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_MUTEX_Delete
-                0x00000000       0x3c build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_MUTEX_Lock
-                0x00000000       0x44 build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_MUTEX_Unlock
-                0x00000000       0x30 build/default/production/_ext/24337685/osal_freertos.o
- .rodata        0x00000000        0xc build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_Name
-                0x00000000        0xc build/default/production/_ext/24337685/osal_freertos.o
- .text.OSAL_Initialize
-                0x00000000        0x8 build/default/production/_ext/24337685/osal_freertos.o
- .text          0x00000000        0x0 build/default/production/_ext/122796885/sys_int_pic32.o
- .data          0x00000000        0x0 build/default/production/_ext/122796885/sys_int_pic32.o
- .bss           0x00000000        0x0 build/default/production/_ext/122796885/sys_int_pic32.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/122796885/sys_int_pic32.o
- .text.SYS_INT_StatusGetAndDisable
-                0x00000000       0x1c build/default/production/_ext/122796885/sys_int_pic32.o
- .text.SYS_INT_StatusRestore
-                0x00000000       0x1c build/default/production/_ext/122796885/sys_int_pic32.o
- .text.SYS_INT_Disable
-                0x00000000       0x20 build/default/production/_ext/122796885/sys_int_pic32.o
- .text.SYS_INT_SourceDisable
-                0x00000000       0x54 build/default/production/_ext/122796885/sys_int_pic32.o
- .text          0x00000000        0x0 build/default/production/_ext/1128951024/croutine.o
- .data          0x00000000        0x0 build/default/production/_ext/1128951024/croutine.o
- .bss           0x00000000        0x0 build/default/production/_ext/1128951024/croutine.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/croutine.o
- .text          0x00000000        0x0 build/default/production/_ext/1128951024/list.o
- .data          0x00000000        0x0 build/default/production/_ext/1128951024/list.o
- .bss           0x00000000        0x0 build/default/production/_ext/1128951024/list.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/list.o
- .text          0x00000000        0x0 build/default/production/_ext/1128951024/queue.o
- .data          0x00000000        0x0 build/default/production/_ext/1128951024/queue.o
- .bss           0x00000000        0x0 build/default/production/_ext/1128951024/queue.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/queue.o
- .text.xQueueCreateCountingSemaphore
-                0x00000000       0x34 build/default/production/_ext/1128951024/queue.o
- .text.xQueueGiveFromISR
-                0x00000000       0xc0 build/default/production/_ext/1128951024/queue.o
- .text.xQueuePeekFromISR
-                0x00000000       0x74 build/default/production/_ext/1128951024/queue.o
- .text.uxQueueMessagesWaiting
-                0x00000000       0x34 build/default/production/_ext/1128951024/queue.o
- .text.uxQueueSpacesAvailable
-                0x00000000       0x38 build/default/production/_ext/1128951024/queue.o
- .text.uxQueueMessagesWaitingFromISR
-                0x00000000        0xc build/default/production/_ext/1128951024/queue.o
- .text.vQueueDelete
-                0x00000000       0x1c build/default/production/_ext/1128951024/queue.o
- .text.xQueueIsQueueEmptyFromISR
-                0x00000000        0xc build/default/production/_ext/1128951024/queue.o
- .text.xQueueIsQueueFullFromISR
-                0x00000000       0x14 build/default/production/_ext/1128951024/queue.o
- .text          0x00000000        0x0 build/default/production/_ext/1128951024/tasks.o
- .data          0x00000000        0x0 build/default/production/_ext/1128951024/tasks.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/tasks.o
- .text.prvTaskIsTaskSuspended
-                0x00000000       0x38 build/default/production/_ext/1128951024/tasks.o
- .text.uxTaskPriorityGetFromISR
-                0x00000000       0x3c build/default/production/_ext/1128951024/tasks.o
- .text.xTaskResumeFromISR
-                0x00000000       0xd8 build/default/production/_ext/1128951024/tasks.o
- .text.vTaskEndScheduler
-                0x00000000       0x3c build/default/production/_ext/1128951024/tasks.o
- .text.xTaskGetTickCountFromISR
-                0x00000000        0xc build/default/production/_ext/1128951024/tasks.o
- .text.uxTaskGetNumberOfTasks
-                0x00000000        0xc build/default/production/_ext/1128951024/tasks.o
- .text.pcTaskGetName
-                0x00000000       0x10 build/default/production/_ext/1128951024/tasks.o
- .text.vTaskPlaceOnUnorderedEventList
-                0x00000000       0x48 build/default/production/_ext/1128951024/tasks.o
- .text.xTaskRemoveFromUnorderedEventList
-                0x00000000       0x9c build/default/production/_ext/1128951024/tasks.o
- .text.xTaskGetCurrentTaskHandle
-                0x00000000        0xc build/default/production/_ext/1128951024/tasks.o
- .text.vTaskDelete
-                0x00000000      0x128 build/default/production/_ext/1128951024/tasks.o
- .text.uxTaskPriorityGet
-                0x00000000       0x38 build/default/production/_ext/1128951024/tasks.o
- .text.vTaskPrioritySet
-                0x00000000      0x15c build/default/production/_ext/1128951024/tasks.o
- .text.vTaskSuspend
-                0x00000000      0x130 build/default/production/_ext/1128951024/tasks.o
- .text.vTaskResume
-                0x00000000       0xc0 build/default/production/_ext/1128951024/tasks.o
- .text.vTaskDelayUntil
-                0x00000000       0xa8 build/default/production/_ext/1128951024/tasks.o
- .text.vTaskDelay
-                0x00000000       0x58 build/default/production/_ext/1128951024/tasks.o
- .text.uxTaskResetEventItemValue
-                0x00000000       0x24 build/default/production/_ext/1128951024/tasks.o
- .text.ulTaskNotifyTake
-                0x00000000       0xc4 build/default/production/_ext/1128951024/tasks.o
- .text.xTaskNotifyWait
-                0x00000000      0x108 build/default/production/_ext/1128951024/tasks.o
- .text.xTaskGenericNotify
-                0x00000000      0x170 build/default/production/_ext/1128951024/tasks.o
- .text.xTaskGenericNotifyFromISR
-                0x00000000      0x1a8 build/default/production/_ext/1128951024/tasks.o
- .text.vTaskNotifyGiveFromISR
-                0x00000000      0x104 build/default/production/_ext/1128951024/tasks.o
- .text.xTaskNotifyStateClear
-                0x00000000       0x60 build/default/production/_ext/1128951024/tasks.o
- .text          0x00000000        0x0 build/default/production/_ext/1128951024/timers.o
- .data          0x00000000        0x0 build/default/production/_ext/1128951024/timers.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/timers.o
- .text.xTimerGetTimerDaemonTaskHandle
-                0x00000000        0x8 build/default/production/_ext/1128951024/timers.o
- .text.xTimerGetPeriod
-                0x00000000        0x8 build/default/production/_ext/1128951024/timers.o
- .text.xTimerGetExpiryTime
-                0x00000000        0x8 build/default/production/_ext/1128951024/timers.o
- .text.pcTimerGetName
-                0x00000000        0x8 build/default/production/_ext/1128951024/timers.o
- .text.xTimerIsTimerActive
-                0x00000000       0x34 build/default/production/_ext/1128951024/timers.o
- .text.pvTimerGetTimerID
-                0x00000000       0x30 build/default/production/_ext/1128951024/timers.o
- .text.vTimerSetTimerID
-                0x00000000       0x38 build/default/production/_ext/1128951024/timers.o
- .text          0x00000000        0x0 build/default/production/_ext/1128951024/event_groups.o
- .data          0x00000000        0x0 build/default/production/_ext/1128951024/event_groups.o
- .bss           0x00000000        0x0 build/default/production/_ext/1128951024/event_groups.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/event_groups.o
- .text.xEventGroupCreate
-                0x00000000       0x3c build/default/production/_ext/1128951024/event_groups.o
- .text.xEventGroupWaitBits
-                0x00000000      0x148 build/default/production/_ext/1128951024/event_groups.o
- .text.xEventGroupClearBits
-                0x00000000       0x50 build/default/production/_ext/1128951024/event_groups.o
- .text.xEventGroupGetBitsFromISR
-                0x00000000       0x34 build/default/production/_ext/1128951024/event_groups.o
- .text.xEventGroupSetBits
-                0x00000000       0xfc build/default/production/_ext/1128951024/event_groups.o
- .text.xEventGroupSync
-                0x00000000      0x110 build/default/production/_ext/1128951024/event_groups.o
- .text.vEventGroupDelete
-                0x00000000       0x58 build/default/production/_ext/1128951024/event_groups.o
- .text.vEventGroupSetBitsCallback
-                0x00000000       0x1c build/default/production/_ext/1128951024/event_groups.o
- .text.vEventGroupClearBitsCallback
-                0x00000000       0x1c build/default/production/_ext/1128951024/event_groups.o
- .text          0x00000000        0x0 build/default/production/_ext/1856876499/heap_1.o
- .data          0x00000000        0x0 build/default/production/_ext/1856876499/heap_1.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/1856876499/heap_1.o
- .text.vPortInitialiseBlocks
-                0x00000000        0x8 build/default/production/_ext/1856876499/heap_1.o
- .text.xPortGetFreeHeapSize
-                0x00000000       0x14 build/default/production/_ext/1856876499/heap_1.o
- .text          0x00000000        0x0 build/default/production/_ext/12131622/port.o
- .data          0x00000000        0x0 build/default/production/_ext/12131622/port.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/12131622/port.o
- .text.vPortEndScheduler
-                0x00000000        0x8 build/default/production/_ext/12131622/port.o
- .data          0x00000000        0x0 build/default/production/_ext/12131622/port_asm.o
- .bss           0x00000000        0x0 build/default/production/_ext/12131622/port_asm.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/12131622/port_asm.o
+ .text          0x00000000        0x0 build/default/production/_ext/74298950/bsp.o
+ .data          0x00000000        0x0 build/default/production/_ext/74298950/bsp.o
+ .bss           0x00000000        0x0 build/default/production/_ext/74298950/bsp.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/74298950/bsp.o
+ .text.BSP_SwitchStateGet
+                0x00000000       0x50 build/default/production/_ext/74298950/bsp.o
+ .text.BSP_LEDStateSet
+                0x00000000      0x130 build/default/production/_ext/74298950/bsp.o
+ .text.BSP_LEDToggle
+                0x00000000       0x54 build/default/production/_ext/74298950/bsp.o
+ .text.BSP_LEDStateGet
+                0x00000000       0x68 build/default/production/_ext/74298950/bsp.o
+ .text.BSP_LEDOn
+                0x00000000       0xc0 build/default/production/_ext/74298950/bsp.o
+ .text.BSP_SwitchS5Select
+                0x00000000       0x34 build/default/production/_ext/74298950/bsp.o
  .text          0x00000000        0x0 build/default/production/_ext/1361460060/drv_adc_static.o
  .data          0x00000000        0x0 build/default/production/_ext/1361460060/drv_adc_static.o
  .bss           0x00000000        0x0 build/default/production/_ext/1361460060/drv_adc_static.o
@@ -1135,22 +918,6 @@ Discarded input sections
                 0x00000000        0x8 build/default/production/_ext/822048611/sys_ports_static.o
  .text.SYS_PORTS_RemapOutput
                 0x00000000        0x8 build/default/production/_ext/822048611/sys_ports_static.o
- .text          0x00000000        0x0 build/default/production/_ext/74298950/bsp.o
- .data          0x00000000        0x0 build/default/production/_ext/74298950/bsp.o
- .bss           0x00000000        0x0 build/default/production/_ext/74298950/bsp.o
- .reginfo       0x00000000       0x18 build/default/production/_ext/74298950/bsp.o
- .text.BSP_SwitchStateGet
-                0x00000000       0x50 build/default/production/_ext/74298950/bsp.o
- .text.BSP_LEDStateSet
-                0x00000000      0x130 build/default/production/_ext/74298950/bsp.o
- .text.BSP_LEDToggle
-                0x00000000       0x54 build/default/production/_ext/74298950/bsp.o
- .text.BSP_LEDStateGet
-                0x00000000       0x68 build/default/production/_ext/74298950/bsp.o
- .text.BSP_LEDOn
-                0x00000000       0xc0 build/default/production/_ext/74298950/bsp.o
- .text.BSP_SwitchS5Select
-                0x00000000       0x34 build/default/production/_ext/74298950/bsp.o
  .text          0x00000000        0x0 build/default/production/_ext/1688732426/system_init.o
  .data          0x00000000        0x0 build/default/production/_ext/1688732426/system_init.o
  .bss           0x00000000        0x0 build/default/production/_ext/1688732426/system_init.o
@@ -1175,6 +942,239 @@ Discarded input sections
  .data          0x00000000        0x0 build/default/production/_ext/1688732426/rtos_hooks.o
  .bss           0x00000000        0x0 build/default/production/_ext/1688732426/rtos_hooks.o
  .reginfo       0x00000000       0x18 build/default/production/_ext/1688732426/rtos_hooks.o
+ .text          0x00000000        0x0 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .data          0x00000000        0x0 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .text.Left_Motor_PID
+                0x00000000       0x1c build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .text.Right_Motor_PID
+                0x00000000       0x1c build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .text.Left_Motor_Distance
+                0x00000000       0x24 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .text.Right_Motor_Distance
+                0x00000000       0x24 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .text.Left_Is_Finish
+                0x00000000        0x8 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .text.Right_Is_Finish
+                0x00000000        0x8 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .text.SetServo1PWM
+                0x00000000        0x8 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .text          0x00000000        0x0 build/default/production/_ext/1360937237/main.o
+ .data          0x00000000        0x0 build/default/production/_ext/1360937237/main.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1360937237/main.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/main.o
+ .text          0x00000000        0x0 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .data          0x00000000        0x0 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .text          0x00000000        0x0 build/default/production/_ext/1360937237/WiFiReceive.o
+ .data          0x00000000        0x0 build/default/production/_ext/1360937237/WiFiReceive.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/WiFiReceive.o
+ .text          0x00000000        0x0 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .data          0x00000000        0x0 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .text          0x00000000        0x0 build/default/production/_ext/1360937237/jsmn.o
+ .data          0x00000000        0x0 build/default/production/_ext/1360937237/jsmn.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1360937237/jsmn.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/jsmn.o
+ .text          0x00000000        0x0 build/default/production/_ext/1360937237/Test_Thread.o
+ .data          0x00000000        0x0 build/default/production/_ext/1360937237/Test_Thread.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1360937237/Test_Thread.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/Test_Thread.o
+ .text          0x00000000        0x0 build/default/production/_ext/1360937237/function.o
+ .data          0x00000000        0x0 build/default/production/_ext/1360937237/function.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1360937237/function.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1360937237/function.o
+ .text.Wait     0x00000000       0x30 build/default/production/_ext/1360937237/function.o
+ .text.Wait_Left
+                0x00000000       0x20 build/default/production/_ext/1360937237/function.o
+ .text.Wait_Right
+                0x00000000       0x20 build/default/production/_ext/1360937237/function.o
+ .text.Left_Turn
+                0x00000000       0x3c build/default/production/_ext/1360937237/function.o
+ .text.Right_Turn
+                0x00000000       0x3c build/default/production/_ext/1360937237/function.o
+ .text.Move     0x00000000       0x60 build/default/production/_ext/1360937237/function.o
+ .text          0x00000000        0x0 build/default/production/_ext/24337685/osal_freertos.o
+ .data          0x00000000        0x0 build/default/production/_ext/24337685/osal_freertos.o
+ .bss           0x00000000        0x0 build/default/production/_ext/24337685/osal_freertos.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_CRIT_Enter
+                0x00000000       0x48 build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_CRIT_Leave
+                0x00000000       0x44 build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_SEM_Create
+                0x00000000       0x94 build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_SEM_Delete
+                0x00000000       0x30 build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_SEM_Pend
+                0x00000000       0x44 build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_SEM_Post
+                0x00000000       0x30 build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_SEM_PostISR
+                0x00000000       0x4c build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_SEM_GetCount
+                0x00000000       0x2c build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_MUTEX_Delete
+                0x00000000       0x3c build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_MUTEX_Lock
+                0x00000000       0x44 build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_MUTEX_Unlock
+                0x00000000       0x30 build/default/production/_ext/24337685/osal_freertos.o
+ .rodata        0x00000000        0xc build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_Name
+                0x00000000        0xc build/default/production/_ext/24337685/osal_freertos.o
+ .text.OSAL_Initialize
+                0x00000000        0x8 build/default/production/_ext/24337685/osal_freertos.o
+ .text          0x00000000        0x0 build/default/production/_ext/122796885/sys_int_pic32.o
+ .data          0x00000000        0x0 build/default/production/_ext/122796885/sys_int_pic32.o
+ .bss           0x00000000        0x0 build/default/production/_ext/122796885/sys_int_pic32.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/122796885/sys_int_pic32.o
+ .text.SYS_INT_StatusGetAndDisable
+                0x00000000       0x1c build/default/production/_ext/122796885/sys_int_pic32.o
+ .text.SYS_INT_StatusRestore
+                0x00000000       0x1c build/default/production/_ext/122796885/sys_int_pic32.o
+ .text.SYS_INT_Disable
+                0x00000000       0x20 build/default/production/_ext/122796885/sys_int_pic32.o
+ .text.SYS_INT_SourceDisable
+                0x00000000       0x54 build/default/production/_ext/122796885/sys_int_pic32.o
+ .text          0x00000000        0x0 build/default/production/_ext/1856876499/heap_1.o
+ .data          0x00000000        0x0 build/default/production/_ext/1856876499/heap_1.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1856876499/heap_1.o
+ .text.vPortInitialiseBlocks
+                0x00000000        0x8 build/default/production/_ext/1856876499/heap_1.o
+ .text.xPortGetFreeHeapSize
+                0x00000000       0x14 build/default/production/_ext/1856876499/heap_1.o
+ .text          0x00000000        0x0 build/default/production/_ext/12131622/port.o
+ .data          0x00000000        0x0 build/default/production/_ext/12131622/port.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/12131622/port.o
+ .text.vPortEndScheduler
+                0x00000000        0x8 build/default/production/_ext/12131622/port.o
+ .data          0x00000000        0x0 build/default/production/_ext/12131622/port_asm.o
+ .bss           0x00000000        0x0 build/default/production/_ext/12131622/port_asm.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/12131622/port_asm.o
+ .text          0x00000000        0x0 build/default/production/_ext/1128951024/croutine.o
+ .data          0x00000000        0x0 build/default/production/_ext/1128951024/croutine.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1128951024/croutine.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/croutine.o
+ .text          0x00000000        0x0 build/default/production/_ext/1128951024/list.o
+ .data          0x00000000        0x0 build/default/production/_ext/1128951024/list.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1128951024/list.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/list.o
+ .text          0x00000000        0x0 build/default/production/_ext/1128951024/queue.o
+ .data          0x00000000        0x0 build/default/production/_ext/1128951024/queue.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1128951024/queue.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/queue.o
+ .text.xQueueCreateCountingSemaphore
+                0x00000000       0x34 build/default/production/_ext/1128951024/queue.o
+ .text.xQueueGiveFromISR
+                0x00000000       0xc0 build/default/production/_ext/1128951024/queue.o
+ .text.xQueuePeekFromISR
+                0x00000000       0x74 build/default/production/_ext/1128951024/queue.o
+ .text.uxQueueMessagesWaiting
+                0x00000000       0x34 build/default/production/_ext/1128951024/queue.o
+ .text.uxQueueSpacesAvailable
+                0x00000000       0x38 build/default/production/_ext/1128951024/queue.o
+ .text.uxQueueMessagesWaitingFromISR
+                0x00000000        0xc build/default/production/_ext/1128951024/queue.o
+ .text.vQueueDelete
+                0x00000000       0x1c build/default/production/_ext/1128951024/queue.o
+ .text.xQueueIsQueueEmptyFromISR
+                0x00000000        0xc build/default/production/_ext/1128951024/queue.o
+ .text.xQueueIsQueueFullFromISR
+                0x00000000       0x14 build/default/production/_ext/1128951024/queue.o
+ .text          0x00000000        0x0 build/default/production/_ext/1128951024/tasks.o
+ .data          0x00000000        0x0 build/default/production/_ext/1128951024/tasks.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/tasks.o
+ .text.prvTaskIsTaskSuspended
+                0x00000000       0x38 build/default/production/_ext/1128951024/tasks.o
+ .text.uxTaskPriorityGetFromISR
+                0x00000000       0x3c build/default/production/_ext/1128951024/tasks.o
+ .text.xTaskResumeFromISR
+                0x00000000       0xd8 build/default/production/_ext/1128951024/tasks.o
+ .text.vTaskEndScheduler
+                0x00000000       0x3c build/default/production/_ext/1128951024/tasks.o
+ .text.xTaskGetTickCountFromISR
+                0x00000000        0xc build/default/production/_ext/1128951024/tasks.o
+ .text.uxTaskGetNumberOfTasks
+                0x00000000        0xc build/default/production/_ext/1128951024/tasks.o
+ .text.pcTaskGetName
+                0x00000000       0x10 build/default/production/_ext/1128951024/tasks.o
+ .text.vTaskPlaceOnUnorderedEventList
+                0x00000000       0x48 build/default/production/_ext/1128951024/tasks.o
+ .text.xTaskRemoveFromUnorderedEventList
+                0x00000000       0x9c build/default/production/_ext/1128951024/tasks.o
+ .text.xTaskGetCurrentTaskHandle
+                0x00000000        0xc build/default/production/_ext/1128951024/tasks.o
+ .text.vTaskDelete
+                0x00000000      0x128 build/default/production/_ext/1128951024/tasks.o
+ .text.uxTaskPriorityGet
+                0x00000000       0x38 build/default/production/_ext/1128951024/tasks.o
+ .text.vTaskPrioritySet
+                0x00000000      0x15c build/default/production/_ext/1128951024/tasks.o
+ .text.vTaskSuspend
+                0x00000000      0x130 build/default/production/_ext/1128951024/tasks.o
+ .text.vTaskResume
+                0x00000000       0xc0 build/default/production/_ext/1128951024/tasks.o
+ .text.vTaskDelayUntil
+                0x00000000       0xa8 build/default/production/_ext/1128951024/tasks.o
+ .text.vTaskDelay
+                0x00000000       0x58 build/default/production/_ext/1128951024/tasks.o
+ .text.uxTaskResetEventItemValue
+                0x00000000       0x24 build/default/production/_ext/1128951024/tasks.o
+ .text.ulTaskNotifyTake
+                0x00000000       0xc4 build/default/production/_ext/1128951024/tasks.o
+ .text.xTaskNotifyWait
+                0x00000000      0x108 build/default/production/_ext/1128951024/tasks.o
+ .text.xTaskGenericNotify
+                0x00000000      0x170 build/default/production/_ext/1128951024/tasks.o
+ .text.xTaskGenericNotifyFromISR
+                0x00000000      0x1a8 build/default/production/_ext/1128951024/tasks.o
+ .text.vTaskNotifyGiveFromISR
+                0x00000000      0x104 build/default/production/_ext/1128951024/tasks.o
+ .text.xTaskNotifyStateClear
+                0x00000000       0x60 build/default/production/_ext/1128951024/tasks.o
+ .text          0x00000000        0x0 build/default/production/_ext/1128951024/timers.o
+ .data          0x00000000        0x0 build/default/production/_ext/1128951024/timers.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/timers.o
+ .text.xTimerGetTimerDaemonTaskHandle
+                0x00000000        0x8 build/default/production/_ext/1128951024/timers.o
+ .text.xTimerGetPeriod
+                0x00000000        0x8 build/default/production/_ext/1128951024/timers.o
+ .text.xTimerGetExpiryTime
+                0x00000000        0x8 build/default/production/_ext/1128951024/timers.o
+ .text.pcTimerGetName
+                0x00000000        0x8 build/default/production/_ext/1128951024/timers.o
+ .text.xTimerIsTimerActive
+                0x00000000       0x34 build/default/production/_ext/1128951024/timers.o
+ .text.pvTimerGetTimerID
+                0x00000000       0x30 build/default/production/_ext/1128951024/timers.o
+ .text.vTimerSetTimerID
+                0x00000000       0x38 build/default/production/_ext/1128951024/timers.o
+ .text          0x00000000        0x0 build/default/production/_ext/1128951024/event_groups.o
+ .data          0x00000000        0x0 build/default/production/_ext/1128951024/event_groups.o
+ .bss           0x00000000        0x0 build/default/production/_ext/1128951024/event_groups.o
+ .reginfo       0x00000000       0x18 build/default/production/_ext/1128951024/event_groups.o
+ .text.xEventGroupCreate
+                0x00000000       0x3c build/default/production/_ext/1128951024/event_groups.o
+ .text.xEventGroupWaitBits
+                0x00000000      0x148 build/default/production/_ext/1128951024/event_groups.o
+ .text.xEventGroupClearBits
+                0x00000000       0x50 build/default/production/_ext/1128951024/event_groups.o
+ .text.xEventGroupGetBitsFromISR
+                0x00000000       0x34 build/default/production/_ext/1128951024/event_groups.o
+ .text.xEventGroupSetBits
+                0x00000000       0xfc build/default/production/_ext/1128951024/event_groups.o
+ .text.xEventGroupSync
+                0x00000000      0x110 build/default/production/_ext/1128951024/event_groups.o
+ .text.vEventGroupDelete
+                0x00000000       0x58 build/default/production/_ext/1128951024/event_groups.o
+ .text.vEventGroupSetBitsCallback
+                0x00000000       0x1c build/default/production/_ext/1128951024/event_groups.o
+ .text.vEventGroupClearBitsCallback
+                0x00000000       0x1c build/default/production/_ext/1128951024/event_groups.o
  .text          0x00000000        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX795F512L\default_isr_vectors.o
  .data          0x00000000        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX795F512L\default_isr_vectors.o
  .bss           0x00000000        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX795F512L\default_isr_vectors.o
@@ -1482,25 +1482,7 @@ Linker script and memory map
 
 LOAD c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX795F512L/crt0_mips32r2.o
 LOAD c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\debug-exception-return.o
-LOAD build/default/production/_ext/1360937237/motor_encoder_thread.o
-LOAD build/default/production/_ext/1360937237/main.o
-LOAD build/default/production/_ext/1360937237/Sensor_Control_Thread.o
-LOAD build/default/production/_ext/1360937237/WiFiReceive.o
-LOAD build/default/production/_ext/1360937237/WiFiTransmit.o
-LOAD build/default/production/_ext/1360937237/jsmn.o
-LOAD build/default/production/_ext/1360937237/Test_Thread.o
-LOAD build/default/production/_ext/1360937237/function.o
-LOAD build/default/production/_ext/24337685/osal_freertos.o
-LOAD build/default/production/_ext/122796885/sys_int_pic32.o
-LOAD build/default/production/_ext/1128951024/croutine.o
-LOAD build/default/production/_ext/1128951024/list.o
-LOAD build/default/production/_ext/1128951024/queue.o
-LOAD build/default/production/_ext/1128951024/tasks.o
-LOAD build/default/production/_ext/1128951024/timers.o
-LOAD build/default/production/_ext/1128951024/event_groups.o
-LOAD build/default/production/_ext/1856876499/heap_1.o
-LOAD build/default/production/_ext/12131622/port.o
-LOAD build/default/production/_ext/12131622/port_asm.o
+LOAD build/default/production/_ext/74298950/bsp.o
 LOAD build/default/production/_ext/1361460060/drv_adc_static.o
 LOAD build/default/production/_ext/1047219354/drv_oc_mapping.o
 LOAD build/default/production/_ext/1047219354/drv_oc_static.o
@@ -1513,13 +1495,31 @@ LOAD build/default/production/_ext/639803181/sys_clk_pic32mx.o
 LOAD build/default/production/_ext/340578644/sys_devcon.o
 LOAD build/default/production/_ext/340578644/sys_devcon_pic32mx.o
 LOAD build/default/production/_ext/822048611/sys_ports_static.o
-LOAD build/default/production/_ext/74298950/bsp.o
 LOAD build/default/production/_ext/1688732426/system_init.o
 LOAD build/default/production/_ext/1688732426/system_interrupt.o
 LOAD build/default/production/_ext/1688732426/system_exceptions.o
 LOAD build/default/production/_ext/1688732426/system_tasks.o
 LOAD build/default/production/_ext/1688732426/system_interrupt_a.o
 LOAD build/default/production/_ext/1688732426/rtos_hooks.o
+LOAD build/default/production/_ext/1360937237/motor_encoder_thread.o
+LOAD build/default/production/_ext/1360937237/main.o
+LOAD build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+LOAD build/default/production/_ext/1360937237/WiFiReceive.o
+LOAD build/default/production/_ext/1360937237/WiFiTransmit.o
+LOAD build/default/production/_ext/1360937237/jsmn.o
+LOAD build/default/production/_ext/1360937237/Test_Thread.o
+LOAD build/default/production/_ext/1360937237/function.o
+LOAD build/default/production/_ext/24337685/osal_freertos.o
+LOAD build/default/production/_ext/122796885/sys_int_pic32.o
+LOAD build/default/production/_ext/1856876499/heap_1.o
+LOAD build/default/production/_ext/12131622/port.o
+LOAD build/default/production/_ext/12131622/port_asm.o
+LOAD build/default/production/_ext/1128951024/croutine.o
+LOAD build/default/production/_ext/1128951024/list.o
+LOAD build/default/production/_ext/1128951024/queue.o
+LOAD build/default/production/_ext/1128951024/tasks.o
+LOAD build/default/production/_ext/1128951024/timers.o
+LOAD build/default/production/_ext/1128951024/event_groups.o
 LOAD ..\..\..\..\bin\framework\peripheral\PIC32MX795F512L_peripherals.a
                 0x00000001                __MPLAB_BUILD = 0x1
                 0x00000000                _min_heap_size = 0x0
@@ -2098,83 +2098,83 @@ END GROUP
                 0xa000001c                _sbss_begin = .
  *(.dynsbss)
  *(.sbss .sbss.* .gnu.linkonce.sb.*)
- .sbss          0xa000001c       0x60 build/default/production/_ext/1360937237/motor_encoder_thread.o
-                0xa000001c                servo2_pwm
-                0xa0000020                servo1_pwm
-                0xa0000024                counter_start
-                0xa0000028                counter
-                0xa000002c                set_time
-                0xa0000030                time_up
-                0xa0000031                right_finish
-                0xa0000032                left_finish
-                0xa0000033                distance_mode
-                0xa0000034                right_move_distance
-                0xa0000038                right_current_distance
-                0xa000003c                right_old_distance
-                0xa0000040                left_move_distance
-                0xa0000044                left_current_distance
-                0xa0000048                left_old_distance
-                0xa000004c                rightpwm
-                0xa0000050                leftpwm
-                0xa0000054                Kd
-                0xa0000058                Ki
-                0xa000005c                dir_right
-                0xa000005d                dir_left
-                0xa0000060                speed_right
-                0xa0000064                speed_left
-                0xa0000068                derivative
-                0xa000006c                previous_error
-                0xa0000070                integral
-                0xa0000074                right
-                0xa0000078                left
- .sbss          0xa000007c        0x8 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
-                0xa000007c                SideIR
-                0xa0000080                FrontIR
- .sbss          0xa0000084        0x4 build/default/production/_ext/1360937237/WiFiTransmit.o
-                0xa0000084                is_wifi_connected
-                0xa0000086                picsequence
- .sbss          0xa0000088       0x3c build/default/production/_ext/1128951024/tasks.o
-                0xa00000c0                pxCurrentTCB
- .sbss          0xa00000c4       0x14 build/default/production/_ext/1128951024/timers.o
- .sbss          0xa00000d8        0x8 build/default/production/_ext/1856876499/heap_1.o
- .sbss          0xa00000e0        0x4 build/default/production/_ext/12131622/port.o
-                0xa00000e0                uxSavedTaskStackPointer
- .sbss          0xa00000e4        0x4 build/default/production/_ext/1407244131/drv_tmr_static.o
- .sbss          0xa00000e8        0x4 build/default/production/_ext/1688732426/system_interrupt.o
-                0xa00000e8                count
- .sbss          0xa00000ec        0xc build/default/production/_ext/1688732426/system_exceptions.o
+ .sbss          0xa000001c        0x4 build/default/production/_ext/1407244131/drv_tmr_static.o
+ .sbss          0xa0000020        0x4 build/default/production/_ext/1688732426/system_interrupt.o
+                0xa0000020                count
+ .sbss          0xa0000024        0xc build/default/production/_ext/1688732426/system_exceptions.o
+ .sbss          0xa0000030       0x60 build/default/production/_ext/1360937237/motor_encoder_thread.o
+                0xa0000030                servo2_pwm
+                0xa0000034                servo1_pwm
+                0xa0000038                counter_start
+                0xa000003c                counter
+                0xa0000040                set_time
+                0xa0000044                time_up
+                0xa0000045                right_finish
+                0xa0000046                left_finish
+                0xa0000047                distance_mode
+                0xa0000048                right_move_distance
+                0xa000004c                right_current_distance
+                0xa0000050                right_old_distance
+                0xa0000054                left_move_distance
+                0xa0000058                left_current_distance
+                0xa000005c                left_old_distance
+                0xa0000060                rightpwm
+                0xa0000064                leftpwm
+                0xa0000068                Kd
+                0xa000006c                Ki
+                0xa0000070                dir_right
+                0xa0000071                dir_left
+                0xa0000074                speed_right
+                0xa0000078                speed_left
+                0xa000007c                derivative
+                0xa0000080                previous_error
+                0xa0000084                integral
+                0xa0000088                right
+                0xa000008c                left
+ .sbss          0xa0000090        0x8 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+                0xa0000090                SideIR
+                0xa0000094                FrontIR
+ .sbss          0xa0000098        0x4 build/default/production/_ext/1360937237/WiFiTransmit.o
+                0xa0000098                is_wifi_connected
+                0xa000009a                picsequence
+ .sbss          0xa000009c        0x8 build/default/production/_ext/1856876499/heap_1.o
+ .sbss          0xa00000a4        0x4 build/default/production/_ext/12131622/port.o
+                0xa00000a4                uxSavedTaskStackPointer
+ .sbss          0xa00000a8       0x3c build/default/production/_ext/1128951024/tasks.o
+                0xa00000e0                pxCurrentTCB
+ .sbss          0xa00000e4       0x14 build/default/production/_ext/1128951024/timers.o
  *(.scommon)
- .scommon       0xa00000f8       0x14 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .scommon       0xa00000f8       0x14 build/default/production/_ext/1047219354/drv_oc_mapping.o
                 0xa00000f8                mytimer1
                 0xa00000fc                mytimer0
                 0xa0000100                Encoder_Q
                 0xa0000104                receive_q
                 0xa0000108                IR_Q
- .scommon       0xa000010c        0xc build/default/production/_ext/1360937237/Sensor_Control_Thread.o
-                0xa000010c                sendFront
-                0xa0000110                sendSide
-                0xa0000114                receive
- .scommon       0xa0000118        0xc build/default/production/_ext/1360937237/WiFiReceive.o
-                0xa0000118                myUART
-                0xa000011c                usartreceivequeue
-                0xa0000120                wifireceiveData
- .scommon       0xa0000124        0x8 build/default/production/_ext/1360937237/WiFiTransmit.o
-                0xa0000124                wifitransmitqueue
-                0xa0000128                usarttransmitqueue
- .scommon       0xa000012c        0x0 build/default/production/_ext/1360937237/Test_Thread.o
- .scommon       0xa000012c        0x0 build/default/production/_ext/1360937237/function.o
- .scommon       0xa000012c        0x0 build/default/production/_ext/1047219354/drv_oc_mapping.o
- .scommon       0xa000012c        0x0 build/default/production/_ext/327000265/drv_usart_mapping.o
- .scommon       0xa000012c        0x8 build/default/production/_ext/327000265/drv_usart_static.o
-                0xa000012c                gDrvUSART0Obj
- .scommon       0xa0000134        0x0 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
- .scommon       0xa0000134        0x0 build/default/production/_ext/639803181/sys_clk_pic32mx.o
- .scommon       0xa0000134        0x8 build/default/production/_ext/340578644/sys_devcon.o
-                0xa0000134                sysDevconObj
- .scommon       0xa000013c        0x0 build/default/production/_ext/1688732426/system_init.o
- .scommon       0xa000013c        0x0 build/default/production/_ext/1688732426/system_interrupt.o
- .scommon       0xa000013c        0x0 build/default/production/_ext/1688732426/system_exceptions.o
- .scommon       0xa000013c        0x0 build/default/production/_ext/1688732426/system_tasks.o
+ .scommon       0xa000010c        0x0 build/default/production/_ext/327000265/drv_usart_mapping.o
+ .scommon       0xa000010c        0x8 build/default/production/_ext/327000265/drv_usart_static.o
+                0xa000010c                gDrvUSART0Obj
+ .scommon       0xa0000114        0x0 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
+ .scommon       0xa0000114        0x0 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+ .scommon       0xa0000114        0x8 build/default/production/_ext/340578644/sys_devcon.o
+                0xa0000114                sysDevconObj
+ .scommon       0xa000011c        0x0 build/default/production/_ext/1688732426/system_init.o
+ .scommon       0xa000011c        0x0 build/default/production/_ext/1688732426/system_interrupt.o
+ .scommon       0xa000011c        0x0 build/default/production/_ext/1688732426/system_exceptions.o
+ .scommon       0xa000011c        0x0 build/default/production/_ext/1688732426/system_tasks.o
+ .scommon       0xa000011c        0x0 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .scommon       0xa000011c        0xc build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+                0xa000011c                sendFront
+                0xa0000120                sendSide
+                0xa0000124                receive
+ .scommon       0xa0000128        0xc build/default/production/_ext/1360937237/WiFiReceive.o
+                0xa0000128                myUART
+                0xa000012c                usartreceivequeue
+                0xa0000130                wifireceiveData
+ .scommon       0xa0000134        0x8 build/default/production/_ext/1360937237/WiFiTransmit.o
+                0xa0000134                wifitransmitqueue
+                0xa0000138                usarttransmitqueue
+ .scommon       0xa000013c        0x0 build/default/production/_ext/1360937237/Test_Thread.o
+ .scommon       0xa000013c        0x0 build/default/production/_ext/1360937237/function.o
                 0xa000013c                _sbss_end = .
                 0xa000013c                . = ALIGN (0x4)
 
@@ -2209,24 +2209,7 @@ END GROUP
 
 .mdebug.abi32   0xa0000150        0x0
  *(.mdebug.abi32)
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/main.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/WiFiReceive.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/WiFiTransmit.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/jsmn.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/Test_Thread.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/function.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/24337685/osal_freertos.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/122796885/sys_int_pic32.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/croutine.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/list.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/queue.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/tasks.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/timers.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/event_groups.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1856876499/heap_1.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/12131622/port.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/74298950/bsp.o
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1361460060/drv_adc_static.o
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1047219354/drv_oc_mapping.o
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1047219354/drv_oc_static.o
@@ -2239,12 +2222,29 @@ END GROUP
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/340578644/sys_devcon.o
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/822048611/sys_ports_static.o
- .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/74298950/bsp.o
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1688732426/system_init.o
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1688732426/system_interrupt.o
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1688732426/system_exceptions.o
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1688732426/system_tasks.o
  .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1688732426/rtos_hooks.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/main.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/WiFiReceive.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/jsmn.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/Test_Thread.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1360937237/function.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/24337685/osal_freertos.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/122796885/sys_int_pic32.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1856876499/heap_1.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/12131622/port.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/croutine.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/list.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/queue.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/tasks.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/timers.o
+ .mdebug.abi32  0xa0000150        0x0 build/default/production/_ext/1128951024/event_groups.o
  .mdebug.abi32  0xa0000150        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
  .mdebug.abi32  0xa0000150        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
  .mdebug.abi32  0xa0000150        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
@@ -2304,25 +2304,8 @@ END GROUP
 
 .comment        0x00000000       0xbb
  *(.comment)
- .comment       0x00000000       0x3c build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .comment       0x00000000       0x3c build/default/production/_ext/74298950/bsp.o
                                  0x3d (size before relaxing)
- .comment       0x00000000       0x3d build/default/production/_ext/1360937237/main.o
- .comment       0x00000000       0x3d build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .comment       0x00000000       0x3d build/default/production/_ext/1360937237/WiFiReceive.o
- .comment       0x00000000       0x3d build/default/production/_ext/1360937237/WiFiTransmit.o
- .comment       0x00000000       0x3d build/default/production/_ext/1360937237/jsmn.o
- .comment       0x00000000       0x3d build/default/production/_ext/1360937237/Test_Thread.o
- .comment       0x00000000       0x3d build/default/production/_ext/1360937237/function.o
- .comment       0x00000000       0x3d build/default/production/_ext/24337685/osal_freertos.o
- .comment       0x00000000       0x3d build/default/production/_ext/122796885/sys_int_pic32.o
- .comment       0x00000000       0x3d build/default/production/_ext/1128951024/croutine.o
- .comment       0x00000000       0x3d build/default/production/_ext/1128951024/list.o
- .comment       0x00000000       0x3d build/default/production/_ext/1128951024/queue.o
- .comment       0x00000000       0x3d build/default/production/_ext/1128951024/tasks.o
- .comment       0x00000000       0x3d build/default/production/_ext/1128951024/timers.o
- .comment       0x00000000       0x3d build/default/production/_ext/1128951024/event_groups.o
- .comment       0x00000000       0x3d build/default/production/_ext/1856876499/heap_1.o
- .comment       0x00000000       0x3d build/default/production/_ext/12131622/port.o
  .comment       0x00000000       0x3d build/default/production/_ext/1361460060/drv_adc_static.o
  .comment       0x00000000       0x3d build/default/production/_ext/1047219354/drv_oc_mapping.o
  .comment       0x00000000       0x3d build/default/production/_ext/1047219354/drv_oc_static.o
@@ -2335,12 +2318,29 @@ END GROUP
  .comment       0x00000000       0x3d build/default/production/_ext/340578644/sys_devcon.o
  .comment       0x00000000       0x3d build/default/production/_ext/340578644/sys_devcon_pic32mx.o
  .comment       0x00000000       0x3d build/default/production/_ext/822048611/sys_ports_static.o
- .comment       0x00000000       0x3d build/default/production/_ext/74298950/bsp.o
  .comment       0x00000000       0x3d build/default/production/_ext/1688732426/system_init.o
  .comment       0x00000000       0x3d build/default/production/_ext/1688732426/system_interrupt.o
  .comment       0x00000000       0x3d build/default/production/_ext/1688732426/system_exceptions.o
  .comment       0x00000000       0x3d build/default/production/_ext/1688732426/system_tasks.o
  .comment       0x00000000       0x3d build/default/production/_ext/1688732426/rtos_hooks.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1360937237/main.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1360937237/WiFiReceive.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1360937237/WiFiTransmit.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1360937237/jsmn.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1360937237/Test_Thread.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1360937237/function.o
+ .comment       0x00000000       0x3d build/default/production/_ext/24337685/osal_freertos.o
+ .comment       0x00000000       0x3d build/default/production/_ext/122796885/sys_int_pic32.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1856876499/heap_1.o
+ .comment       0x00000000       0x3d build/default/production/_ext/12131622/port.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1128951024/croutine.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1128951024/list.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1128951024/queue.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1128951024/tasks.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1128951024/timers.o
+ .comment       0x00000000       0x3d build/default/production/_ext/1128951024/event_groups.o
  .comment       0x0000003c       0x18 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(memset.o)
                                  0x19 (size before relaxing)
  .comment       0x00000054       0x19 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(strlen.o)
@@ -2379,81 +2379,81 @@ END GROUP
 .debug_aranges  0x00000000     0x1358
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0xa0 build/default/production/_ext/1360937237/motor_encoder_thread.o
+                0x00000000       0x58 build/default/production/_ext/74298950/bsp.o
  .debug_aranges
-                0x000000a0       0x20 build/default/production/_ext/1360937237/main.o
+                0x00000058       0x78 build/default/production/_ext/1361460060/drv_adc_static.o
  .debug_aranges
-                0x000000c0       0x48 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+                0x000000d0       0x50 build/default/production/_ext/1047219354/drv_oc_mapping.o
  .debug_aranges
-                0x00000108       0x60 build/default/production/_ext/1360937237/WiFiReceive.o
+                0x00000120       0xf8 build/default/production/_ext/1047219354/drv_oc_static.o
  .debug_aranges
-                0x00000168       0x50 build/default/production/_ext/1360937237/WiFiTransmit.o
+                0x00000218      0x200 build/default/production/_ext/1407244131/drv_tmr_static.o
  .debug_aranges
-                0x000001b8       0x28 build/default/production/_ext/1360937237/jsmn.o
+                0x00000418       0xe8 build/default/production/_ext/1407244131/drv_tmr_mapping.o
  .debug_aranges
-                0x000001e0       0x28 build/default/production/_ext/1360937237/Test_Thread.o
+                0x00000500       0xb0 build/default/production/_ext/327000265/drv_usart_mapping.o
  .debug_aranges
-                0x00000208       0x50 build/default/production/_ext/1360937237/function.o
+                0x000005b0       0x88 build/default/production/_ext/327000265/drv_usart_static.o
  .debug_aranges
-                0x00000258       0x88 build/default/production/_ext/24337685/osal_freertos.o
+                0x00000638       0x48 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
  .debug_aranges
-                0x000002e0       0x48 build/default/production/_ext/122796885/sys_int_pic32.o
+                0x00000680       0x50 build/default/production/_ext/639803181/sys_clk_pic32mx.o
  .debug_aranges
-                0x00000328       0x18 build/default/production/_ext/1128951024/croutine.o
+                0x000006d0       0x78 build/default/production/_ext/340578644/sys_devcon.o
  .debug_aranges
-                0x00000340       0x40 build/default/production/_ext/1128951024/list.o
+                0x00000748       0x20 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
  .debug_aranges
-                0x00000380       0xb8 build/default/production/_ext/1128951024/queue.o
+                0x00000768      0x148 build/default/production/_ext/822048611/sys_ports_static.o
  .debug_aranges
-                0x00000438      0x188 build/default/production/_ext/1128951024/tasks.o
+                0x000008b0       0x20 build/default/production/_ext/1688732426/system_init.o
  .debug_aranges
-                0x000005c0       0x88 build/default/production/_ext/1128951024/timers.o
+                0x000008d0       0x50 build/default/production/_ext/1688732426/system_interrupt.o
  .debug_aranges
-                0x00000648       0x60 build/default/production/_ext/1128951024/event_groups.o
+                0x00000920       0x20 build/default/production/_ext/1688732426/system_exceptions.o
  .debug_aranges
-                0x000006a8       0x38 build/default/production/_ext/1856876499/heap_1.o
+                0x00000940       0x50 build/default/production/_ext/1688732426/system_tasks.o
  .debug_aranges
-                0x000006e0       0x58 build/default/production/_ext/12131622/port.o
+                0x00000990       0x88 build/default/production/_ext/1688732426/system_interrupt_a.o
  .debug_aranges
-                0x00000738       0x20 build/default/production/_ext/12131622/port_asm.o
+                0x00000a18       0x28 build/default/production/_ext/1688732426/rtos_hooks.o
  .debug_aranges
-                0x00000758       0x78 build/default/production/_ext/1361460060/drv_adc_static.o
+                0x00000a40       0xa0 build/default/production/_ext/1360937237/motor_encoder_thread.o
  .debug_aranges
-                0x000007d0       0x50 build/default/production/_ext/1047219354/drv_oc_mapping.o
+                0x00000ae0       0x20 build/default/production/_ext/1360937237/main.o
  .debug_aranges
-                0x00000820       0xf8 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x00000b00       0x48 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
  .debug_aranges
-                0x00000918      0x200 build/default/production/_ext/1407244131/drv_tmr_static.o
+                0x00000b48       0x60 build/default/production/_ext/1360937237/WiFiReceive.o
  .debug_aranges
-                0x00000b18       0xe8 build/default/production/_ext/1407244131/drv_tmr_mapping.o
+                0x00000ba8       0x50 build/default/production/_ext/1360937237/WiFiTransmit.o
  .debug_aranges
-                0x00000c00       0xb0 build/default/production/_ext/327000265/drv_usart_mapping.o
+                0x00000bf8       0x28 build/default/production/_ext/1360937237/jsmn.o
  .debug_aranges
-                0x00000cb0       0x88 build/default/production/_ext/327000265/drv_usart_static.o
+                0x00000c20       0x28 build/default/production/_ext/1360937237/Test_Thread.o
  .debug_aranges
-                0x00000d38       0x48 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
+                0x00000c48       0x50 build/default/production/_ext/1360937237/function.o
  .debug_aranges
-                0x00000d80       0x50 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+                0x00000c98       0x88 build/default/production/_ext/24337685/osal_freertos.o
  .debug_aranges
-                0x00000dd0       0x78 build/default/production/_ext/340578644/sys_devcon.o
+                0x00000d20       0x48 build/default/production/_ext/122796885/sys_int_pic32.o
  .debug_aranges
-                0x00000e48       0x20 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
+                0x00000d68       0x38 build/default/production/_ext/1856876499/heap_1.o
  .debug_aranges
-                0x00000e68      0x148 build/default/production/_ext/822048611/sys_ports_static.o
+                0x00000da0       0x58 build/default/production/_ext/12131622/port.o
  .debug_aranges
-                0x00000fb0       0x58 build/default/production/_ext/74298950/bsp.o
+                0x00000df8       0x20 build/default/production/_ext/12131622/port_asm.o
  .debug_aranges
-                0x00001008       0x20 build/default/production/_ext/1688732426/system_init.o
+                0x00000e18       0x18 build/default/production/_ext/1128951024/croutine.o
  .debug_aranges
-                0x00001028       0x50 build/default/production/_ext/1688732426/system_interrupt.o
+                0x00000e30       0x40 build/default/production/_ext/1128951024/list.o
  .debug_aranges
-                0x00001078       0x20 build/default/production/_ext/1688732426/system_exceptions.o
+                0x00000e70       0xb8 build/default/production/_ext/1128951024/queue.o
  .debug_aranges
-                0x00001098       0x50 build/default/production/_ext/1688732426/system_tasks.o
+                0x00000f28      0x188 build/default/production/_ext/1128951024/tasks.o
  .debug_aranges
-                0x000010e8       0x88 build/default/production/_ext/1688732426/system_interrupt_a.o
+                0x000010b0       0x88 build/default/production/_ext/1128951024/timers.o
  .debug_aranges
-                0x00001170       0x28 build/default/production/_ext/1688732426/rtos_hooks.o
+                0x00001138       0x60 build/default/production/_ext/1128951024/event_groups.o
  .debug_aranges
                 0x00001198       0x20 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
  .debug_aranges
@@ -2488,44 +2488,44 @@ END GROUP
 
 .debug_info     0x00000000    0x438ce
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000     0x2779 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .debug_info    0x00002779      0x1b6 build/default/production/_ext/1360937237/main.o
- .debug_info    0x0000292f     0x1a83 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .debug_info    0x000043b2     0x2955 build/default/production/_ext/1360937237/WiFiReceive.o
- .debug_info    0x00006d07     0x3234 build/default/production/_ext/1360937237/WiFiTransmit.o
- .debug_info    0x00009f3b      0x74d build/default/production/_ext/1360937237/jsmn.o
- .debug_info    0x0000a688     0x141e build/default/production/_ext/1360937237/Test_Thread.o
- .debug_info    0x0000baa6     0x15f7 build/default/production/_ext/1360937237/function.o
- .debug_info    0x0000d09d      0xa9a build/default/production/_ext/24337685/osal_freertos.o
- .debug_info    0x0000db37     0x1596 build/default/production/_ext/122796885/sys_int_pic32.o
- .debug_info    0x0000f0cd      0x17b build/default/production/_ext/1128951024/croutine.o
- .debug_info    0x0000f248      0x477 build/default/production/_ext/1128951024/list.o
- .debug_info    0x0000f6bf     0x1a2a build/default/production/_ext/1128951024/queue.o
- .debug_info    0x000110e9     0x2a2c build/default/production/_ext/1128951024/tasks.o
- .debug_info    0x00013b15     0x15d1 build/default/production/_ext/1128951024/timers.o
- .debug_info    0x000150e6      0xd4e build/default/production/_ext/1128951024/event_groups.o
- .debug_info    0x00015e34      0x381 build/default/production/_ext/1856876499/heap_1.o
- .debug_info    0x000161b5     0x11aa build/default/production/_ext/12131622/port.o
- .debug_info    0x0001735f       0xc9 build/default/production/_ext/12131622/port_asm.o
- .debug_info    0x00017428     0x30c5 build/default/production/_ext/1361460060/drv_adc_static.o
- .debug_info    0x0001a4ed     0x1a3b build/default/production/_ext/1047219354/drv_oc_mapping.o
- .debug_info    0x0001bf28     0x1c2b build/default/production/_ext/1047219354/drv_oc_static.o
- .debug_info    0x0001db53     0x6691 build/default/production/_ext/1407244131/drv_tmr_static.o
- .debug_info    0x000241e4     0x2187 build/default/production/_ext/1407244131/drv_tmr_mapping.o
- .debug_info    0x0002636b     0x23ec build/default/production/_ext/327000265/drv_usart_mapping.o
- .debug_info    0x00028757     0x47dc build/default/production/_ext/327000265/drv_usart_static.o
- .debug_info    0x0002cf33     0x2b75 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
- .debug_info    0x0002faa8     0x1ee3 build/default/production/_ext/639803181/sys_clk_pic32mx.o
- .debug_info    0x0003198b     0x1791 build/default/production/_ext/340578644/sys_devcon.o
- .debug_info    0x0003311c     0x18ca build/default/production/_ext/340578644/sys_devcon_pic32mx.o
- .debug_info    0x000349e6     0x411b build/default/production/_ext/822048611/sys_ports_static.o
- .debug_info    0x00038b01     0x1297 build/default/production/_ext/74298950/bsp.o
- .debug_info    0x00039d98     0x30f7 build/default/production/_ext/1688732426/system_init.o
- .debug_info    0x0003ce8f     0x235d build/default/production/_ext/1688732426/system_interrupt.o
- .debug_info    0x0003f1ec     0x13bd build/default/production/_ext/1688732426/system_exceptions.o
- .debug_info    0x000405a9     0x172a build/default/production/_ext/1688732426/system_tasks.o
- .debug_info    0x00041cd3       0xa8 build/default/production/_ext/1688732426/system_interrupt_a.o
- .debug_info    0x00041d7b      0x25e build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_info    0x00000000     0x1297 build/default/production/_ext/74298950/bsp.o
+ .debug_info    0x00001297     0x30c5 build/default/production/_ext/1361460060/drv_adc_static.o
+ .debug_info    0x0000435c     0x1a3b build/default/production/_ext/1047219354/drv_oc_mapping.o
+ .debug_info    0x00005d97     0x1c2b build/default/production/_ext/1047219354/drv_oc_static.o
+ .debug_info    0x000079c2     0x6691 build/default/production/_ext/1407244131/drv_tmr_static.o
+ .debug_info    0x0000e053     0x2187 build/default/production/_ext/1407244131/drv_tmr_mapping.o
+ .debug_info    0x000101da     0x23ec build/default/production/_ext/327000265/drv_usart_mapping.o
+ .debug_info    0x000125c6     0x47dc build/default/production/_ext/327000265/drv_usart_static.o
+ .debug_info    0x00016da2     0x2b75 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
+ .debug_info    0x00019917     0x1ee3 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+ .debug_info    0x0001b7fa     0x1791 build/default/production/_ext/340578644/sys_devcon.o
+ .debug_info    0x0001cf8b     0x18ca build/default/production/_ext/340578644/sys_devcon_pic32mx.o
+ .debug_info    0x0001e855     0x411b build/default/production/_ext/822048611/sys_ports_static.o
+ .debug_info    0x00022970     0x30f7 build/default/production/_ext/1688732426/system_init.o
+ .debug_info    0x00025a67     0x235d build/default/production/_ext/1688732426/system_interrupt.o
+ .debug_info    0x00027dc4     0x13bd build/default/production/_ext/1688732426/system_exceptions.o
+ .debug_info    0x00029181     0x172a build/default/production/_ext/1688732426/system_tasks.o
+ .debug_info    0x0002a8ab       0xa8 build/default/production/_ext/1688732426/system_interrupt_a.o
+ .debug_info    0x0002a953      0x25e build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_info    0x0002abb1     0x2779 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .debug_info    0x0002d32a      0x1b6 build/default/production/_ext/1360937237/main.o
+ .debug_info    0x0002d4e0     0x1a83 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .debug_info    0x0002ef63     0x2955 build/default/production/_ext/1360937237/WiFiReceive.o
+ .debug_info    0x000318b8     0x3234 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .debug_info    0x00034aec      0x74d build/default/production/_ext/1360937237/jsmn.o
+ .debug_info    0x00035239     0x141e build/default/production/_ext/1360937237/Test_Thread.o
+ .debug_info    0x00036657     0x15f7 build/default/production/_ext/1360937237/function.o
+ .debug_info    0x00037c4e      0xa9a build/default/production/_ext/24337685/osal_freertos.o
+ .debug_info    0x000386e8     0x1596 build/default/production/_ext/122796885/sys_int_pic32.o
+ .debug_info    0x00039c7e      0x381 build/default/production/_ext/1856876499/heap_1.o
+ .debug_info    0x00039fff     0x11aa build/default/production/_ext/12131622/port.o
+ .debug_info    0x0003b1a9       0xc9 build/default/production/_ext/12131622/port_asm.o
+ .debug_info    0x0003b272      0x17b build/default/production/_ext/1128951024/croutine.o
+ .debug_info    0x0003b3ed      0x477 build/default/production/_ext/1128951024/list.o
+ .debug_info    0x0003b864     0x1a2a build/default/production/_ext/1128951024/queue.o
+ .debug_info    0x0003d28e     0x2a2c build/default/production/_ext/1128951024/tasks.o
+ .debug_info    0x0003fcba     0x15d1 build/default/production/_ext/1128951024/timers.o
+ .debug_info    0x0004128b      0xd4e build/default/production/_ext/1128951024/event_groups.o
  .debug_info    0x00041fd9       0xf5 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
  .debug_info    0x000420ce       0xcf c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
  .debug_info    0x0004219d       0xd7 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
@@ -2543,44 +2543,44 @@ END GROUP
 
 .debug_abbrev   0x00000000     0x5583
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x33f build/default/production/_ext/1360937237/motor_encoder_thread.o
- .debug_abbrev  0x0000033f       0x93 build/default/production/_ext/1360937237/main.o
- .debug_abbrev  0x000003d2      0x21f build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .debug_abbrev  0x000005f1      0x349 build/default/production/_ext/1360937237/WiFiReceive.o
- .debug_abbrev  0x0000093a      0x361 build/default/production/_ext/1360937237/WiFiTransmit.o
- .debug_abbrev  0x00000c9b      0x201 build/default/production/_ext/1360937237/jsmn.o
- .debug_abbrev  0x00000e9c      0x14c build/default/production/_ext/1360937237/Test_Thread.o
- .debug_abbrev  0x00000fe8      0x173 build/default/production/_ext/1360937237/function.o
- .debug_abbrev  0x0000115b      0x1fe build/default/production/_ext/24337685/osal_freertos.o
- .debug_abbrev  0x00001359      0x237 build/default/production/_ext/122796885/sys_int_pic32.o
- .debug_abbrev  0x00001590       0x1b build/default/production/_ext/1128951024/croutine.o
- .debug_abbrev  0x000015ab       0xf1 build/default/production/_ext/1128951024/list.o
- .debug_abbrev  0x0000169c      0x2f4 build/default/production/_ext/1128951024/queue.o
- .debug_abbrev  0x00001990      0x394 build/default/production/_ext/1128951024/tasks.o
- .debug_abbrev  0x00001d24      0x341 build/default/production/_ext/1128951024/timers.o
- .debug_abbrev  0x00002065      0x29a build/default/production/_ext/1128951024/event_groups.o
- .debug_abbrev  0x000022ff      0x13f build/default/production/_ext/1856876499/heap_1.o
- .debug_abbrev  0x0000243e      0x2cf build/default/production/_ext/12131622/port.o
- .debug_abbrev  0x0000270d       0x14 build/default/production/_ext/12131622/port_asm.o
- .debug_abbrev  0x00002721      0x24e build/default/production/_ext/1361460060/drv_adc_static.o
- .debug_abbrev  0x0000296f      0x1d6 build/default/production/_ext/1047219354/drv_oc_mapping.o
- .debug_abbrev  0x00002b45      0x1c2 build/default/production/_ext/1047219354/drv_oc_static.o
- .debug_abbrev  0x00002d07      0x402 build/default/production/_ext/1407244131/drv_tmr_static.o
- .debug_abbrev  0x00003109      0x2ff build/default/production/_ext/1407244131/drv_tmr_mapping.o
- .debug_abbrev  0x00003408      0x243 build/default/production/_ext/327000265/drv_usart_mapping.o
- .debug_abbrev  0x0000364b      0x403 build/default/production/_ext/327000265/drv_usart_static.o
- .debug_abbrev  0x00003a4e      0x30e build/default/production/_ext/327000265/drv_usart_static_byte_model.o
- .debug_abbrev  0x00003d5c      0x283 build/default/production/_ext/639803181/sys_clk_pic32mx.o
- .debug_abbrev  0x00003fdf      0x27b build/default/production/_ext/340578644/sys_devcon.o
- .debug_abbrev  0x0000425a      0x20f build/default/production/_ext/340578644/sys_devcon_pic32mx.o
- .debug_abbrev  0x00004469      0x282 build/default/production/_ext/822048611/sys_ports_static.o
- .debug_abbrev  0x000046eb      0x26d build/default/production/_ext/74298950/bsp.o
- .debug_abbrev  0x00004958      0x299 build/default/production/_ext/1688732426/system_init.o
- .debug_abbrev  0x00004bf1      0x1e8 build/default/production/_ext/1688732426/system_interrupt.o
- .debug_abbrev  0x00004dd9      0x114 build/default/production/_ext/1688732426/system_exceptions.o
- .debug_abbrev  0x00004eed      0x18e build/default/production/_ext/1688732426/system_tasks.o
- .debug_abbrev  0x0000507b       0x12 build/default/production/_ext/1688732426/system_interrupt_a.o
- .debug_abbrev  0x0000508d       0x97 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_abbrev  0x00000000      0x26d build/default/production/_ext/74298950/bsp.o
+ .debug_abbrev  0x0000026d      0x24e build/default/production/_ext/1361460060/drv_adc_static.o
+ .debug_abbrev  0x000004bb      0x1d6 build/default/production/_ext/1047219354/drv_oc_mapping.o
+ .debug_abbrev  0x00000691      0x1c2 build/default/production/_ext/1047219354/drv_oc_static.o
+ .debug_abbrev  0x00000853      0x402 build/default/production/_ext/1407244131/drv_tmr_static.o
+ .debug_abbrev  0x00000c55      0x2ff build/default/production/_ext/1407244131/drv_tmr_mapping.o
+ .debug_abbrev  0x00000f54      0x243 build/default/production/_ext/327000265/drv_usart_mapping.o
+ .debug_abbrev  0x00001197      0x403 build/default/production/_ext/327000265/drv_usart_static.o
+ .debug_abbrev  0x0000159a      0x30e build/default/production/_ext/327000265/drv_usart_static_byte_model.o
+ .debug_abbrev  0x000018a8      0x283 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+ .debug_abbrev  0x00001b2b      0x27b build/default/production/_ext/340578644/sys_devcon.o
+ .debug_abbrev  0x00001da6      0x20f build/default/production/_ext/340578644/sys_devcon_pic32mx.o
+ .debug_abbrev  0x00001fb5      0x282 build/default/production/_ext/822048611/sys_ports_static.o
+ .debug_abbrev  0x00002237      0x299 build/default/production/_ext/1688732426/system_init.o
+ .debug_abbrev  0x000024d0      0x1e8 build/default/production/_ext/1688732426/system_interrupt.o
+ .debug_abbrev  0x000026b8      0x114 build/default/production/_ext/1688732426/system_exceptions.o
+ .debug_abbrev  0x000027cc      0x18e build/default/production/_ext/1688732426/system_tasks.o
+ .debug_abbrev  0x0000295a       0x12 build/default/production/_ext/1688732426/system_interrupt_a.o
+ .debug_abbrev  0x0000296c       0x97 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_abbrev  0x00002a03      0x33f build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .debug_abbrev  0x00002d42       0x93 build/default/production/_ext/1360937237/main.o
+ .debug_abbrev  0x00002dd5      0x21f build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .debug_abbrev  0x00002ff4      0x349 build/default/production/_ext/1360937237/WiFiReceive.o
+ .debug_abbrev  0x0000333d      0x361 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .debug_abbrev  0x0000369e      0x201 build/default/production/_ext/1360937237/jsmn.o
+ .debug_abbrev  0x0000389f      0x14c build/default/production/_ext/1360937237/Test_Thread.o
+ .debug_abbrev  0x000039eb      0x173 build/default/production/_ext/1360937237/function.o
+ .debug_abbrev  0x00003b5e      0x1fe build/default/production/_ext/24337685/osal_freertos.o
+ .debug_abbrev  0x00003d5c      0x237 build/default/production/_ext/122796885/sys_int_pic32.o
+ .debug_abbrev  0x00003f93      0x13f build/default/production/_ext/1856876499/heap_1.o
+ .debug_abbrev  0x000040d2      0x2cf build/default/production/_ext/12131622/port.o
+ .debug_abbrev  0x000043a1       0x14 build/default/production/_ext/12131622/port_asm.o
+ .debug_abbrev  0x000043b5       0x1b build/default/production/_ext/1128951024/croutine.o
+ .debug_abbrev  0x000043d0       0xf1 build/default/production/_ext/1128951024/list.o
+ .debug_abbrev  0x000044c1      0x2f4 build/default/production/_ext/1128951024/queue.o
+ .debug_abbrev  0x000047b5      0x394 build/default/production/_ext/1128951024/tasks.o
+ .debug_abbrev  0x00004b49      0x341 build/default/production/_ext/1128951024/timers.o
+ .debug_abbrev  0x00004e8a      0x29a build/default/production/_ext/1128951024/event_groups.o
  .debug_abbrev  0x00005124       0x28 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
  .debug_abbrev  0x0000514c       0x28 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
  .debug_abbrev  0x00005174       0x28 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
@@ -2598,44 +2598,44 @@ END GROUP
 
 .debug_line     0x00000000     0xb369
  *(.debug_line)
- .debug_line    0x00000000      0x72f build/default/production/_ext/1360937237/motor_encoder_thread.o
- .debug_line    0x0000072f       0xbc build/default/production/_ext/1360937237/main.o
- .debug_line    0x000007eb      0x46f build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .debug_line    0x00000c5a      0x634 build/default/production/_ext/1360937237/WiFiReceive.o
- .debug_line    0x0000128e      0x661 build/default/production/_ext/1360937237/WiFiTransmit.o
- .debug_line    0x000018ef      0x208 build/default/production/_ext/1360937237/jsmn.o
- .debug_line    0x00001af7      0x26f build/default/production/_ext/1360937237/Test_Thread.o
- .debug_line    0x00001d66      0x2c6 build/default/production/_ext/1360937237/function.o
- .debug_line    0x0000202c      0x2e5 build/default/production/_ext/24337685/osal_freertos.o
- .debug_line    0x00002311      0x2d1 build/default/production/_ext/122796885/sys_int_pic32.o
- .debug_line    0x000025e2       0x1d build/default/production/_ext/1128951024/croutine.o
- .debug_line    0x000025ff      0x1dc build/default/production/_ext/1128951024/list.o
- .debug_line    0x000027db      0x4b0 build/default/production/_ext/1128951024/queue.o
- .debug_line    0x00002c8b      0x7f8 build/default/production/_ext/1128951024/tasks.o
- .debug_line    0x00003483      0x3ca build/default/production/_ext/1128951024/timers.o
- .debug_line    0x0000384d      0x325 build/default/production/_ext/1128951024/event_groups.o
- .debug_line    0x00003b72      0x217 build/default/production/_ext/1856876499/heap_1.o
- .debug_line    0x00003d89      0x23a build/default/production/_ext/12131622/port.o
- .debug_line    0x00003fc3      0x102 build/default/production/_ext/12131622/port_asm.o
- .debug_line    0x000040c5      0x674 build/default/production/_ext/1361460060/drv_adc_static.o
- .debug_line    0x00004739      0x47e build/default/production/_ext/1047219354/drv_oc_mapping.o
- .debug_line    0x00004bb7      0x564 build/default/production/_ext/1047219354/drv_oc_static.o
- .debug_line    0x0000511b      0xc8a build/default/production/_ext/1407244131/drv_tmr_static.o
- .debug_line    0x00005da5      0x5b8 build/default/production/_ext/1407244131/drv_tmr_mapping.o
- .debug_line    0x0000635d      0x5e9 build/default/production/_ext/327000265/drv_usart_mapping.o
- .debug_line    0x00006946      0x967 build/default/production/_ext/327000265/drv_usart_static.o
- .debug_line    0x000072ad      0x5f3 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
- .debug_line    0x000078a0      0x607 build/default/production/_ext/639803181/sys_clk_pic32mx.o
- .debug_line    0x00007ea7      0x675 build/default/production/_ext/340578644/sys_devcon.o
- .debug_line    0x0000851c      0x48b build/default/production/_ext/340578644/sys_devcon_pic32mx.o
- .debug_line    0x000089a7      0x769 build/default/production/_ext/822048611/sys_ports_static.o
- .debug_line    0x00009110      0x345 build/default/production/_ext/74298950/bsp.o
- .debug_line    0x00009455      0x85e build/default/production/_ext/1688732426/system_init.o
- .debug_line    0x00009cb3      0x471 build/default/production/_ext/1688732426/system_interrupt.o
- .debug_line    0x0000a124      0x2ae build/default/production/_ext/1688732426/system_exceptions.o
- .debug_line    0x0000a3d2      0x422 build/default/production/_ext/1688732426/system_tasks.o
- .debug_line    0x0000a7f4      0x178 build/default/production/_ext/1688732426/system_interrupt_a.o
- .debug_line    0x0000a96c      0x147 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_line    0x00000000      0x345 build/default/production/_ext/74298950/bsp.o
+ .debug_line    0x00000345      0x674 build/default/production/_ext/1361460060/drv_adc_static.o
+ .debug_line    0x000009b9      0x47e build/default/production/_ext/1047219354/drv_oc_mapping.o
+ .debug_line    0x00000e37      0x564 build/default/production/_ext/1047219354/drv_oc_static.o
+ .debug_line    0x0000139b      0xc8a build/default/production/_ext/1407244131/drv_tmr_static.o
+ .debug_line    0x00002025      0x5b8 build/default/production/_ext/1407244131/drv_tmr_mapping.o
+ .debug_line    0x000025dd      0x5e9 build/default/production/_ext/327000265/drv_usart_mapping.o
+ .debug_line    0x00002bc6      0x967 build/default/production/_ext/327000265/drv_usart_static.o
+ .debug_line    0x0000352d      0x5f3 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
+ .debug_line    0x00003b20      0x607 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+ .debug_line    0x00004127      0x675 build/default/production/_ext/340578644/sys_devcon.o
+ .debug_line    0x0000479c      0x48b build/default/production/_ext/340578644/sys_devcon_pic32mx.o
+ .debug_line    0x00004c27      0x769 build/default/production/_ext/822048611/sys_ports_static.o
+ .debug_line    0x00005390      0x85e build/default/production/_ext/1688732426/system_init.o
+ .debug_line    0x00005bee      0x471 build/default/production/_ext/1688732426/system_interrupt.o
+ .debug_line    0x0000605f      0x2ae build/default/production/_ext/1688732426/system_exceptions.o
+ .debug_line    0x0000630d      0x422 build/default/production/_ext/1688732426/system_tasks.o
+ .debug_line    0x0000672f      0x178 build/default/production/_ext/1688732426/system_interrupt_a.o
+ .debug_line    0x000068a7      0x147 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_line    0x000069ee      0x72f build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .debug_line    0x0000711d       0xbc build/default/production/_ext/1360937237/main.o
+ .debug_line    0x000071d9      0x46f build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .debug_line    0x00007648      0x634 build/default/production/_ext/1360937237/WiFiReceive.o
+ .debug_line    0x00007c7c      0x661 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .debug_line    0x000082dd      0x208 build/default/production/_ext/1360937237/jsmn.o
+ .debug_line    0x000084e5      0x26f build/default/production/_ext/1360937237/Test_Thread.o
+ .debug_line    0x00008754      0x2c6 build/default/production/_ext/1360937237/function.o
+ .debug_line    0x00008a1a      0x2e5 build/default/production/_ext/24337685/osal_freertos.o
+ .debug_line    0x00008cff      0x2d1 build/default/production/_ext/122796885/sys_int_pic32.o
+ .debug_line    0x00008fd0      0x217 build/default/production/_ext/1856876499/heap_1.o
+ .debug_line    0x000091e7      0x23a build/default/production/_ext/12131622/port.o
+ .debug_line    0x00009421      0x102 build/default/production/_ext/12131622/port_asm.o
+ .debug_line    0x00009523       0x1d build/default/production/_ext/1128951024/croutine.o
+ .debug_line    0x00009540      0x1dc build/default/production/_ext/1128951024/list.o
+ .debug_line    0x0000971c      0x4b0 build/default/production/_ext/1128951024/queue.o
+ .debug_line    0x00009bcc      0x7f8 build/default/production/_ext/1128951024/tasks.o
+ .debug_line    0x0000a3c4      0x3ca build/default/production/_ext/1128951024/timers.o
+ .debug_line    0x0000a78e      0x325 build/default/production/_ext/1128951024/event_groups.o
  .debug_line    0x0000aab3       0xa9 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
  .debug_line    0x0000ab5c       0x96 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
  .debug_line    0x0000abf2       0x9a c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
@@ -2656,41 +2656,41 @@ END GROUP
 
 .debug_frame    0x00000000     0x27cc
  *(.debug_frame)
- .debug_frame   0x00000000      0x160 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .debug_frame   0x00000160       0x28 build/default/production/_ext/1360937237/main.o
- .debug_frame   0x00000188       0xa4 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .debug_frame   0x0000022c      0x104 build/default/production/_ext/1360937237/WiFiReceive.o
- .debug_frame   0x00000330       0xb8 build/default/production/_ext/1360937237/WiFiTransmit.o
- .debug_frame   0x000003e8       0x48 build/default/production/_ext/1360937237/jsmn.o
- .debug_frame   0x00000430       0x38 build/default/production/_ext/1360937237/Test_Thread.o
- .debug_frame   0x00000468       0xbc build/default/production/_ext/1360937237/function.o
- .debug_frame   0x00000524      0x150 build/default/production/_ext/24337685/osal_freertos.o
- .debug_frame   0x00000674       0x90 build/default/production/_ext/122796885/sys_int_pic32.o
- .debug_frame   0x00000704       0x60 build/default/production/_ext/1128951024/list.o
- .debug_frame   0x00000764      0x234 build/default/production/_ext/1128951024/queue.o
- .debug_frame   0x00000998      0x484 build/default/production/_ext/1128951024/tasks.o
- .debug_frame   0x00000e1c      0x164 build/default/production/_ext/1128951024/timers.o
- .debug_frame   0x00000f80      0x108 build/default/production/_ext/1128951024/event_groups.o
- .debug_frame   0x00001088       0x5c build/default/production/_ext/1856876499/heap_1.o
- .debug_frame   0x000010e4       0xc0 build/default/production/_ext/12131622/port.o
- .debug_frame   0x000011a4       0xd0 build/default/production/_ext/1361460060/drv_adc_static.o
- .debug_frame   0x00001274       0xa8 build/default/production/_ext/1047219354/drv_oc_mapping.o
- .debug_frame   0x0000131c      0x1d0 build/default/production/_ext/1047219354/drv_oc_static.o
- .debug_frame   0x000014ec      0x420 build/default/production/_ext/1407244131/drv_tmr_static.o
- .debug_frame   0x0000190c      0x218 build/default/production/_ext/1407244131/drv_tmr_mapping.o
- .debug_frame   0x00001b24      0x258 build/default/production/_ext/327000265/drv_usart_mapping.o
- .debug_frame   0x00001d7c      0x120 build/default/production/_ext/327000265/drv_usart_static.o
- .debug_frame   0x00001e9c       0x80 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
- .debug_frame   0x00001f1c       0xa0 build/default/production/_ext/639803181/sys_clk_pic32mx.o
- .debug_frame   0x00001fbc       0xe8 build/default/production/_ext/340578644/sys_devcon.o
- .debug_frame   0x000020a4       0x28 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
- .debug_frame   0x000020cc      0x270 build/default/production/_ext/822048611/sys_ports_static.o
- .debug_frame   0x0000233c       0x98 build/default/production/_ext/74298950/bsp.o
- .debug_frame   0x000023d4       0x30 build/default/production/_ext/1688732426/system_init.o
- .debug_frame   0x00002404       0x90 build/default/production/_ext/1688732426/system_interrupt.o
- .debug_frame   0x00002494       0x28 build/default/production/_ext/1688732426/system_exceptions.o
- .debug_frame   0x000024bc       0xb0 build/default/production/_ext/1688732426/system_tasks.o
- .debug_frame   0x0000256c       0x40 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_frame   0x00000000       0x98 build/default/production/_ext/74298950/bsp.o
+ .debug_frame   0x00000098       0xd0 build/default/production/_ext/1361460060/drv_adc_static.o
+ .debug_frame   0x00000168       0xa8 build/default/production/_ext/1047219354/drv_oc_mapping.o
+ .debug_frame   0x00000210      0x1d0 build/default/production/_ext/1047219354/drv_oc_static.o
+ .debug_frame   0x000003e0      0x420 build/default/production/_ext/1407244131/drv_tmr_static.o
+ .debug_frame   0x00000800      0x218 build/default/production/_ext/1407244131/drv_tmr_mapping.o
+ .debug_frame   0x00000a18      0x258 build/default/production/_ext/327000265/drv_usart_mapping.o
+ .debug_frame   0x00000c70      0x120 build/default/production/_ext/327000265/drv_usart_static.o
+ .debug_frame   0x00000d90       0x80 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
+ .debug_frame   0x00000e10       0xa0 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+ .debug_frame   0x00000eb0       0xe8 build/default/production/_ext/340578644/sys_devcon.o
+ .debug_frame   0x00000f98       0x28 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
+ .debug_frame   0x00000fc0      0x270 build/default/production/_ext/822048611/sys_ports_static.o
+ .debug_frame   0x00001230       0x30 build/default/production/_ext/1688732426/system_init.o
+ .debug_frame   0x00001260       0x90 build/default/production/_ext/1688732426/system_interrupt.o
+ .debug_frame   0x000012f0       0x28 build/default/production/_ext/1688732426/system_exceptions.o
+ .debug_frame   0x00001318       0xb0 build/default/production/_ext/1688732426/system_tasks.o
+ .debug_frame   0x000013c8       0x40 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_frame   0x00001408      0x160 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .debug_frame   0x00001568       0x28 build/default/production/_ext/1360937237/main.o
+ .debug_frame   0x00001590       0xa4 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .debug_frame   0x00001634      0x104 build/default/production/_ext/1360937237/WiFiReceive.o
+ .debug_frame   0x00001738       0xb8 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .debug_frame   0x000017f0       0x48 build/default/production/_ext/1360937237/jsmn.o
+ .debug_frame   0x00001838       0x38 build/default/production/_ext/1360937237/Test_Thread.o
+ .debug_frame   0x00001870       0xbc build/default/production/_ext/1360937237/function.o
+ .debug_frame   0x0000192c      0x150 build/default/production/_ext/24337685/osal_freertos.o
+ .debug_frame   0x00001a7c       0x90 build/default/production/_ext/122796885/sys_int_pic32.o
+ .debug_frame   0x00001b0c       0x5c build/default/production/_ext/1856876499/heap_1.o
+ .debug_frame   0x00001b68       0xc0 build/default/production/_ext/12131622/port.o
+ .debug_frame   0x00001c28       0x60 build/default/production/_ext/1128951024/list.o
+ .debug_frame   0x00001c88      0x234 build/default/production/_ext/1128951024/queue.o
+ .debug_frame   0x00001ebc      0x484 build/default/production/_ext/1128951024/tasks.o
+ .debug_frame   0x00002340      0x164 build/default/production/_ext/1128951024/timers.o
+ .debug_frame   0x000024a4      0x108 build/default/production/_ext/1128951024/event_groups.o
  .debug_frame   0x000025ac       0x2c c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
  .debug_frame   0x000025d8       0x20 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
  .debug_frame   0x000025f8       0x20 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
@@ -2708,42 +2708,42 @@ END GROUP
 
 .debug_str      0x00000000      0x927
  *(.debug_str)
- .debug_str     0x00000000       0x15 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .debug_str     0x00000015        0x0 build/default/production/_ext/1360937237/main.o
- .debug_str     0x00000015        0x0 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .debug_str     0x00000015       0x24 build/default/production/_ext/1360937237/WiFiReceive.o
- .debug_str     0x00000039        0xd build/default/production/_ext/1360937237/WiFiTransmit.o
- .debug_str     0x00000046       0x25 build/default/production/_ext/1360937237/jsmn.o
- .debug_str     0x0000006b        0x0 build/default/production/_ext/1360937237/Test_Thread.o
- .debug_str     0x0000006b        0x0 build/default/production/_ext/1360937237/function.o
- .debug_str     0x0000006b       0x40 build/default/production/_ext/24337685/osal_freertos.o
- .debug_str     0x000000ab       0x1d build/default/production/_ext/122796885/sys_int_pic32.o
- .debug_str     0x000000c8        0x0 build/default/production/_ext/1128951024/croutine.o
- .debug_str     0x000000c8       0x2b build/default/production/_ext/1128951024/list.o
- .debug_str     0x000000f3      0x131 build/default/production/_ext/1128951024/queue.o
- .debug_str     0x00000224      0x186 build/default/production/_ext/1128951024/tasks.o
- .debug_str     0x000003aa       0xd2 build/default/production/_ext/1128951024/timers.o
- .debug_str     0x0000047c       0xe6 build/default/production/_ext/1128951024/event_groups.o
- .debug_str     0x00000562       0x1d build/default/production/_ext/1856876499/heap_1.o
- .debug_str     0x0000057f       0x37 build/default/production/_ext/12131622/port.o
- .debug_str     0x000005b6       0x69 build/default/production/_ext/1361460060/drv_adc_static.o
- .debug_str     0x0000061f       0x13 build/default/production/_ext/1047219354/drv_oc_mapping.o
- .debug_str     0x00000632       0x1f build/default/production/_ext/1047219354/drv_oc_static.o
- .debug_str     0x00000651       0xa5 build/default/production/_ext/1407244131/drv_tmr_static.o
- .debug_str     0x000006f6        0xe build/default/production/_ext/1407244131/drv_tmr_mapping.o
- .debug_str     0x00000704       0x23 build/default/production/_ext/327000265/drv_usart_mapping.o
- .debug_str     0x00000727       0xe8 build/default/production/_ext/327000265/drv_usart_static.o
- .debug_str     0x0000080f       0x18 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
- .debug_str     0x00000827       0x39 build/default/production/_ext/639803181/sys_clk_pic32mx.o
- .debug_str     0x00000860       0x16 build/default/production/_ext/340578644/sys_devcon.o
- .debug_str     0x00000876        0x6 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
- .debug_str     0x0000087c       0x55 build/default/production/_ext/822048611/sys_ports_static.o
- .debug_str     0x000008d1       0x15 build/default/production/_ext/74298950/bsp.o
- .debug_str     0x000008e6       0x2b build/default/production/_ext/1688732426/system_init.o
- .debug_str     0x00000911        0xd build/default/production/_ext/1688732426/system_interrupt.o
- .debug_str     0x0000091e        0x0 build/default/production/_ext/1688732426/system_exceptions.o
- .debug_str     0x0000091e        0x0 build/default/production/_ext/1688732426/system_tasks.o
- .debug_str     0x0000091e        0x9 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_str     0x00000000       0x15 build/default/production/_ext/74298950/bsp.o
+ .debug_str     0x00000015       0x69 build/default/production/_ext/1361460060/drv_adc_static.o
+ .debug_str     0x0000007e       0x13 build/default/production/_ext/1047219354/drv_oc_mapping.o
+ .debug_str     0x00000091       0x1f build/default/production/_ext/1047219354/drv_oc_static.o
+ .debug_str     0x000000b0       0xa5 build/default/production/_ext/1407244131/drv_tmr_static.o
+ .debug_str     0x00000155        0xe build/default/production/_ext/1407244131/drv_tmr_mapping.o
+ .debug_str     0x00000163       0x23 build/default/production/_ext/327000265/drv_usart_mapping.o
+ .debug_str     0x00000186       0xe8 build/default/production/_ext/327000265/drv_usart_static.o
+ .debug_str     0x0000026e       0x18 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
+ .debug_str     0x00000286       0x39 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+ .debug_str     0x000002bf       0x16 build/default/production/_ext/340578644/sys_devcon.o
+ .debug_str     0x000002d5        0x6 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
+ .debug_str     0x000002db       0x55 build/default/production/_ext/822048611/sys_ports_static.o
+ .debug_str     0x00000330       0x2b build/default/production/_ext/1688732426/system_init.o
+ .debug_str     0x0000035b        0xd build/default/production/_ext/1688732426/system_interrupt.o
+ .debug_str     0x00000368        0x0 build/default/production/_ext/1688732426/system_exceptions.o
+ .debug_str     0x00000368        0x0 build/default/production/_ext/1688732426/system_tasks.o
+ .debug_str     0x00000368        0x9 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_str     0x00000371       0x15 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .debug_str     0x00000386        0x0 build/default/production/_ext/1360937237/main.o
+ .debug_str     0x00000386        0x0 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .debug_str     0x00000386       0x24 build/default/production/_ext/1360937237/WiFiReceive.o
+ .debug_str     0x000003aa        0xd build/default/production/_ext/1360937237/WiFiTransmit.o
+ .debug_str     0x000003b7       0x25 build/default/production/_ext/1360937237/jsmn.o
+ .debug_str     0x000003dc        0x0 build/default/production/_ext/1360937237/Test_Thread.o
+ .debug_str     0x000003dc        0x0 build/default/production/_ext/1360937237/function.o
+ .debug_str     0x000003dc       0x40 build/default/production/_ext/24337685/osal_freertos.o
+ .debug_str     0x0000041c       0x1d build/default/production/_ext/122796885/sys_int_pic32.o
+ .debug_str     0x00000439       0x1d build/default/production/_ext/1856876499/heap_1.o
+ .debug_str     0x00000456       0x37 build/default/production/_ext/12131622/port.o
+ .debug_str     0x0000048d        0x0 build/default/production/_ext/1128951024/croutine.o
+ .debug_str     0x0000048d       0x2b build/default/production/_ext/1128951024/list.o
+ .debug_str     0x000004b8      0x131 build/default/production/_ext/1128951024/queue.o
+ .debug_str     0x000005e9      0x186 build/default/production/_ext/1128951024/tasks.o
+ .debug_str     0x0000076f       0xd2 build/default/production/_ext/1128951024/timers.o
+ .debug_str     0x00000841       0xe6 build/default/production/_ext/1128951024/event_groups.o
  .debug_str     0x00000927        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
  .debug_str     0x00000927        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
  .debug_str     0x00000927        0x0 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
@@ -2764,37 +2764,37 @@ END GROUP
 
 .debug_loc      0x00000000     0x90dd
  *(.debug_loc)
- .debug_loc     0x00000000      0x1fd build/default/production/_ext/1360937237/motor_encoder_thread.o
- .debug_loc     0x000001fd       0x66 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .debug_loc     0x00000263      0x31b build/default/production/_ext/1360937237/WiFiReceive.o
- .debug_loc     0x0000057e      0x167 build/default/production/_ext/1360937237/WiFiTransmit.o
- .debug_loc     0x000006e5      0x59c build/default/production/_ext/1360937237/jsmn.o
- .debug_loc     0x00000c81       0xb0 build/default/production/_ext/1360937237/function.o
- .debug_loc     0x00000d31      0x40c build/default/production/_ext/24337685/osal_freertos.o
- .debug_loc     0x0000113d       0x7c build/default/production/_ext/122796885/sys_int_pic32.o
- .debug_loc     0x000011b9       0x31 build/default/production/_ext/1128951024/list.o
- .debug_loc     0x000011ea      0xf60 build/default/production/_ext/1128951024/queue.o
- .debug_loc     0x0000214a     0x1555 build/default/production/_ext/1128951024/tasks.o
- .debug_loc     0x0000369f      0x833 build/default/production/_ext/1128951024/timers.o
- .debug_loc     0x00003ed2      0x8ea build/default/production/_ext/1128951024/event_groups.o
- .debug_loc     0x000047bc       0x49 build/default/production/_ext/1856876499/heap_1.o
- .debug_loc     0x00004805       0xea build/default/production/_ext/12131622/port.o
- .debug_loc     0x000048ef       0x21 build/default/production/_ext/1361460060/drv_adc_static.o
- .debug_loc     0x00004910      0x453 build/default/production/_ext/1047219354/drv_oc_mapping.o
- .debug_loc     0x00004d63       0x84 build/default/production/_ext/1047219354/drv_oc_static.o
- .debug_loc     0x00004de7      0x9df build/default/production/_ext/1407244131/drv_tmr_static.o
- .debug_loc     0x000057c6      0x70b build/default/production/_ext/1407244131/drv_tmr_mapping.o
- .debug_loc     0x00005ed1      0x707 build/default/production/_ext/327000265/drv_usart_mapping.o
- .debug_loc     0x000065d8      0x63a build/default/production/_ext/327000265/drv_usart_static.o
- .debug_loc     0x00006c12       0x78 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
- .debug_loc     0x00006c8a       0x49 build/default/production/_ext/639803181/sys_clk_pic32mx.o
- .debug_loc     0x00006cd3       0xf0 build/default/production/_ext/340578644/sys_devcon.o
- .debug_loc     0x00006dc3       0xec build/default/production/_ext/340578644/sys_devcon_pic32mx.o
- .debug_loc     0x00006eaf      0x8ff build/default/production/_ext/822048611/sys_ports_static.o
- .debug_loc     0x000077ae      0x3e3 build/default/production/_ext/74298950/bsp.o
- .debug_loc     0x00007b91       0x21 build/default/production/_ext/1688732426/system_init.o
- .debug_loc     0x00007bb2       0x50 build/default/production/_ext/1688732426/system_interrupt.o
- .debug_loc     0x00007c02       0x34 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_loc     0x00000000      0x3e3 build/default/production/_ext/74298950/bsp.o
+ .debug_loc     0x000003e3       0x21 build/default/production/_ext/1361460060/drv_adc_static.o
+ .debug_loc     0x00000404      0x453 build/default/production/_ext/1047219354/drv_oc_mapping.o
+ .debug_loc     0x00000857       0x84 build/default/production/_ext/1047219354/drv_oc_static.o
+ .debug_loc     0x000008db      0x9df build/default/production/_ext/1407244131/drv_tmr_static.o
+ .debug_loc     0x000012ba      0x70b build/default/production/_ext/1407244131/drv_tmr_mapping.o
+ .debug_loc     0x000019c5      0x707 build/default/production/_ext/327000265/drv_usart_mapping.o
+ .debug_loc     0x000020cc      0x63a build/default/production/_ext/327000265/drv_usart_static.o
+ .debug_loc     0x00002706       0x78 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
+ .debug_loc     0x0000277e       0x49 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+ .debug_loc     0x000027c7       0xf0 build/default/production/_ext/340578644/sys_devcon.o
+ .debug_loc     0x000028b7       0xec build/default/production/_ext/340578644/sys_devcon_pic32mx.o
+ .debug_loc     0x000029a3      0x8ff build/default/production/_ext/822048611/sys_ports_static.o
+ .debug_loc     0x000032a2       0x21 build/default/production/_ext/1688732426/system_init.o
+ .debug_loc     0x000032c3       0x50 build/default/production/_ext/1688732426/system_interrupt.o
+ .debug_loc     0x00003313       0x34 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_loc     0x00003347      0x1fd build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .debug_loc     0x00003544       0x66 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .debug_loc     0x000035aa      0x31b build/default/production/_ext/1360937237/WiFiReceive.o
+ .debug_loc     0x000038c5      0x167 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .debug_loc     0x00003a2c      0x59c build/default/production/_ext/1360937237/jsmn.o
+ .debug_loc     0x00003fc8       0xb0 build/default/production/_ext/1360937237/function.o
+ .debug_loc     0x00004078      0x40c build/default/production/_ext/24337685/osal_freertos.o
+ .debug_loc     0x00004484       0x7c build/default/production/_ext/122796885/sys_int_pic32.o
+ .debug_loc     0x00004500       0x49 build/default/production/_ext/1856876499/heap_1.o
+ .debug_loc     0x00004549       0xea build/default/production/_ext/12131622/port.o
+ .debug_loc     0x00004633       0x31 build/default/production/_ext/1128951024/list.o
+ .debug_loc     0x00004664      0xf60 build/default/production/_ext/1128951024/queue.o
+ .debug_loc     0x000055c4     0x1555 build/default/production/_ext/1128951024/tasks.o
+ .debug_loc     0x00006b19      0x833 build/default/production/_ext/1128951024/timers.o
+ .debug_loc     0x0000734c      0x8ea build/default/production/_ext/1128951024/event_groups.o
  .debug_loc     0x00007c36      0xa6a c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3\libgcc.a(_udivdi3.o)
  .debug_loc     0x000086a0      0xa3d c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3\libgcc.a(_umoddi3.o)
 
@@ -2818,42 +2818,42 @@ END GROUP
 
 .debug_ranges   0x00000000     0x1608
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x90 build/default/production/_ext/1360937237/motor_encoder_thread.o
- .debug_ranges  0x00000090       0x10 build/default/production/_ext/1360937237/main.o
- .debug_ranges  0x000000a0       0x38 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
- .debug_ranges  0x000000d8       0x88 build/default/production/_ext/1360937237/WiFiReceive.o
- .debug_ranges  0x00000160       0x70 build/default/production/_ext/1360937237/WiFiTransmit.o
- .debug_ranges  0x000001d0      0x1a8 build/default/production/_ext/1360937237/jsmn.o
- .debug_ranges  0x00000378       0x18 build/default/production/_ext/1360937237/Test_Thread.o
- .debug_ranges  0x00000390       0x40 build/default/production/_ext/1360937237/function.o
- .debug_ranges  0x000003d0       0x78 build/default/production/_ext/24337685/osal_freertos.o
- .debug_ranges  0x00000448       0x50 build/default/production/_ext/122796885/sys_int_pic32.o
- .debug_ranges  0x00000498       0x30 build/default/production/_ext/1128951024/list.o
- .debug_ranges  0x000004c8      0x138 build/default/production/_ext/1128951024/queue.o
- .debug_ranges  0x00000600      0x1c0 build/default/production/_ext/1128951024/tasks.o
- .debug_ranges  0x000007c0      0x120 build/default/production/_ext/1128951024/timers.o
- .debug_ranges  0x000008e0       0x98 build/default/production/_ext/1128951024/event_groups.o
- .debug_ranges  0x00000978       0x28 build/default/production/_ext/1856876499/heap_1.o
- .debug_ranges  0x000009a0       0x48 build/default/production/_ext/12131622/port.o
- .debug_ranges  0x000009e8       0x68 build/default/production/_ext/1361460060/drv_adc_static.o
- .debug_ranges  0x00000a50       0x40 build/default/production/_ext/1047219354/drv_oc_mapping.o
- .debug_ranges  0x00000a90       0xe8 build/default/production/_ext/1047219354/drv_oc_static.o
- .debug_ranges  0x00000b78      0x1f0 build/default/production/_ext/1407244131/drv_tmr_static.o
- .debug_ranges  0x00000d68       0xd8 build/default/production/_ext/1407244131/drv_tmr_mapping.o
- .debug_ranges  0x00000e40       0xa0 build/default/production/_ext/327000265/drv_usart_mapping.o
- .debug_ranges  0x00000ee0       0xa8 build/default/production/_ext/327000265/drv_usart_static.o
- .debug_ranges  0x00000f88       0x38 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
- .debug_ranges  0x00000fc0       0x40 build/default/production/_ext/639803181/sys_clk_pic32mx.o
- .debug_ranges  0x00001000       0x68 build/default/production/_ext/340578644/sys_devcon.o
- .debug_ranges  0x00001068       0x10 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
- .debug_ranges  0x00001078      0x138 build/default/production/_ext/822048611/sys_ports_static.o
- .debug_ranges  0x000011b0       0xf0 build/default/production/_ext/74298950/bsp.o
- .debug_ranges  0x000012a0       0x10 build/default/production/_ext/1688732426/system_init.o
- .debug_ranges  0x000012b0       0x40 build/default/production/_ext/1688732426/system_interrupt.o
- .debug_ranges  0x000012f0       0x10 build/default/production/_ext/1688732426/system_exceptions.o
- .debug_ranges  0x00001300       0x40 build/default/production/_ext/1688732426/system_tasks.o
- .debug_ranges  0x00001340       0x80 build/default/production/_ext/1688732426/system_interrupt_a.o
- .debug_ranges  0x000013c0       0x18 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_ranges  0x00000000       0xf0 build/default/production/_ext/74298950/bsp.o
+ .debug_ranges  0x000000f0       0x68 build/default/production/_ext/1361460060/drv_adc_static.o
+ .debug_ranges  0x00000158       0x40 build/default/production/_ext/1047219354/drv_oc_mapping.o
+ .debug_ranges  0x00000198       0xe8 build/default/production/_ext/1047219354/drv_oc_static.o
+ .debug_ranges  0x00000280      0x1f0 build/default/production/_ext/1407244131/drv_tmr_static.o
+ .debug_ranges  0x00000470       0xd8 build/default/production/_ext/1407244131/drv_tmr_mapping.o
+ .debug_ranges  0x00000548       0xa0 build/default/production/_ext/327000265/drv_usart_mapping.o
+ .debug_ranges  0x000005e8       0xa8 build/default/production/_ext/327000265/drv_usart_static.o
+ .debug_ranges  0x00000690       0x38 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
+ .debug_ranges  0x000006c8       0x40 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+ .debug_ranges  0x00000708       0x68 build/default/production/_ext/340578644/sys_devcon.o
+ .debug_ranges  0x00000770       0x10 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
+ .debug_ranges  0x00000780      0x138 build/default/production/_ext/822048611/sys_ports_static.o
+ .debug_ranges  0x000008b8       0x10 build/default/production/_ext/1688732426/system_init.o
+ .debug_ranges  0x000008c8       0x40 build/default/production/_ext/1688732426/system_interrupt.o
+ .debug_ranges  0x00000908       0x10 build/default/production/_ext/1688732426/system_exceptions.o
+ .debug_ranges  0x00000918       0x40 build/default/production/_ext/1688732426/system_tasks.o
+ .debug_ranges  0x00000958       0x80 build/default/production/_ext/1688732426/system_interrupt_a.o
+ .debug_ranges  0x000009d8       0x18 build/default/production/_ext/1688732426/rtos_hooks.o
+ .debug_ranges  0x000009f0       0x90 build/default/production/_ext/1360937237/motor_encoder_thread.o
+ .debug_ranges  0x00000a80       0x10 build/default/production/_ext/1360937237/main.o
+ .debug_ranges  0x00000a90       0x38 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+ .debug_ranges  0x00000ac8       0x88 build/default/production/_ext/1360937237/WiFiReceive.o
+ .debug_ranges  0x00000b50       0x70 build/default/production/_ext/1360937237/WiFiTransmit.o
+ .debug_ranges  0x00000bc0      0x1a8 build/default/production/_ext/1360937237/jsmn.o
+ .debug_ranges  0x00000d68       0x18 build/default/production/_ext/1360937237/Test_Thread.o
+ .debug_ranges  0x00000d80       0x40 build/default/production/_ext/1360937237/function.o
+ .debug_ranges  0x00000dc0       0x78 build/default/production/_ext/24337685/osal_freertos.o
+ .debug_ranges  0x00000e38       0x50 build/default/production/_ext/122796885/sys_int_pic32.o
+ .debug_ranges  0x00000e88       0x28 build/default/production/_ext/1856876499/heap_1.o
+ .debug_ranges  0x00000eb0       0x48 build/default/production/_ext/12131622/port.o
+ .debug_ranges  0x00000ef8       0x30 build/default/production/_ext/1128951024/list.o
+ .debug_ranges  0x00000f28      0x138 build/default/production/_ext/1128951024/queue.o
+ .debug_ranges  0x00001060      0x1c0 build/default/production/_ext/1128951024/tasks.o
+ .debug_ranges  0x00001220      0x120 build/default/production/_ext/1128951024/timers.o
+ .debug_ranges  0x00001340       0x98 build/default/production/_ext/1128951024/event_groups.o
  .debug_ranges  0x000013d8       0x10 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
  .debug_ranges  0x000013e8       0x10 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
  .debug_ranges  0x000013f8       0x10 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
@@ -2873,77 +2873,77 @@ END GROUP
                 0x00000000       0x10
  *(.gnu.attributes)
  .gnu.attributes
-                0x00000000       0x10 build/default/production/_ext/1360937237/motor_encoder_thread.o
+                0x00000000       0x10 build/default/production/_ext/74298950/bsp.o
  .gnu.attributes
-                0x00000010       0x10 build/default/production/_ext/1360937237/main.o
+                0x00000010       0x10 build/default/production/_ext/1361460060/drv_adc_static.o
  .gnu.attributes
-                0x00000020       0x10 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+                0x00000020       0x10 build/default/production/_ext/1047219354/drv_oc_mapping.o
  .gnu.attributes
-                0x00000030       0x10 build/default/production/_ext/1360937237/WiFiReceive.o
+                0x00000030       0x10 build/default/production/_ext/1047219354/drv_oc_static.o
  .gnu.attributes
-                0x00000040       0x10 build/default/production/_ext/1360937237/WiFiTransmit.o
+                0x00000040       0x10 build/default/production/_ext/1407244131/drv_tmr_static.o
  .gnu.attributes
-                0x00000050       0x10 build/default/production/_ext/1360937237/jsmn.o
+                0x00000050       0x10 build/default/production/_ext/1407244131/drv_tmr_mapping.o
  .gnu.attributes
-                0x00000060       0x10 build/default/production/_ext/1360937237/Test_Thread.o
+                0x00000060       0x10 build/default/production/_ext/327000265/drv_usart_mapping.o
  .gnu.attributes
-                0x00000070       0x10 build/default/production/_ext/1360937237/function.o
+                0x00000070       0x10 build/default/production/_ext/327000265/drv_usart_static.o
  .gnu.attributes
-                0x00000080       0x10 build/default/production/_ext/24337685/osal_freertos.o
+                0x00000080       0x10 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
  .gnu.attributes
-                0x00000090       0x10 build/default/production/_ext/122796885/sys_int_pic32.o
+                0x00000090       0x10 build/default/production/_ext/639803181/sys_clk_pic32mx.o
  .gnu.attributes
-                0x000000a0       0x10 build/default/production/_ext/1128951024/croutine.o
+                0x000000a0       0x10 build/default/production/_ext/340578644/sys_devcon.o
  .gnu.attributes
-                0x000000b0       0x10 build/default/production/_ext/1128951024/list.o
+                0x000000b0       0x10 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
  .gnu.attributes
-                0x000000c0       0x10 build/default/production/_ext/1128951024/queue.o
+                0x000000c0       0x10 build/default/production/_ext/822048611/sys_ports_static.o
  .gnu.attributes
-                0x000000d0       0x10 build/default/production/_ext/1128951024/tasks.o
+                0x000000d0       0x10 build/default/production/_ext/1688732426/system_init.o
  .gnu.attributes
-                0x000000e0       0x10 build/default/production/_ext/1128951024/timers.o
+                0x000000e0       0x10 build/default/production/_ext/1688732426/system_interrupt.o
  .gnu.attributes
-                0x000000f0       0x10 build/default/production/_ext/1128951024/event_groups.o
+                0x000000f0       0x10 build/default/production/_ext/1688732426/system_exceptions.o
  .gnu.attributes
-                0x00000100       0x10 build/default/production/_ext/1856876499/heap_1.o
+                0x00000100       0x10 build/default/production/_ext/1688732426/system_tasks.o
  .gnu.attributes
-                0x00000110       0x10 build/default/production/_ext/12131622/port.o
+                0x00000110       0x10 build/default/production/_ext/1688732426/rtos_hooks.o
  .gnu.attributes
-                0x00000120       0x10 build/default/production/_ext/1361460060/drv_adc_static.o
+                0x00000120       0x10 build/default/production/_ext/1360937237/motor_encoder_thread.o
  .gnu.attributes
-                0x00000130       0x10 build/default/production/_ext/1047219354/drv_oc_mapping.o
+                0x00000130       0x10 build/default/production/_ext/1360937237/main.o
  .gnu.attributes
-                0x00000140       0x10 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x00000140       0x10 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
  .gnu.attributes
-                0x00000150       0x10 build/default/production/_ext/1407244131/drv_tmr_static.o
+                0x00000150       0x10 build/default/production/_ext/1360937237/WiFiReceive.o
  .gnu.attributes
-                0x00000160       0x10 build/default/production/_ext/1407244131/drv_tmr_mapping.o
+                0x00000160       0x10 build/default/production/_ext/1360937237/WiFiTransmit.o
  .gnu.attributes
-                0x00000170       0x10 build/default/production/_ext/327000265/drv_usart_mapping.o
+                0x00000170       0x10 build/default/production/_ext/1360937237/jsmn.o
  .gnu.attributes
-                0x00000180       0x10 build/default/production/_ext/327000265/drv_usart_static.o
+                0x00000180       0x10 build/default/production/_ext/1360937237/Test_Thread.o
  .gnu.attributes
-                0x00000190       0x10 build/default/production/_ext/327000265/drv_usart_static_byte_model.o
+                0x00000190       0x10 build/default/production/_ext/1360937237/function.o
  .gnu.attributes
-                0x000001a0       0x10 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+                0x000001a0       0x10 build/default/production/_ext/24337685/osal_freertos.o
  .gnu.attributes
-                0x000001b0       0x10 build/default/production/_ext/340578644/sys_devcon.o
+                0x000001b0       0x10 build/default/production/_ext/122796885/sys_int_pic32.o
  .gnu.attributes
-                0x000001c0       0x10 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
+                0x000001c0       0x10 build/default/production/_ext/1856876499/heap_1.o
  .gnu.attributes
-                0x000001d0       0x10 build/default/production/_ext/822048611/sys_ports_static.o
+                0x000001d0       0x10 build/default/production/_ext/12131622/port.o
  .gnu.attributes
-                0x000001e0       0x10 build/default/production/_ext/74298950/bsp.o
+                0x000001e0       0x10 build/default/production/_ext/1128951024/croutine.o
  .gnu.attributes
-                0x000001f0       0x10 build/default/production/_ext/1688732426/system_init.o
+                0x000001f0       0x10 build/default/production/_ext/1128951024/list.o
  .gnu.attributes
-                0x00000200       0x10 build/default/production/_ext/1688732426/system_interrupt.o
+                0x00000200       0x10 build/default/production/_ext/1128951024/queue.o
  .gnu.attributes
-                0x00000210       0x10 build/default/production/_ext/1688732426/system_exceptions.o
+                0x00000210       0x10 build/default/production/_ext/1128951024/tasks.o
  .gnu.attributes
-                0x00000220       0x10 build/default/production/_ext/1688732426/system_tasks.o
+                0x00000220       0x10 build/default/production/_ext/1128951024/timers.o
  .gnu.attributes
-                0x00000230       0x10 build/default/production/_ext/1688732426/rtos_hooks.o
+                0x00000230       0x10 build/default/production/_ext/1128951024/event_groups.o
  .gnu.attributes
                 0x00000240       0x10 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
  .gnu.attributes
@@ -3236,16 +3236,16 @@ LOAD data_init
                 0x9d005838       0xf0 build/default/production/_ext/1128951024/queue.o
                 0x9d005838                xQueueGenericSendFromISR
 
-.text.prvAddCurrentTaskToDelayedList
-                0x9d005928       0xe4
- .text.prvAddCurrentTaskToDelayedList
-                0x9d005928       0xe4 build/default/production/_ext/1128951024/tasks.o
-
 .text.SYS_DEVCON_PerformanceConfig
-                0x9d005a0c       0xe4
+                0x9d005928       0xe4
  .text.SYS_DEVCON_PerformanceConfig
-                0x9d005a0c       0xe4 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
-                0x9d005a0c                SYS_DEVCON_PerformanceConfig
+                0x9d005928       0xe4 build/default/production/_ext/340578644/sys_devcon_pic32mx.o
+                0x9d005928                SYS_DEVCON_PerformanceConfig
+
+.text.prvAddCurrentTaskToDelayedList
+                0x9d005a0c       0xe4
+ .text.prvAddCurrentTaskToDelayedList
+                0x9d005a0c       0xe4 build/default/production/_ext/1128951024/tasks.o
 
 .text.xQueueReceiveFromISR
                 0x9d005af0       0xe0
@@ -3286,11 +3286,11 @@ LOAD data_init
                 0x9d006000       0xc8 build/default/production/_ext/1361460060/drv_adc_static.o
                 0x9d006000                DRV_ADC_Initialize
 
-.text.xQueueGenericReset
+.text.BSP_LEDOff
                 0x9d0060c8       0xc0
- .text.xQueueGenericReset
-                0x9d0060c8       0xc0 build/default/production/_ext/1128951024/queue.o
-                0x9d0060c8                xQueueGenericReset
+ .text.BSP_LEDOff
+                0x9d0060c8       0xc0 build/default/production/_ext/74298950/bsp.o
+                0x9d0060c8                BSP_LEDOff
 
 .text.pvPortMalloc
                 0x9d006188       0xc0
@@ -3298,11 +3298,11 @@ LOAD data_init
                 0x9d006188       0xc0 build/default/production/_ext/1856876499/heap_1.o
                 0x9d006188                pvPortMalloc
 
-.text.BSP_LEDOff
+.text.xQueueGenericReset
                 0x9d006248       0xc0
- .text.BSP_LEDOff
-                0x9d006248       0xc0 build/default/production/_ext/74298950/bsp.o
-                0x9d006248                BSP_LEDOff
+ .text.xQueueGenericReset
+                0x9d006248       0xc0 build/default/production/_ext/1128951024/queue.o
+                0x9d006248                xQueueGenericReset
 
 .text.xTaskRemoveFromEventList
                 0x9d006308       0xbc
@@ -3310,22 +3310,22 @@ LOAD data_init
                 0x9d006308       0xbc build/default/production/_ext/1128951024/tasks.o
                 0x9d006308                xTaskRemoveFromEventList
 
-.text.SENSOR_CONTROL_THREAD_Tasks
+.text.SYS_PORTS_Initialize
                 0x9d0063c4       0xb4
+ .text.SYS_PORTS_Initialize
+                0x9d0063c4       0xb4 build/default/production/_ext/822048611/sys_ports_static.o
+                0x9d0063c4                SYS_PORTS_Initialize
+
+.text.SENSOR_CONTROL_THREAD_Tasks
+                0x9d006478       0xb4
  .text.SENSOR_CONTROL_THREAD_Tasks
-                0x9d0063c4       0xb4 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
-                0x9d0063c4                SENSOR_CONTROL_THREAD_Tasks
+                0x9d006478       0xb4 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+                0x9d006478                SENSOR_CONTROL_THREAD_Tasks
 
 .text.prvIdleTask
-                0x9d006478       0xb4
- .text.prvIdleTask
-                0x9d006478       0xb4 build/default/production/_ext/1128951024/tasks.o
-
-.text.SYS_PORTS_Initialize
                 0x9d00652c       0xb4
- .text.SYS_PORTS_Initialize
-                0x9d00652c       0xb4 build/default/production/_ext/822048611/sys_ports_static.o
-                0x9d00652c                SYS_PORTS_Initialize
+ .text.prvIdleTask
+                0x9d00652c       0xb4 build/default/production/_ext/1128951024/tasks.o
 
 .text           0x9d0065e0       0xa8
  .text          0x9d0065e0       0xa8 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(memset.o)
@@ -3381,14 +3381,14 @@ LOAD data_init
                 0x9d006b50       0x88 build/default/production/_ext/1128951024/timers.o
                 0x9d006b50                xTimerCreate
 
-.text.jsoneq    0x9d006bd8       0x84
- .text.jsoneq   0x9d006bd8       0x84 build/default/production/_ext/1360937237/WiFiReceive.o
-
 .text.DRV_TMR0_Initialize
-                0x9d006c5c       0x84
+                0x9d006bd8       0x84
  .text.DRV_TMR0_Initialize
-                0x9d006c5c       0x84 build/default/production/_ext/1407244131/drv_tmr_static.o
-                0x9d006c5c                DRV_TMR0_Initialize
+                0x9d006bd8       0x84 build/default/production/_ext/1407244131/drv_tmr_static.o
+                0x9d006bd8                DRV_TMR0_Initialize
+
+.text.jsoneq    0x9d006c5c       0x84
+ .text.jsoneq   0x9d006c5c       0x84 build/default/production/_ext/1360937237/WiFiReceive.o
 
 .text.DRV_TMR2_Initialize
                 0x9d006ce0       0x80
@@ -3411,14 +3411,14 @@ LOAD data_init
                 0x9d006e60       0x7c build/default/production/_ext/1407244131/drv_tmr_static.o
                 0x9d006e60                DRV_TMR3_Initialize
 
-.text.DRV_TMR1_Initialize
-                0x9d006edc       0x78
- .text.DRV_TMR1_Initialize
-                0x9d006edc       0x78 build/default/production/_ext/1407244131/drv_tmr_static.o
-                0x9d006edc                DRV_TMR1_Initialize
+.rodata         0x9d006edc       0x78
+ .rodata        0x9d006edc       0x78 build/default/production/_ext/74298950/bsp.o
 
-.rodata         0x9d006f54       0x78
- .rodata        0x9d006f54       0x78 build/default/production/_ext/74298950/bsp.o
+.text.DRV_TMR1_Initialize
+                0x9d006f54       0x78
+ .text.DRV_TMR1_Initialize
+                0x9d006f54       0x78 build/default/production/_ext/1407244131/drv_tmr_static.o
+                0x9d006f54                DRV_TMR1_Initialize
 
 .text.prvInsertTimerInActiveList
                 0x9d006fcc       0x74
@@ -3458,23 +3458,23 @@ LOAD data_init
                 0x9d00726c       0x6c build/default/production/_ext/12131622/port.o
                 0x9d00726c                vApplicationSetupTickTimerInterrupt
 
-.text.MOTOR_ENCODER_THREAD_Initialize
+.text.IntHandlerDrvUsartInstance0
                 0x9d0072d8       0x68
+ .text.IntHandlerDrvUsartInstance0
+                0x9d0072d8       0x68 build/default/production/_ext/1688732426/system_interrupt.o
+                0x9d0072d8                IntHandlerDrvUsartInstance0
+
+.text.MOTOR_ENCODER_THREAD_Initialize
+                0x9d007340       0x68
  .text.MOTOR_ENCODER_THREAD_Initialize
-                0x9d0072d8       0x68 build/default/production/_ext/1360937237/motor_encoder_thread.o
-                0x9d0072d8                MOTOR_ENCODER_THREAD_Initialize
+                0x9d007340       0x68 build/default/production/_ext/1360937237/motor_encoder_thread.o
+                0x9d007340                MOTOR_ENCODER_THREAD_Initialize
 
 .text.vTaskExitCritical
-                0x9d007340       0x68
- .text.vTaskExitCritical
-                0x9d007340       0x68 build/default/production/_ext/1128951024/tasks.o
-                0x9d007340                vTaskExitCritical
-
-.text.IntHandlerDrvUsartInstance0
                 0x9d0073a8       0x68
- .text.IntHandlerDrvUsartInstance0
-                0x9d0073a8       0x68 build/default/production/_ext/1688732426/system_interrupt.o
-                0x9d0073a8                IntHandlerDrvUsartInstance0
+ .text.vTaskExitCritical
+                0x9d0073a8       0x68 build/default/production/_ext/1128951024/tasks.o
+                0x9d0073a8                vTaskExitCritical
 
 .text._sprintf_cdnopuxX
                 0x9d007410       0x68
@@ -3492,58 +3492,58 @@ LOAD data_init
                 0x9d0074d8                litofp
                 0x9d0074d8                __floatsisf
 
-.text.vListInsert
+.text.xPortStartScheduler
                 0x9d007538       0x5c
+ .text.xPortStartScheduler
+                0x9d007538       0x5c build/default/production/_ext/12131622/port.o
+                0x9d007538                xPortStartScheduler
+
+.text.vListInsert
+                0x9d007594       0x5c
  .text.vListInsert
-                0x9d007538       0x5c build/default/production/_ext/1128951024/list.o
-                0x9d007538                vListInsert
+                0x9d007594       0x5c build/default/production/_ext/1128951024/list.o
+                0x9d007594                vListInsert
 
 .text.xTimerCreateTimerTask
-                0x9d007594       0x5c
- .text.xTimerCreateTimerTask
-                0x9d007594       0x5c build/default/production/_ext/1128951024/timers.o
-                0x9d007594                xTimerCreateTimerTask
-
-.text.xPortStartScheduler
                 0x9d0075f0       0x5c
- .text.xPortStartScheduler
-                0x9d0075f0       0x5c build/default/production/_ext/12131622/port.o
-                0x9d0075f0                xPortStartScheduler
-
-.text.Callback1
-                0x9d00764c       0x58
- .text.Callback1
-                0x9d00764c       0x58 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
-                0x9d00764c                Callback1
-
-.text.SendToIRQueue
-                0x9d0076a4       0x58
- .text.SendToIRQueue
-                0x9d0076a4       0x58 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
-                0x9d0076a4                SendToIRQueue
-
-.text.WIFIRECEIVE_Initialize
-                0x9d0076fc       0x58
- .text.WIFIRECEIVE_Initialize
-                0x9d0076fc       0x58 build/default/production/_ext/1360937237/WiFiReceive.o
-                0x9d0076fc                WIFIRECEIVE_Initialize
-
-.text.Dispatch  0x9d007754       0x58
- .text.Dispatch
-                0x9d007754       0x58 build/default/production/_ext/1360937237/WiFiReceive.o
-                0x9d007754                Dispatch
-
-.text.xQueueCreateMutex
-                0x9d0077ac       0x58
- .text.xQueueCreateMutex
-                0x9d0077ac       0x58 build/default/production/_ext/1128951024/queue.o
-                0x9d0077ac                xQueueCreateMutex
+ .text.xTimerCreateTimerTask
+                0x9d0075f0       0x5c build/default/production/_ext/1128951024/timers.o
+                0x9d0075f0                xTimerCreateTimerTask
 
 .text.SYS_DEVCON_SystemUnlock
-                0x9d007804       0x58
+                0x9d00764c       0x58
  .text.SYS_DEVCON_SystemUnlock
-                0x9d007804       0x58 build/default/production/_ext/340578644/sys_devcon.o
-                0x9d007804                SYS_DEVCON_SystemUnlock
+                0x9d00764c       0x58 build/default/production/_ext/340578644/sys_devcon.o
+                0x9d00764c                SYS_DEVCON_SystemUnlock
+
+.text.Callback1
+                0x9d0076a4       0x58
+ .text.Callback1
+                0x9d0076a4       0x58 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+                0x9d0076a4                Callback1
+
+.text.SendToIRQueue
+                0x9d0076fc       0x58
+ .text.SendToIRQueue
+                0x9d0076fc       0x58 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+                0x9d0076fc                SendToIRQueue
+
+.text.WIFIRECEIVE_Initialize
+                0x9d007754       0x58
+ .text.WIFIRECEIVE_Initialize
+                0x9d007754       0x58 build/default/production/_ext/1360937237/WiFiReceive.o
+                0x9d007754                WIFIRECEIVE_Initialize
+
+.text.Dispatch  0x9d0077ac       0x58
+ .text.Dispatch
+                0x9d0077ac       0x58 build/default/production/_ext/1360937237/WiFiReceive.o
+                0x9d0077ac                Dispatch
+
+.text.xQueueCreateMutex
+                0x9d007804       0x58
+ .text.xQueueCreateMutex
+                0x9d007804       0x58 build/default/production/_ext/1128951024/queue.o
+                0x9d007804                xQueueCreateMutex
 
 .text.main_entry
                 0x9d00785c       0x54
@@ -3551,38 +3551,38 @@ LOAD data_init
                 0x9d00785c       0x54 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX795F512L/crt0_mips32r2.o
                 0x9d007890                __crt0_exit
 
-.text.CheckString
+.text.BSP_Initialize
                 0x9d0078b0       0x54
- .text.CheckString
-                0x9d0078b0       0x54 build/default/production/_ext/1360937237/WiFiReceive.o
-                0x9d0078b0                CheckString
+ .text.BSP_Initialize
+                0x9d0078b0       0x54 build/default/production/_ext/74298950/bsp.o
+                0x9d0078b0                BSP_Initialize
 
-.rodata         0x9d007904       0x54
- .rodata        0x9d007904       0x54 build/default/production/_ext/1360937237/WiFiTransmit.o
+.text.CheckString
+                0x9d007904       0x54
+ .text.CheckString
+                0x9d007904       0x54 build/default/production/_ext/1360937237/WiFiReceive.o
+                0x9d007904                CheckString
+
+.rodata         0x9d007958       0x54
+ .rodata        0x9d007958       0x54 build/default/production/_ext/1360937237/WiFiTransmit.o
 
 .text.TEST_THREAD_Tasks
-                0x9d007958       0x54
+                0x9d0079ac       0x54
  .text.TEST_THREAD_Tasks
-                0x9d007958       0x54 build/default/production/_ext/1360937237/Test_Thread.o
-                0x9d007958                TEST_THREAD_Tasks
+                0x9d0079ac       0x54 build/default/production/_ext/1360937237/Test_Thread.o
+                0x9d0079ac                TEST_THREAD_Tasks
 
 .text.pxPortInitialiseStack
-                0x9d0079ac       0x54
+                0x9d007a00       0x54
  .text.pxPortInitialiseStack
-                0x9d0079ac       0x54 build/default/production/_ext/12131622/port.o
-                0x9d0079ac                pxPortInitialiseStack
+                0x9d007a00       0x54 build/default/production/_ext/12131622/port.o
+                0x9d007a00                pxPortInitialiseStack
 
 .text.vPortIncrementTick
-                0x9d007a00       0x54
- .text.vPortIncrementTick
-                0x9d007a00       0x54 build/default/production/_ext/12131622/port.o
-                0x9d007a00                vPortIncrementTick
-
-.text.BSP_Initialize
                 0x9d007a54       0x54
- .text.BSP_Initialize
-                0x9d007a54       0x54 build/default/production/_ext/74298950/bsp.o
-                0x9d007a54                BSP_Initialize
+ .text.vPortIncrementTick
+                0x9d007a54       0x54 build/default/production/_ext/12131622/port.o
+                0x9d007a54                vPortIncrementTick
 
 .text.SendToQueue
                 0x9d007aa8       0x50
@@ -3601,41 +3601,41 @@ LOAD data_init
                 0x9d007b48       0x50 build/default/production/_ext/1128951024/tasks.o
                 0x9d007b48                vTaskEnterCritical
 
-.text.Motor_Left_Set
+.text.IntHandlerDrvTmrInstance3
                 0x9d007b98       0x4c
+ .text.IntHandlerDrvTmrInstance3
+                0x9d007b98       0x4c build/default/production/_ext/1688732426/system_interrupt.o
+                0x9d007b98                IntHandlerDrvTmrInstance3
+
+.text.Motor_Left_Set
+                0x9d007be4       0x4c
  .text.Motor_Left_Set
-                0x9d007b98       0x4c build/default/production/_ext/1360937237/motor_encoder_thread.o
-                0x9d007b98                Motor_Left_Set
+                0x9d007be4       0x4c build/default/production/_ext/1360937237/motor_encoder_thread.o
+                0x9d007be4                Motor_Left_Set
 
 .text.Motor_Right_Set
-                0x9d007be4       0x4c
+                0x9d007c30       0x4c
  .text.Motor_Right_Set
-                0x9d007be4       0x4c build/default/production/_ext/1360937237/motor_encoder_thread.o
-                0x9d007be4                Motor_Right_Set
+                0x9d007c30       0x4c build/default/production/_ext/1360937237/motor_encoder_thread.o
+                0x9d007c30                Motor_Right_Set
 
 .text.Callback2
-                0x9d007c30       0x4c
- .text.Callback2
-                0x9d007c30       0x4c build/default/production/_ext/1360937237/Sensor_Control_Thread.o
-                0x9d007c30                Callback2
-
-.text.IntHandlerDrvTmrInstance3
                 0x9d007c7c       0x4c
- .text.IntHandlerDrvTmrInstance3
-                0x9d007c7c       0x4c build/default/production/_ext/1688732426/system_interrupt.o
-                0x9d007c7c                IntHandlerDrvTmrInstance3
-
-.text.vTaskPlaceOnEventListRestricted
-                0x9d007cc8       0x48
- .text.vTaskPlaceOnEventListRestricted
-                0x9d007cc8       0x48 build/default/production/_ext/1128951024/tasks.o
-                0x9d007cc8                vTaskPlaceOnEventListRestricted
+ .text.Callback2
+                0x9d007c7c       0x4c build/default/production/_ext/1360937237/Sensor_Control_Thread.o
+                0x9d007c7c                Callback2
 
 .text.SYS_DEVCON_SystemLock
-                0x9d007d10       0x48
+                0x9d007cc8       0x48
  .text.SYS_DEVCON_SystemLock
-                0x9d007d10       0x48 build/default/production/_ext/340578644/sys_devcon.o
-                0x9d007d10                SYS_DEVCON_SystemLock
+                0x9d007cc8       0x48 build/default/production/_ext/340578644/sys_devcon.o
+                0x9d007cc8                SYS_DEVCON_SystemLock
+
+.text.vTaskPlaceOnEventListRestricted
+                0x9d007d10       0x48
+ .text.vTaskPlaceOnEventListRestricted
+                0x9d007d10       0x48 build/default/production/_ext/1128951024/tasks.o
+                0x9d007d10                vTaskPlaceOnEventListRestricted
 
 .text._bootstrap_exception_handler
                 0x9d007d58       0x48
@@ -3649,126 +3649,126 @@ LOAD data_init
                 0x9d007da0       0x48 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
                 0x9d007da0                _DefaultInterrupt
 
-.text.uxListRemove
-                0x9d007de8       0x44
- .text.uxListRemove
-                0x9d007de8       0x44 build/default/production/_ext/1128951024/list.o
-                0x9d007de8                uxListRemove
-
 .text.SYS_CLK_Initialize
-                0x9d007e2c       0x44
+                0x9d007de8       0x44
  .text.SYS_CLK_Initialize
-                0x9d007e2c       0x44 build/default/production/_ext/639803181/sys_clk_pic32mx.o
-                0x9d007e2c                SYS_CLK_Initialize
+                0x9d007de8       0x44 build/default/production/_ext/639803181/sys_clk_pic32mx.o
+                0x9d007de8                SYS_CLK_Initialize
+
+.text.uxListRemove
+                0x9d007e2c       0x44
+ .text.uxListRemove
+                0x9d007e2c       0x44 build/default/production/_ext/1128951024/list.o
+                0x9d007e2c                uxListRemove
 
 .text           0x9d007e70       0x44
  .text          0x9d007e70       0x44 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\pic32_software_reset.o
                 0x9d007e70                __pic32_software_reset
 
-.text.Read_Encoders
-                0x9d007eb4       0x40
- .text.Read_Encoders
-                0x9d007eb4       0x40 build/default/production/_ext/1360937237/motor_encoder_thread.o
-                0x9d007eb4                Read_Encoders
-
 .text.DRV_OC2_Initialize
-                0x9d007ef4       0x40
+                0x9d007eb4       0x40
  .text.DRV_OC2_Initialize
-                0x9d007ef4       0x40 build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d007ef4                DRV_OC2_Initialize
+                0x9d007eb4       0x40 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d007eb4                DRV_OC2_Initialize
 
 .text.DRV_OC3_Initialize
-                0x9d007f34       0x40
+                0x9d007ef4       0x40
  .text.DRV_OC3_Initialize
-                0x9d007f34       0x40 build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d007f34                DRV_OC3_Initialize
+                0x9d007ef4       0x40 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d007ef4                DRV_OC3_Initialize
 
 .text._general_exception_handler
-                0x9d007f74       0x40
+                0x9d007f34       0x40
  .text._general_exception_handler
-                0x9d007f74       0x40 build/default/production/_ext/1688732426/system_exceptions.o
-                0x9d007f74                _general_exception_handler
+                0x9d007f34       0x40 build/default/production/_ext/1688732426/system_exceptions.o
+                0x9d007f34                _general_exception_handler
 
-.text.hash      0x9d007fb4       0x3c
- .text.hash     0x9d007fb4       0x3c build/default/production/_ext/1360937237/WiFiReceive.o
-                0x9d007fb4                hash
-
-.text.WIFITRANSMIT_Initialize
-                0x9d007ff0       0x3c
- .text.WIFITRANSMIT_Initialize
-                0x9d007ff0       0x3c build/default/production/_ext/1360937237/WiFiTransmit.o
-                0x9d007ff0                WIFITRANSMIT_Initialize
-
-.text.SendOverWiFi
-                0x9d00802c       0x3c
- .text.SendOverWiFi
-                0x9d00802c       0x3c build/default/production/_ext/1360937237/WiFiTransmit.o
-                0x9d00802c                SendOverWiFi
-
-.text.OSAL_MUTEX_Create
-                0x9d008068       0x3c
- .text.OSAL_MUTEX_Create
-                0x9d008068       0x3c build/default/production/_ext/24337685/osal_freertos.o
-                0x9d008068                OSAL_MUTEX_Create
-
-.text.uxPortSetInterruptMaskFromISR
-                0x9d0080a4       0x3c
- .text.uxPortSetInterruptMaskFromISR
-                0x9d0080a4       0x3c build/default/production/_ext/12131622/port.o
-                0x9d0080a4                uxPortSetInterruptMaskFromISR
+.text.Read_Encoders
+                0x9d007f74       0x40
+ .text.Read_Encoders
+                0x9d007f74       0x40 build/default/production/_ext/1360937237/motor_encoder_thread.o
+                0x9d007f74                Read_Encoders
 
 .text.DRV_OC0_Initialize
-                0x9d0080e0       0x3c
+                0x9d007fb4       0x3c
  .text.DRV_OC0_Initialize
-                0x9d0080e0       0x3c build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d0080e0                DRV_OC0_Initialize
+                0x9d007fb4       0x3c build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d007fb4                DRV_OC0_Initialize
 
 .text.DRV_OC1_Initialize
-                0x9d00811c       0x3c
+                0x9d007ff0       0x3c
  .text.DRV_OC1_Initialize
-                0x9d00811c       0x3c build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d00811c                DRV_OC1_Initialize
+                0x9d007ff0       0x3c build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d007ff0                DRV_OC1_Initialize
 
-.text.GetMessageStat
-                0x9d008158       0x38
- .text.GetMessageStat
-                0x9d008158       0x38 build/default/production/_ext/1360937237/WiFiReceive.o
-                0x9d008158                GetMessageStat
+.text.hash      0x9d00802c       0x3c
+ .text.hash     0x9d00802c       0x3c build/default/production/_ext/1360937237/WiFiReceive.o
+                0x9d00802c                hash
 
-.text.prvResetNextTaskUnblockTime
-                0x9d008190       0x38
- .text.prvResetNextTaskUnblockTime
-                0x9d008190       0x38 build/default/production/_ext/1128951024/tasks.o
+.text.WIFITRANSMIT_Initialize
+                0x9d008068       0x3c
+ .text.WIFITRANSMIT_Initialize
+                0x9d008068       0x3c build/default/production/_ext/1360937237/WiFiTransmit.o
+                0x9d008068                WIFITRANSMIT_Initialize
 
-.text.vTaskPlaceOnEventList
-                0x9d0081c8       0x38
- .text.vTaskPlaceOnEventList
-                0x9d0081c8       0x38 build/default/production/_ext/1128951024/tasks.o
-                0x9d0081c8                vTaskPlaceOnEventList
+.text.SendOverWiFi
+                0x9d0080a4       0x3c
+ .text.SendOverWiFi
+                0x9d0080a4       0x3c build/default/production/_ext/1360937237/WiFiTransmit.o
+                0x9d0080a4                SendOverWiFi
+
+.text.OSAL_MUTEX_Create
+                0x9d0080e0       0x3c
+ .text.OSAL_MUTEX_Create
+                0x9d0080e0       0x3c build/default/production/_ext/24337685/osal_freertos.o
+                0x9d0080e0                OSAL_MUTEX_Create
+
+.text.uxPortSetInterruptMaskFromISR
+                0x9d00811c       0x3c
+ .text.uxPortSetInterruptMaskFromISR
+                0x9d00811c       0x3c build/default/production/_ext/12131622/port.o
+                0x9d00811c                uxPortSetInterruptMaskFromISR
 
 .text.DRV_TMR0_Start
-                0x9d008200       0x38
+                0x9d008158       0x38
  .text.DRV_TMR0_Start
-                0x9d008200       0x38 build/default/production/_ext/1407244131/drv_tmr_static.o
-                0x9d008200                DRV_TMR0_Start
+                0x9d008158       0x38 build/default/production/_ext/1407244131/drv_tmr_static.o
+                0x9d008158                DRV_TMR0_Start
 
 .text.DRV_TMR1_Start
-                0x9d008238       0x38
+                0x9d008190       0x38
  .text.DRV_TMR1_Start
-                0x9d008238       0x38 build/default/production/_ext/1407244131/drv_tmr_static.o
-                0x9d008238                DRV_TMR1_Start
+                0x9d008190       0x38 build/default/production/_ext/1407244131/drv_tmr_static.o
+                0x9d008190                DRV_TMR1_Start
 
 .text.DRV_TMR2_Start
-                0x9d008270       0x38
+                0x9d0081c8       0x38
  .text.DRV_TMR2_Start
-                0x9d008270       0x38 build/default/production/_ext/1407244131/drv_tmr_static.o
-                0x9d008270                DRV_TMR2_Start
+                0x9d0081c8       0x38 build/default/production/_ext/1407244131/drv_tmr_static.o
+                0x9d0081c8                DRV_TMR2_Start
 
 .text.DRV_TMR3_Start
-                0x9d0082a8       0x38
+                0x9d008200       0x38
  .text.DRV_TMR3_Start
-                0x9d0082a8       0x38 build/default/production/_ext/1407244131/drv_tmr_static.o
-                0x9d0082a8                DRV_TMR3_Start
+                0x9d008200       0x38 build/default/production/_ext/1407244131/drv_tmr_static.o
+                0x9d008200                DRV_TMR3_Start
+
+.text.GetMessageStat
+                0x9d008238       0x38
+ .text.GetMessageStat
+                0x9d008238       0x38 build/default/production/_ext/1360937237/WiFiReceive.o
+                0x9d008238                GetMessageStat
+
+.text.prvResetNextTaskUnblockTime
+                0x9d008270       0x38
+ .text.prvResetNextTaskUnblockTime
+                0x9d008270       0x38 build/default/production/_ext/1128951024/tasks.o
+
+.text.vTaskPlaceOnEventList
+                0x9d0082a8       0x38
+ .text.vTaskPlaceOnEventList
+                0x9d0082a8       0x38 build/default/production/_ext/1128951024/tasks.o
+                0x9d0082a8                vTaskPlaceOnEventList
 
 .text.DRV_USART_Initialize
                 0x9d0082e0       0x34
@@ -3794,22 +3794,22 @@ LOAD data_init
                 0x9d008378       0x30 build/default/production/_ext/1128951024/list.o
                 0x9d008378                vListInsertEnd
 
-.text.prvTaskExitError
-                0x9d0083a8       0x2c
- .text.prvTaskExitError
-                0x9d0083a8       0x2c build/default/production/_ext/12131622/port.o
-
 .text.vApplicationStackOverflowHook
-                0x9d0083d4       0x2c
+                0x9d0083a8       0x2c
  .text.vApplicationStackOverflowHook
-                0x9d0083d4       0x2c build/default/production/_ext/1688732426/rtos_hooks.o
-                0x9d0083d4                vApplicationStackOverflowHook
+                0x9d0083a8       0x2c build/default/production/_ext/1688732426/rtos_hooks.o
+                0x9d0083a8                vApplicationStackOverflowHook
 
 .text.vApplicationMallocFailedHook
-                0x9d008400       0x2c
+                0x9d0083d4       0x2c
  .text.vApplicationMallocFailedHook
-                0x9d008400       0x2c build/default/production/_ext/1688732426/rtos_hooks.o
-                0x9d008400                vApplicationMallocFailedHook
+                0x9d0083d4       0x2c build/default/production/_ext/1688732426/rtos_hooks.o
+                0x9d0083d4                vApplicationMallocFailedHook
+
+.text.prvTaskExitError
+                0x9d008400       0x2c
+ .text.prvTaskExitError
+                0x9d008400       0x2c build/default/production/_ext/12131622/port.o
 
 .text.Wait_Time
                 0x9d00842c       0x28
@@ -3835,191 +3835,191 @@ LOAD data_init
                 0x9d0084a4       0x24 build/default/production/_ext/1361460060/drv_adc_static.o
                 0x9d0084a4                DRV_ADC_SamplesRead
 
-.text.main      0x9d0084c8       0x20
- .text.main     0x9d0084c8       0x20 build/default/production/_ext/1360937237/main.o
-                0x9d0084c8                main
+.text.DRV_ADC_Open
+                0x9d0084c8       0x20
+ .text.DRV_ADC_Open
+                0x9d0084c8       0x20 build/default/production/_ext/1361460060/drv_adc_static.o
+                0x9d0084c8                DRV_ADC_Open
+
+.text.main      0x9d0084e8       0x20
+ .text.main     0x9d0084e8       0x20 build/default/production/_ext/1360937237/main.o
+                0x9d0084e8                main
 
 .text.vListInitialise
-                0x9d0084e8       0x20
+                0x9d008508       0x20
  .text.vListInitialise
-                0x9d0084e8       0x20 build/default/production/_ext/1128951024/list.o
-                0x9d0084e8                vListInitialise
+                0x9d008508       0x20 build/default/production/_ext/1128951024/list.o
+                0x9d008508                vListInitialise
 
 .text.xTaskGetSchedulerState
-                0x9d008508       0x20
- .text.xTaskGetSchedulerState
-                0x9d008508       0x20 build/default/production/_ext/1128951024/tasks.o
-                0x9d008508                xTaskGetSchedulerState
-
-.text.DRV_ADC_Open
                 0x9d008528       0x20
- .text.DRV_ADC_Open
-                0x9d008528       0x20 build/default/production/_ext/1361460060/drv_adc_static.o
-                0x9d008528                DRV_ADC_Open
-
-.text.vPortClearInterruptMaskFromISR
-                0x9d008548       0x1c
- .text.vPortClearInterruptMaskFromISR
-                0x9d008548       0x1c build/default/production/_ext/12131622/port.o
-                0x9d008548                vPortClearInterruptMaskFromISR
+ .text.xTaskGetSchedulerState
+                0x9d008528       0x20 build/default/production/_ext/1128951024/tasks.o
+                0x9d008528                xTaskGetSchedulerState
 
 .text.SYS_DEVCON_JTAGDisable
-                0x9d008564       0x1c
+                0x9d008548       0x1c
  .text.SYS_DEVCON_JTAGDisable
-                0x9d008564       0x1c build/default/production/_ext/340578644/sys_devcon.o
-                0x9d008564                SYS_DEVCON_JTAGDisable
+                0x9d008548       0x1c build/default/production/_ext/340578644/sys_devcon.o
+                0x9d008548                SYS_DEVCON_JTAGDisable
 
 .text._TEST_THREAD_Tasks
-                0x9d008580       0x1c
+                0x9d008564       0x1c
  .text._TEST_THREAD_Tasks
-                0x9d008580       0x1c build/default/production/_ext/1688732426/system_tasks.o
+                0x9d008564       0x1c build/default/production/_ext/1688732426/system_tasks.o
 
-.text.Timing_Wait
-                0x9d00859c       0x18
- .text.Timing_Wait
-                0x9d00859c       0x18 build/default/production/_ext/1360937237/motor_encoder_thread.o
-                0x9d00859c                Timing_Wait
-
-.rodata         0x9d0085b4       0x18
- .rodata        0x9d0085b4       0x18 build/default/production/_ext/1360937237/WiFiReceive.o
+.text.vPortClearInterruptMaskFromISR
+                0x9d008580       0x1c
+ .text.vPortClearInterruptMaskFromISR
+                0x9d008580       0x1c build/default/production/_ext/12131622/port.o
+                0x9d008580                vPortClearInterruptMaskFromISR
 
 .text.IntHandlerExternalInterruptInstance0
-                0x9d0085cc       0x18
+                0x9d00859c       0x18
  .text.IntHandlerExternalInterruptInstance0
-                0x9d0085cc       0x18 build/default/production/_ext/1688732426/system_interrupt.o
-                0x9d0085cc                IntHandlerExternalInterruptInstance0
+                0x9d00859c       0x18 build/default/production/_ext/1688732426/system_interrupt.o
+                0x9d00859c                IntHandlerExternalInterruptInstance0
 
 .text.IntHandlerExternalInterruptInstance1
-                0x9d0085e4       0x18
+                0x9d0085b4       0x18
  .text.IntHandlerExternalInterruptInstance1
-                0x9d0085e4       0x18 build/default/production/_ext/1688732426/system_interrupt.o
-                0x9d0085e4                IntHandlerExternalInterruptInstance1
+                0x9d0085b4       0x18 build/default/production/_ext/1688732426/system_interrupt.o
+                0x9d0085b4                IntHandlerExternalInterruptInstance1
 
 .text.IntHandlerDrvTmrInstance0
-                0x9d0085fc       0x18
+                0x9d0085cc       0x18
  .text.IntHandlerDrvTmrInstance0
-                0x9d0085fc       0x18 build/default/production/_ext/1688732426/system_interrupt.o
-                0x9d0085fc                IntHandlerDrvTmrInstance0
+                0x9d0085cc       0x18 build/default/production/_ext/1688732426/system_interrupt.o
+                0x9d0085cc                IntHandlerDrvTmrInstance0
 
 .text.IntHandlerDrvTmrInstance1
-                0x9d008614       0x18
+                0x9d0085e4       0x18
  .text.IntHandlerDrvTmrInstance1
-                0x9d008614       0x18 build/default/production/_ext/1688732426/system_interrupt.o
-                0x9d008614                IntHandlerDrvTmrInstance1
+                0x9d0085e4       0x18 build/default/production/_ext/1688732426/system_interrupt.o
+                0x9d0085e4                IntHandlerDrvTmrInstance1
 
 .text.IntHandlerDrvTmrInstance2
-                0x9d00862c       0x18
+                0x9d0085fc       0x18
  .text.IntHandlerDrvTmrInstance2
-                0x9d00862c       0x18 build/default/production/_ext/1688732426/system_interrupt.o
-                0x9d00862c                IntHandlerDrvTmrInstance2
+                0x9d0085fc       0x18 build/default/production/_ext/1688732426/system_interrupt.o
+                0x9d0085fc                IntHandlerDrvTmrInstance2
 
 .text._WIFITRANSMIT_Tasks
-                0x9d008644       0x18
+                0x9d008614       0x18
  .text._WIFITRANSMIT_Tasks
-                0x9d008644       0x18 build/default/production/_ext/1688732426/system_tasks.o
+                0x9d008614       0x18 build/default/production/_ext/1688732426/system_tasks.o
 
 .text._WIFIRECEIVE_Tasks
-                0x9d00865c       0x18
+                0x9d00862c       0x18
  .text._WIFIRECEIVE_Tasks
-                0x9d00865c       0x18 build/default/production/_ext/1688732426/system_tasks.o
+                0x9d00862c       0x18 build/default/production/_ext/1688732426/system_tasks.o
 
 .text._SENSOR_CONTROL_THREAD_Tasks
-                0x9d008674       0x18
+                0x9d008644       0x18
  .text._SENSOR_CONTROL_THREAD_Tasks
-                0x9d008674       0x18 build/default/production/_ext/1688732426/system_tasks.o
+                0x9d008644       0x18 build/default/production/_ext/1688732426/system_tasks.o
 
 .text._MOTOR_ENCODER_THREAD_Tasks
-                0x9d00868c       0x18
+                0x9d00865c       0x18
  .text._MOTOR_ENCODER_THREAD_Tasks
-                0x9d00868c       0x18 build/default/production/_ext/1688732426/system_tasks.o
+                0x9d00865c       0x18 build/default/production/_ext/1688732426/system_tasks.o
+
+.text.Timing_Wait
+                0x9d008674       0x18
+ .text.Timing_Wait
+                0x9d008674       0x18 build/default/production/_ext/1360937237/motor_encoder_thread.o
+                0x9d008674                Timing_Wait
+
+.rodata         0x9d00868c       0x18
+ .rodata        0x9d00868c       0x18 build/default/production/_ext/1360937237/WiFiReceive.o
 
 .text           0x9d0086a4       0x18
  .text          0x9d0086a4       0x18 c:/program files (x86)/microchip/xc32/v1.42/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-nmi-handler.o)
                 0x9d0086a4                _nmi_handler
 
-.text.jsmn_init
-                0x9d0086bc       0x14
- .text.jsmn_init
-                0x9d0086bc       0x14 build/default/production/_ext/1360937237/jsmn.o
-                0x9d0086bc                jsmn_init
-
-.text.SYS_INT_Initialize
-                0x9d0086d0       0x14
- .text.SYS_INT_Initialize
-                0x9d0086d0       0x14 build/default/production/_ext/122796885/sys_int_pic32.o
-                0x9d0086d0                SYS_INT_Initialize
-
-.text.vTaskSuspendAll
-                0x9d0086e4       0x14
- .text.vTaskSuspendAll
-                0x9d0086e4       0x14 build/default/production/_ext/1128951024/tasks.o
-                0x9d0086e4                vTaskSuspendAll
-
-.text.vTaskSetTimeOutState
-                0x9d0086f8       0x14
- .text.vTaskSetTimeOutState
-                0x9d0086f8       0x14 build/default/production/_ext/1128951024/tasks.o
-                0x9d0086f8                vTaskSetTimeOutState
-
 .text.DRV_ADC_SamplesAvailable
-                0x9d00870c       0x14
+                0x9d0086bc       0x14
  .text.DRV_ADC_SamplesAvailable
-                0x9d00870c       0x14 build/default/production/_ext/1361460060/drv_adc_static.o
-                0x9d00870c                DRV_ADC_SamplesAvailable
+                0x9d0086bc       0x14 build/default/production/_ext/1361460060/drv_adc_static.o
+                0x9d0086bc                DRV_ADC_SamplesAvailable
 
 .text.DRV_OC0_Start
-                0x9d008720       0x14
+                0x9d0086d0       0x14
  .text.DRV_OC0_Start
-                0x9d008720       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d008720                DRV_OC0_Start
+                0x9d0086d0       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d0086d0                DRV_OC0_Start
 
 .text.DRV_OC0_PulseWidthSet
-                0x9d008734       0x14
+                0x9d0086e4       0x14
  .text.DRV_OC0_PulseWidthSet
-                0x9d008734       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d008734                DRV_OC0_PulseWidthSet
+                0x9d0086e4       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d0086e4                DRV_OC0_PulseWidthSet
 
 .text.DRV_OC1_Start
-                0x9d008748       0x14
+                0x9d0086f8       0x14
  .text.DRV_OC1_Start
-                0x9d008748       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d008748                DRV_OC1_Start
+                0x9d0086f8       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d0086f8                DRV_OC1_Start
 
 .text.DRV_OC1_PulseWidthSet
-                0x9d00875c       0x14
+                0x9d00870c       0x14
  .text.DRV_OC1_PulseWidthSet
-                0x9d00875c       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d00875c                DRV_OC1_PulseWidthSet
+                0x9d00870c       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d00870c                DRV_OC1_PulseWidthSet
 
 .text.DRV_OC2_Start
-                0x9d008770       0x14
+                0x9d008720       0x14
  .text.DRV_OC2_Start
-                0x9d008770       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d008770                DRV_OC2_Start
+                0x9d008720       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d008720                DRV_OC2_Start
 
 .text.DRV_OC2_PulseWidthSet
-                0x9d008784       0x14
+                0x9d008734       0x14
  .text.DRV_OC2_PulseWidthSet
-                0x9d008784       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d008784                DRV_OC2_PulseWidthSet
+                0x9d008734       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d008734                DRV_OC2_PulseWidthSet
 
 .text.DRV_OC3_Start
-                0x9d008798       0x14
+                0x9d008748       0x14
  .text.DRV_OC3_Start
-                0x9d008798       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d008798                DRV_OC3_Start
+                0x9d008748       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d008748                DRV_OC3_Start
 
 .text.DRV_OC3_PulseWidthSet
-                0x9d0087ac       0x14
+                0x9d00875c       0x14
  .text.DRV_OC3_PulseWidthSet
-                0x9d0087ac       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
-                0x9d0087ac                DRV_OC3_PulseWidthSet
+                0x9d00875c       0x14 build/default/production/_ext/1047219354/drv_oc_static.o
+                0x9d00875c                DRV_OC3_PulseWidthSet
 
 .text.SYS_DEVCON_Initialize
-                0x9d0087c0       0x14
+                0x9d008770       0x14
  .text.SYS_DEVCON_Initialize
-                0x9d0087c0       0x14 build/default/production/_ext/340578644/sys_devcon.o
-                0x9d0087c0                SYS_DEVCON_Initialize
+                0x9d008770       0x14 build/default/production/_ext/340578644/sys_devcon.o
+                0x9d008770                SYS_DEVCON_Initialize
+
+.text.jsmn_init
+                0x9d008784       0x14
+ .text.jsmn_init
+                0x9d008784       0x14 build/default/production/_ext/1360937237/jsmn.o
+                0x9d008784                jsmn_init
+
+.text.SYS_INT_Initialize
+                0x9d008798       0x14
+ .text.SYS_INT_Initialize
+                0x9d008798       0x14 build/default/production/_ext/122796885/sys_int_pic32.o
+                0x9d008798                SYS_INT_Initialize
+
+.text.vTaskSuspendAll
+                0x9d0087ac       0x14
+ .text.vTaskSuspendAll
+                0x9d0087ac       0x14 build/default/production/_ext/1128951024/tasks.o
+                0x9d0087ac                vTaskSuspendAll
+
+.text.vTaskSetTimeOutState
+                0x9d0087c0       0x14
+ .text.vTaskSetTimeOutState
+                0x9d0087c0       0x14 build/default/production/_ext/1128951024/tasks.o
+                0x9d0087c0                vTaskSetTimeOutState
 
 .rodata         0x9d0087d4       0x10
  .rodata        0x9d0087d4       0x10 build/default/production/_ext/1360937237/Sensor_Control_Thread.o
@@ -4030,68 +4030,68 @@ LOAD data_init
                 0x9d0087e4       0x10 build/default/production/_ext/1128951024/tasks.o
                 0x9d0087e4                vTaskMissedYield
 
-.text.xTaskGetTickCount
-                0x9d0087f4        0xc
- .text.xTaskGetTickCount
-                0x9d0087f4        0xc build/default/production/_ext/1128951024/tasks.o
-                0x9d0087f4                xTaskGetTickCount
-
 .text.SYS_CLK_SystemFrequencyGet
-                0x9d008800        0xc
+                0x9d0087f4        0xc
  .text.SYS_CLK_SystemFrequencyGet
-                0x9d008800        0xc build/default/production/_ext/639803181/sys_clk_pic32mx.o
-                0x9d008800                SYS_CLK_SystemFrequencyGet
+                0x9d0087f4        0xc build/default/production/_ext/639803181/sys_clk_pic32mx.o
+                0x9d0087f4                SYS_CLK_SystemFrequencyGet
 
 .text.SYS_CLK_PeripheralFrequencyGet
-                0x9d00880c        0xc
+                0x9d008800        0xc
  .text.SYS_CLK_PeripheralFrequencyGet
-                0x9d00880c        0xc build/default/production/_ext/639803181/sys_clk_pic32mx.o
-                0x9d00880c                SYS_CLK_PeripheralFrequencyGet
+                0x9d008800        0xc build/default/production/_ext/639803181/sys_clk_pic32mx.o
+                0x9d008800                SYS_CLK_PeripheralFrequencyGet
 
-.text.GetTimingFlag
-                0x9d008818        0x8
- .text.GetTimingFlag
-                0x9d008818        0x8 build/default/production/_ext/1360937237/motor_encoder_thread.o
-                0x9d008818                GetTimingFlag
-
-.text.SetServo2PWM
-                0x9d008820        0x8
- .text.SetServo2PWM
-                0x9d008820        0x8 build/default/production/_ext/1360937237/motor_encoder_thread.o
-                0x9d008820                SetServo2PWM
-
-.text.TEST_THREAD_Initialize
-                0x9d008828        0x8
- .text.TEST_THREAD_Initialize
-                0x9d008828        0x8 build/default/production/_ext/1360937237/Test_Thread.o
-                0x9d008828                TEST_THREAD_Initialize
-
-.text.vListInitialiseItem
-                0x9d008830        0x8
- .text.vListInitialiseItem
-                0x9d008830        0x8 build/default/production/_ext/1128951024/list.o
-                0x9d008830                vListInitialiseItem
-
-.rodata         0x9d008838       0x10
- .rodata        0x9d008838        0x8 build/default/production/_ext/1128951024/tasks.o
- .rodata        0x9d008840        0x8 build/default/production/_ext/1128951024/timers.o
-
-.text.vPortFree
-                0x9d008848        0x8
- .text.vPortFree
-                0x9d008848        0x8 build/default/production/_ext/1856876499/heap_1.o
-                0x9d008848                vPortFree
+.text.xTaskGetTickCount
+                0x9d00880c        0xc
+ .text.xTaskGetTickCount
+                0x9d00880c        0xc build/default/production/_ext/1128951024/tasks.o
+                0x9d00880c                xTaskGetTickCount
 
 .text.DRV_USART0_Open
-                0x9d008850        0x8
+                0x9d008818        0x8
  .text.DRV_USART0_Open
-                0x9d008850        0x8 build/default/production/_ext/327000265/drv_usart_static.o
-                0x9d008850                DRV_USART0_Open
+                0x9d008818        0x8 build/default/production/_ext/327000265/drv_usart_static.o
+                0x9d008818                DRV_USART0_Open
 
 .text._SYS_Tasks
-                0x9d008858        0x8
+                0x9d008820        0x8
  .text._SYS_Tasks
-                0x9d008858        0x8 build/default/production/_ext/1688732426/system_tasks.o
+                0x9d008820        0x8 build/default/production/_ext/1688732426/system_tasks.o
+
+.text.GetTimingFlag
+                0x9d008828        0x8
+ .text.GetTimingFlag
+                0x9d008828        0x8 build/default/production/_ext/1360937237/motor_encoder_thread.o
+                0x9d008828                GetTimingFlag
+
+.text.SetServo2PWM
+                0x9d008830        0x8
+ .text.SetServo2PWM
+                0x9d008830        0x8 build/default/production/_ext/1360937237/motor_encoder_thread.o
+                0x9d008830                SetServo2PWM
+
+.text.TEST_THREAD_Initialize
+                0x9d008838        0x8
+ .text.TEST_THREAD_Initialize
+                0x9d008838        0x8 build/default/production/_ext/1360937237/Test_Thread.o
+                0x9d008838                TEST_THREAD_Initialize
+
+.text.vPortFree
+                0x9d008840        0x8
+ .text.vPortFree
+                0x9d008840        0x8 build/default/production/_ext/1856876499/heap_1.o
+                0x9d008840                vPortFree
+
+.text.vListInitialiseItem
+                0x9d008848        0x8
+ .text.vListInitialiseItem
+                0x9d008848        0x8 build/default/production/_ext/1128951024/list.o
+                0x9d008848                vListInitialiseItem
+
+.rodata         0x9d008850       0x10
+ .rodata        0x9d008850        0x8 build/default/production/_ext/1128951024/tasks.o
+ .rodata        0x9d008858        0x8 build/default/production/_ext/1128951024/timers.o
 
 .text._on_reset
                 0x9d008860        0x8

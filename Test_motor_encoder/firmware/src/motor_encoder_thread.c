@@ -34,7 +34,7 @@ bool time_up = false;
 int set_time = 0;
 int counter = 0;
 bool counter_start = false;
-//
+//PWM parameter
 int servo1_pwm = 0;
 int servo2_pwm = 0;
 void MOTOR_ENCODER_THREAD_Initialize ( void )

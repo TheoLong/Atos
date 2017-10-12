@@ -10,6 +10,7 @@
             <file>file:/C:/microchip/harmony/v2_04/apps/Test_motor_encoder/firmware/src/system_config/default/system_tasks.c</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Test_motor_encoder/firmware/src/motor_encoder_thread.c</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Test_motor_encoder/firmware/src/Test_Thread.c</file>
+            <file>file:/C:/microchip/harmony/v2_04/apps/Test_motor_encoder/firmware/Test_motor_encoder.X/nbproject/Makefile-default.mk</file>
         </group>
     </open-files>
 </project-private>
