@@ -37,8 +37,7 @@ void SendToQueue(Encoder data);
 int PID_module(int Speed, int set_speed, int*pwm);
 QueueHandle_t Encoder_Q;
 
-TimerHandle_t mytimer2;
-void Callback3(TimerHandle_t xTimer);
+
 #endif /* _MOTOR_ENCODER_THREAD_H */
 
 #ifdef __cplusplus

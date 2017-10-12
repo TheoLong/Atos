@@ -9,6 +9,7 @@
 #include "system_config.h"
 #include "system_definitions.h"
 #include "public.h"
+#include "timers.h"
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
@@ -20,7 +21,6 @@ extern "C" {
 void TEST_THREAD_Initialize ( void );
 
 void TEST_THREAD_Tasks( void );
-
 
 #endif /* _TEST_THREAD_H */
 

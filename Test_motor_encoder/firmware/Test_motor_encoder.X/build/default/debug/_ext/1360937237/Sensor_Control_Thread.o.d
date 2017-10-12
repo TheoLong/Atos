@@ -292,11 +292,11 @@ build/default/debug/_ext/1360937237/Sensor_Control_Thread.o:  \
  ../../../../framework/system/ports/sys_ports.h  \
  ../../../../framework/system/ports/sys_ports_definitions.h  \
  ../src/motor_encoder_thread.h  \
-../src/sensor_control_thread.h  \
- ../src/wifireceive.h  \
-../src/public.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
+ ../src/sensor_control_thread.h  \
+../src/wifireceive.h  \
+../src/public.h  \
  ../src/jsmn.h  \
 ../src/wifitransmit.h  \
 ../src/test_thread.h 

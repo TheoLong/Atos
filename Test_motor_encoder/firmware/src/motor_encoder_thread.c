@@ -29,13 +29,13 @@ bool distance_mode = false;
 //blocking flag for API
 bool left_finish = false;
 bool right_finish = false;
-
-void Callback3(TimerHandle_t xTimer)
-{
-//   Read_Encoders();
-//   ReadIR();
-}
-
+//timer 
+bool time_up = false;
+int set_time = 0;
+int counter = 0;
+bool counter_start = false;
+//
+int servo_pwm = 270;
 void MOTOR_ENCODER_THREAD_Initialize ( void )
 {
     //start timer and OC
@@ -45,22 +45,32 @@ void MOTOR_ENCODER_THREAD_Initialize ( void )
     DRV_TMR3_Start();
     DRV_OC0_Start();
     DRV_OC1_Start();
+    DRV_OC2_Start();
     //init Q to receive encoder
     Encoder_Q = xQueueCreate( 10, sizeof(Encoder) );
     //if queue create failed
     if (!Encoder_Q)
     {
         //sendToUART('c'); 
-    }
-     
-    mytimer2 = xTimerCreate("Timer2", 100, pdTRUE, (void*)0, Callback3);
-    BaseType_t ret = xTimerStart(mytimer2, (TickType_t)3);
-    
+    }    
 }
 
 
 void MOTOR_ENCODER_THREAD_Tasks ( void )
 {
+    //270 start,770end
+    DRV_OC2_PulseWidthSet(servo_pwm);
+    //
+    if(counter_start)
+    {
+        counter = counter+100;;
+    }
+    if(counter >= set_time)
+    {
+        time_up = true;
+        counter_start = false;
+    }
+    //
     Encoder data;
     BaseType_t receive;
     //Encoder_Struct data;
@@ -227,3 +237,20 @@ void SendToQueue(Encoder data)
     portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
 }
 
+void Timing_Wait(int time)
+{
+    counter = 0;
+    counter_start = true;
+    time_up = false;
+    set_time = time;
+}
+
+bool GetTimingFlag()
+{
+    return time_up; 
+}
+
+void SetServoPWM(int pwm)
+{
+    servo_pwm = pwm;
+}

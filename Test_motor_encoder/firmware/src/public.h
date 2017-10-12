@@ -69,5 +69,9 @@ void Wait_Right();
 void Left_Turn();
 void Right_Turn();
 void Move(int speed, int distance, bool dir);
+void Timing_Wait(int time);
+bool GetTimingFlag();
+void SetServoPWM(int pwm);
+
 #endif /* _EXAMPLE_FILE_NAME_H */
 

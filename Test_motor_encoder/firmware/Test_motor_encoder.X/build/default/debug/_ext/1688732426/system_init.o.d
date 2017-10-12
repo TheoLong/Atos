@@ -293,11 +293,11 @@ build/default/debug/_ext/1688732426/system_init.o:  \
  ../../../../framework/system/ports/sys_ports_definitions.h  \
  ../src/motor_encoder_thread.h  \
  ../src/system_config/default/system_definitions.h  \
- ../src/sensor_control_thread.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/public.h  \
+ ../src/sensor_control_thread.h  \
+../src/public.h  \
 ../src/wifireceive.h  \
-../src/jsmn.h  \
+ ../src/jsmn.h  \
 ../src/wifitransmit.h  \
- ../src/test_thread.h 
+../src/test_thread.h 
