@@ -41,3 +41,11 @@ void Move(int speed, int distance, bool dir)
     Right_Motor_Distance(dir, speed, distance);
     Wait();
 }
+
+void Wait_Time(int time)
+{
+    Timing_Wait(time);
+    while(!GetTimingFlag())
+    {
+    }
+}

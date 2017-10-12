@@ -190,6 +190,52 @@ bool DRV_OC2_FaultHasOccurred(void)
    return PLIB_OC_FaultHasOccurred(OC_ID_3);
 }
 
+// *****************************************************************************
+// *****************************************************************************
+// Section: Instance 3 static driver functions
+// *****************************************************************************
+// *****************************************************************************
+void DRV_OC3_Initialize(void)
+{
+    /* Setup OC0 Instance */
+    PLIB_OC_ModeSelect(OC_ID_4, OC_COMPARE_PWM_MODE_WITHOUT_FAULT_PROTECTION);
+    PLIB_OC_BufferSizeSelect(OC_ID_4, OC_BUFFER_SIZE_16BIT);
+    PLIB_OC_TimerSelect(OC_ID_4, OC_TIMER_16BIT_TMR3);
+    PLIB_OC_Buffer16BitSet(OC_ID_4, 0);
+    PLIB_OC_PulseWidth16BitSet(OC_ID_4, 0);
+}
+
+void DRV_OC3_Enable(void)
+{
+   PLIB_OC_Enable(OC_ID_4);
+}
+
+void DRV_OC3_Disable(void)
+{
+   PLIB_OC_Disable(OC_ID_4);
+}
+
+void DRV_OC3_Start(void)
+{
+   PLIB_OC_Enable(OC_ID_4);
+}
+
+void DRV_OC3_Stop(void)
+{
+   PLIB_OC_Disable(OC_ID_4);
+}
+
+void DRV_OC3_PulseWidthSet(uint32_t pulseWidth)
+{
+    /* Updating pulse width for 16 bit mode */
+    PLIB_OC_PulseWidth16BitSet(OC_ID_4, (uint16_t)pulseWidth);
+}
+
+bool DRV_OC3_FaultHasOccurred(void)
+{
+   return PLIB_OC_FaultHasOccurred(OC_ID_4);
+}
+
 /*******************************************************************************
  End of File
 */

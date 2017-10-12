@@ -71,7 +71,9 @@ void Right_Turn();
 void Move(int speed, int distance, bool dir);
 void Timing_Wait(int time);
 bool GetTimingFlag();
-void SetServoPWM(int pwm);
+void SetServo1PWM(int pwm);
+void SetServo2PWM(int pwm);
+void Wait_Time(int time);
 
 #endif /* _EXAMPLE_FILE_NAME_H */
 

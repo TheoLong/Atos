@@ -35,7 +35,8 @@ int set_time = 0;
 int counter = 0;
 bool counter_start = false;
 //
-int servo_pwm = 270;
+int servo1_pwm = 0;
+int servo2_pwm = 0;
 void MOTOR_ENCODER_THREAD_Initialize ( void )
 {
     //start timer and OC
@@ -46,6 +47,7 @@ void MOTOR_ENCODER_THREAD_Initialize ( void )
     DRV_OC0_Start();
     DRV_OC1_Start();
     DRV_OC2_Start();
+    DRV_OC3_Start();
     //init Q to receive encoder
     Encoder_Q = xQueueCreate( 10, sizeof(Encoder) );
     //if queue create failed
@@ -59,7 +61,8 @@ void MOTOR_ENCODER_THREAD_Initialize ( void )
 void MOTOR_ENCODER_THREAD_Tasks ( void )
 {
     //270 start,770end
-    DRV_OC2_PulseWidthSet(servo_pwm);
+    DRV_OC2_PulseWidthSet(servo1_pwm);
+    DRV_OC3_PulseWidthSet(servo2_pwm);
     //
     if(counter_start)
     {
@@ -250,7 +253,12 @@ bool GetTimingFlag()
     return time_up; 
 }
 
-void SetServoPWM(int pwm)
+void SetServo1PWM(int pwm)
 {
-    servo_pwm = pwm;
+    servo1_pwm = pwm;
+}
+
+void SetServo2PWM(int pwm)
+{
+    servo2_pwm = pwm;
 }

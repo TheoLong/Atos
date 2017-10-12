@@ -13,26 +13,14 @@ void TEST_THREAD_Tasks ( void )
 //    while(!GetTimingFlag())
 //    {
 //    }
-    SetServoPWM(770);
-    Timing_Wait(800);
-    while(!GetTimingFlag())
-    {
-    }
-    SetServoPWM(0);
-    Timing_Wait(800);
-    while(!GetTimingFlag())
-    {
-    }
-    SetServoPWM(50);
-    Timing_Wait(800);
-    while(!GetTimingFlag())
-    {
-    }
-    SetServoPWM(0);
-    Timing_Wait(800);
-    while(!GetTimingFlag())
-    {
-    }
+    SetServo2PWM(770);
+    Wait_Time(800);
+    SetServo2PWM(0);
+    Wait_Time(800);
+    SetServo2PWM(50);
+    Wait_Time(800);
+    SetServo2PWM(0);
+    Wait_Time(800);
     //speed, distance, dir
     //Move(45, 1500, FORWARD);
     

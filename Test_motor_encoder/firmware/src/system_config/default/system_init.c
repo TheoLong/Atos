@@ -163,6 +163,7 @@ void SYS_Initialize ( void* data )
     DRV_OC0_Initialize();
     DRV_OC1_Initialize();
     DRV_OC2_Initialize();
+    DRV_OC3_Initialize();
     /*Initialize TMR0 */
     DRV_TMR0_Initialize();
     /*Initialize TMR1 */
