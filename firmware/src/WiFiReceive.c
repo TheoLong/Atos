@@ -101,7 +101,7 @@ void WIFIRECEIVE_Tasks ( void )
                     index = 0;
                     if((msgstat.total & WIFI_REPORT_RATE) == 0)
                     {
-                        struct JsonRequest j = {PIC_ID, 's', 0, 11, 0,
+                        struct JsonRequest j = {PIC_ID, 'm', 0, 11, 0,
                         msgstat.total, msgstat.good, msgstat.corrupted, msgstat.missed};
                         SendOverWiFi(j);
                     }
