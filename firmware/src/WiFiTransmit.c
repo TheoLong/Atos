@@ -8,7 +8,7 @@ uint8_t is_wifi_connected = 0;
 void WIFITRANSMIT_Initialize ( void )
 {   
     usarttransmitqueue = xQueueCreate(512, sizeof(char));
-    wifitransmitqueue = xQueueCreate(16, sizeof(struct JsonRequest));
+    wifitransmitqueue = xQueueCreate(64, sizeof(struct JsonRequest));
     if(!wifitransmitqueue || !usarttransmitqueue)
     {
         //TODO: dbgHLT   

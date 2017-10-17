@@ -11,7 +11,7 @@
 #include "public.h"
 
 #define TRANSMIT_BUFFER_SIZE 256
-#define STAT_SEND_FREQ 0xF
+#define STAT_SEND_FREQ 0x1F
 
 void WIFITRANSMIT_Initialize ( void );
 

@@ -91,6 +91,8 @@ void ServoControlCallback2(TimerHandle_t xTimer)
     pos = (pos == 50) ? 850 : 50;
     if(counter == 94)
     {
+        struct JsonRequest jsr = {3, 's', 0, 80, 0, 0, 0, 0, 0};
+        SendOverWiFi(jsr);
         xTimerStop(xTimer, (TickType_t)10);
         xTimerStart(ServoTimer1, (TickType_t)5);
         xTimerStart(ServoTimer3, (TickType_t)5);
@@ -101,7 +103,7 @@ void ServoControlCallback2(TimerHandle_t xTimer)
 
 void ServoControlCallback3(TimerHandle_t xTimer)
 {
-    struct JsonRequest js = {PIC_ID, 'r', 0, 80, 0, 0, 0, 0, 0};
+    struct JsonRequest js = {PIC_ID, 'r', 3, 80, 0, 0, 0, 0, 0};
     SendOverWiFi(js);    
 }
 /*******************************************************************************
