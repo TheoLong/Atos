@@ -68,6 +68,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
  
 static void _SYS_Tasks ( void );
+//    DRV_TMR0_Tasks();
  
  
 static void _APP_Tasks(void);
@@ -96,6 +97,7 @@ void SYS_Tasks ( void )
                 "Sys Tasks",
                 1024, NULL, 0, NULL);
 
+    DRV_TMR0_Tasks();
  
  
     /* Create OS Thread for APP Tasks. */
@@ -134,6 +136,7 @@ static void _SYS_Tasks ( void)
         /* Maintain system services */
 
         /* Maintain Device Drivers */
+    DRV_TMR0_Tasks();
  
  
 
@@ -143,6 +146,7 @@ static void _SYS_Tasks ( void)
     }
 }
 
+//    DRV_TMR0_Tasks();
  
  
 
