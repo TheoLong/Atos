@@ -377,6 +377,7 @@
         <Name dnOrder="0">system_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">D032FCD977A5D0338BEE974B8906FD4A</Checksum>
+        <ProjectFileChecksum dnOrder="3">4D2FA3BB8D3A61FE46357FB1ACF87055</ProjectFileChecksum>
       </Template>
       <Template dnOrder="27">
         <Name dnOrder="0">sys_devcon_pic32mx.c</Name>

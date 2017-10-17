@@ -112,8 +112,8 @@ void WIFITRANSMIT_Tasks ( void )
 
  uint8_t GetConnectionStatus()
  {
-     return (PLIB_PORTS_PinGet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_14) &&
-                PLIB_PORTS_PinGet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_15));
+     return (PLIB_PORTS_PinGet(PORTS_ID_0, PORT_CHANNEL_F, PORTS_BIT_POS_0) &&
+                PLIB_PORTS_PinGet(PORTS_ID_0, PORT_CHANNEL_F, PORTS_BIT_POS_1));
  }
 
 /*******************************************************************************

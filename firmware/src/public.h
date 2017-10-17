@@ -41,7 +41,7 @@ BaseType_t SendOverWiFi(struct JsonRequest js);
 //when connection is good, return 1, otherwise 0
 uint8_t GetConnectionStatus();
 
-
+void SendToServoQueue(struct JsonResponse js);
 
 
 
