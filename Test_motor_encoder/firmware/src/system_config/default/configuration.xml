@@ -263,7 +263,7 @@
       <Template dnOrder="3">
         <Name dnOrder="0">system_interrupt_a.S</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">54CFC725B0845F3A431E23851F50A3EC</Checksum>
+        <Checksum dnOrder="2">1466ADE059B6424BE8056D53174E9F45</Checksum>
       </Template>
       <Template dnOrder="4">
         <Name dnOrder="0">drv_tmr_static.h</Name>
@@ -331,7 +331,7 @@
       <Template dnOrder="17">
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">73704A328674B161518EC162B7A59062</Checksum>
+        <Checksum dnOrder="2">2E5C43D0F5B6AA3ECB7CA35DDA9F365B</Checksum>
         <ProjectFileChecksum dnOrder="3">A75B945877B767A3F6FC75D68BB5E7BC</ProjectFileChecksum>
       </Template>
       <Template dnOrder="18">
@@ -356,7 +356,7 @@
       <Template dnOrder="22">
         <Name dnOrder="0">system_init.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">CB198F49C3E055C7EE05744FC2E79A70</Checksum>
+        <Checksum dnOrder="2">CDDCB1927E222E6B4ABECD67533CBD19</Checksum>
       </Template>
       <Template dnOrder="23">
         <Name dnOrder="0">drv_oc_static.h</Name>

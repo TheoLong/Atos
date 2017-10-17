@@ -67,7 +67,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "test_thread.h"
 #include "system_definitions.h"
 #include "public.h"
-
+int bumper = 0;
 int count = 0;
 // *****************************************************************************
 // *****************************************************************************
@@ -106,11 +106,10 @@ void IntHandlerDrvUsartInstance0(void)
 
 void IntHandlerExternalInterruptInstance0(void)
 {
+//    struct JsonResponse js = {50, 0, 1, 0, 0, 0};
+//    SendToIRQueue(js);
+    bumper++;
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
-}
-void IntHandlerExternalInterruptInstance1(void)
-{
-    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_4);
 }
  
 
@@ -120,7 +119,6 @@ void IntHandlerDrvTmrInstance0(void)
 }
 void IntHandlerDrvTmrInstance1(void)
 {
-   
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
 }
 void IntHandlerDrvTmrInstance2(void)
