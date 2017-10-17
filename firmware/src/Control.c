@@ -53,7 +53,7 @@ void CONTROL_Tasks ( void )
         {
 //            bool appInitialized = true;
             bumper = false;
-        
+            controlData.state = CONTROL_STATE_SWEEP;
             if (js.tsk == 80 && js.arg0 == 1)
             {          
                 controlData.state = CONTROL_STATE_RUN_TESTS;
@@ -128,8 +128,8 @@ void CONTROL_Tasks ( void )
         {
             if(controlData.entertare)
             {
-                Left_Motor_Distance(BACKWARD, 50, 500);
-                Right_Motor_Distance(BACKWARD, 50, 500); 
+                Left_Motor_Distance(BACKWARD, 50, 1500);
+                Right_Motor_Distance(BACKWARD, 50, 1500); 
                 controlData.entertare = false;
             }
             if(bumper)
@@ -169,8 +169,8 @@ void CONTROL_Tasks ( void )
             }
             if(bumper)
             {
-                Left_Motor_Distance(FORWARD, 45, 550);
-                Right_Motor_Distance(FORWARD, 45, 550);
+                Left_Motor_Distance(FORWARD, 45, 450);
+                Right_Motor_Distance(FORWARD, 45, 450);
                 vTaskDelay((TickType_t) 500);
                 bumper = false;
                 controlData.dump = true;
@@ -206,15 +206,13 @@ void CONTROL_Tasks ( void )
         
         case CONTROL_STATE_PREDUMP:
         {
-            Left_Motor_Distance(BACKWARD, 45, 6000);
-            Right_Motor_Distance(BACKWARD, 45, 6000);
-//            Left_Motor_PID(BACKWARD, 45);
-//            Right_Motor_PID(BACKWARD, 45);
+            Left_Motor_Distance(BACKWARD, 45, 4000);
+            Right_Motor_Distance(BACKWARD, 45, 4000);
             if(bumper)
             {
                 bumper = false;
-                Left_Motor_Distance(FORWARD, 45, 550);
-                Right_Motor_Distance(FORWARD, 45, 550);
+                Left_Motor_Distance(FORWARD, 45, 450);
+                Right_Motor_Distance(FORWARD, 45, 450);
                 vTaskDelay((TickType_t) 500);
                 controlData.state = CONTROL_STATE_TURN_RIGHT;
             }
@@ -225,48 +223,51 @@ void CONTROL_Tasks ( void )
         {
             Left_Motor_Distance(BACKWARD, 45, 1000);
             Right_Motor_Distance(BACKWARD, 45, 1000);
+            if(bumper)
+            {
+                Move(45, 250, FORWARD);
+                iscipangoready = false;
+                Left_Motor_PID(FORWARD, 0);
+                Right_Motor_PID(FORWARD, 0);
+                SetServo2PWM(800);
+                vTaskDelay((TickType_t) 225);
+                SetServo2PWM(50);
+                vTaskDelay((TickType_t) 225);
+                SetServo2PWM(0);
+                bumper = false;
+                struct JsonRequest jsr = {PIC_ID, 's', 2, 91, 0, 1, 0, 0, 0};
+                SendOverWiFi(jsr);
+                controlData.current_row++;
+                controlData.enterback = true;
+                controlData.dump = false;
+                controlData.enterstandby = true;
+                controlData.entersweep = true;
+                controlData.entertare = true;
+                controlData.enterturnright = true;
+                controlData.standby = false;
+                bumper = false;
+                controlData.enterturnleft = true;
+                controlData.state = (controlData.current_row >= 3) ? CONTROL_STATE_END : CONTROL_STATE_TURN_LEFT;  
+            }            
 //            Left_Motor_PID(BACKWARD, 45);
 //            Right_Motor_PID(BACKWARD, 45);
-            if(!iscipangoready)
-            {
-                BaseType_t ret = xTimerStart(myTimer, (TickType_t) 5);
-                if(ret == pdFAIL)
-                {
-                    
-                }
-            }
-            else
-            {
-                BaseType_t ret = xTimerStop(myTimer, (TickType_t) 5);
-                if(ret == pdFAIL)
-                {
-                
-                }
-                if(bumper)
-                {
-                    iscipangoready = false;
-                    Left_Motor_PID(FORWARD, 0);
-                    Right_Motor_PID(FORWARD, 0);
-                    SetServo2PWM(800);
-                    vTaskDelay((TickType_t) 225);
-                    SetServo2PWM(50);
-                    vTaskDelay((TickType_t) 225);
-                    SetServo2PWM(0);
-                    bumper = false;
-                    struct JsonRequest jsr = {PIC_ID, 's', 2, 91, 0, 1, 0, 0, 0};
-                    SendOverWiFi(jsr);
-                    controlData.current_row++;
-                    controlData.enterback = true;
-                    controlData.dump = false;
-                    controlData.enterstandby = true;
-                    controlData.entersweep = true;
-                    controlData.entertare = true;
-                    controlData.enterturnright = true;
-                    controlData.standby = false;
-                    controlData.enterturnleft = true;
-                    controlData.state = (controlData.current_row >= 4) ? CONTROL_STATE_END : CONTROL_STATE_TURN_LEFT;  
-                }
-            }
+//            if(!iscipangoready)
+//            {
+//                BaseType_t ret = xTimerStart(myTimer, (TickType_t) 5);
+//                if(ret == pdFAIL)
+//                {
+//                    
+//                }
+//            }
+//            else
+//            {
+//                BaseType_t ret = xTimerStop(myTimer, (TickType_t) 5);
+//                if(ret == pdFAIL)
+//                {
+//                
+//                }
+//
+//            }
             break;
         }
         
