@@ -79,17 +79,13 @@ void WIFIRECEIVE_Tasks ( void )
                         uint8_t r = ParseJson(strbuf, &jsr);
                         if(r == 0)
                         {
-                            msgstat.missed += (jsr.seq > msgstat.sequence) ? 
-                            (jsr.seq - msgstat.sequence - 1) : 0;
+                            msgstat.missed += jsr.seq - msgstat.sequence - 1;
                             msgstat.sequence = jsr.seq;
                             msgstat.good++;
                             Dispatch(jsr);
                         }
                         else
                         {
-                            msgstat.missed += (jsr.seq > msgstat.sequence) ? 
-                            (jsr.seq - msgstat.sequence - 1) : 0;
-                            msgstat.sequence = jsr.seq;            
                             msgstat.corrupted++;
                         }
                     }
@@ -99,12 +95,6 @@ void WIFIRECEIVE_Tasks ( void )
                         msgstat.corrupted++;
                     }
                     index = 0;
-                    if((msgstat.total & WIFI_REPORT_RATE) == 0)
-                    {
-                        struct JsonRequest j = {PIC_ID, 'm', 0, 11, 0,
-                        msgstat.total, msgstat.good, msgstat.corrupted, msgstat.missed};
-                        SendOverWiFi(j);
-                    }
                 }
                 else
                 {
@@ -212,10 +202,10 @@ struct MessageStat GetMessageStat()
     return msgstat;
 }
 
-void Dispatch(struct JsonResponse js)
+void Dispatch(volatile struct JsonResponse js)
 {
-    if(js.tsk >= 80 && js.tsk <= 90)
-    {
-        SendToServoQueue(js);
-    }
+//    if(js.tsk == 31)
+//    {
+//        SendToIRQueue(js);
+//    }
 }

@@ -67,9 +67,9 @@ void DRV_ADC_Initialize(void)
     /* Enable Auto Sample Mode */
     PLIB_ADC_SampleAutoStartEnable(DRV_ADC_ID_1);
     /* Sample Acquisition Time (Auto Sample Mode) */	
-    PLIB_ADC_SampleAcquisitionTimeSet(DRV_ADC_ID_1, 31);
+    PLIB_ADC_SampleAcquisitionTimeSet(DRV_ADC_ID_1, 4);
     /* Select Sampling Mode */
-    PLIB_ADC_SamplingModeSelect(DRV_ADC_ID_1, ADC_SAMPLING_MODE_MUXA);
+    PLIB_ADC_SamplingModeSelect(DRV_ADC_ID_1, ADC_SAMPLING_MODE_ALTERNATE_INPUT);
     /* Number of Samples Per Interrupt */
     PLIB_ADC_SamplesPerInterruptSelect(DRV_ADC_ID_1, ADC_16SAMPLES_PER_INTERRUPT);
 
@@ -82,13 +82,23 @@ void DRV_ADC_Initialize(void)
     PLIB_ADC_ResultBufferModeSelect(DRV_ADC_ID_1, ADC_BUFFER_MODE_ONE_16WORD_BUFFER);
 
     /* Channel Selections */
+
     /* MUX A Negative Input Select */
     PLIB_ADC_MuxChannel0InputNegativeSelect(DRV_ADC_ID_1, ADC_MUX_A, ADC_INPUT_NEGATIVE_VREF_MINUS);
+
+    /* MUX B Negative Input Select */
+    PLIB_ADC_MuxChannel0InputNegativeSelect(DRV_ADC_ID_1, ADC_MUX_B, ADC_INPUT_NEGATIVE_VREF_MINUS);
  
 
 
     /* MUX A Positive Input Select */
     PLIB_ADC_MuxChannel0InputPositiveSelect(DRV_ADC_ID_1, ADC_MUX_A, ADC_INPUT_POSITIVE_AN0);
+ 
+ 
+
+
+    /* MUX B Positive Input Select */
+    PLIB_ADC_MuxChannel0InputPositiveSelect(DRV_ADC_ID_1, ADC_MUX_B, ADC_INPUT_POSITIVE_AN1);
  
 }
 

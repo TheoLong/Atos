@@ -32,6 +32,27 @@ void WIFITRANSMIT_Tasks ( void )
         {
             JsonToString(js, str);
             SendToTransmitQueue(str);
+//            picsequence++;
+            if((picsequence & 0xF) == 0)
+            {
+                struct MessageStat msg = GetMessageStat();
+                js.seq = 0;
+                js.id = PIC_ID;
+                js.tgt = 0;
+                js.tp = 's';
+                js.tsk = 11;
+                js.arg0 = msg.total;
+                js.arg1 = msg.good;
+                js.arg2 = msg.corrupted;
+                js.arg3 = msg.missed;
+                if(msg.corrupted + msg.missed > 128)
+                {
+                    //TODO: dbgHLT
+                }
+                JsonToString(js, str);
+                SendToTransmitQueue(str);
+//                picsequence++;
+            }
         }
         else
         {

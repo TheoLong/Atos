@@ -68,7 +68,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 /*** DEVCFG1 ***/
 
 #pragma config FNOSC =      FRCPLL
-#pragma config FSOSCEN =    ON
+#pragma config FSOSCEN =    OFF
 #pragma config IESO =       ON
 #pragma config POSCMOD =    OFF
 #pragma config OSCIOFNC =   OFF
@@ -158,8 +158,17 @@ void SYS_Initialize ( void* data )
 
     /* Initialize the OC Driver */
     DRV_OC0_Initialize();
+    DRV_OC1_Initialize();
+    DRV_OC2_Initialize();
+    DRV_OC3_Initialize();
     /*Initialize TMR0 */
     DRV_TMR0_Initialize();
+    /*Initialize TMR1 */
+    DRV_TMR1_Initialize();
+    /*Initialize TMR2 */
+    DRV_TMR2_Initialize();
+    /*Initialize TMR3 */
+    DRV_TMR3_Initialize();
  
      sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)NULL);
     SYS_INT_VectorPrioritySet(INT_VECTOR_UART1, INT_PRIORITY_LEVEL1);
@@ -170,12 +179,24 @@ void SYS_Initialize ( void* data )
     /*** Interrupt Service Initialization Code ***/
     SYS_INT_Initialize();
 
+    /*Setup the INT_SOURCE_EXTERNAL_3 and Enable it*/
+    SYS_INT_VectorPrioritySet(INT_VECTOR_INT3, INT_PRIORITY_LEVEL1);
+    SYS_INT_VectorSubprioritySet(INT_VECTOR_INT3, INT_SUBPRIORITY_LEVEL0);
+    SYS_INT_ExternalInterruptTriggerSet(INT_EXTERNAL_INT_SOURCE3,INT_EDGE_TRIGGER_RISING);
+    SYS_INT_SourceEnable(INT_SOURCE_EXTERNAL_3);
+
+
+
+
+
+
     /* Initialize Middleware */
 
     /* Initialize the Application */
-    APP_Initialize();
     WIFIRECEIVE_Initialize();
     WIFITRANSMIT_Initialize();
+    MOTOR_ENCODER_THREAD_Initialize();
+    CONTROL_Initialize();
 }
 
 

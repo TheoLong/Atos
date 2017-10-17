@@ -60,11 +60,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "system/common/sys_common.h"
+#include "motor_encoder_thread.h"
 #include "WiFiReceive.h"
 #include "WiFiTransmit.h"
-#include "app.h"
-#include "public.h"
+#include "Control.h"
 #include "system_definitions.h"
+#include "public.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -82,10 +83,58 @@ void IntHandlerDrvUsartInstance0(void)
     {
         PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_RECEIVE);
         ISR_UART_RECEIVE();
-    }        
+    }    
 }
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
 
 
+
+void IntHandlerExternalInterruptInstance0(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
+}
+ 
+
+void IntHandlerDrvTmrInstance0(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
+}
+void IntHandlerDrvTmrInstance1(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
+}
+void IntHandlerDrvTmrInstance2(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_4);
+}
+void IntHandlerDrvTmrInstance3(void)
+{
+    static count = 0;
+    if(count < 5)
+    {
+        count++;
+    }
+    else
+    {
+        count = 0;
+        Read_Encoders();
+        ReadIR();
+    }
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
+}
  
 /*******************************************************************************
  End of File

@@ -67,6 +67,42 @@ void DRV_OC0_Start(void);
 void DRV_OC0_Stop(void);
 bool DRV_OC0_FaultHasOccurred(void);
 void DRV_OC0_PulseWidthSet(uint32_t pulseWidth);
+// *****************************************************************************
+// *****************************************************************************
+// Section: Interface Headers for Instance 1 for the static driver
+// *****************************************************************************
+// *****************************************************************************
+void DRV_OC1_Initialize(void);
+void DRV_OC1_Enable(void);
+void DRV_OC1_Disable(void);
+void DRV_OC1_Start(void);
+void DRV_OC1_Stop(void);
+bool DRV_OC1_FaultHasOccurred(void);
+void DRV_OC1_PulseWidthSet(uint32_t pulseWidth);
+// *****************************************************************************
+// *****************************************************************************
+// Section: Interface Headers for Instance 2 for the static driver
+// *****************************************************************************
+// *****************************************************************************
+void DRV_OC2_Initialize(void);
+void DRV_OC2_Enable(void);
+void DRV_OC2_Disable(void);
+void DRV_OC2_Start(void);
+void DRV_OC2_Stop(void);
+bool DRV_OC2_FaultHasOccurred(void);
+void DRV_OC2_PulseWidthSet(uint32_t pulseWidth);
+// *****************************************************************************
+// *****************************************************************************
+// Section: Interface Headers for Instance 3 for the static driver
+// *****************************************************************************
+// *****************************************************************************
+void DRV_OC3_Initialize(void);
+void DRV_OC3_Enable(void);
+void DRV_OC3_Disable(void);
+void DRV_OC3_Start(void);
+void DRV_OC3_Stop(void);
+bool DRV_OC3_FaultHasOccurred(void);
+void DRV_OC3_PulseWidthSet(uint32_t pulseWidth);
 #endif // #ifndef _DRV_OC_STATIC_H
 
 /*******************************************************************************
