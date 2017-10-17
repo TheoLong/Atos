@@ -96,7 +96,7 @@ void MOTOR_ENCODER_THREAD_Tasks ( void )
             right_current_distance = right_current_distance + right;
         }
         //left control
-        if(left_current_distance > (left_old_distance+left_move_distance))
+        if(left_current_distance >= (left_old_distance+left_move_distance))
         {
             Motor_Left_Set(dir_left, 0);
             left_finish = true;
@@ -107,7 +107,7 @@ void MOTOR_ENCODER_THREAD_Tasks ( void )
             Motor_Left_Set(dir_left, left_motor_pwm);
         }
         //right control
-        if(right_current_distance > (right_old_distance+right_move_distance))
+        if(right_current_distance >= (right_old_distance+right_move_distance))
         {
             Motor_Right_Set(dir_right, 0);
             right_finish = true;

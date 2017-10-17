@@ -104,6 +104,7 @@ void IntHandlerDrvUsartInstance0(void)
 
 void IntHandlerExternalInterruptInstance0(void)
 {
+    bumper = true;
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
 }
  

@@ -10,7 +10,7 @@
 #include "timers.h"
 #include "queue.h"
 
-#define PIC_ID 3
+#define PIC_ID 1
 #define FORWARD false
 #define BACKWARD true
 
@@ -61,22 +61,22 @@ struct MessageStat
 uint32_t hash(unsigned char * str);
 struct MessageStat GetMessageStat();
 
-//non-blocking
+
 void Left_Motor_PID(bool dir, int speed);
 void Right_Motor_PID(bool dir, int speed);
 void SetServo1PWM(int pwm);
 void SetServo2PWM(int pwm);
-//blocking
 void Left_Motor_Distance(bool dir, int speed, int distance);
 void Right_Motor_Distance(bool dir, int speed, int distance);
+
+
 void Move(int speed, int distance, bool dir);
 void Left_Turn();
 void Right_Turn();
-//timming
-//servo timming function
+
 void Wait_Time(int time);
 
-//encoder timming function
+
 void Wait_Left();
 void Wait_Right();
 void Wait();
