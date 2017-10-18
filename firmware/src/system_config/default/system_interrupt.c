@@ -60,24 +60,84 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "system/common/sys_common.h"
-#include "app.h"
+#include "motor_encoder_thread.h"
+#include "WiFiReceive.h"
+#include "WiFiTransmit.h"
+#include "Control.h"
 #include "system_definitions.h"
+#include "public.h"
 
+int bumper = 0;
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
 // *****************************************************************************
 // *****************************************************************************
+void IntHandlerDrvUsartInstance0(void)
+{
+    if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT))
+    {
+        PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT);
+        ISR_UART_TRANSMIT();
+    }
+    if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_RECEIVE))
+    {
+        PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_RECEIVE);
+        ISR_UART_RECEIVE();
+    }    
+}
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
  
 
 
 
+void IntHandlerExternalInterruptInstance0(void)
+{
+    bumper++;
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
+}
  
 
 void IntHandlerDrvTmrInstance0(void)
 {
-    DRV_TMR_Tasks(sysObj.drvTmr0);
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
 }
- /*******************************************************************************
+void IntHandlerDrvTmrInstance1(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
+}
+void IntHandlerDrvTmrInstance2(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_4);
+}
+void IntHandlerDrvTmrInstance3(void)
+{
+    static count = 0;
+    if(count < 5)
+    {
+        count++;
+    }
+    else
+    {
+        count = 0;
+        Read_Encoders();
+        ReadIR();
+    }
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
+}
+ 
+/*******************************************************************************
  End of File
 */

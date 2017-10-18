@@ -54,7 +54,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system_config.h"
 #include "system_definitions.h"
-#include "app.h"
+#include "wifireceive.h"
+#include "wifitransmit.h"
+#include "motor_encoder_thread.h"
+#include "control.h"
 
 
 // *****************************************************************************
@@ -68,7 +71,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 static void _SYS_Tasks ( void );
  
  
-static void _APP_Tasks(void);
+static void _WIFIRECEIVE_Tasks(void);
+static void _WIFITRANSMIT_Tasks(void);
+static void _MOTOR_ENCODER_THREAD_Tasks(void);
+static void _CONTROL_Tasks(void);
 
 
 // *****************************************************************************
@@ -94,9 +100,24 @@ void SYS_Tasks ( void )
 
  
  
-    /* Create OS Thread for APP Tasks. */
-    xTaskCreate((TaskFunction_t) _APP_Tasks,
-                "APP Tasks",
+    /* Create OS Thread for WIFIRECEIVE Tasks. */
+    xTaskCreate((TaskFunction_t) _WIFIRECEIVE_Tasks,
+                "WIFIRECEIVE Tasks",
+                1024, NULL, 1, NULL);
+
+    /* Create OS Thread for WIFITRANSMIT Tasks. */
+    xTaskCreate((TaskFunction_t) _WIFITRANSMIT_Tasks,
+                "WIFITRANSMIT Tasks",
+                1024, NULL, 1, NULL);
+
+    /* Create OS Thread for MOTOR_ENCODER_THREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _MOTOR_ENCODER_THREAD_Tasks,
+                "MOTOR_ENCODER_THREAD Tasks",
+                1024, NULL, 1, NULL);
+
+    /* Create OS Thread for CONTROL Tasks. */
+    xTaskCreate((TaskFunction_t) _CONTROL_Tasks,
+                "CONTROL Tasks",
                 1024, NULL, 1, NULL);
 
     /**************
@@ -120,9 +141,6 @@ static void _SYS_Tasks ( void)
         /* Maintain system services */
 
         /* Maintain Device Drivers */
-    DRV_USART_TasksTransmit(sysObj.drvUsart0);
-    DRV_USART_TasksError (sysObj.drvUsart0);
-    DRV_USART_TasksReceive(sysObj.drvUsart0);
  
  
 
@@ -137,17 +155,68 @@ static void _SYS_Tasks ( void)
 
 /*******************************************************************************
   Function:
-    void _APP_Tasks ( void )
+    void _WIFIRECEIVE_Tasks ( void )
 
   Summary:
-    Maintains state machine of APP.
+    Maintains state machine of WIFIRECEIVE.
 */
 
-static void _APP_Tasks(void)
+static void _WIFIRECEIVE_Tasks(void)
 {
     while(1)
     {
-        APP_Tasks();
+        WIFIRECEIVE_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _WIFITRANSMIT_Tasks ( void )
+
+  Summary:
+    Maintains state machine of WIFITRANSMIT.
+*/
+
+static void _WIFITRANSMIT_Tasks(void)
+{
+    while(1)
+    {
+        WIFITRANSMIT_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _MOTOR_ENCODER_THREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of MOTOR_ENCODER_THREAD.
+*/
+
+static void _MOTOR_ENCODER_THREAD_Tasks(void)
+{
+    while(1)
+    {
+        MOTOR_ENCODER_THREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _CONTROL_Tasks ( void )
+
+  Summary:
+    Maintains state machine of CONTROL.
+*/
+
+static void _CONTROL_Tasks(void)
+{
+    while(1)
+    {
+        CONTROL_Tasks();
     }
 }
 
