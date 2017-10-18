@@ -174,6 +174,7 @@ void CONTROL_Tasks ( void )
                 vTaskDelay((TickType_t) 500);
                 bumper = false;
                 controlData.dump = true;
+                controlData.enterturnleft = true;
                 controlData.state = CONTROL_STATE_TURN_LEFT;
             }
             break;
@@ -211,9 +212,10 @@ void CONTROL_Tasks ( void )
             if(bumper)
             {
                 bumper = false;
-                Left_Motor_Distance(FORWARD, 45, 450);
-                Right_Motor_Distance(FORWARD, 45, 450);
+                Left_Motor_Distance(FORWARD, 45, 350);
+                Right_Motor_Distance(FORWARD, 45, 350);
                 vTaskDelay((TickType_t) 500);
+                controlData.enterturnright = true;
                 controlData.state = CONTROL_STATE_TURN_RIGHT;
             }
             break;
