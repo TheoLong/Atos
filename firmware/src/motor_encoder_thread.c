@@ -2,8 +2,8 @@
 #include "public.h"
 
 //public used for PID and PID API
-PID pid_left = {0,0,0,0.6,0.03,0,0,FORWARD,0};
-PID pid_right = {0,0,0,0.6,0.03,0,FORWARD,0};
+PID pid_left = {0,0,0,0.7,0.03,0,0,FORWARD,0};
+PID pid_right = {0,0,0,0.7,0.03,0,FORWARD,0};
 DISTANCE_CONTROL left_distance_control = {0,0,0};
 DISTANCE_CONTROL right_distance_control = {0,0,0};
 FLAG flag = {false,false,false,false,false};

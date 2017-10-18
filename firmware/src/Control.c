@@ -53,8 +53,8 @@ void CONTROL_Tasks ( void )
 //                {
 //                }
                 //Move(45, 7000, FORWARD);
-                Left_Motor_PID(FORWARD, 35);
-                Right_Motor_PID(FORWARD, 35);
+                Left_Motor_PID(BACKWARD, 36);
+                Right_Motor_PID(BACKWARD, 35);
 //                Timing_Wait(20000);
 //                while(!GetTimingFlag())
 //                {
