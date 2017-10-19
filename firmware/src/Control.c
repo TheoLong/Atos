@@ -1,4 +1,5 @@
 #include "control.h"
+#include "statemachine.h"
 
 QueueHandle_t receive_q;
 
@@ -16,7 +17,21 @@ void CONTROL_Initialize ( void )
 
 void CONTROL_Tasks ( void )
 {
- 
+//    Left_Motor_Distance(BACKWARD, 35, 540);
+//    Right_Motor_Distance(FORWARD, 35, 540);
+    static struct StateMachineParams smp = {0, false, false, true, true, 0};
+    vTaskDelay((TickType_t) 1000);
+    while(1)
+    {
+        struct JsonResponse js;
+        BaseType_t ret = xQueueReceive(receive_q, &js, (TickType_t) 2);
+        if(ret == pdTRUE)
+        {
+            if(js.tsk == 61 && js.arg0 == 1)
+                smp.bumper = true;
+        }
+        lori_state_machine(&smp);
+    }
 }
 
 
@@ -29,12 +44,12 @@ void ReadIR(void)
         FrontIR =  DRV_ADC_SamplesRead(0);
         SideIR = DRV_ADC_SamplesRead(1);
         struct JsonResponse js = {49, 0, FrontIR, SideIR, 0, 0};
-        SendToIRQueue(js);        
+        SendToControlQueue(js);        
     }
 
 }
 
-void SendToIRQueue(struct JsonResponse js)
+void SendToControlQueue(struct JsonResponse js)
 {
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
     BaseType_t ret = xQueueSendFromISR(receive_q, &js, &xHigherPriorityTaskWoken);
