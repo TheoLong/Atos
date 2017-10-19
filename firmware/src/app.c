@@ -99,7 +99,7 @@ void ServoControlCallback2(TimerHandle_t xTimer)
     }
     DRV_OC0_PulseWidthSet(pos);
     pos = (pos == 50) ? 850 : 50;
-    if(counter >= 78)
+    if(counter >= 75)
     {
         struct JsonRequest jsr = {3, 's', 0, 80, 0, 0, 0, 0, 0};
         SendOverWiFi(jsr);
