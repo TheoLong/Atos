@@ -2,13 +2,15 @@
 #include "statemachine.h"
 
 QueueHandle_t receive_q;
-
+TimerHandle_t controltimer;
 
 void CONTROL_Initialize ( void )
 {
     receive_q = xQueueCreate(128, sizeof(struct JsonResponse));
+    controltimer = xTimerCreate("ControlTimer", 200, pdTRUE, (void*)0, requeststatus);
     DRV_ADC_Open();
     DRV_ADC_Start();
+    BaseType_t ret = xTimerStart(controltimer, (TickType_t) 5);
     if(!receive_q)
     {
         //DBG: TODO;
@@ -17,10 +19,8 @@ void CONTROL_Initialize ( void )
 
 void CONTROL_Tasks ( void )
 {
-//    Left_Motor_Distance(BACKWARD, 35, 540);
-//    Right_Motor_Distance(FORWARD, 35, 540);
     static struct StateMachineParams smp = {0, false, false, true, true, 0};
-    vTaskDelay((TickType_t) 1000);
+//    vTaskDelay((TickType_t) 1000);
     while(1)
     {
         struct JsonResponse js;
@@ -29,6 +29,8 @@ void CONTROL_Tasks ( void )
         {
             if(js.tsk == 61 && js.arg0 == 1)
                 smp.bumper = true;
+            else if(js.tsk == 60)
+                smp.status = js.arg0;
         }
         lori_state_machine(&smp);
     }

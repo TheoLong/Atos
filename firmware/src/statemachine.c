@@ -3,15 +3,29 @@
 void lori_state_machine(struct StateMachineParams * arg)
 {
 	static Lori_States state = INIT, prev = INIT, pause = INIT;
+    if(arg->status == 2)
+    {
+        prev = INIT;
+        pause = state;
+        state = PAUSED;
+    }
 	switch (state)
 	{
         case INIT:
         {
-            state = SWEEP;
+            if(arg->status == 1)
+            {
+                state = SWEEP;
+            }
+//            state = SWEEP;
             break;
         }
         case PAUSED:
         {
+            if(arg->status == 3)
+            {
+                state = pause;
+            }
             break;
         }
 		case STANDBY:
@@ -79,8 +93,10 @@ void _state_machine_standby(Lori_States * state, Lori_States * prev, struct Stat
 	}
 	if (Left_Is_Finish() && Right_Is_Finish())
 	{
+        
 		arg->standby = true;
 		*state = TURN_RIGHT;
+        _state_machine_send_status(prev, state);
 	}
 }
 
@@ -103,6 +119,7 @@ void _state_machine_turnright(Lori_States * state, Lori_States * prev, struct St
 		{
 			*state = DUMP;
 		}
+        _state_machine_send_status(prev, state);
 	}
 }
 
@@ -113,14 +130,13 @@ void _state_machine_tare(Lori_States * state, Lori_States * prev, struct StateMa
         *prev = TARE;
         arg->bumper = false;
     }
-//	Left_Motor_Distance(BACKWARD, 35, 425);
-//	Right_Motor_Distance(BACKWARD, 35, 425);
-    Left_Motor_PID(BACKWARD, 36);
+    Left_Motor_PID(BACKWARD, 35);
     Right_Motor_PID(BACKWARD, 35);
 	if (arg->bumper)
 	{
         vTaskDelay(200);
 		*state = SWEEP;
+        _state_machine_send_status(prev, state);
 	}
 }
 
@@ -136,15 +152,14 @@ void _state_machine_sweep(Lori_States * state, Lori_States * prev, struct StateM
 	{
         arg->bumper = false;
 		*state = BACK;
+        _state_machine_send_status(prev, state);
 	}
 }
 
 void _state_machine_back(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg)
 {
 	*prev = BACK;
-//	Left_Motor_Distance(BACKWARD, 35, 8000);
-//	Right_Motor_Distance(BACKWARD, 35, 8000);
-    Left_Motor_PID(BACKWARD, 36);
+    Left_Motor_PID(BACKWARD, 35);
     Right_Motor_PID(BACKWARD, 35);
 	if (arg->bumper)
 	{
@@ -155,6 +170,7 @@ void _state_machine_back(Lori_States * state, Lori_States * prev, struct StateMa
 		arg->bumper = false;
 		arg->dump = true;
 		*state = TURN_LEFT;
+        _state_machine_send_status(prev, state);
 	}
 }
 
@@ -183,13 +199,14 @@ void _state_machine_turnleft(Lori_States * state, Lori_States * prev, struct Sta
             vTaskDelay(400);
 			*state = STANDBY;
 		}
+        _state_machine_send_status(prev, state);
 	}
 }
 
 void _state_machine_predump(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg)
 {
 	*prev = PREDUMP;
-    Left_Motor_PID(BACKWARD, 36);
+    Left_Motor_PID(BACKWARD, 35);
     Right_Motor_PID(BACKWARD, 35);
 	if (arg->bumper)
 	{
@@ -199,13 +216,14 @@ void _state_machine_predump(Lori_States * state, Lori_States * prev, struct Stat
 		vTaskDelay((TickType_t) 320);
 		arg->bumper = false;
 		*state = TURN_RIGHT;
+        _state_machine_send_status(prev, state);
 	}
 }
 
 void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg)
 {
 	
-    Left_Motor_PID(BACKWARD, 36);
+    Left_Motor_PID(BACKWARD, 35);
     Right_Motor_PID(BACKWARD, 35);
 
 	if (arg->bumper && *prev != DUMP)
@@ -233,6 +251,20 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
         arg->dump = false;
         arg->standby = false;
         *state = (arg->current_row >= 6) ? END : TURN_LEFT;
+        _state_machine_send_status(prev, state);
     }
     
+}
+
+
+void _state_machine_send_status(Lori_States * prev, Lori_States * curr)
+{
+    struct JsonRequest jsr = {PIC_ID, 's', 0, 62, 0, *curr, *prev, 0, 0};
+    SendOverWiFi(jsr);
+}
+
+void requeststatus(TimerHandle_t xTimer)
+{
+    struct JsonRequest jsr = {PIC_ID, 'r', 0, 60, 0, 0, 0, 0, 0};
+    SendOverWiFi(jsr);
 }
