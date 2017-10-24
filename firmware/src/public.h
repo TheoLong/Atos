@@ -42,7 +42,7 @@ BaseType_t SendOverWiFi(struct JsonRequest js);
 //when connection is good, return 1, otherwise 0
 uint8_t GetConnectionStatus();
 //YunfeiGuo's IRQueue
-void SendToControlQueue(struct JsonResponse js);
+void SendToIRQueue(struct JsonResponse js);
 
 struct MessageStat
 {
@@ -81,6 +81,6 @@ bool Right_Is_Finish();
 void Timing_Wait(int time);
 bool GetTimingFlag();
 
-extern bool bumper;
+extern int bumper;
 
 #endif /* _EXAMPLE_FILE_NAME_H */

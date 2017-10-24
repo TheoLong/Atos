@@ -45,7 +45,7 @@
         <itemPath>../src/Control.h</itemPath>
         <itemPath>../src/public.h</itemPath>
         <itemPath>../src/jsmn.h</itemPath>
-        <itemPath>../src/statemachine.h</itemPath>
+        <itemPath>../src/IR_pid.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="driver" projectFiles="true">
@@ -206,7 +206,7 @@
         <itemPath>../src/main.c</itemPath>
         <itemPath>../src/jsmn.c</itemPath>
         <itemPath>../src/function.c</itemPath>
-        <itemPath>../src/statemachine.c</itemPath>
+        <itemPath>../src/IR_pid.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="osal" projectFiles="true">
@@ -265,7 +265,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>1.44</languageToolchainVersion>
+        <languageToolchainVersion>1.42</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -301,7 +301,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/system_config/default;../src/default;../../../../framework;../src/system_config/default/framework;../../../../third_party/rtos/FreeRTOS/Source/include;../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
+                  value="../src;../src/default;../../../../framework;../src/system_config/default/framework;../src/system_config/default;../../../../third_party/rtos/FreeRTOS/Source/include;../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

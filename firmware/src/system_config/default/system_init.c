@@ -197,6 +197,7 @@ void SYS_Initialize ( void* data )
     WIFITRANSMIT_Initialize();
     MOTOR_ENCODER_THREAD_Initialize();
     CONTROL_Initialize();
+    IR_PID_Initialize();
 }
 
 

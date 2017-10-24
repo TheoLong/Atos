@@ -67,8 +67,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_definitions.h"
 #include "public.h"
 
-//bool bumper;
-
+int bumper = 0;
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
@@ -106,9 +105,7 @@ void IntHandlerDrvUsartInstance0(void)
 
 void IntHandlerExternalInterruptInstance0(void)
 {
-//    bumper = true;
-    struct JsonResponse js = {61, 1, 1, 1, 1};
-    SendToControlQueue(js);
+    bumper++;
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
 }
  

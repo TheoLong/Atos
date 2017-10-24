@@ -58,6 +58,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "wifitransmit.h"
 #include "motor_encoder_thread.h"
 #include "control.h"
+#include "ir_pid.h"
 
 
 // *****************************************************************************
@@ -75,6 +76,7 @@ static void _WIFIRECEIVE_Tasks(void);
 static void _WIFITRANSMIT_Tasks(void);
 static void _MOTOR_ENCODER_THREAD_Tasks(void);
 static void _CONTROL_Tasks(void);
+static void _IR_PID_Tasks(void);
 
 
 // *****************************************************************************
@@ -118,6 +120,11 @@ void SYS_Tasks ( void )
     /* Create OS Thread for CONTROL Tasks. */
     xTaskCreate((TaskFunction_t) _CONTROL_Tasks,
                 "CONTROL Tasks",
+                1024, NULL, 1, NULL);
+
+    /* Create OS Thread for IR_PID Tasks. */
+    xTaskCreate((TaskFunction_t) _IR_PID_Tasks,
+                "IR_PID Tasks",
                 1024, NULL, 1, NULL);
 
     /**************
@@ -217,6 +224,23 @@ static void _CONTROL_Tasks(void)
     while(1)
     {
         CONTROL_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _IR_PID_Tasks ( void )
+
+  Summary:
+    Maintains state machine of IR_PID.
+*/
+
+static void _IR_PID_Tasks(void)
+{
+    while(1)
+    {
+        IR_PID_Tasks();
     }
 }
 
