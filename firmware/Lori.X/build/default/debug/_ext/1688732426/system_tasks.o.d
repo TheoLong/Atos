@@ -298,4 +298,5 @@ build/default/debug/_ext/1688732426/system_tasks.o:  \
  ../src/jsmn.h  \
 ../src/wifitransmit.h  \
 ../src/motor_encoder_thread.h  \
- ../src/control.h 
+ ../src/control.h  \
+../src/ir_pid.h 

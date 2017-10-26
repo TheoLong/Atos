@@ -297,8 +297,10 @@ build/default/debug/_ext/1688732426/system_interrupt.o:  \
  ../src/jsmn.h  \
 ../src/wifitransmit.h  \
 ../src/control.h  \
+../src/ir_pid.h  \
  ../src/WiFiReceive.h  \
 ../src/WiFiTransmit.h  \
 ../src/Control.h  \
  ../src/system_config/default/system_definitions.h  \
-../src/public.h 
+../src/public.h  \
+ ../src/IR_pid.h 

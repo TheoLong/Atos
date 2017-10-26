@@ -26,7 +26,6 @@ typedef struct
 
 void CONTROL_Initialize ( void );
 void CONTROL_Tasks( void );
-void ReadIR(void);
 #endif /* _CONTROL_H */
 
 

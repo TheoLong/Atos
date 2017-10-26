@@ -41,8 +41,6 @@ BaseType_t SendOverWiFi(struct JsonRequest js);
 
 //when connection is good, return 1, otherwise 0
 uint8_t GetConnectionStatus();
-//YunfeiGuo's IRQueue
-void SendToIRQueue(struct JsonResponse js);
 
 struct MessageStat
 {
@@ -80,7 +78,12 @@ bool Left_Is_Finish();
 bool Right_Is_Finish();
 void Timing_Wait(int time);
 bool GetTimingFlag();
-
+void Motor_Left_Set(bool dir, int pwm);
+void Motor_Right_Set(bool dir, int pwm);
 extern int bumper;
-
+//IR PID control
+void SetIRPID(bool dir, int speed, int distance);
+void StopIRPID(void);
+int GetFrontIR();
+int GetSideIR();
 #endif /* _EXAMPLE_FILE_NAME_H */

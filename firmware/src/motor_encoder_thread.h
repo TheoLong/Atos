@@ -29,8 +29,6 @@ struct Encoder_Struct
 typedef struct Encoder_Struct Encoder;
 void MOTOR_ENCODER_THREAD_Initialize ( void );
 void MOTOR_ENCODER_THREAD_Tasks( void );
-void Motor_Left_Set(bool dir, int pwm);
-void Motor_Right_Set(bool dir, int pwm);
 void Read_Encoders(void);
 void SendToQueue(Encoder data);
 int Left_PID_module(int Speed, int set_speed, int*pwm);

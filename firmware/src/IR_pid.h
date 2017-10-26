@@ -17,11 +17,18 @@ extern "C" {
 #endif
 // DOM-IGNORE-END 
 
+struct IR_Struct 
+{
+    int Front_IR;
+    int Side_IR;
+};
 
+typedef struct IR_Struct IR;
 
 void IR_PID_Initialize ( void );
 void IR_PID_Tasks( void );
-
+void ReadIR(void);
+void SendToIRQueue(IR data);
 
 #endif /* _IR_PID_H */
 

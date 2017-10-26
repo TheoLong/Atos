@@ -297,4 +297,5 @@ build/default/debug/_ext/1360937237/WiFiReceive.o:  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/motor_encoder_thread.h  \
 ../src/control.h  \
-../src/jsmn.h 
+../src/ir_pid.h  \
+ ../src/jsmn.h 

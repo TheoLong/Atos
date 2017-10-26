@@ -1,6 +1,7 @@
-build/default/debug/_ext/1047219354/drv_oc_mapping.o:  \
- ../src/system_config/default/framework/driver/oc/src/drv_oc_mapping.c  \
- ../src/system_config/default/system_config.h  \
+build/default/debug/_ext/1360937237/IR_pid.o:  \
+../src/IR_pid.c  \
+ ../src/ir_pid.h  \
+../src/system_config/default/system_config.h  \
  ../src/system_config/default/system_definitions.h  \
  ../../../../framework/system/common/sys_common.h  \
  ../../../../framework/system/common/sys_module.h  \

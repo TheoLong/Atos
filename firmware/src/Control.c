@@ -9,8 +9,6 @@ void CONTROL_Initialize ( void )
     /* Place the App state machine in its initial state. */
     controlData.state = CONTROL_STATE_INIT;
     receive_q = xQueueCreate(128, sizeof(struct JsonResponse));
-    DRV_ADC_Open();
-    DRV_ADC_Start();
     if(!receive_q)
     {
         //DBG: TODO;
@@ -53,8 +51,8 @@ void CONTROL_Tasks ( void )
 //                {
 //                }
                 //Move(45, 7000, FORWARD);
-                Left_Motor_PID(BACKWARD, 36);
-                Right_Motor_PID(BACKWARD, 35);
+                //Left_Motor_PID(BACKWARD, 36);
+                //Right_Motor_PID(BACKWARD, 35);
 //                Timing_Wait(20000);
 //                while(!GetTimingFlag())
 //                {
@@ -69,6 +67,8 @@ void CONTROL_Tasks ( void )
 //                Wait_Time(800);
 //                SetServo2PWM(0);
 //                Wait_Time(800);
+                int a = GetSideIR();
+                SetIRPID(BACKWARD, 35, a);
                 controlData.state = CONTROL_STATE_SERVICE_TASKS;
                 break;
             }
@@ -105,27 +105,4 @@ void CONTROL_Tasks ( void )
 }
 
 
-void ReadIR(void)
-{
-    int FrontIR = 0;
-    int SideIR = 0;
-    if (DRV_ADC_SamplesAvailable())
-    {
-        FrontIR =  DRV_ADC_SamplesRead(0);
-        SideIR = DRV_ADC_SamplesRead(1);
-        struct JsonResponse js = {49, 0, FrontIR, SideIR, 0, 0};
-        SendToIRQueue(js);        
-    }
 
-}
-
-void SendToIRQueue(struct JsonResponse js)
-{
-    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-    BaseType_t ret = xQueueSendFromISR(receive_q, &js, &xHigherPriorityTaskWoken);
-    if(ret==pdFALSE)
-    {
-        //sendToUART('f');
-    }
-    portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
-}

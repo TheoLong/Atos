@@ -301,7 +301,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/default;../../../../framework;../src/system_config/default/framework;../src/system_config/default;../../../../third_party/rtos/FreeRTOS/Source/include;../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
+                  value="../src;../src/system_config/default;../src/default;../../../../framework;../src/system_config/default/framework;../../../../third_party/rtos/FreeRTOS/Source/include;../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

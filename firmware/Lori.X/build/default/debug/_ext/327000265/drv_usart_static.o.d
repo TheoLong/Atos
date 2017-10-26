@@ -296,4 +296,5 @@ build/default/debug/_ext/327000265/drv_usart_static.o:  \
  ../src/jsmn.h  \
 ../src/wifitransmit.h  \
 ../src/motor_encoder_thread.h  \
- ../src/control.h 
+ ../src/control.h  \
+../src/ir_pid.h 
