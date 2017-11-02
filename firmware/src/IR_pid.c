@@ -7,8 +7,8 @@ int set_distance=0;
 float integral=0;
 float derivative=0;
 int previous_error;
-float Kp =0.2;
-float Ki=0;
+float Kp =0.1;
+float Ki=0.01;
 float Kd=0;
 int set_speed = 0;
 bool set_dir = FORWARD;
@@ -57,24 +57,24 @@ void IR_PID_Tasks ( void )
             //  output = Kp*error + Ki*integral + Kd*derivative
             previous_error = error;
             //  previous_error = error  
-            if(output>=1)
+            if(output>=2)
             {
-                o = 1;
+                o = 2;
             }
-            else if(output <= -1)
+            else if(output <= -2)
             {
-                o = -1;
+                o = -2;
             }
             else
             {
                 o = output+0.5;
             }
-            if(o<=0)
+            if(set_dir == FORWARD)
             {
                 Left_Motor_PID(set_dir, set_speed-o);
                 Right_Motor_PID(set_dir, set_speed+o);
             }
-            if(o>0)
+            if(set_dir == BACKWARD)
             {
                 Left_Motor_PID(set_dir, set_speed-o);
                 Right_Motor_PID(set_dir, set_speed+o);

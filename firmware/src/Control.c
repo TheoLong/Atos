@@ -67,8 +67,11 @@ void CONTROL_Tasks ( void )
 //                Wait_Time(800);
 //                SetServo2PWM(0);
 //                Wait_Time(800);
+                PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
+                Left_Motor_PID(BACKWARD, 35);
+                Right_Motor_PID(BACKWARD, 35);
                 int a = GetSideIR();
-                SetIRPID(BACKWARD, 35, a);
+                //SetIRPID(BACKWARD, 35, a);
                 controlData.state = CONTROL_STATE_SERVICE_TASKS;
                 break;
             }
