@@ -1,23 +1,9 @@
 #include "ir_pid.h"
-int FrontIR = 0;
-int SideIR = 0;
-int ircount=0;
-int distance=0;
-int set_distance=0;
-float integral=0;
-float derivative=0;
-int previous_error;
-float Kp =0.1;
-float Ki=0.01;
-float Kd=0;
-int set_speed = 0;
-bool set_dir = FORWARD;
-bool enable = false;
-float output=0;
-int o =0;
-QueueHandle_t ir_q;
-IR ir_distance = {0, 0};
 
+IRPID irpid = {0,0,0,1,0,0,0,FORWARD,false,0,0,0};
+IRC ir= {0,0,0,0};
+bool unset = false;
+QueueHandle_t ir_q;
 void IR_PID_Initialize ( void )
 {
     DRV_ADC_Open();
@@ -31,7 +17,7 @@ void IR_PID_Initialize ( void )
 
 void IR_PID_Tasks ( void )
 {
-    
+    IR ir_distance = {0, 0};
     BaseType_t ret = xQueueReceive(ir_q, &ir_distance, (TickType_t) 5);
     if(ret == pdFALSE)
     {
@@ -40,50 +26,67 @@ void IR_PID_Tasks ( void )
     else
     {
         //side IR distance
-        distance = ir_distance.Side_IR;
+        ir.distance = ir_distance.Side_IR;
         
-        struct JsonRequest js = {PIC_ID, 's',0, 32,0, distance, 0, 0, 0};
-        SendOverWiFi(js);
         //--------------------pid control started---------------------
-        if(enable)
+        if(irpid.enable)
         {   
-            int error = set_distance -distance;
+            int error = irpid.set_distance -ir.distance;
             //  error = setpoint - measured_value
-            integral = integral + error*10;
+            irpid.integral = irpid.integral + error*10;
             //  integral = integral + error*dt
-            derivative = (error - previous_error)/10.0;
+            irpid.derivative = (error - irpid.previous_error)/10.0;
             //  derivative = (error - previous_error)/dt
-            output = Kp*error+ Ki* integral+ Kd*derivative;
+            irpid.output = irpid.Kp*error+ irpid.Ki* irpid.integral+ irpid.Kd*irpid.derivative;
             //  output = Kp*error + Ki*integral + Kd*derivative
-            previous_error = error;
+            irpid.previous_error = error;
             //  previous_error = error  
-            if(output>=2)
+           
+            if(irpid.set_dir == FORWARD)
             {
-                o = 2;
-            }
-            else if(output <= -2)
-            {
-                o = -2;
+                if(irpid.output>=1)
+                {
+                    irpid.cap = 1;
+                }
+                else if(irpid.output <= -1)
+                {
+                    irpid.cap = -1;
+                }
+                else
+                {
+                    irpid.cap = irpid.cap+0.5;
+                }
+                Left_Motor_PID(irpid.set_dir, irpid.set_speed+irpid.cap);
+                Right_Motor_PID(irpid.set_dir, irpid.set_speed);
             }
             else
             {
-                o = output+0.5;
+                if(irpid.output>=2)
+                {
+                    irpid.cap = 2;
+                }
+                else if(irpid.output <= -2)
+                {
+                    irpid.cap = -2;
+                }
+                else
+                {
+                    irpid.cap = irpid.cap+0.5;
+                }
+                Left_Motor_PID(irpid.set_dir, irpid.set_speed+irpid.cap);
+                Right_Motor_PID(irpid.set_dir, irpid.set_speed-irpid.cap);
             }
-            if(set_dir == FORWARD)
-            {
-                Left_Motor_PID(set_dir, set_speed-o);
-                Right_Motor_PID(set_dir, set_speed+o);
-            }
-            if(set_dir == BACKWARD)
-            {
-                Left_Motor_PID(set_dir, set_speed-o);
-                Right_Motor_PID(set_dir, set_speed+o);
-            }
+            struct JsonRequest js = {PIC_ID, 's',0, 32,0, ir.distance, irpid.cap, 0, 0};
+            SendOverWiFi(js);
         }
         else
         {
-            Motor_Left_Set(FORWARD, 0);
-            Motor_Right_Set(FORWARD, 0);
+            if(unset == false)
+            {
+                Left_Motor_PID(FORWARD,0);
+                Right_Motor_PID(FORWARD,0);
+                unset = true;
+            }
         }
     }
 }
@@ -93,16 +96,16 @@ void IR_PID_Tasks ( void )
     
     if (DRV_ADC_SamplesAvailable())
     {
-        FrontIR =  DRV_ADC_SamplesRead(0);
-        SideIR = DRV_ADC_SamplesRead(1);      
+        ir.FrontIR =  DRV_ADC_SamplesRead(0);
+        ir.SideIR = DRV_ADC_SamplesRead(1);      
     }
-    if(ircount == 25)
+    if(ir.ircount == 25)
     {
-        IR data = {FrontIR, SideIR};
+        IR data = {ir.FrontIR, ir.SideIR};
         SendToIRQueue(data);
-        ircount =0;
+        ir.ircount =0;
     }
-    ircount++;
+    ir.ircount++;
 }
 
 void SendToIRQueue(IR data)
@@ -118,27 +121,26 @@ void SendToIRQueue(IR data)
 
 void SetIRPID(bool dir, int speed, int distance)
 {
-    set_distance = distance;
-    enable = true;
-    set_speed = speed;
-    set_dir = dir;
-    integral=0;
-    derivative=0;
-    previous_error=0;
-    
-    
+    irpid.set_distance = distance;
+    irpid.enable = true;
+    irpid.set_speed = speed;
+    irpid.set_dir = dir;
+    irpid.integral=0;
+    irpid.derivative=0;
+    irpid.previous_error=0;
 }
 
 void StopIRPID(void)
 {
-    enable = false;
+    irpid.enable = false;
+    unset = false;
     
 }
 int GetFrontIR()
 {
-    return FrontIR;
+    return ir.FrontIR;
 }
 int GetSideIR()
 {
-    return SideIR;
+    return ir.SideIR;
 }

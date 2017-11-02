@@ -40,65 +40,51 @@ void CONTROL_Tasks ( void )
         {
             if(bumper >= 1)
             {
-//                Left_Turn();
-//                Timing_Wait(500);
-//                while(!GetTimingFlag())
-//                {
-//                }
-//                Right_Turn();
-//                Timing_Wait(500);
-//                while(!GetTimingFlag())
-//                {
-//                }
-                //Move(45, 7000, FORWARD);
-                //Left_Motor_PID(BACKWARD, 36);
-                //Right_Motor_PID(BACKWARD, 35);
-//                Timing_Wait(20000);
-//                while(!GetTimingFlag())
-//                {
-//                }
-//                Left_Motor_PID(FORWARD, 0);
-//                Right_Motor_PID(FORWARD, 0);
-//                SetServo2PWM(770);
-//                Wait_Time(800);
-//                SetServo2PWM(0);
-//                Wait_Time(800);
-//                SetServo2PWM(50);
-//                Wait_Time(800);
-//                SetServo2PWM(0);
-//                Wait_Time(800);
-                PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
-                Left_Motor_PID(BACKWARD, 35);
-                Right_Motor_PID(BACKWARD, 35);
-                int a = GetSideIR();
-                //SetIRPID(BACKWARD, 35, a);
-                controlData.state = CONTROL_STATE_SERVICE_TASKS;
-                break;
+               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
+               //Left_Motor_PID(FORWARD,35);
+               //Right_Motor_PID(FORWARD,35);
+               SetIRPID(FORWARD, 35, GetSideIR());
+               while(GetFrontIR() < 700)
+               {
+                }
+               //Left_Motor_PID(FORWARD,0);
+               //Right_Motor_PID(FORWARD,0);
+               StopIRPID(); 
+               //-----------wait some time
+               SetServo1PWM(760);
+               Timing_Wait(1000);
+               while(!GetTimingFlag())
+               {
+               }
+               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
+               Move(35, 1000, FORWARD);        
+               SetIRPID(BACKWARD, 35, GetSideIR());
+               bumper =0;
+               controlData.state = CONTROL_STATE_SERVICE_TASKS;
+               break;
             }
             
         }
 
         case CONTROL_STATE_SERVICE_TASKS:
         {
-            volatile int df;
-            volatile int ds;
-            if(ret != pdTRUE)
+            if(bumper >= 1)
             {
-                //TODO: dbgHLT
+               StopIRPID(); 
+               SetServo1PWM(50);
+               Timing_Wait(1000);
+               while(!GetTimingFlag())
+               {
+               }
+               SetServo2PWM(770);
+               Wait_Time(1500);
+               while(!GetTimingFlag())
+               {
+               }
+               SetServo2PWM(0);
+               controlData.state = CONTROL_STATE_END;
+               break;
             }
-            if(js.tsk == 49)
-            {
-                df = js.arg0;
-                ds = js.arg1;
-            }
-            if(js.tsk == 50)
-            {
-
-            }
-            //Wait_Time(800);
-//            struct JsonRequest js = {PIC_ID, 's',31, 0, 1, 0, 0, 0};
-//            SendOverWiFi(js);
-            break;
         }
         default:
         {

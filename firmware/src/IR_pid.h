@@ -22,7 +22,28 @@ struct IR_Struct
     int Front_IR;
     int Side_IR;
 };
-
+typedef struct IRC
+{
+    int FrontIR;
+    int SideIR;
+    int ircount;
+    int distance;
+} IRC;
+typedef struct IRPID 
+{
+    float integral;
+    int previous_error;
+    float derivative;
+    double Kp;
+    double Ki;
+    double Kd;
+    int output;
+    bool set_dir;
+    bool enable;
+    int cap;
+    int set_distance;
+    int set_speed;
+} IRPID;
 typedef struct IR_Struct IR;
 
 void IR_PID_Initialize ( void );
