@@ -23,6 +23,7 @@ void CONTROL_Tasks ( void )
 //    vTaskDelay((TickType_t) 1000);
     while(1)
     {
+        smp.status = 1;
         struct JsonResponse js;
         BaseType_t ret = xQueueReceive(receive_q, &js, (TickType_t) 2);
         if(ret == pdTRUE)
