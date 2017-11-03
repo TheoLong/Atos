@@ -56,8 +56,8 @@ void IR_PID_Tasks ( void )
                 {
                     irpid.cap = irpid.cap+0.5;
                 }
-                Left_Motor_PID(irpid.set_dir, irpid.set_speed+irpid.cap);
-                Right_Motor_PID(irpid.set_dir, irpid.set_speed);
+                Left_Motor_PID(irpid.set_dir, irpid.set_speed-irpid.cap);
+                Right_Motor_PID(irpid.set_dir, irpid.set_speed+irpid.cap);
             }
             else
             {
