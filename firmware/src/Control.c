@@ -14,12 +14,13 @@ void CONTROL_Initialize ( void )
 
 void CONTROL_Tasks ( void )
 {
-    struct JsonResponse js;
-    BaseType_t ret = xQueueReceive(receive_q, &js, (TickType_t) 2);
-    if(ret == pdTRUE)
-    {
-         
-    }
+    SetServoGripperPWM(30);
+//    struct JsonResponse js;
+//    BaseType_t ret = xQueueReceive(receive_q, &js, (TickType_t) 2);
+//    if(ret == pdTRUE)
+//    {
+//         
+//    }
 }
 void SendToControlQueue(struct JsonResponse js)
 {

@@ -66,8 +66,8 @@ bool GetTimingFlag();
 //servo timming function
 void Wait_Time(int time);
 
-extern bool bumperA;
-extern bool bumperB;
+extern bool bumperTop;
+extern bool bumperBot;
 void SendToControlQueue(struct JsonResponse js);
 
 #endif /* _EXAMPLE_FILE_NAME_H */

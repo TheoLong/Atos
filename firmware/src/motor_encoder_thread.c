@@ -30,9 +30,9 @@ void MOTOR_ENCODER_THREAD_Initialize ( void )
 void MOTOR_ENCODER_THREAD_Tasks ( void )
 {
     DRV_OC0_PulseWidthSet(rotor.pwm);
-    DRV_OC1_PulseWidthSet(gripper.pwm);
+    DRV_OC3_PulseWidthSet(gripper.pwm);
     DRV_OC2_PulseWidthSet(winch.pwm);
-    DRV_OC3_PulseWidthSet(wrist.pwm);
+    DRV_OC1_PulseWidthSet(wrist.pwm);
     timing data;
     BaseType_t receive;
     receive = xQueueReceive(Timing_Q, &data, portMAX_DELAY);

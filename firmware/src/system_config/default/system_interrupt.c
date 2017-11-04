@@ -66,8 +66,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "control.h"
 #include "system_definitions.h"
 #include "public.h"
-bool bumperA =false;
-bool bumperB =false;
+bool bumperTop =false;
+bool bumperBot =false;
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
@@ -102,13 +102,13 @@ void IntHandlerDrvUsartInstance0(void)
  
 void IntHandlerExternalInterruptInstance0(void)
 {
-    bumperA = true;
-    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
+    bumperTop=true;
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_1);
 }
 void IntHandlerExternalInterruptInstance1(void)
 {
-    bumperB = true;
-    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_4);
+    bumperBot=true;
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_2);
 }
  
 
