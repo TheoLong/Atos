@@ -57,8 +57,8 @@ void IR_PID_Tasks ( void )
                 {
                     round = 0;
                 }
-                Left_Motor_PID(FORWARD, irpid.set_speed+round);
-                Right_Motor_PID(FORWARD, irpid.set_speed-round);
+                Left_Motor_PID(FORWARD, irpid.set_speed);
+                Right_Motor_PID(FORWARD, irpid.set_speed);
             }
             else
             {
