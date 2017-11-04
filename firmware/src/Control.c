@@ -3,6 +3,7 @@
 
 QueueHandle_t receive_q;
 bool startRemoving=false;
+bool init = false;
 void CONTROL_Initialize ( void )
 {
     receive_q = xQueueCreate(128, sizeof(struct JsonResponse));
@@ -14,61 +15,69 @@ void CONTROL_Initialize ( void )
 
 void CONTROL_Tasks ( void )
 {
-    while(1)
+    if(!init)
     {
         //init==========================
-        SetServoGripperPWM(80);//initial angle for the Crane
-        SetServoRotorPWM(10);//initial angle for the Crane
-        SetServoWristPWM(10);//level possition
+        init = true;
+        SetServoGripperPWM(500); // gripper 500 for open, 750 for close
+        SetServoRotorPWM(130);//130 for 0, 750 for 180
+        SetServoWristPWM(170);//170 for init, 800 for flip
         //move winch up
+        bumperTop = false;
         while(!bumperTop)
 		{
-			SetServoWinchPWM(100);//assume 100 is moving up, otherwise change to 0
+			SetServoWinchPWM(700); //700 is up, 10 is down
 		}
-        bumperTop = false;
-        //init==========================
         SetServoWinchPWM(0);//stop winch
         //trigger signal from server
-        if (startRemoving)
+    }
+    
+    if (!startRemoving)
+    {
+        startRemoving = true;
+        //===========	move the arm down
+        bumperBot = false;
+        while(!bumperBot)
         {
-            //===========	move the arm down
-            while(!bumperBot)
-            {
-                SetServoWristPWM(10); //assume 0 as moving down, otherwise change to 100
-            }
-            SetServoWristPWM(0);//stop winch
-            //===========	close gripper
-            Wait_Time(1000);//wait 1 second
-            SetServoGripperPWM(10);//assume 0 is close, otherwise change to 80
-            Wait_Time(1000);//wait 1 second
-            //===========	move the arm up
-            while(!bumperTop)
-            {
-                SetServoWinchPWM(100);//assume 100 is moving up, otherwise change to 0
-            }
-            SetServoWinchPWM(0);//stop winch
-            Wait_Time(1000);//wait 1 second
-            //===========	rotate the Crane
-            SetServoRotorPWM(100);//assume 100 is 180 degree for the servo
-            Wait_Time(1000);//wait 1 second
-            //===========	dump contents
-            SetServoWristPWM(50);//vertical position
-            Wait_Time(1000);//wait 1 second
-            SetServoWristPWM(10);//level pisition
-            Wait_Time(1000);//wait 1 second
-            //===========	rotate the Crane
-            SetServoRotorPWM(0);//assume 100 is 180 degree for the servo
-            Wait_Time(1000);//wait 1 second
-            //===========	move the arm down
-            while(!bumperBot)
-            {
-                SetServoWinchPWM(10); //assume 0 as moving down, otherwise change to 100
-            }
-            SetServoWinchPWM(50);//stop winch
-            //===========	open gripper
-            Wait_Time(1000);//wait 1 second
-            SetServoGripperPWM(80);//assume 0 is close, otherwise change to 80
+            SetServoWinchPWM(10);
         }
+        
+        SetServoWinchPWM(0);//stop winch
+        //===========	close gripper
+        Wait_Time(1000);//wait 1 second
+        SetServoGripperPWM(750);
+        Wait_Time(1000);//wait 1 second
+        //===========	move the arm up
+        bumperTop = false;
+        while(!bumperTop)
+        {
+            SetServoWinchPWM(700);
+        }
+        
+        SetServoWinchPWM(0);//stop winch
+        Wait_Time(1000);//wait 1 second
+        //===========	rotate the Crane
+        SetServoRotorPWM(750);
+        Wait_Time(1000);//wait 1 second
+        //===========	dump contents
+        SetServoWristPWM(800);//vertical position
+        Wait_Time(1000);//wait 1 second
+        SetServoWristPWM(170);//level pisition
+        Wait_Time(1000);//wait 1 second
+        //===========	rotate the Crane
+        SetServoRotorPWM(130);
+        Wait_Time(1000);//wait 1 second
+        //===========	move the arm down
+        bumperBot = false;
+        while(!bumperBot)
+        {
+            SetServoWinchPWM(10); //assume 0 as moving down, otherwise change to 100
+        }
+        
+        SetServoWinchPWM(0);//stop winch
+        //===========	open gripper
+        Wait_Time(1000);//wait 1 second
+        SetServoGripperPWM(500);//assume 0 is close, otherwise change to 80
     }
 }
 //    struct JsonResponse js;
