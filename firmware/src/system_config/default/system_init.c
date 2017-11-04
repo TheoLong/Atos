@@ -152,10 +152,6 @@ void SYS_Initialize ( void* data )
     SYS_PORTS_Initialize();
 
     /* Initialize Drivers */
-
-    /* Initialize ADC */
-    DRV_ADC_Initialize();
-
     /* Initialize the OC Driver */
     DRV_OC0_Initialize();
     DRV_OC1_Initialize();
@@ -163,12 +159,6 @@ void SYS_Initialize ( void* data )
     DRV_OC3_Initialize();
     /*Initialize TMR0 */
     DRV_TMR0_Initialize();
-    /*Initialize TMR1 */
-    DRV_TMR1_Initialize();
-    /*Initialize TMR2 */
-    DRV_TMR2_Initialize();
-    /*Initialize TMR3 */
-    DRV_TMR3_Initialize();
  
      sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)NULL);
     SYS_INT_VectorPrioritySet(INT_VECTOR_UART1, INT_PRIORITY_LEVEL1);
@@ -185,6 +175,11 @@ void SYS_Initialize ( void* data )
     SYS_INT_ExternalInterruptTriggerSet(INT_EXTERNAL_INT_SOURCE3,INT_EDGE_TRIGGER_RISING);
     SYS_INT_SourceEnable(INT_SOURCE_EXTERNAL_3);
 
+    /*Setup the INT_SOURCE_EXTERNAL_4 and Enable it*/
+    SYS_INT_VectorPrioritySet(INT_VECTOR_INT4, INT_PRIORITY_LEVEL1);
+    SYS_INT_VectorSubprioritySet(INT_VECTOR_INT4, INT_SUBPRIORITY_LEVEL0);
+    SYS_INT_ExternalInterruptTriggerSet(INT_EXTERNAL_INT_SOURCE4,INT_EDGE_TRIGGER_RISING);
+    SYS_INT_SourceEnable(INT_SOURCE_EXTERNAL_4);
 
 
 

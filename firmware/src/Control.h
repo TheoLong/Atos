@@ -13,8 +13,6 @@
 
 void CONTROL_Initialize ( void );
 void CONTROL_Tasks( void );
-void ReadIR(void);
-void requeststatus(TimerHandle_t xTimer);
 #endif /* _CONTROL_H */
 
 

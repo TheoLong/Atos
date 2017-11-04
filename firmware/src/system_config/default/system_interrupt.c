@@ -60,15 +60,14 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "system/common/sys_common.h"
+#include "wifireceive.h"
+#include "wifitransmit.h"
 #include "motor_encoder_thread.h"
-#include "WiFiReceive.h"
-#include "WiFiTransmit.h"
-#include "Control.h"
+#include "control.h"
 #include "system_definitions.h"
 #include "public.h"
-
-//bool bumper;
-
+bool bumperA =false;
+bool bumperB =false;
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
@@ -101,31 +100,19 @@ void IntHandlerDrvUsartInstance0(void)
 
  
  
-
-
-
 void IntHandlerExternalInterruptInstance0(void)
 {
-//    bumper = true;
-    struct JsonResponse js = {61, 1, 1, 1, 1};
-    SendToControlQueue(js);
+    bumperA = true;
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
+}
+void IntHandlerExternalInterruptInstance1(void)
+{
+    bumperB = true;
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_4);
 }
  
 
 void IntHandlerDrvTmrInstance0(void)
-{
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
-}
-void IntHandlerDrvTmrInstance1(void)
-{
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
-}
-void IntHandlerDrvTmrInstance2(void)
-{
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_4);
-}
-void IntHandlerDrvTmrInstance3(void)
 {
     static count = 0;
     if(count < 5)
@@ -134,9 +121,8 @@ void IntHandlerDrvTmrInstance3(void)
     }
     else
     {
+        read_timing();
         count = 0;
-        Read_Encoders();
-        ReadIR();
     }
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
 }
