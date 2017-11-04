@@ -7,6 +7,7 @@
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/public.h</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/Control.h</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/function.c</file>
+            <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/system_config/default/system_tasks.c</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/system_config/default/system_interrupt.c</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/statemachine.c</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/motor_encoder_thread.c</file>
