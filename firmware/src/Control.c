@@ -48,7 +48,7 @@ void CONTROL_Tasks ( void )
                {
                 }
                //Left_Motor_PID(FORWARD,0);
-               //Right_Motor_PID(FORWARD,0);
+//               //Right_Motor_PID(FORWARD,0);
                StopIRPID(); 
                //-----------wait some time
                SetServo1PWM(760);
@@ -65,7 +65,7 @@ void CONTROL_Tasks ( void )
             }
             
         }
-
+        
         case CONTROL_STATE_SERVICE_TASKS:
         {
             if(bumper >= 1)
