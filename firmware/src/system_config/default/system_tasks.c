@@ -120,7 +120,7 @@ void SYS_Tasks ( void )
     /* Create OS Thread for CONTROL Tasks. */
     xTaskCreate((TaskFunction_t) _CONTROL_Tasks,
                 "CONTROL Tasks",
-                1024, NULL, 1, NULL);
+                1024, NULL, 3, NULL);
 
     /* Create OS Thread for IR_PID Tasks. */
     xTaskCreate((TaskFunction_t) _IR_PID_Tasks,

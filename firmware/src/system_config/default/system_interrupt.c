@@ -90,7 +90,9 @@ void IntHandlerDrvUsartInstance0(void)
 
 void IntHandlerExternalInterruptInstance0(void)
 {
-    bumper++;
+//    bumper = true;
+    struct JsonResponse js = {61, 1, 1, 1, 1};
+    SendToControlQueue(js);
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
 }
  
@@ -126,7 +128,6 @@ void IntHandlerDrvTmrInstance3(void)
     }
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
 }
- 
 /*******************************************************************************
  End of File
 */

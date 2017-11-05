@@ -322,7 +322,7 @@
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">1FF42792250F3EB928B8CD7C08FD8F87</Checksum>
-        <ProjectFileChecksum dnOrder="3">9C77FE6EE05BF9CED077F5567D28673E</ProjectFileChecksum>
+        <ProjectFileChecksum dnOrder="3">AEA2733971BAC15EA68D6408D6BD0DC1</ProjectFileChecksum>
       </Template>
       <Template dnOrder="16">
         <Name dnOrder="0">WiFiTransmit.h</Name>
@@ -396,7 +396,7 @@
       <Template dnOrder="31">
         <Name dnOrder="0">system_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">677B4371F57748E7186E4DCE56149CA8</Checksum>
+        <Checksum dnOrder="2">66E4AA6C8CA3B374B8E2B4E9C26CCED9</Checksum>
       </Template>
       <Template dnOrder="32">
         <Name dnOrder="0">sys_devcon_pic32mx.c</Name>
@@ -440,11 +440,11 @@
         <Include dnOrder="2" value="../src/system_config/default"/>
       </C32-AS>
       <C32 dnOrder="1">
-        <Include dnOrder="0" value="C:\microchip\harmony\v2_04\apps\Atos\firmware\src"/>
-        <Include dnOrder="1" value="C:\microchip\harmony\v2_04\apps\Atos\firmware\src\system_config\default"/>
-        <Include dnOrder="2" value="C:\microchip\harmony\v2_04\apps\Atos\firmware\src\default"/>
-        <Include dnOrder="3" value="C:\microchip\harmony\v2_04\framework"/>
-        <Include dnOrder="4" value="C:\microchip\harmony\v2_04\apps\Atos\firmware\src\system_config\default\framework"/>
+        <Include dnOrder="0" value="D:\Program Files (x86)\Microchip\Harmony\apps\Atos\firmware\src"/>
+        <Include dnOrder="1" value="D:\Program Files (x86)\Microchip\Harmony\apps\Atos\firmware\src\system_config\default"/>
+        <Include dnOrder="2" value="D:\Program Files (x86)\Microchip\Harmony\apps\Atos\firmware\src\default"/>
+        <Include dnOrder="3" value="D:\Program Files (x86)\Microchip\Harmony\framework"/>
+        <Include dnOrder="4" value="D:\Program Files (x86)\Microchip\Harmony\apps\Atos\firmware\src\system_config\default\framework"/>
         <Include dnOrder="5" value="../../../../third_party/rtos/FreeRTOS/Source/include"/>
         <Include dnOrder="6" value="../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
         <Include dnOrder="7" value="../src/system_config/default"/>
