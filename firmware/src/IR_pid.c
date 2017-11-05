@@ -1,6 +1,6 @@
 #include "ir_pid.h"
 
-IRPID irpid = {0,0,0,0.5,0,0,0,FORWARD,false,0,0,0};
+IRPID irpid = {0,0,0,0.1,0,0,0,FORWARD,false,0,0,0};
 IRC ir= {0,0,0,0};
 bool unset = false;
 QueueHandle_t ir_q;
@@ -57,8 +57,8 @@ void IR_PID_Tasks ( void )
                 {
                     round = 0;
                 }
-                Left_Motor_PID(FORWARD, irpid.set_speed+round);
-                Right_Motor_PID(FORWARD, irpid.set_speed-round);
+                Left_Motor_PID(FORWARD, irpid.set_speed);
+                Right_Motor_PID(FORWARD, irpid.set_speed);
             }
             else
             {
@@ -75,8 +75,8 @@ void IR_PID_Tasks ( void )
                 {
                     round = 0;
                 }
-                Left_Motor_PID(irpid.set_dir, irpid.set_speed+1+round);
-                Right_Motor_PID(irpid.set_dir, irpid.set_speed-round);
+                Left_Motor_PID(irpid.set_dir, irpid.set_speed+2);
+                Right_Motor_PID(irpid.set_dir, irpid.set_speed);
             }
             struct JsonRequest js = {PIC_ID, 's',0, 32,0, ir.distance, irpid.cap, 0, 0};
             SendOverWiFi(js);
