@@ -6,6 +6,7 @@ TimerHandle_t controltimer;
 
 void CONTROL_Initialize ( void )
 {
+    PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
     receive_q = xQueueCreate(128, sizeof(struct JsonResponse));
     controltimer = xTimerCreate("ControlTimer", 200, pdTRUE, (void*)0, requeststatus);
     DRV_ADC_Open();
@@ -20,12 +21,12 @@ void CONTROL_Initialize ( void )
 void CONTROL_Tasks ( void )
 {
     static struct StateMachineParams smp = {0, false, false, true, true, 0};
-//    vTaskDelay((TickType_t) 1000);
+    vTaskDelay((TickType_t) 1250);
     while(1)
     {
         smp.status = 1;
         struct JsonResponse js;
-        BaseType_t ret = xQueueReceive(receive_q, &js, (TickType_t) 2);
+        BaseType_t ret = xQueueReceive(receive_q, &js, (TickType_t) 0);
         if(ret == pdTRUE)
         {
             if(js.tsk == 61 && js.arg0 == 1)

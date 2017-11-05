@@ -64,6 +64,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "wifitransmit.h"
 #include "motor_encoder_thread.h"
 #include "control.h"
+#include "ir_pid.h"
 
 
 // DOM-IGNORE-BEGIN

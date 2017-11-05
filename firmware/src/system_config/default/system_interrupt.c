@@ -66,9 +66,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "Control.h"
 #include "system_definitions.h"
 #include "public.h"
+#include "IR_pid.h"
 
-//bool bumper;
-
+int bumper = 0;
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
@@ -87,47 +87,34 @@ void IntHandlerDrvUsartInstance0(void)
         ISR_UART_RECEIVE();
     }    
 }
- 
- 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
- 
-
-
 
 void IntHandlerExternalInterruptInstance0(void)
 {
-//    bumper = true;
-    struct JsonResponse js = {61, 1, 1, 1, 1};
-    SendToControlQueue(js);
+    bumper++;
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
 }
  
-
 void IntHandlerDrvTmrInstance0(void)
 {
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
 }
+
 void IntHandlerDrvTmrInstance1(void)
 {
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
 }
+
 void IntHandlerDrvTmrInstance2(void)
 {
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_4);
 }
+
 void IntHandlerDrvTmrInstance3(void)
 {
+    //50hz timer
     static count = 0;
+    ReadIR();
+    //10hz
     if(count < 5)
     {
         count++;
@@ -136,7 +123,6 @@ void IntHandlerDrvTmrInstance3(void)
     {
         count = 0;
         Read_Encoders();
-        ReadIR();
     }
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
 }

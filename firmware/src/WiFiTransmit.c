@@ -104,13 +104,13 @@ void WIFITRANSMIT_Tasks ( void )
  
  BaseType_t SendOverWiFi(struct JsonRequest js)
  {
-     BaseType_t xHigher;
-     BaseType_t ret = xQueueSendToBackFromISR(wifitransmitqueue, &js, &xHigher);
-     if(ret != pdPASS)     
-     {
-         //TODO: dbgHLT
-     }
-     return xHigher;
+//     BaseType_t xHigher;
+//     BaseType_t ret = xQueueSendToBackFromISR(wifitransmitqueue, &js, &xHigher);
+//     if(ret != pdPASS)     
+//     {
+//         //TODO: dbgHLT
+//     }
+//     return xHigher;
      
  }
  

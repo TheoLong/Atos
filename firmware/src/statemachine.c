@@ -2,13 +2,7 @@
 
 void lori_state_machine(struct StateMachineParams * arg)
 {
-	static Lori_States state = INIT, prev = INIT, pause = INIT;
-    if(arg->status == 2)
-    {
-        prev = INIT;
-        pause = state;
-        state = PAUSED;
-    }
+	static Lori_States state = INIT, prev = INIT;
 	switch (state)
 	{
         case INIT:
@@ -17,15 +11,7 @@ void lori_state_machine(struct StateMachineParams * arg)
             {
                 state = SWEEP;
             }
-//            state = SWEEP;
-            break;
-        }
-        case PAUSED:
-        {
-            if(arg->status == 3)
-            {
-                state = pause;
-            }
+            state = SWEEP;
             break;
         }
 		case STANDBY:
@@ -88,12 +74,11 @@ void _state_machine_standby(Lori_States * state, Lori_States * prev, struct Stat
 	if (*prev != STANDBY)
 	{
 		*prev = STANDBY;
-		Left_Motor_Distance(FORWARD, 35, 435 * arg->current_row);
-		Right_Motor_Distance(FORWARD, 35, 435 * arg->current_row);
+		Left_Motor_Distance(FORWARD, 35, 500 * arg->current_row);
+		Right_Motor_Distance(FORWARD, 35, 500 * arg->current_row);
 	}
 	if (Left_Is_Finish() && Right_Is_Finish())
 	{
-        
 		arg->standby = true;
 		*state = TURN_RIGHT;
         _state_machine_send_status(prev, state);
@@ -145,28 +130,43 @@ void _state_machine_sweep(Lori_States * state, Lori_States * prev, struct StateM
 	if (*prev != SWEEP)
 	{
 		*prev = SWEEP;
-		Left_Motor_Distance(FORWARD, 35, 6600);
-		Right_Motor_Distance(FORWARD, 35, 6600);
+        Left_Motor_PID(FORWARD, 35);
+        Right_Motor_PID(FORWARD, 35);
+//        SetIRPID(FORWARD, 35, GetSideIR());
 	}
-	if (Left_Is_Finish() && Right_Is_Finish())
-	{
+    if (GetFrontIR() > 700)
+    {
+        *state = FORWARDTARE;
+//        StopIRPID();
+    }
+}
+
+void _state_machine_forwardtare(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg)
+{
+    if (*prev != FORWARDTARE)
+    {
+        *prev = FORWARDTARE;
+        SetServo1PWM(760);
+        *state = BACK;
         arg->bumper = false;
-		*state = BACK;
-        _state_machine_send_status(prev, state);
-	}
+    }
 }
 
 void _state_machine_back(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg)
 {
-	*prev = BACK;
-    Left_Motor_PID(BACKWARD, 35);
-    Right_Motor_PID(BACKWARD, 35);
+    if(*prev != BACK)
+    {
+        *prev = BACK;
+        Left_Motor_PID(BACKWARD, 35);
+        Right_Motor_PID(BACKWARD, 35);
+//        SetIRPID(BACKWARD, 35, GetSideIR());
+    }
 	if (arg->bumper)
 	{
         vTaskDelay(100);
 		Left_Motor_Distance(FORWARD, 35, 425);
 		Right_Motor_Distance(FORWARD, 35, 425);
-		vTaskDelay((TickType_t) 335);
+		vTaskDelay((TickType_t) 500);
 		arg->bumper = false;
 		arg->dump = true;
 		*state = TURN_LEFT;
@@ -191,6 +191,7 @@ void _state_machine_turnleft(Lori_States * state, Lori_States * prev, struct Sta
 		}
 		else
 		{
+//            SetIRPID(BACKWARD, 35, 0);
             Left_Motor_PID(BACKWARD, 35);
             Right_Motor_PID(BACKWARD, 35);
             vTaskDelay(400);
@@ -205,9 +206,13 @@ void _state_machine_turnleft(Lori_States * state, Lori_States * prev, struct Sta
 
 void _state_machine_predump(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg)
 {
-	*prev = PREDUMP;
-    Left_Motor_PID(BACKWARD, 35);
-    Right_Motor_PID(BACKWARD, 35);
+    if (*prev != PREDUMP)
+    {
+        *prev = PREDUMP;
+//        SetIRPID(BACKWARD, 35, 0);
+        Left_Motor_PID(BACKWARD, 35);
+        Right_Motor_PID(BACKWARD, 35);
+    }
 	if (arg->bumper)
 	{
 		vTaskDelay(100);
@@ -222,14 +227,16 @@ void _state_machine_predump(Lori_States * state, Lori_States * prev, struct Stat
 
 void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg)
 {
-	
-    Left_Motor_PID(BACKWARD, 35);
-    Right_Motor_PID(BACKWARD, 35);
-
-	if (arg->bumper && *prev != DUMP)
-	{
-        vTaskDelay(100);
+	if(*prev != DUMP)
+    {
         *prev = DUMP;
+        arg->bumper =false;
+        Left_Motor_PID(BACKWARD, 35);
+        Right_Motor_PID(BACKWARD, 35);
+    }
+	if (arg->bumper)
+	{
+        vTaskDelay(100);        
         Left_Motor_PID(FORWARD, 0);
 		Right_Motor_PID(FORWARD, 0);
 	}	
@@ -245,7 +252,6 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
         Left_Motor_Distance(FORWARD, 35, 200);
         Right_Motor_Distance(FORWARD, 35, 200);
         vTaskDelay((TickType_t) 225);
-//			arg->cipangoready = false;
         arg->bumper = false;
         arg->current_row++;
         arg->dump = false;
@@ -253,7 +259,6 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
         *state = (arg->current_row >= 6) ? END : TURN_LEFT;
         _state_machine_send_status(prev, state);
     }
-    
 }
 
 

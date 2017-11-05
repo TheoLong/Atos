@@ -19,7 +19,7 @@ typedef enum
 	TARE,
 	PREDUMP,
 	DUMP,
-    PAUSED,
+    FORWARDTARE,
     END,
 	MAXSTATE
 }Lori_States;
@@ -43,7 +43,7 @@ void _state_machine_back(Lori_States * state, Lori_States * prev, struct StateMa
 void _state_machine_turnleft(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg);
 void _state_machine_predump(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg);
 void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg);
-
+void _state_machine_forwardtare(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg);
 void _state_machine_send_status(Lori_States * curr, Lori_States * next);
 
 #endif /* _EXAMPLE_FILE_NAME_H */
