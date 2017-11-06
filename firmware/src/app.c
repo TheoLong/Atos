@@ -13,7 +13,7 @@ void APP_Initialize ( void )
     DRV_OC0_Start();
     DRV_TMR0_Start();
     ServoTimer1 = xTimerCreate("ServoTimer1", 10, pdTRUE, (void*)0, ServoControlCallback1);
-    ServoTimer2 = xTimerCreate("ServoTimer2", 100, pdTRUE, (void*)1, ServoControlCallback2);
+    ServoTimer2 = xTimerCreate("ServoTimer2", 90, pdTRUE, (void*)1, ServoControlCallback2);
     ServoTimer3 = xTimerCreate("ServoTimer3", 500, pdTRUE, (void*)2, ServoControlCallback3);
     ServoQueue = xQueueCreate(128, sizeof(struct JsonResponse));
     if(ServoTimer1 == NULL || ServoQueue == NULL)
@@ -23,7 +23,7 @@ void APP_Initialize ( void )
             
         }
     }    
-    DRV_OC0_PulseWidthSet(400);
+//    DRV_OC0_PulseWidthSet(375);
 }
 
 
@@ -50,7 +50,6 @@ void APP_Tasks ( void )
                 DRV_OC0_PulseWidthSet(800);
                 vTaskDelay((TickType_t)140);
                 xTimerStop(ServoTimer1, 5);
-//                xTimerStop(ServoTimer3, 5);
                 xTimerStart(ServoTimer2, 5);            
             }
         }
@@ -72,11 +71,11 @@ void SendToServoQueue(struct JsonResponse js)
 
 void ServoControlCallback1(TimerHandle_t xTimer)
 {
-    static int pos = 375;
+    static int pos = 325;
     static bool inc = true;
     if(inc && (pos >= 550))
         inc = false;
-    else if(!inc && (pos <=375))
+    else if(!inc && (pos <=325))
         inc = true;
     DRV_OC0_PulseWidthSet(pos);
     pos = (inc) ? (pos + 5) : (pos - 5);  
@@ -84,7 +83,7 @@ void ServoControlCallback1(TimerHandle_t xTimer)
 
 void ServoControlCallback2(TimerHandle_t xTimer)
 {
-    static int pos = 350;
+    static int pos = 325;
     static int counter = 0;
     if(load)
     {
@@ -92,8 +91,8 @@ void ServoControlCallback2(TimerHandle_t xTimer)
         counter = 0;
     }
     DRV_OC0_PulseWidthSet(pos);
-    pos = (pos == 375) ? 550 : 375;
-    if(counter >= 75)
+    pos = (pos == 325) ? 550 : 325;
+    if(counter >= 176)
     {
         struct JsonRequest jsr = {3, 's', 0, 80, 0, 0, 0, 0, 0};
         SendOverWiFi(jsr);
