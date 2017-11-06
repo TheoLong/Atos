@@ -13,10 +13,8 @@ void APP_Initialize ( void )
     DRV_OC0_Start();
     DRV_TMR0_Start();
     ServoTimer1 = xTimerCreate("ServoTimer1", 10, pdTRUE, (void*)0, ServoControlCallback1);
-    ServoTimer2 = xTimerCreate("ServoTimer2", 200, pdTRUE, (void*)1, ServoControlCallback2);
+    ServoTimer2 = xTimerCreate("ServoTimer2", 100, pdTRUE, (void*)1, ServoControlCallback2);
     ServoTimer3 = xTimerCreate("ServoTimer3", 500, pdTRUE, (void*)2, ServoControlCallback3);
-    xTimerStart(ServoTimer1, (TickType_t)3);
-    xTimerStart(ServoTimer3, (TickType_t)3);
     ServoQueue = xQueueCreate(128, sizeof(struct JsonResponse));
     if(ServoTimer1 == NULL || ServoQueue == NULL)
     {
@@ -25,24 +23,20 @@ void APP_Initialize ( void )
             
         }
     }    
-//    mytimer0 = xTimerCreate("Timer0", 125, pdTRUE, (void*)0, Callback);
-//    xTimerStart(mytimer0, (TickType_t)3);
+    DRV_OC0_PulseWidthSet(400);
 }
 
 
 void APP_Tasks ( void )
 {
-    BaseType_t ret = xTimerStart(ServoTimer1, 5);
+//      BaseType_t ret = xTimerStart(ServoTimer2, 5);
+    BaseType_t ret = xTimerStart(ServoTimer1, 5); 
     BaseType_t ret2 = xTimerStart(ServoTimer3, 5);
     if(ret != pdPASS || ret2 != pdPASS)
     {
         ret = pdPASS;
     }
     struct JsonResponse jsr;
-    if(ret != pdPASS)
-    {
-        //
-    }
     while(true)
     {
         BaseType_t ret = xQueueReceive(ServoQueue, &jsr, portMAX_DELAY);
@@ -78,19 +72,19 @@ void SendToServoQueue(struct JsonResponse js)
 
 void ServoControlCallback1(TimerHandle_t xTimer)
 {
-    static int pos = 50;
+    static int pos = 375;
     static bool inc = true;
-    if(inc && (pos >= 850))
+    if(inc && (pos >= 550))
         inc = false;
-    else if(!inc && (pos <=50))
+    else if(!inc && (pos <=375))
         inc = true;
     DRV_OC0_PulseWidthSet(pos);
-    pos = (inc) ? (pos + 6) : (pos - 6);  
+    pos = (inc) ? (pos + 5) : (pos - 5);  
 }
 
 void ServoControlCallback2(TimerHandle_t xTimer)
 {
-    static int pos = 50;
+    static int pos = 350;
     static int counter = 0;
     if(load)
     {
@@ -98,7 +92,7 @@ void ServoControlCallback2(TimerHandle_t xTimer)
         counter = 0;
     }
     DRV_OC0_PulseWidthSet(pos);
-    pos = (pos == 50) ? 850 : 50;
+    pos = (pos == 375) ? 550 : 375;
     if(counter >= 75)
     {
         struct JsonRequest jsr = {3, 's', 0, 80, 0, 0, 0, 0, 0};
