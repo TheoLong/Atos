@@ -31,6 +31,8 @@ void CONTROL_Tasks ( void )
                 smp.bumper = true;
             else if(js.tsk == 60)
                 smp.status = js.arg0;
+            else if(js.tsk == 79)
+                smp.cipangoready = (js.arg0 == 0) ? true : false;
         }
         lori_state_machine(&smp);
     }

@@ -204,8 +204,8 @@ struct MessageStat GetMessageStat()
 
 void Dispatch(volatile struct JsonResponse js)
 {
-//    if(js.tsk == 31)
-//    {
-//        SendToIRQueue(js);
-//    }
+    if(js.tsk >= 60 && js.tsk <= 80)
+    {
+        SendToControlQueue(js);
+    }
 }
