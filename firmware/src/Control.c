@@ -50,6 +50,8 @@ void CONTROL_Tasks ( void )
                //Left_Motor_PID(FORWARD,0);
 //               //Right_Motor_PID(FORWARD,0);
                StopIRPID(); 
+               Left_Motor_PID(FORWARD,0);
+                Right_Motor_PID(FORWARD,0);
                //-----------wait some time
                SetServo1PWM(760);
                Timing_Wait(1000);
@@ -58,7 +60,7 @@ void CONTROL_Tasks ( void )
                }
                PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
                Move(35, 1000, FORWARD);        
-               SetIRPID(BACKWARD, 25, GetSideIR());
+               SetIRPID(BACKWARD, 30, GetSideIR());
                bumper =0;
                controlData.state = CONTROL_STATE_SERVICE_TASKS;
                break;
@@ -71,6 +73,8 @@ void CONTROL_Tasks ( void )
             if(bumper >= 1)
             {
                StopIRPID(); 
+               Left_Motor_PID(FORWARD,0);
+                Right_Motor_PID(FORWARD,0);
                SetServo1PWM(50);
                Timing_Wait(1000);
                while(!GetTimingFlag())
