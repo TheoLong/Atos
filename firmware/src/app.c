@@ -23,19 +23,19 @@ void APP_Initialize ( void )
             
         }
     }    
-//    DRV_OC0_PulseWidthSet(375);
+//    DRV_OC0_PulseWidthSet(325);
 }
 
 
 void APP_Tasks ( void )
 {
-//      BaseType_t ret = xTimerStart(ServoTimer2, 5);
-    BaseType_t ret = xTimerStart(ServoTimer1, 5); 
-    BaseType_t ret2 = xTimerStart(ServoTimer3, 5);
-    if(ret != pdPASS || ret2 != pdPASS)
-    {
-        ret = pdPASS;
-    }
+      BaseType_t ret = xTimerStart(ServoTimer2, 5);
+//    BaseType_t ret = xTimerStart(ServoTimer1, 5); 
+//    BaseType_t ret2 = xTimerStart(ServoTimer3, 5);
+//    if(ret != pdPASS || ret2 != pdPASS)
+//    {
+//        ret = pdPASS;
+//    }
     struct JsonResponse jsr;
     while(true)
     {
