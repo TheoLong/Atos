@@ -41,7 +41,7 @@ void CONTROL_Tasks ( void )
             if(bumper >= 1)
             {
                PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
-               //Left_Motor_PID(FORWARD,35);
+               //Left_Motor_PID(FORWARD,35); 
                //Right_Motor_PID(FORWARD,35);
                SetIRPID(FORWARD, 35, GetSideIR());
                while(GetFrontIR() < 700)

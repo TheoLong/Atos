@@ -57,8 +57,10 @@ void IR_PID_Tasks ( void )
                 {
                     round = 0;
                 }
-                Left_Motor_PID(FORWARD, irpid.set_speed);
-                Right_Motor_PID(FORWARD, irpid.set_speed);
+                Left_Motor_PID(FORWARD, irpid.set_speed+round);
+                Right_Motor_PID(FORWARD, irpid.set_speed-round);
+//                Left_Motor_PID(FORWARD, irpid.set_speed);
+//                Right_Motor_PID(FORWARD, irpid.set_speed);
             }
             else
             {
@@ -75,8 +77,10 @@ void IR_PID_Tasks ( void )
                 {
                     round = 0;
                 }
-                Left_Motor_PID(irpid.set_dir, irpid.set_speed+2);
-                Right_Motor_PID(irpid.set_dir, irpid.set_speed);
+                Left_Motor_PID(irpid.set_dir, irpid.set_speed+1+round);
+                Right_Motor_PID(irpid.set_dir, irpid.set_speed-round);
+//                Left_Motor_PID(irpid.set_dir, irpid.set_speed+2);
+//                Right_Motor_PID(irpid.set_dir, irpid.set_speed);
             }
             struct JsonRequest js = {PIC_ID, 's',0, 32,0, ir.distance, irpid.cap, 0, 0};
             SendOverWiFi(js);
