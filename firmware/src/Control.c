@@ -21,7 +21,7 @@ void CONTROL_Tasks ( void )
     static struct StateMachineParams smp = {0, false, false, true, true, 0};
     vTaskDelay((TickType_t) 1250);
     while(1)
-    {
+    {        
         smp.status = 1;
         struct JsonResponse js;
         BaseType_t ret = xQueueReceive(receive_q, &js, (TickType_t) 2);

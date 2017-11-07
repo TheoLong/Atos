@@ -61,8 +61,8 @@ void MOTOR_ENCODER_THREAD_Tasks ( void )
         int left = data.Encoder_Left_Speed;
         int right = data.Encoder_Right_Speed;
         //---------------------------plot current speed
-        //struct JsonRequest js = {PIC_ID, 's',0, 31,0, left, right, 0, 0};
-        //SendOverWiFi(js);
+        struct JsonRequest js = {PIC_ID, 's',0, 31,0, left, right, 0, 0};
+        SendOverWiFi(js);
         //---------------------------using distance control or not
         if(flag.distance_mode)
         {
