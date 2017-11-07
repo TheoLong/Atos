@@ -1,8 +1,8 @@
 #include "ir_pid.h"
 
-IRPID irpid = {0,0,0,0.1,0,0,0,FORWARD,false,0,0,0};
+IRPID irpid = {0,0,0,0.3,0,0,0,FORWARD,false,0,0,0};
 IRC ir= {0,0,0,0};
-bool unset = false;
+bool unset = true;
 QueueHandle_t ir_q;
 void IR_PID_Initialize ( void )
 {
@@ -55,7 +55,7 @@ void IR_PID_Tasks ( void )
                 }
                 else
                 {
-                    round = 0;
+                    round = irpid.output+0.5;
                 }
                 Left_Motor_PID(FORWARD, irpid.set_speed+round);
                 Right_Motor_PID(FORWARD, irpid.set_speed-round);
@@ -75,9 +75,9 @@ void IR_PID_Tasks ( void )
                 }
                 else
                 {
-                    round = 0;
+                    round = irpid.output+1;
                 }
-                Left_Motor_PID(irpid.set_dir, irpid.set_speed+1+round);
+                Left_Motor_PID(irpid.set_dir, irpid.set_speed+round);
                 Right_Motor_PID(irpid.set_dir, irpid.set_speed-round);
 //                Left_Motor_PID(irpid.set_dir, irpid.set_speed+2);
 //                Right_Motor_PID(irpid.set_dir, irpid.set_speed);
@@ -134,6 +134,7 @@ void SetIRPID(bool dir, int speed, int distance)
     irpid.integral=0;
     irpid.derivative=0;
     irpid.previous_error=0;
+    unset = true;
 }
 
 void StopIRPID(void)
