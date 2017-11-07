@@ -6,8 +6,8 @@
 CND_BASEDIR=`pwd`
 # default configuration
 CND_ARTIFACT_DIR_default=dist/default/production
-CND_ARTIFACT_NAME_default=Crane2.X.production.hex
-CND_ARTIFACT_PATH_default=dist/default/production/Crane2.X.production.hex
+CND_ARTIFACT_NAME_default=Lori.X.production.hex
+CND_ARTIFACT_PATH_default=dist/default/production/Lori.X.production.hex
 CND_PACKAGE_DIR_default=${CND_DISTDIR}/default/package
-CND_PACKAGE_NAME_default=crane2.x.tar
-CND_PACKAGE_PATH_default=${CND_DISTDIR}/default/package/crane2.x.tar
+CND_PACKAGE_NAME_default=lori.x.tar
+CND_PACKAGE_PATH_default=${CND_DISTDIR}/default/package/lori.x.tar
