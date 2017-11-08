@@ -69,9 +69,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "public.h"
 
 int bumper = 0;
-int a=0;
-int b=0;
-int c=0;
+volatile int ir_an0, ir_an1, ir_an2;
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
@@ -94,10 +92,9 @@ void IntHandlerDrvUsartInstance0(void)
 void IntHandlerDrvAdc(void)
 {
     /* Clear ADC Interrupt Flag */
-    a= (DRV_ADC_SamplesRead(0)+DRV_ADC_SamplesRead(3)+DRV_ADC_SamplesRead(6)+DRV_ADC_SamplesRead(9))/4;
-    b =(DRV_ADC_SamplesRead(1)+DRV_ADC_SamplesRead(4)+DRV_ADC_SamplesRead(7)+DRV_ADC_SamplesRead(11))/4;
-    c = (DRV_ADC_SamplesRead(2)+DRV_ADC_SamplesRead(5)+DRV_ADC_SamplesRead(8)+DRV_ADC_SamplesRead(12))/4;
-    PLIB_ADC_SampleAutoStartEnable(ADC_ID_1);
+    ir_an0 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 0);
+    ir_an1 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 1);
+    ir_an2 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 2);
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
 }
 
