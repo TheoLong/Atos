@@ -19,15 +19,17 @@ extern "C" {
 
 struct IR_Struct 
 {
+    int Side_IRF;
+    int Side_IRB;
     int Front_IR;
-    int Side_IR;
 };
+
 typedef struct IRC
 {
     int FrontIR;
-    int SideIR;
+    int SideIRF;
+    int SideIRB;
     int ircount;
-    int distance;
 } IRC;
 typedef struct IRPID 
 {
@@ -40,8 +42,6 @@ typedef struct IRPID
     int output;
     bool set_dir;
     bool enable;
-    int cap;
-    int set_distance;
     int set_speed;
 } IRPID;
 typedef struct IR_Struct IR;

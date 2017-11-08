@@ -40,28 +40,28 @@ void CONTROL_Tasks ( void )
         {
             if(bumper >= 1)
             {
-               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
+               //PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
                //Left_Motor_PID(FORWARD,35); 
                //Right_Motor_PID(FORWARD,35);
-               SetIRPID(FORWARD, 35, GetSideIR());
-               while(GetFrontIR() < 700)
-               {
-                }
-               //Left_Motor_PID(FORWARD,0);
-//               //Right_Motor_PID(FORWARD,0);
-               StopIRPID(); 
-               Left_Motor_PID(FORWARD,0);
-                Right_Motor_PID(FORWARD,0);
-               //-----------wait some time
-               SetServo1PWM(760);
-               Timing_Wait(1000);
-               while(!GetTimingFlag())
-               {
-               }
-               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
-               Move(35, 1000, FORWARD);        
-               SetIRPID(BACKWARD, 30, GetSideIR());
-               bumper =0;
+               //SetIRPID(FORWARD, 35);
+//               while(GetFrontIR() < 700)
+//               {
+//                }
+//               //Left_Motor_PID(FORWARD,0);
+////               //Right_Motor_PID(FORWARD,0);
+//               StopIRPID(); 
+//               Left_Motor_PID(FORWARD,0);
+//                Right_Motor_PID(FORWARD,0);
+//               //-----------wait some time
+//               SetServo1PWM(760);
+//               Timing_Wait(1000);
+//               while(!GetTimingFlag())
+//               {
+//               }
+//               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
+//               Move(35, 1000, FORWARD);        
+//               SetIRPID(BACKWARD, 30, GetSideIR());
+//               bumper =0;
                controlData.state = CONTROL_STATE_SERVICE_TASKS;
                break;
             }
@@ -70,25 +70,25 @@ void CONTROL_Tasks ( void )
         
         case CONTROL_STATE_SERVICE_TASKS:
         {
-            if(bumper >= 1)
-            {
-               StopIRPID(); 
-               Left_Motor_PID(FORWARD,0);
-                Right_Motor_PID(FORWARD,0);
-               SetServo1PWM(50);
-               Timing_Wait(1000);
-               while(!GetTimingFlag())
-               {
-               }
-               SetServo2PWM(770);
-               Wait_Time(1500);
-               while(!GetTimingFlag())
-               {
-               }
-               SetServo2PWM(0);
-               controlData.state = CONTROL_STATE_END;
-               break;
-            }
+//            if(bumper >= 1)
+//            {
+//               StopIRPID(); 
+//               Left_Motor_PID(FORWARD,0);
+//                Right_Motor_PID(FORWARD,0);
+//               SetServo1PWM(50);
+//               Timing_Wait(1000);
+//               while(!GetTimingFlag())
+//               {
+//               }
+//               SetServo2PWM(770);
+//               Wait_Time(1500);
+//               while(!GetTimingFlag())
+//               {
+//               }
+//               SetServo2PWM(0);
+//               controlData.state = CONTROL_STATE_END;
+//               break;
+//            }
         }
         default:
         {

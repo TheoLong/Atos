@@ -1,7 +1,7 @@
 build/default/debug/_ext/1688732426/system_interrupt.o:  \
  ../src/system_config/default/system_interrupt.c  \
  ../../../../framework/system/common/sys_common.h  \
- ../src/motor_encoder_thread.h  \
+../src/wifireceive.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/system_definitions.h  \
  ../../../../framework/system/common/sys_module.h  \
@@ -290,17 +290,13 @@ build/default/debug/_ext/1688732426/system_interrupt.o:  \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../framework/peripheral/ports/plib_ports_compatibility.h  \
- ../src/wifireceive.h  \
+ ../src/wifitransmit.h  \
 ../src/public.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/jsmn.h  \
-../src/wifitransmit.h  \
+ ../src/motor_encoder_thread.h  \
 ../src/control.h  \
 ../src/ir_pid.h  \
- ../src/WiFiReceive.h  \
-../src/WiFiTransmit.h  \
-../src/Control.h  \
- ../src/system_config/default/system_definitions.h  \
-../src/public.h  \
- ../src/IR_pid.h 
+ ../src/jsmn.h  \
+../src/system_config/default/system_definitions.h  \
+ ../src/public.h 

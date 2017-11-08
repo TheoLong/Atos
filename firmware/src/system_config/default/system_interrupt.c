@@ -60,15 +60,18 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "system/common/sys_common.h"
+#include "wifireceive.h"
+#include "wifitransmit.h"
 #include "motor_encoder_thread.h"
-#include "WiFiReceive.h"
-#include "WiFiTransmit.h"
-#include "Control.h"
+#include "control.h"
+#include "ir_pid.h"
 #include "system_definitions.h"
 #include "public.h"
-#include "IR_pid.h"
 
 int bumper = 0;
+int a=0;
+int b=0;
+int c=0;
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
@@ -76,7 +79,7 @@ int bumper = 0;
 // *****************************************************************************
 void IntHandlerDrvUsartInstance0(void)
 {
-    if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT))
+   if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT))
     {
         PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT);
         ISR_UART_TRANSMIT();
@@ -87,6 +90,16 @@ void IntHandlerDrvUsartInstance0(void)
         ISR_UART_RECEIVE();
     }    
 }
+ 
+void IntHandlerDrvAdc(void)
+{
+    /* Clear ADC Interrupt Flag */
+    a= (DRV_ADC_SamplesRead(0)+DRV_ADC_SamplesRead(3)+DRV_ADC_SamplesRead(6)+DRV_ADC_SamplesRead(9))/4;
+    b =(DRV_ADC_SamplesRead(1)+DRV_ADC_SamplesRead(4)+DRV_ADC_SamplesRead(7)+DRV_ADC_SamplesRead(11))/4;
+    c = (DRV_ADC_SamplesRead(2)+DRV_ADC_SamplesRead(5)+DRV_ADC_SamplesRead(8)+DRV_ADC_SamplesRead(12))/4;
+    PLIB_ADC_SampleAutoStartEnable(ADC_ID_1);
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
+}
 
 void IntHandlerExternalInterruptInstance0(void)
 {
@@ -94,6 +107,7 @@ void IntHandlerExternalInterruptInstance0(void)
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
 }
  
+
 void IntHandlerDrvTmrInstance0(void)
 {
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
@@ -113,7 +127,7 @@ void IntHandlerDrvTmrInstance3(void)
 {
     //50hz timer
     static count = 0;
-    ReadIR();
+    //ReadIR();
     //10hz
     if(count < 5)
     {

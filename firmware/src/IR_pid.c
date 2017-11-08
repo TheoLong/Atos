@@ -1,13 +1,16 @@
 #include "ir_pid.h"
-
-IRPID irpid = {0,0,0,0.5,0,0,0,FORWARD,false,0,0,0};
+int FrontIR =0;
+int SideIRF =0;
+int SideIRB =0;
+IRPID irpid = {0,0,0,0.8,0.05,0.01,0,FORWARD,false,0};
 IRC ir= {0,0,0,0};
-bool unset = true;
 QueueHandle_t ir_q;
 void IR_PID_Initialize ( void )
 {
     DRV_ADC_Open();
     DRV_ADC_Start();
+    PLIB_ADC_SampleAutoStartEnable(ADC_ID_1);
+    PLIB_ADC_MuxAInputScanEnable(ADC_ID_1);
     ir_q = xQueueCreate(128, sizeof(IR));
     if(!ir_q)
     {
@@ -18,6 +21,7 @@ void IR_PID_Initialize ( void )
 void IR_PID_Tasks ( void )
 {
     IR ir_distance = {0, 0};
+    
     BaseType_t ret = xQueueReceive(ir_q, &ir_distance, (TickType_t) 5);
     if(ret == pdFALSE)
     {
@@ -25,63 +29,23 @@ void IR_PID_Tasks ( void )
     }
     else
     {
-        //side IR distance
-        ir.distance = ir_distance.Side_IR;
-        
-        //--------------------pid control started---------------------
         if(irpid.enable)
-        {   
-            int error = irpid.set_distance -ir.distance;
+        {
+            //perform PID here
+            int error = ir_distance.Side_IRF - ir_distance.Side_IRB;
             //  error = setpoint - measured_value
-            irpid.integral = irpid.integral + error*10;
+            irpid.integral = irpid.integral + error*5;
             //  integral = integral + error*dt
-            irpid.derivative = (error - irpid.previous_error)/10.0;
+            irpid.derivative = (error - irpid.previous_error)/5.0;
             //  derivative = (error - previous_error)/dt
             irpid.output = irpid.Kp*error+ irpid.Ki* irpid.integral+ irpid.Kd*irpid.derivative;
             //  output = Kp*error + Ki*integral + Kd*derivative
             irpid.previous_error = error;
             //  previous_error = error  
-           
-            if(irpid.set_dir == FORWARD)
-            {
-                int round =0;
-                if(irpid.output>=2)
-                {
-                    round = 2;
-                }
-                else if(irpid.output <= -2)
-                {
-                    round = -2;
-                }
-                else
-                {
-                    //round = irpid.output+0.5;
-                    round =0;
-                }
-                Left_Motor_PID(FORWARD, irpid.set_speed+round);
-                Right_Motor_PID(FORWARD, irpid.set_speed-round);
-            }
-            else
-            {
-                int round = 0;
-                if(irpid.output>=2)
-                {
-                    round = 2;
-                }
-                else if(irpid.output <= -2)
-                {
-                    round = -2;
-                }
-                else
-                {
-                    //round = irpid.output+0.5;
-                    round =0;
-                }
-                Left_Motor_PID(irpid.set_dir, irpid.set_speed+round);
-                Right_Motor_PID(irpid.set_dir, irpid.set_speed-round);
-            }
-            struct JsonRequest js = {PIC_ID, 's',0, 32,0, ir.distance, irpid.cap, 0, 0};
-            SendOverWiFi(js);
+            Left_Motor_PID(irpid.set_dir,irpid.set_speed-irpid.output); 
+            Right_Motor_PID(irpid.set_dir,irpid.set_speed+irpid.output);
+            //struct JsonRequest js = {PIC_ID, 's',0, 32,0,ir_distance.Side_IRF,ir_distance.Side_IRB, irpid.output, 0};
+            //SendOverWiFi(js);
         }
     }
 }
@@ -91,12 +55,16 @@ void IR_PID_Tasks ( void )
     
     if (DRV_ADC_SamplesAvailable())
     {
-        ir.FrontIR =  DRV_ADC_SamplesRead(0);
-        ir.SideIR = DRV_ADC_SamplesRead(1);      
+        SideIRF = DRV_ADC_SamplesRead(0);
+        SideIRB = DRV_ADC_SamplesRead(1);
+        //FrontIR = DRV_ADC_SamplesRead(2);
+        ir.SideIRF = SideIRF;
+        ir.SideIRB = SideIRB;
+        ir.FrontIR = FrontIR;
     }
     if(ir.ircount == 25)
     {
-        IR data = {ir.FrontIR, ir.SideIR};
+        IR data = {ir.SideIRF, ir.SideIRB, ir.FrontIR};
         SendToIRQueue(data);
         ir.ircount =0;
     }
@@ -114,16 +82,14 @@ void SendToIRQueue(IR data)
     portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
 }
 
-void SetIRPID(bool dir, int speed, int distance)
+void SetIRPID(bool dir, int speed)
 {
-    irpid.set_distance = distance;
     irpid.enable = true;
     irpid.set_speed = speed;
     irpid.set_dir = dir;
     irpid.integral=0;
     irpid.derivative=0;
     irpid.previous_error=0;
-    unset = true;
 }
 
 void StopIRPID(void)
@@ -134,7 +100,12 @@ int GetFrontIR()
 {
     return ir.FrontIR;
 }
-int GetSideIR()
+int GetSideIRF()
 {
-    return ir.SideIR;
+    return ir.SideIRF;
+}
+
+int GetSideIRB()
+{
+    return ir.SideIRB;
 }

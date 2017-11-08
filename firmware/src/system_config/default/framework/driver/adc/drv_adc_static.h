@@ -53,6 +53,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdbool.h>
 #include "system_config.h"
 #include "peripheral/adc/plib_adc.h"
+#include "peripheral/int/plib_int.h"
 
 typedef enum {
 
@@ -113,14 +114,15 @@ typedef enum {
 
 typedef enum {
 
-    DRV_ADC_INPUT_POSITIVE_AN0 = ADC_INPUT_POSITIVE_AN0,
-    DRV_ADC_INPUT_POSITIVE_AN1 = ADC_INPUT_POSITIVE_AN1,
     DRV_ADC_POSITIVE_INPUT_NUM
 	
 } DRV_ADC_INPUTS_POSITIVE;
 
 typedef enum {
 
+    DRV_ADC_INPUT_SCAN_AN0 = ADC_INPUT_SCAN_AN0,
+    DRV_ADC_INPUT_SCAN_AN1 = ADC_INPUT_SCAN_AN1,
+    DRV_ADC_INPUT_SCAN_AN2 = ADC_INPUT_SCAN_AN2,
     DRV_ADC_SCAN_INPUT_NUM
 } DRV_ADC_INPUTS_SCAN;
 
