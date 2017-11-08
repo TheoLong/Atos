@@ -60,10 +60,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "system/common/sys_common.h"
-#include "WiFiReceive.h"
-#include "WiFiTransmit.h"
 #include "app.h"
-#include "public.h"
 #include "system_definitions.h"
 
 // *****************************************************************************
@@ -71,19 +68,17 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: System Interrupt Vector Functions
 // *****************************************************************************
 // *****************************************************************************
-void IntHandlerDrvUsartInstance0(void)
+
+void IntHandlerDrvAdc(void)
 {
-    if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT))
-    {
-        PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT);
-        ISR_UART_TRANSMIT();
-    }
-    if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_RECEIVE))
-    {
-        PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_RECEIVE);
-        ISR_UART_RECEIVE();
-    }        
+    /* Clear ADC Interrupt Flag */
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
+    ir_an0 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 0);
+    ir_an1 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 1);
+    ir_an2 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 2);
+    PLIB_ADC_SamplingStart(DRV_ADC_ID_1);
 }
+
 
 
  

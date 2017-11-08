@@ -55,8 +55,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_config.h"
 #include "system_definitions.h"
 #include "app.h"
-#include "wifireceive.h"
-#include "wifitransmit.h"
 
 
 // *****************************************************************************
@@ -68,12 +66,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
  
 static void _SYS_Tasks ( void );
-//    DRV_TMR0_Tasks();
  
  
 static void _APP_Tasks(void);
-static void _WIFIRECEIVE_Tasks(void);
-static void _WIFITRANSMIT_Tasks(void);
 
 
 // *****************************************************************************
@@ -97,22 +92,11 @@ void SYS_Tasks ( void )
                 "Sys Tasks",
                 1024, NULL, 0, NULL);
 
-    DRV_TMR0_Tasks();
  
  
     /* Create OS Thread for APP Tasks. */
     xTaskCreate((TaskFunction_t) _APP_Tasks,
                 "APP Tasks",
-                1024, NULL, 1, NULL);
-
-    /* Create OS Thread for WIFIRECEIVE Tasks. */
-    xTaskCreate((TaskFunction_t) _WIFIRECEIVE_Tasks,
-                "WIFIRECEIVE Tasks",
-                1024, NULL, 1, NULL);
-
-    /* Create OS Thread for WIFITRANSMIT Tasks. */
-    xTaskCreate((TaskFunction_t) _WIFITRANSMIT_Tasks,
-                "WIFITRANSMIT Tasks",
                 1024, NULL, 1, NULL);
 
     /**************
@@ -136,7 +120,6 @@ static void _SYS_Tasks ( void)
         /* Maintain system services */
 
         /* Maintain Device Drivers */
-    DRV_TMR0_Tasks();
  
  
 
@@ -146,7 +129,6 @@ static void _SYS_Tasks ( void)
     }
 }
 
-//    DRV_TMR0_Tasks();
  
  
 
@@ -163,40 +145,6 @@ static void _APP_Tasks(void)
     while(1)
     {
         APP_Tasks();
-    }
-}
-
-
-/*******************************************************************************
-  Function:
-    void _WIFIRECEIVE_Tasks ( void )
-
-  Summary:
-    Maintains state machine of WIFIRECEIVE.
-*/
-
-static void _WIFIRECEIVE_Tasks(void)
-{
-    while(1)
-    {
-        WIFIRECEIVE_Tasks();
-    }
-}
-
-
-/*******************************************************************************
-  Function:
-    void _WIFITRANSMIT_Tasks ( void )
-
-  Summary:
-    Maintains state machine of WIFITRANSMIT.
-*/
-
-static void _WIFITRANSMIT_Tasks(void)
-{
-    while(1)
-    {
-        WIFITRANSMIT_Tasks();
     }
 }
 
