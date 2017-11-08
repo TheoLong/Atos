@@ -69,7 +69,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "public.h"
 
 int bumper = 0;
-volatile int ir_an0, ir_an1, ir_an2;
+int ir_an0, ir_an1, ir_an2;
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
@@ -124,7 +124,7 @@ void IntHandlerDrvTmrInstance3(void)
 {
     //50hz timer
     static count = 0;
-    //ReadIR();
+    ReadIR();
     //10hz
     if(count < 5)
     {

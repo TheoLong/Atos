@@ -9,11 +9,6 @@ void IR_PID_Initialize ( void )
 {
     DRV_ADC_Open();
     DRV_ADC_Start();
-    //PLIB_ADC_SampleAutoStartEnable(ADC_ID_1);
-    //PLIB_ADC_MuxAInputScanEnable(ADC_ID_1);
-    //DRV_ADC_ChannelScanInputsAdd(DRV_ADC_INPUT_SCAN_AN0);
-    //DRV_ADC_ChannelScanInputsAdd(DRV_ADC_INPUT_SCAN_AN1);
-    //DRV_ADC_ChannelScanInputsAdd(DRV_ADC_INPUT_SCAN_AN2);
     ir_q = xQueueCreate(128, sizeof(IR));
     if(!ir_q)
     {
@@ -23,7 +18,7 @@ void IR_PID_Initialize ( void )
 
 void IR_PID_Tasks ( void )
 {
-    IR ir_distance = {0, 0};
+    IR ir_distance = {0, 0, 0};
     
     BaseType_t ret = xQueueReceive(ir_q, &ir_distance, (TickType_t) 5);
     if(ret == pdFALSE)
@@ -32,6 +27,8 @@ void IR_PID_Tasks ( void )
     }
     else
     {
+        SideIRF=ir_distance.Side_IRF;
+        SideIRB=ir_distance.Side_IRB;
         if(irpid.enable)
         {
             //perform PID here
@@ -55,19 +52,9 @@ void IR_PID_Tasks ( void )
 
  void ReadIR(void)
 {
-    
-    if (DRV_ADC_SamplesAvailable())
-    {
-        SideIRF = DRV_ADC_SamplesRead(0);
-        SideIRB = DRV_ADC_SamplesRead(1);
-        //FrontIR = DRV_ADC_SamplesRead(2);
-        ir.SideIRF = SideIRF;
-        ir.SideIRB = SideIRB;
-        ir.FrontIR = FrontIR;
-    }
     if(ir.ircount == 25)
     {
-        IR data = {ir.SideIRF, ir.SideIRB, ir.FrontIR};
+        IR data = {ir_an0, ir_an1, ir_an2};
         SendToIRQueue(data);
         ir.ircount =0;
     }
