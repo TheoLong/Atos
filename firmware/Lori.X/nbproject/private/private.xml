@@ -5,13 +5,14 @@
         <group>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/system_config/default/framework/driver/adc/drv_adc_static.h</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/IR_pid.c</file>
-            <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/function.c</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/system_config/default/system_tasks.c</file>
+            <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/function.c</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/system_config/default/system_interrupt_a.S</file>
-            <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/statemachine.c</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/system_config/default/framework/driver/adc/src/drv_adc_static.c</file>
+            <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/statemachine.c</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/IR_pid.h</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/motor_encoder_thread.c</file>
+            <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/system_config/default/system_init.c</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/motor_encoder_thread.h</file>
             <file>file:/C:/microchip/harmony/v2_04/framework/peripheral/int/templates/int_SourceFlag_Default.h</file>
             <file>file:/C:/microchip/harmony/v2_04/apps/Atos/firmware/src/public.h</file>
