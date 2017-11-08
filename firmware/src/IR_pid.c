@@ -11,6 +11,9 @@ void IR_PID_Initialize ( void )
     DRV_ADC_Start();
     PLIB_ADC_SampleAutoStartEnable(ADC_ID_1);
     PLIB_ADC_MuxAInputScanEnable(ADC_ID_1);
+    DRV_ADC_ChannelScanInputsAdd(DRV_ADC_INPUT_SCAN_AN0);
+    DRV_ADC_ChannelScanInputsAdd(DRV_ADC_INPUT_SCAN_AN1);
+    DRV_ADC_ChannelScanInputsAdd(DRV_ADC_INPUT_SCAN_AN2);
     ir_q = xQueueCreate(128, sizeof(IR));
     if(!ir_q)
     {
