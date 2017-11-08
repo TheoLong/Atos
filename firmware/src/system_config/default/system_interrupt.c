@@ -77,6 +77,7 @@ void IntHandlerDrvAdc(void)
     ir_an1 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 1);
     ir_an2 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 2);
     PLIB_ADC_SamplingStart(DRV_ADC_ID_1);
+    PLIB_ADC_ConversionStart(DRV_ADC_ID_1);
 }
 
 
