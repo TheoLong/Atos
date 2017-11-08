@@ -72,12 +72,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 void IntHandlerDrvAdc(void)
 {
     /* Clear ADC Interrupt Flag */
-    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
     ir_an0 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 0);
     ir_an1 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 1);
     ir_an2 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 2);
-    PLIB_ADC_SamplingStart(DRV_ADC_ID_1);
-    PLIB_ADC_ConversionStart(DRV_ADC_ID_1);
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
 }
 
 

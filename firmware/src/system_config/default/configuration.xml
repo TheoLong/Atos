@@ -198,7 +198,7 @@
       <Template dnOrder="0">
         <Name dnOrder="0">sys_ports_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/system/ports/src</Path>
-        <Checksum dnOrder="2">99267C10C5FDEBC9C4BF71787EA1B71E</Checksum>
+        <Checksum dnOrder="2">BC814B1E833F48A33953D65B71BC498D</Checksum>
       </Template>
       <Template dnOrder="1">
         <Name dnOrder="0">system_init.c</Name>
@@ -237,7 +237,7 @@
       <Template dnOrder="8">
         <Name dnOrder="0">drv_adc_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/adc/src</Path>
-        <Checksum dnOrder="2">2ADE645914322F4BA4D0763E30C33481</Checksum>
+        <Checksum dnOrder="2">E6A5A6106FDB14BF420976DDC9D042FF</Checksum>
       </Template>
       <Template dnOrder="9">
         <Name dnOrder="0">app.c</Name>
@@ -271,7 +271,7 @@
       <Template dnOrder="15">
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">565A62280550180038CEB40E5C9F5A7A</Checksum>
+        <Checksum dnOrder="2">BC8DD571E68A3F8D91B6F5A7FC08A118</Checksum>
       </Template>
       <Template dnOrder="16">
         <Name dnOrder="0">app.h</Name>
@@ -281,6 +281,7 @@
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">ED94D5610A495F32B9C4EB5F2A8F1341</Checksum>
+        <ProjectFileChecksum dnOrder="3">AEA2733971BAC15EA68D6408D6BD0DC1</ProjectFileChecksum>
       </Template>
       <Template dnOrder="18">
         <Name dnOrder="0">rtos_hooks.c</Name>
@@ -300,11 +301,11 @@
         <Include dnOrder="2" value="../src/system_config/default"/>
       </C32-AS>
       <C32 dnOrder="1">
-        <Include dnOrder="0" value="D:\Program Files (x86)\Microchip\Harmony\apps\ADC_Int_Test\firmware\src"/>
-        <Include dnOrder="1" value="D:\Program Files (x86)\Microchip\Harmony\apps\ADC_Int_Test\firmware\src\system_config\default"/>
-        <Include dnOrder="2" value="D:\Program Files (x86)\Microchip\Harmony\apps\ADC_Int_Test\firmware\src\default"/>
+        <Include dnOrder="0" value="D:\Program Files (x86)\Microchip\Harmony\apps\Atos\firmware\src"/>
+        <Include dnOrder="1" value="D:\Program Files (x86)\Microchip\Harmony\apps\Atos\firmware\src\system_config\default"/>
+        <Include dnOrder="2" value="D:\Program Files (x86)\Microchip\Harmony\apps\Atos\firmware\src\default"/>
         <Include dnOrder="3" value="D:\Program Files (x86)\Microchip\Harmony\framework"/>
-        <Include dnOrder="4" value="D:\Program Files (x86)\Microchip\Harmony\apps\ADC_Int_Test\firmware\src\system_config\default\framework"/>
+        <Include dnOrder="4" value="D:\Program Files (x86)\Microchip\Harmony\apps\Atos\firmware\src\system_config\default\framework"/>
         <Include dnOrder="5" value="../../../../third_party/rtos/FreeRTOS/Source/include"/>
         <Include dnOrder="6" value="../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
         <Include dnOrder="7" value="../src/system_config/default"/>
