@@ -61,7 +61,7 @@ void CONTROL_Tasks ( void )
 //               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
 //               Move(35, 1000, FORWARD);        
 //               SetIRPID(BACKWARD, 30, GetSideIR());
-//               bumper =0;
+               bumper =0;
                controlData.state = CONTROL_STATE_SERVICE_TASKS;
                break;
             }
@@ -70,11 +70,14 @@ void CONTROL_Tasks ( void )
         
         case CONTROL_STATE_SERVICE_TASKS:
         {
-//            if(bumper >= 1)
-//            {
-//               StopIRPID(); 
-//               Left_Motor_PID(FORWARD,0);
-//                Right_Motor_PID(FORWARD,0);
+            if(bumper >= 1)
+            {
+               StopIRPID(); 
+               Left_Motor_PID(FORWARD,0);
+               Right_Motor_PID(FORWARD,0);
+               Left_Turn();
+               Left_Motor_PID(FORWARD,0);
+               Right_Motor_PID(FORWARD,0);
 //               SetServo1PWM(50);
 //               Timing_Wait(1000);
 //               while(!GetTimingFlag())
@@ -86,9 +89,9 @@ void CONTROL_Tasks ( void )
 //               {
 //               }
 //               SetServo2PWM(0);
-//               controlData.state = CONTROL_STATE_END;
-//               break;
-//            }
+               controlData.state = CONTROL_STATE_END;
+               break;
+            }
         }
         default:
         {
