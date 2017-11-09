@@ -94,6 +94,9 @@ void lori_state_machine(struct StateMachineParams * arg)
 		default:
 		{
 			prev = END;
+            StopIRPID();
+            Left_Motor_PID(FORWARD, 0);
+            Right_Motor_PID(FORWARD, 0);
 			break;
 		}
 	}

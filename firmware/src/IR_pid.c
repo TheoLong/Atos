@@ -119,7 +119,7 @@ void SetIRPID(bool dir, int speed)
     irpid.integral=0;
     irpid.derivative=0;
     irpid.previous_error=0;
-    std_error = ir_an0-ir_an2;
+    std_error = sum0/11-sum2/11;
 }
 
 void StopIRPID(void)
