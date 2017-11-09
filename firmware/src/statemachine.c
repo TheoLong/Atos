@@ -215,7 +215,7 @@ void _state_machine_back(Lori_States * state, Lori_States * prev, struct StateMa
     {
         *prev = BACK;
         Left_Motor_PID(BACKWARD, 35);
-        Right_Motor_PID(BACKWARD, 34);
+        Right_Motor_PID(BACKWARD, 35);
 //        SetIRPID(BACKWARD, 35, GetSideIR());
     }
 	if (arg->bumper)
