@@ -23,7 +23,7 @@ void APP_Initialize ( void )
             
         }
     }    
-//    DRV_OC0_PulseWidthSet(325);
+//    DRV_OC0_PulseWidthSet(750);
 }
 
 
@@ -49,7 +49,7 @@ void APP_Tasks ( void )
                 load = true;
                 DRV_OC0_PulseWidthSet(800);
                 vTaskDelay((TickType_t)140);
-                xTimerStop(ServoTimer1, 5);
+                xTimerStop(ServoTimer1, 5); 
                 xTimerStart(ServoTimer2, 5);            
             }
         }
@@ -71,11 +71,11 @@ void SendToServoQueue(struct JsonResponse js)
 
 void ServoControlCallback1(TimerHandle_t xTimer)
 {
-    static int pos = 325;
+    static int pos = 525;
     static bool inc = true;
-    if(inc && (pos >= 550))
+    if(inc && (pos >= 725))
         inc = false;
-    else if(!inc && (pos <=325))
+    else if(!inc && (pos <=525))
         inc = true;
     DRV_OC0_PulseWidthSet(pos);
     pos = (inc) ? (pos + 5) : (pos - 5);  
@@ -83,7 +83,7 @@ void ServoControlCallback1(TimerHandle_t xTimer)
 
 void ServoControlCallback2(TimerHandle_t xTimer)
 {
-    static int pos = 325;
+    static int pos = 550;
     static int counter = 0;
     if(load)
     {
@@ -91,7 +91,7 @@ void ServoControlCallback2(TimerHandle_t xTimer)
         counter = 0;
     }
     DRV_OC0_PulseWidthSet(pos);
-    pos = (pos == 325) ? 550 : 325;
+    pos = (pos == 550) ? 700 : 550;
     if(counter >= 176)
     {
         struct JsonRequest jsr = {3, 's', 0, 80, 0, 0, 0, 0, 0};
