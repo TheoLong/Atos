@@ -92,9 +92,9 @@ void IntHandlerDrvUsartInstance0(void)
 void IntHandlerDrvAdc(void)
 {
     /* Clear ADC Interrupt Flag */
-    ir_an0 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 0);
-    ir_an1 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 1);
-    ir_an2 = PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 2);
+    ir_an0 = (PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 0)+PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 3)+PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 6)+PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 9))/4;
+    ir_an1 = (PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 1)+PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 4)+PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 7)+PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 10))/4;
+    ir_an2 = (PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 2)+PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 5)+PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 8)+PLIB_ADC_ResultGetByIndex(DRV_ADC_ID_1, 11))/4;
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
 }
 
