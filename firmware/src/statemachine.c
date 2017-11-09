@@ -33,7 +33,7 @@ void lori_state_machine(struct StateMachineParams * arg)
             
             if(arg->status == 1)
             {
-                SetServo1PWM(200);
+                SetServo1PWM(150);
                 state = TARE;
             }
             break;
@@ -175,6 +175,7 @@ void _state_machine_sweep(Lori_States * state, Lori_States * prev, struct StateM
 {
 	if (*prev != SWEEP)
 	{
+        vTaskDelay(125);
         PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
 		*prev = SWEEP;
         SetIRPID(FORWARD, 35);
@@ -200,9 +201,9 @@ void _state_machine_forwardtare(Lori_States * state, Lori_States * prev, struct 
         *state = BACK;
         arg->bumper = false;
         SetServo1PWM(780);
-        PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
         Left_Motor_PID(FORWARD, 0);
         Right_Motor_PID(FORWARD, 0);
+        PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
         vTaskDelay(125);
     }
 }
@@ -305,7 +306,7 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
         while(!Left_Is_Finish() || !Right_Is_Finish());
         Left_Motor_PID(FORWARD, 0);
 		Right_Motor_PID(FORWARD, 0);
-        SetServo1PWM(200);
+        SetServo1PWM(150);
         vTaskDelay((TickType_t) 200);
         SetServo2PWM(800);
         vTaskDelay((TickType_t) 300);
