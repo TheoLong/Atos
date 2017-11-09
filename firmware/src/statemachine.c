@@ -177,7 +177,7 @@ void _state_machine_sweep(Lori_States * state, Lori_States * prev, struct StateM
         Right_Motor_PID(FORWARD, 35);
 //        SetIRPID(FORWARD, 35, GetSideIR());
 	}
-    if (GetFrontIR() > 600)
+    if (GetFrontIR() > 680)
     {
         *state = FORWARDTARE;
     }
@@ -194,12 +194,8 @@ void _state_machine_forwardtare(Lori_States * state, Lori_States * prev, struct 
             SetServo1PWM(pwm);
             vTaskDelay(15);
         }
-//        SetServo1PWM(650);
-//        Left_Motor_PID(FORWARD, 35);
-//        Right_Motor_PID(FORWARD, 40);
         *state = BACK;
         arg->bumper = false;
-        vTaskDelay(300);
         SetServo1PWM(750);
         PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
         Left_Motor_PID(FORWARD, 0);
@@ -248,14 +244,11 @@ void _state_machine_turnleft(Lori_States * state, Lori_States * prev, struct Sta
 		}
 		else
 		{
-//            SetIRPID(BACKWARD, 35, 0);
             Left_Motor_PID(BACKWARD, 41);
             Right_Motor_PID(BACKWARD, 40);
             vTaskDelay(400);
-//            StopIRPID();
             Left_Motor_Distance(FORWARD, 35, 200);
             Right_Motor_Distance(FORWARD, 35, 200);
-//            vTaskDelay(400);
 			*state = STANDBY;
 		}
         _state_machine_send_status(prev, state);
@@ -289,7 +282,7 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
 	if(*prev != DUMP)
     {
         *prev = DUMP;
-        arg->bumper =false;
+//        arg->bumper =false;
         Left_Motor_PID(BACKWARD, 42);
         Right_Motor_PID(BACKWARD, 40);
         f = true;
@@ -303,10 +296,10 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
 	}	
     if (arg->cipangoready && arg->bumper)
     {
-//        arg->cipangoready = false;
         Left_Motor_Distance(FORWARD,35,150);
         Right_Motor_Distance(FORWARD, 35, 150);
-        while(!Left_Is_Finish() || !Right_Is_Finish());
+        vTaskDelay((TickType_t) 200);
+//        while((!Left_Is_Finish()) || (!Right_Is_Finish()));
         Left_Motor_PID(FORWARD, 0);
 		Right_Motor_PID(FORWARD, 0);
         SetServo1PWM(200);
@@ -318,7 +311,8 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
         SetServo2PWM(0);
         Left_Motor_Distance(FORWARD, 35, 200);
         Right_Motor_Distance(FORWARD, 35, 200);
-        while(!Left_Is_Finish() || !Right_Is_Finish());
+        vTaskDelay((TickType_t) 200);
+//        while(!Left_Is_Finish() || !Right_Is_Finish());
         arg->bumper = false;
         arg->current_row++;
         arg->dump = false;
