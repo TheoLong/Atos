@@ -260,16 +260,16 @@ void StopIRPID(void)
 }
 int GetFrontIR()
 {
-    return ir_an2;
+    return ir_an1;
 }
 int GetSideIRF()
 {
     
-    return ir_an1;
+    return ir_an0;
 }
 
 int GetSideIRB()
 {
     
-    return ir_an0;
+    return ir_an2;
 }

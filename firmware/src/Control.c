@@ -41,18 +41,18 @@ void CONTROL_Tasks ( void )
         {
             if(bumper >= 1)
             {
-               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
+               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
                //Left_Motor_PID(FORWARD,35); 
                //Right_Motor_PID(FORWARD,35);
-               SetIRPID(BACKWARD, 35,200);
-//               while(GetFrontIR() < 700)
-//               {
-//                }
+               SetIRPID(FORWARD, 35,50);
+               while(GetFrontIR() < 700)
+               {
+                }
                //Left_Motor_PID(FORWARD,35);
                //Right_Motor_PID(FORWARD,35);
-//               StopIRPID(); 
-//               Left_Motor_PID(FORWARD,0);
-//                Right_Motor_PID(FORWARD,0);
+               StopIRPID(); 
+               Left_Motor_PID(FORWARD,0);
+               Right_Motor_PID(FORWARD,0);
 //               //-----------wait some time
 //               SetServo1PWM(760);
 //               Timing_Wait(1000);
@@ -61,7 +61,7 @@ void CONTROL_Tasks ( void )
 //               }
 //               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
 //               Move(35, 1000, FORWARD);        
-//               SetIRPID(BACKWARD, 30, GetSideIR());
+               SetIRPID(BACKWARD, 35, 50 );
                bumper =0;
                controlData.state = CONTROL_STATE_SERVICE_TASKS;
                break;
@@ -73,13 +73,13 @@ void CONTROL_Tasks ( void )
         {
             if(bumper >= 1)
             {
-                PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
+                //PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
                StopIRPID(); 
                Left_Motor_PID(FORWARD,0);
                Right_Motor_PID(FORWARD,0);
-               Left_Turn();
-               Left_Motor_PID(FORWARD,0);
-               Right_Motor_PID(FORWARD,0);
+//               Left_Turn();
+//               Left_Motor_PID(FORWARD,0);
+//               Right_Motor_PID(FORWARD,0);
 //               SetServo1PWM(50);
 //               Timing_Wait(1000);
 //               while(!GetTimingFlag())

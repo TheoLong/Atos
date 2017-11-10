@@ -72,7 +72,7 @@ void MOTOR_ENCODER_THREAD_Tasks ( void )
         //----------------------------left distance control
         if(left_distance_control.current_distance > (left_distance_control.old_distance+left_distance_control.move_distance))
         {
-             (pid_left.dir, 0);
+            Motor_Left_Set(pid_left.dir, 0);
             flag.left_finish = true;
         }
         //----------------------------left PID mode
