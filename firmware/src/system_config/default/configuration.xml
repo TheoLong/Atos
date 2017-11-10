@@ -287,7 +287,7 @@
       <Template dnOrder="8">
         <Name dnOrder="0">drv_adc_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/adc/src</Path>
-        <Checksum dnOrder="2">B0DE9AA346EFDAED1BA289BB8CD48D80</Checksum>
+        <Checksum dnOrder="2">34DEA00137B3850D96A3A4255CADDC5B</Checksum>
       </Template>
       <Template dnOrder="9">
         <Name dnOrder="0">drv_usart_mapping.c</Name>
