@@ -8,6 +8,7 @@ void CONTROL_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
     controlData.state = CONTROL_STATE_INIT;
+    PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
     receive_q = xQueueCreate(128, sizeof(struct JsonResponse));
     if(!receive_q)
     {
@@ -40,10 +41,10 @@ void CONTROL_Tasks ( void )
         {
             if(bumper >= 1)
             {
-               //PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
+               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
                //Left_Motor_PID(FORWARD,35); 
                //Right_Motor_PID(FORWARD,35);
-               SetIRPID(BACKWARD, 35);
+               SetIRPID(BACKWARD, 35,200);
 //               while(GetFrontIR() < 700)
 //               {
 //                }
@@ -72,6 +73,7 @@ void CONTROL_Tasks ( void )
         {
             if(bumper >= 1)
             {
+                PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
                StopIRPID(); 
                Left_Motor_PID(FORWARD,0);
                Right_Motor_PID(FORWARD,0);

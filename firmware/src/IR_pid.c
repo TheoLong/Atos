@@ -4,9 +4,11 @@ int SideIRF =0;
 int SideIRB =0;
 int std_error;
 int sum1=0;
-int sum2 =0;
-int sum0 = 0;
-IRPID irpid = {0,0,0,0.1,0.001,0.0001,0,FORWARD,false,0};
+float sum2 =0;
+float sum0 = 0;
+float an0_distance =0;
+float an2_distance =0;
+IRPID irpid = {0,0,0,0.5,0,0.6,0,FORWARD,false,0,0};
 IRC ir= {0,0,0,0};
 int error;
 QueueHandle_t ir_q;
@@ -39,16 +41,15 @@ void IR_PID_Tasks ( void )
         if(irpid.enable)
         {
             //perform PID here
-            error = ir_distance.Side_IRF - ir_distance.Side_IRB - std_error;
-            if(irpid.set_dir == FORWARD)
+            irpid.derivative = ir_distance.Side_IRF - ir_distance.Side_IRB;
+            error = (ir_distance.Side_IRF + ir_distance.Side_IRB)/2 - irpid.distance;
+            if(irpid.set_dir == BACKWARD)
             {
-                error = -error;
+                irpid.derivative = -irpid.derivative;
             }
             //  error = setpoint - measured_value
-            irpid.integral = irpid.integral + error*5;
+            irpid.integral = irpid.integral + error;
             //  integral = integral + error*dt
-            irpid.derivative = (error - irpid.previous_error)/5.0;
-            //  derivative = (error - previous_error)/dt
             irpid.output = irpid.Kp*error+ irpid.Ki* irpid.integral+ irpid.Kd*irpid.derivative;
             //  output = Kp*error + Ki*integral + Kd*derivative
             irpid.previous_error = error;
@@ -73,12 +74,11 @@ void IR_PID_Tasks ( void )
             }
             else
             {
-                setl = irpid.set_speed-irpid.output+0.5;
-                setr = irpid.set_speed+irpid.output+0.5;
+                setl = irpid.set_speed+irpid.output;
+                setr = irpid.set_speed-irpid.output;
             }
             Left_Motor_PID(irpid.set_dir,setl); 
             Right_Motor_PID(irpid.set_dir,setr);
-            
         }
     }
 }
@@ -86,11 +86,143 @@ void IR_PID_Tasks ( void )
  void ReadIR(void)
 {
     sum0=ir_an0+sum0;
-    sum1=ir_an1+sum1;
     sum2=ir_an2+sum2;
+    //
     if(ir.ircount == 10)
     {
-        IR data = {sum0/11, sum2/11, sum1/11};
+        sum0 = sum0/11;
+        sum1=sum1/11;
+        sum2=sum2/11;
+        //1
+        if(sum0>600 && sum0 <= 813)
+        {   
+            float diff_voltage = sum0 - 600;        
+            float k = diff_voltage/(813 - 600);
+            float b = k*40;
+            an0_distance = 50-b;
+        }
+        //2
+        if(sum0>420 && sum0 <= 600)
+        {
+            float diff_voltage = sum0 - 420;        
+            float k = diff_voltage/(600 - 420);
+            float b = k*50;
+            an0_distance = 100-b;
+        }
+        //3
+        if(sum0>345 && sum0 <= 420)
+        {
+            float diff_voltage = sum0 - 345;        
+            float k = diff_voltage/(420 - 345);
+            float b = k*50;
+            an0_distance = 150-b;
+        }
+        //4
+        if(sum0>285 && sum0 <= 345)
+        {
+            float diff_voltage = sum0 - 285;        
+            float k = diff_voltage/(345 - 285);
+            float b = k*50;
+            an0_distance = 200-b;
+        }
+        //5
+        if(sum0>240 && sum0 <= 285)
+        {
+            float diff_voltage = sum0 - 240;        
+            float k = diff_voltage/(285 - 240);
+            float b = k*50;
+            an0_distance = 250-b;
+        }
+        //6
+        if(sum0>215 && sum0 <= 240)
+        {
+            float diff_voltage = sum0 - 215;        
+            float k = diff_voltage/(240 - 215);
+            float b = k*50;
+            an0_distance = 300-b;
+        }
+        //7
+        if(sum0>185 && sum0 <= 215)
+        {
+            float diff_voltage = sum0 - 185;        
+            float k = diff_voltage/(215 - 185);
+            float b = k*50;
+            an0_distance = 350-b;
+        }
+        //8
+        if(sum0>185 && sum0 <= 175)
+        {
+            float diff_voltage = sum0 - 175;        
+            float k = diff_voltage/(185 - 175);
+            float b = k*50;
+            an0_distance = 400-b;
+        }
+        //-----------------------------------------------------------------------------
+        //1
+        if(sum2>596 && sum2 <= 789)
+        {
+            float diff_voltage = sum2 - 596;        
+            float k = diff_voltage/(789 - 596);
+            float b = k*40;
+            an2_distance = 500-b;
+        }
+        //2
+        if(sum2>434 && sum2 <= 596)
+        {
+            float diff_voltage = sum2 - 434;        
+            float k = diff_voltage/(596 - 434);
+            float b = k*50;
+            an2_distance = 100-b;
+        }
+        //3
+        if(sum2>360 && sum2 <= 434)
+        {
+            float diff_voltage = sum2 - 360;        
+            float k = diff_voltage/(434 - 360);
+            float b = k*50;
+            an2_distance = 150-b;
+        }
+        //4
+        if(sum2>315 && sum2 <= 360)
+        {
+            float diff_voltage = sum2 - 315;        
+            float k = diff_voltage/(360 - 315);
+            float b = k*50;
+            an2_distance = 200-b;
+        }
+        //5
+        if(sum2>280 && sum2 <= 315)
+        {
+            float diff_voltage = sum2 - 280;        
+            float k = diff_voltage/(315 - 280);
+            float b = k*50;
+            an2_distance = 250-b;
+        }
+        //6
+        if(sum2>260 && sum2 <= 280)
+        {
+            float diff_voltage = sum2 - 260;        
+            float k = diff_voltage/(280 - 260);
+            float b = k*50;
+            an2_distance = 300-b;
+        }
+        //7
+        if(sum2>245 && sum2 <= 260)
+        {
+            float diff_voltage = sum2 - 245;        
+            float k = diff_voltage/(260 - 245);
+            float b = k*50;
+            an2_distance = 350-b;
+        }
+        //8
+        if(sum2>240 && sum2 <= 245)
+        {
+            float diff_voltage = sum2 - 240;        
+            float k = diff_voltage/(245 - 240);
+            float b = k*50;
+            an2_distance = 400-b;
+        }
+        IR data = {sum0, sum2, sum1};
         SendToIRQueue(data);
         ir.ircount =0;
         sum1=0;
@@ -111,7 +243,7 @@ void SendToIRQueue(IR data)
     portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
 }
 
-void SetIRPID(bool dir, int speed)
+void SetIRPID(bool dir, int speed, int distance)
 {
     irpid.enable = true;
     irpid.set_speed = speed;
@@ -119,7 +251,7 @@ void SetIRPID(bool dir, int speed)
     irpid.integral=0;
     irpid.derivative=0;
     irpid.previous_error=0;
-    std_error = sum0/11-sum2/11;
+    irpid.distance = distance;
 }
 
 void StopIRPID(void)
@@ -128,14 +260,16 @@ void StopIRPID(void)
 }
 int GetFrontIR()
 {
-    return ir_an0;
+    return ir_an2;
 }
 int GetSideIRF()
 {
+    
     return ir_an1;
 }
 
 int GetSideIRB()
 {
-    return ir_an2;
+    
+    return ir_an0;
 }
