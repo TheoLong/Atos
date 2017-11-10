@@ -7,7 +7,7 @@
     }
 }
 void Wait_Left()
-{
+ {
     while(!Left_Is_Finish())
     {
     }

@@ -8,7 +8,7 @@ float sum2 =0;
 float sum0 = 0;
 float an0_distance =0;
 float an2_distance =0;
-IRPID irpid = {0,0,0,0.5,0,0.6,0,FORWARD,false,0,0};
+IRPID irpid = {0,0,0,0.2,0,0.2,0,FORWARD,false,0,0};
 IRC ir= {0,0,0,0};
 int error;
 QueueHandle_t ir_q;
@@ -43,7 +43,7 @@ void IR_PID_Tasks ( void )
             //perform PID here
             irpid.derivative = ir_distance.Side_IRF - ir_distance.Side_IRB;
             error = (ir_distance.Side_IRF + ir_distance.Side_IRB)/2 - irpid.distance;
-            if(irpid.set_dir == BACKWARD)
+            if(irpid.set_dir == FORWARD)
             {
                 irpid.derivative = -irpid.derivative;
             }
@@ -94,135 +94,135 @@ void IR_PID_Tasks ( void )
         sum1=sum1/11;
         sum2=sum2/11;
         //1
-        if(sum0>600 && sum0 <= 813)
+        if(sum0>589 && sum0 <= 867)
         {   
-            float diff_voltage = sum0 - 600;        
-            float k = diff_voltage/(813 - 600);
+            float diff_voltage = sum0 - 589;        
+            float k = diff_voltage/(867 - 589);
             float b = k*40;
             an0_distance = 50-b;
         }
         //2
-        if(sum0>420 && sum0 <= 600)
+        if(sum0>430 && sum0 <= 589)
         {
-            float diff_voltage = sum0 - 420;        
-            float k = diff_voltage/(600 - 420);
+            float diff_voltage = sum0 - 430;        
+            float k = diff_voltage/(589 - 430);
             float b = k*50;
             an0_distance = 100-b;
         }
         //3
-        if(sum0>345 && sum0 <= 420)
+        if(sum0>345 && sum0 <= 430)
         {
             float diff_voltage = sum0 - 345;        
-            float k = diff_voltage/(420 - 345);
+            float k = diff_voltage/(430 - 345);
             float b = k*50;
             an0_distance = 150-b;
         }
         //4
-        if(sum0>285 && sum0 <= 345)
+        if(sum0>291 && sum0 <= 345)
         {
-            float diff_voltage = sum0 - 285;        
-            float k = diff_voltage/(345 - 285);
+            float diff_voltage = sum0 - 291;        
+            float k = diff_voltage/(345 - 291);
             float b = k*50;
             an0_distance = 200-b;
         }
         //5
-        if(sum0>240 && sum0 <= 285)
+        if(sum0>253 && sum0 <= 291)
         {
-            float diff_voltage = sum0 - 240;        
-            float k = diff_voltage/(285 - 240);
+            float diff_voltage = sum0 - 253;        
+            float k = diff_voltage/(291 - 253);
             float b = k*50;
             an0_distance = 250-b;
         }
         //6
-        if(sum0>215 && sum0 <= 240)
+        if(sum0>222 && sum0 <= 253)
         {
-            float diff_voltage = sum0 - 215;        
-            float k = diff_voltage/(240 - 215);
+            float diff_voltage = sum0 - 222;        
+            float k = diff_voltage/(253 - 222);
             float b = k*50;
             an0_distance = 300-b;
         }
         //7
-        if(sum0>185 && sum0 <= 215)
+        if(sum0>200 && sum0 <= 222)
         {
-            float diff_voltage = sum0 - 185;        
-            float k = diff_voltage/(215 - 185);
+            float diff_voltage = sum0 - 200;        
+            float k = diff_voltage/(222 - 200);
             float b = k*50;
             an0_distance = 350-b;
         }
         //8
-        if(sum0>185 && sum0 <= 175)
+        if(sum0>195 && sum0 <= 200)
         {
-            float diff_voltage = sum0 - 175;        
-            float k = diff_voltage/(185 - 175);
-            float b = k*50;
-            an0_distance = 400-b;
+            float diff_voltage = sum0 - 195;        
+            float k = diff_voltage/(200 - 195);
+            float b = k*35;
+            an0_distance = 385-b;
         }
         //-----------------------------------------------------------------------------
         //1
-        if(sum2>596 && sum2 <= 789)
+        if(sum2>582 && sum2 <= 840)
         {
-            float diff_voltage = sum2 - 596;        
-            float k = diff_voltage/(789 - 596);
+            float diff_voltage = sum2 - 582;        
+            float k = diff_voltage/(840 - 582);
             float b = k*40;
-            an2_distance = 500-b;
+            an2_distance = 50-b;
         }
         //2
-        if(sum2>434 && sum2 <= 596)
+        if(sum2>428 && sum2 <= 582)
         {
-            float diff_voltage = sum2 - 434;        
-            float k = diff_voltage/(596 - 434);
+            float diff_voltage = sum2 - 428;        
+            float k = diff_voltage/(582 - 428);
             float b = k*50;
             an2_distance = 100-b;
         }
         //3
-        if(sum2>360 && sum2 <= 434)
+        if(sum2>345 && sum2 <= 428)
         {
-            float diff_voltage = sum2 - 360;        
-            float k = diff_voltage/(434 - 360);
+            float diff_voltage = sum2 - 345;        
+            float k = diff_voltage/(428 - 345);
             float b = k*50;
             an2_distance = 150-b;
         }
         //4
-        if(sum2>315 && sum2 <= 360)
+        if(sum2>296 && sum2 <= 345)
         {
-            float diff_voltage = sum2 - 315;        
-            float k = diff_voltage/(360 - 315);
+            float diff_voltage = sum2 - 296;        
+            float k = diff_voltage/(345 - 296);
             float b = k*50;
             an2_distance = 200-b;
         }
         //5
-        if(sum2>280 && sum2 <= 315)
+        if(sum2>261 && sum2 <= 296)
         {
-            float diff_voltage = sum2 - 280;        
-            float k = diff_voltage/(315 - 280);
+            float diff_voltage = sum2 - 261;        
+            float k = diff_voltage/(296 - 261);
             float b = k*50;
             an2_distance = 250-b;
         }
         //6
-        if(sum2>260 && sum2 <= 280)
+        if(sum2>239 && sum2 <= 261)
         {
-            float diff_voltage = sum2 - 260;        
-            float k = diff_voltage/(280 - 260);
+            float diff_voltage = sum2 - 239;        
+            float k = diff_voltage/(261 - 239);
             float b = k*50;
             an2_distance = 300-b;
         }
         //7
-        if(sum2>245 && sum2 <= 260)
+        if(sum2>220 && sum2 <= 239)
         {
-            float diff_voltage = sum2 - 245;        
-            float k = diff_voltage/(260 - 245);
+            float diff_voltage = sum2 - 220;        
+            float k = diff_voltage/(239 - 220);
             float b = k*50;
             an2_distance = 350-b;
         }
         //8
-        if(sum2>240 && sum2 <= 245)
-        {
-            float diff_voltage = sum2 - 240;        
-            float k = diff_voltage/(245 - 240);
-            float b = k*50;
-            an2_distance = 400-b;
+        if(sum2>213 && sum2 <= 220)
+        { 
+            float diff_voltage = sum2 - 213;        
+            float k = diff_voltage/(220 - 213);
+            float b = k*35;
+            an2_distance = 385-b;
         }
-        IR data = {sum0, sum2, sum1};
+        IR data = {an0_distance, an2_distance, sum1};
         SendToIRQueue(data);
         ir.ircount =0;
         sum1=0;
