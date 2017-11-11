@@ -61,7 +61,7 @@ void CONTROL_Tasks ( void )
 //               }
 //               PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
 //               Move(35, 1000, FORWARD);        
-               SetIRPID(BACKWARD, 35, 50 );
+               SetIRPID(BACKWARD, 35,50);
                bumper =0;
                controlData.state = CONTROL_STATE_SERVICE_TASKS;
                break;

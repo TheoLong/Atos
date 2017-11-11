@@ -83,7 +83,9 @@ void Motor_Right_Set(bool dir, int pwm);
 extern int bumper;
 extern int ir_an0, ir_an1, ir_an2;
 //IR PID control
-void SetIRPID(bool dir, int speed,int distance);
+void SetIRPID(bool dir, int speed, int distance);
+float LinearApprox_an0(int sum0);
+float LinearApprox_an2(int sum2);
 void StopIRPID(void);
 int GetFrontIR();
 int GetSideIRB();
