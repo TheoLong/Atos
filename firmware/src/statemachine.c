@@ -158,8 +158,8 @@ void _state_machine_tare(Lori_States * state, Lori_States * prev, struct StateMa
     {
         *prev = TARE;
         arg->bumper = false;
-        Left_Motor_PID(BACKWARD, 55);
-        Right_Motor_PID(BACKWARD, 53);
+        Left_Motor_PID(BACKWARD, 45);
+        Right_Motor_PID(BACKWARD, 43);
     }
 	if (arg->bumper)
 	{
@@ -178,11 +178,13 @@ void _state_machine_sweep(Lori_States * state, Lori_States * prev, struct StateM
         vTaskDelay(125);
         PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
 		*prev = SWEEP;
-        SetIRPID(FORWARD, 35);
+        SetIRPID(FORWARD, 35, (arg->current_row + 1) * 50);
 	}
-    if (GetFrontIR() > 680)
+    if (GetFrontIR() > 690)
     {
         StopIRPID();
+        Left_Motor_PID(FORWARD, 0);
+        Right_Motor_PID(FORWARD, 0);
         *state = FORWARDTARE;
     }
 }
@@ -213,7 +215,7 @@ void _state_machine_back(Lori_States * state, Lori_States * prev, struct StateMa
     if(*prev != BACK)
     {
         *prev = BACK;
-        SetIRPID(BACKWARD, 35);
+        SetIRPID(BACKWARD, 35, (arg->current_row + 1) * 50);
     }
 	if (arg->bumper)
 	{
@@ -253,6 +255,7 @@ void _state_machine_turnleft(Lori_States * state, Lori_States * prev, struct Sta
             vTaskDelay(500);
             Left_Motor_Distance(FORWARD, 35, 200);
             Right_Motor_Distance(FORWARD, 35, 200);
+            while(!Left_Is_Finish() || !Right_Is_Finish());
 			*state = STANDBY;
 		}
         _state_machine_send_status(prev, state);
@@ -335,9 +338,9 @@ void _state_machine_send_status(Lori_States * prev, Lori_States * curr)
 
 void requeststatus(TimerHandle_t xTimer)
 {
-//    struct JsonRequest jsr = {PIC_ID, 'r', 0, 60, 0, 0, 0, 0, 0};
-//    SendOverWiFi(jsr);
-//    jsr.tgt = 1;
-//    jsr.tsk = 79;
-//    SendOverWiFi(jsr);
+    struct JsonRequest jsr = {PIC_ID, 'r', 0, 60, 0, 0, 0, 0, 0};
+    SendOverWiFi(jsr);
+    jsr.tgt = 1;
+    jsr.tsk = 79;
+    SendOverWiFi(jsr);
 }

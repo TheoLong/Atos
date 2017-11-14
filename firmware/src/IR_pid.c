@@ -4,9 +4,11 @@ int SideIRF =0;
 int SideIRB =0;
 int std_error;
 int sum1=0;
-int sum2 =0;
-int sum0 = 0;
-IRPID irpid = {0,0,0,0.1,0.001,0.0001,0,FORWARD,false,0};
+float sum2 =0;
+float sum0 = 0;
+float an0_distance =0;
+float an2_distance =0;
+IRPID irpid = {0,0,0,0.2,0,0.2,0,FORWARD,false,0,0};
 IRC ir= {0,0,0,0};
 int error;
 QueueHandle_t ir_q;
@@ -39,16 +41,15 @@ void IR_PID_Tasks ( void )
         if(irpid.enable)
         {
             //perform PID here
-            error = ir_distance.Side_IRF - ir_distance.Side_IRB - std_error;
+            irpid.derivative = ir_distance.Side_IRF - ir_distance.Side_IRB;
+            error = (ir_distance.Side_IRF + ir_distance.Side_IRB)/2 - irpid.distance;
             if(irpid.set_dir == FORWARD)
             {
-                error = -error;
+                irpid.derivative = -irpid.derivative;
             }
             //  error = setpoint - measured_value
-            irpid.integral = irpid.integral + error*5;
+            irpid.integral = irpid.integral + error;
             //  integral = integral + error*dt
-            irpid.derivative = (error - irpid.previous_error)/5.0;
-            //  derivative = (error - previous_error)/dt
             irpid.output = irpid.Kp*error+ irpid.Ki* irpid.integral+ irpid.Kd*irpid.derivative;
             //  output = Kp*error + Ki*integral + Kd*derivative
             irpid.previous_error = error;
@@ -59,26 +60,30 @@ void IR_PID_Tasks ( void )
             {
                 setl = 50;
             }
+            else if(irpid.set_speed-irpid.output<10)
+            {
+                setl = 10;
+            }
+            else
+            {
+                setl = irpid.set_speed+irpid.output;
+                setr = irpid.set_speed-irpid.output;
+            }
             if(irpid.set_speed+irpid.output>50)
             {
                 setr = 50;
             }
-            if(irpid.set_speed-irpid.output<10)
-            {
-                setl = 10;
-            }
-            if(irpid.set_speed+irpid.output<10)
+            else if(irpid.set_speed+irpid.output<10)
             {
                 setr = 10;
             }
             else
             {
-                setl = irpid.set_speed-irpid.output+0.5;
-                setr = irpid.set_speed+irpid.output+0.5;
+                setl = irpid.set_speed+irpid.output;
+                setr = irpid.set_speed-irpid.output;
             }
             Left_Motor_PID(irpid.set_dir,setl); 
             Right_Motor_PID(irpid.set_dir,setr);
-            
         }
     }
 }
@@ -86,11 +91,17 @@ void IR_PID_Tasks ( void )
  void ReadIR(void)
 {
     sum0=ir_an0+sum0;
-    sum1=ir_an1+sum1;
     sum2=ir_an2+sum2;
+    //
     if(ir.ircount == 10)
     {
-        IR data = {sum0/11, sum2/11, sum1/11};
+        sum0 = sum0/11;
+        sum1=sum1/11;
+        sum2=sum2/11;
+        //1
+        an0_distance = LinearApprox_an0(sum0);
+        an2_distance = LinearApprox_an2(sum2);
+        IR data = {an0_distance, an2_distance, sum1};
         SendToIRQueue(data);
         ir.ircount =0;
         sum1=0;
@@ -111,7 +122,7 @@ void SendToIRQueue(IR data)
     portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
 }
 
-void SetIRPID(bool dir, int speed)
+void SetIRPID(bool dir, int speed, int distance)
 {
     irpid.enable = true;
     irpid.set_speed = speed;
@@ -119,7 +130,7 @@ void SetIRPID(bool dir, int speed)
     irpid.integral=0;
     irpid.derivative=0;
     irpid.previous_error=0;
-    std_error = sum0/11-sum2/11;
+    irpid.distance = distance;
 }
 
 void StopIRPID(void)
@@ -132,10 +143,12 @@ int GetFrontIR()
 }
 int GetSideIRF()
 {
+    
     return ir_an0;
 }
 
 int GetSideIRB()
 {
+    
     return ir_an2;
 }

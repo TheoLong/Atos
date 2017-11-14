@@ -43,6 +43,7 @@ typedef struct IRPID
     bool set_dir;
     bool enable;
     int set_speed;
+    int distance;
 } IRPID;
 typedef struct IR_Struct IR;
 
