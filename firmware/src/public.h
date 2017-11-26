@@ -6,10 +6,13 @@
 #include <peripheral/adc/plib_adc.h>
 #include <peripheral/int/plib_int.h>
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
 #include "queue.h"
 #include "timers.h"
+#include "Accelerometer.h"
 
-#define PIC_ID 1
+#define PIC_ID 4
 
 struct JsonResponse
 {

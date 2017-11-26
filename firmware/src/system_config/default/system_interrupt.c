@@ -85,7 +85,10 @@ void IntHandlerDrvUsartInstance0(void)
     }        
 }
 
-
+void IntHandlerSPIInstance0(void)
+{
+    DRV_SPI_Tasks(sysObj.spiObjectIdx0);
+}
  
 /*******************************************************************************
  End of File

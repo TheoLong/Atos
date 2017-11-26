@@ -23,6 +23,8 @@ void APP_Tasks( void );
 void ServoControlCallback1(TimerHandle_t xTimer);
 void ServoControlCallback2(TimerHandle_t xTimer);
 void ServoControlCallback3(TimerHandle_t xTimer);
+void PmodACLCallback1(TimerHandle_t xTimer);
+void TurnOnLEDs(bool on);
 
 #endif /* _APP_H */
 

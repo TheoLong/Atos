@@ -47,7 +47,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "ISR_Support.h"
 
-
  
 
 
@@ -85,6 +84,43 @@ _IntHandlerDrvUsartInstance0:
     nop
     portRESTORE_CONTEXT
     .end	_IntHandlerDrvUsartInstance0
+
+
+
+
+/* SPI Instance 0 Interrupt */
+
+   .extern  IntHandlerSPIInstance0
+
+   .section	.vector_32,code, keep
+   .equ     __vector_dispatch_32, IntVectorSPIInstance0
+   .global  __vector_dispatch_32
+   .set     nomicromips
+   .set     noreorder
+   .set     nomips16
+   .set     noat
+   .ent  IntVectorSPIInstance0
+
+IntVectorSPIInstance0:
+    la    $26,  _IntHandlerSPIInstance0         
+    jr    $26
+    nop
+	.end	IntVectorSPIInstance0
+
+   .section	.SPIInstance0_vector_text, code, keep
+   .set     nomicromips
+   .set     noreorder
+   .set     nomips16
+   .set     noat
+   .ent  _IntHandlerSPIInstance0
+
+_IntHandlerSPIInstance0:
+    portSAVE_CONTEXT
+    la    s6,  IntHandlerSPIInstance0
+    jalr  s6
+    nop
+    portRESTORE_CONTEXT
+    .end	_IntHandlerSPIInstance0
 
 
 /*******************************************************************************

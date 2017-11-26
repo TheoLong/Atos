@@ -91,7 +91,7 @@ extern "C" {
 #define SYS_PORT_AD1PCFG        ~0xffff
 #define SYS_PORT_CNPUE          0x0
 #define SYS_PORT_CNEN           0x0
-#define SYS_PORT_A_TRIS         0xFFFF
+#define SYS_PORT_A_TRIS         0xFFF7
 #define SYS_PORT_A_LAT          0x0000
 #define SYS_PORT_A_ODC          0x0000
 
@@ -99,7 +99,7 @@ extern "C" {
 #define SYS_PORT_B_LAT          0x0000
 #define SYS_PORT_B_ODC          0x0000
 
-#define SYS_PORT_C_TRIS         0xFFFF
+#define SYS_PORT_C_TRIS         0xFFFD
 #define SYS_PORT_C_LAT          0x0000
 #define SYS_PORT_C_ODC          0x0000
 
@@ -111,7 +111,7 @@ extern "C" {
 #define SYS_PORT_E_LAT          0x0000
 #define SYS_PORT_E_ODC          0x0000
 
-#define SYS_PORT_F_TRIS         0xFFFF
+#define SYS_PORT_F_TRIS         0xEFFF
 #define SYS_PORT_F_LAT          0x0000
 #define SYS_PORT_F_ODC          0x0000
 
@@ -129,6 +129,48 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 #define DRV_OC_DRIVER_MODE_STATIC 
+
+/*** SPI Driver Configuration ***/
+#define DRV_SPI_NUMBER_OF_MODULES		4
+/*** Driver Compilation and static configuration options. ***/
+/*** Select SPI compilation units.***/
+#define DRV_SPI_POLLED 				0
+#define DRV_SPI_ISR 				1
+#define DRV_SPI_MASTER 				1
+#define DRV_SPI_SLAVE 				0
+#define DRV_SPI_RM 					1
+#define DRV_SPI_EBM 				0
+#define DRV_SPI_8BIT 				1
+#define DRV_SPI_16BIT 				0
+#define DRV_SPI_32BIT 				0
+#define DRV_SPI_DMA 				0
+
+/*** SPI Driver Static Allocation Options ***/
+#define DRV_SPI_INSTANCES_NUMBER 		1
+#define DRV_SPI_CLIENTS_NUMBER 			1
+#define DRV_SPI_ELEMENTS_PER_QUEUE 		10
+/* SPI Driver Instance 0 Configuration */
+#define DRV_SPI_SPI_ID_IDX0 				SPI_ID_4
+#define DRV_SPI_TASK_MODE_IDX0 				DRV_SPI_TASK_MODE_ISR
+#define DRV_SPI_SPI_MODE_IDX0				DRV_SPI_MODE_MASTER
+#define DRV_SPI_ALLOW_IDLE_RUN_IDX0			false
+#define DRV_SPI_SPI_PROTOCOL_TYPE_IDX0 		DRV_SPI_PROTOCOL_TYPE_STANDARD
+#define DRV_SPI_COMM_WIDTH_IDX0 			SPI_COMMUNICATION_WIDTH_8BITS
+#define DRV_SPI_SPI_CLOCK_IDX0 				CLK_BUS_PERIPHERAL_1
+#define DRV_SPI_BAUD_RATE_IDX0 				4000000
+#define DRV_SPI_BUFFER_TYPE_IDX0 			DRV_SPI_BUFFER_TYPE_STANDARD
+#define DRV_SPI_CLOCK_MODE_IDX0 			DRV_SPI_CLOCK_MODE_IDLE_HIGH_EDGE_FALL
+#define DRV_SPI_INPUT_PHASE_IDX0 			SPI_INPUT_SAMPLING_PHASE_IN_MIDDLE
+#define DRV_SPI_TRANSMIT_DUMMY_BYTE_VALUE_IDX0      0xFF
+
+#define DRV_SPI_TX_INT_SOURCE_IDX0 			INT_SOURCE_SPI_4_TRANSMIT
+#define DRV_SPI_RX_INT_SOURCE_IDX0 			INT_SOURCE_SPI_4_RECEIVE
+#define DRV_SPI_ERROR_INT_SOURCE_IDX0 		INT_SOURCE_SPI_4_ERROR
+#define DRV_SPI_INT_VECTOR_IDX0				INT_VECTOR_SPI4
+#define DRV_SPI_INT_PRIORITY_IDX0			INT_PRIORITY_LEVEL2
+#define DRV_SPI_INT_SUB_PRIORITY_IDX0		INT_SUBPRIORITY_LEVEL0        
+#define DRV_SPI_QUEUE_SIZE_IDX0 			10
+#define DRV_SPI_RESERVED_JOB_IDX0 			1
 /*** Timer Driver Configuration ***/
 #define DRV_TMR_INTERRUPT_MODE             false
 
