@@ -328,9 +328,11 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
         SetServo1PWM(150);
         vTaskDelay((TickType_t) 200);
         SetServo2PWM(800);
-        vTaskDelay((TickType_t) 315);
+        vTaskDelay((TickType_t) 300);
+        SetServo2PWM(0);
+        vTaskDelay((TickType_t) 1000);
         SetServo2PWM(35);
-        vTaskDelay((TickType_t) 225);
+        vTaskDelay((TickType_t) 175);
         SetServo2PWM(0);
         Left_Motor_Distance(FORWARD, 35, 200);
         Right_Motor_Distance(FORWARD, 35, 200);
@@ -340,7 +342,9 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
         arg->dump = false;
         arg->standby = false;
         *state = (arg->current_row >= 4) ? END : TURN_LEFT;
-        struct JsonRequest jsr = {PIC_ID, 's', 0, 79, 0, 1, 0, 0, 0};
+        //struct JsonRequest jsr = {PIC_ID, 's', 0, 79, 0, 1, 0, 0, 0};
+        struct JsonRequest jsr1= {PIC_ID, 's', 0, 79, 0, 0, 0,-1,-1};
+        SendOverWiFi(jsr1);
         _state_machine_send_status(prev, state);
     }
 }
