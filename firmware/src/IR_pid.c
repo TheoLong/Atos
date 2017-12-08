@@ -36,8 +36,8 @@ void IR_PID_Tasks ( void )
     {
         SideIRF=ir_distance.Side_IRF;
         SideIRB=ir_distance.Side_IRB;
-        struct JsonRequest js = {PIC_ID, 's',0, 32,0,ir_distance.Side_IRF,ir_distance.Side_IRB, 0, 0};
-        SendOverWiFi(js);
+//        struct JsonRequest js = {PIC_ID, 's',0, 32,0,ir_distance.Side_IRF,ir_distance.Side_IRB, 0, 0};
+//        SendOverWiFi(js);
         if(irpid.enable)
         {
             //perform PID here

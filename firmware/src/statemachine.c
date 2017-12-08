@@ -12,6 +12,7 @@ void lori_state_machine(struct StateMachineParams * arg)
         {
             if(state == SWEEP || state == BACK)
             {
+                StopIRPID();
                 Left_Motor_PID(FORWARD, 0);
                 Right_Motor_PID(FORWARD, 0);
             }
@@ -23,10 +24,10 @@ void lori_state_machine(struct StateMachineParams * arg)
 	{
         case PAUSED:
         {
-            if(arg->status == 1)
-            {
-                
-            }
+//            if(arg->status == 1)
+//            {
+//                
+//            }
         }
         case INIT:
         {
@@ -93,10 +94,13 @@ void lori_state_machine(struct StateMachineParams * arg)
         }
 		default:
 		{
-			prev = END;
-            StopIRPID();
-            Left_Motor_PID(FORWARD, 0);
-            Right_Motor_PID(FORWARD, 0);
+            if(prev != END)
+            {
+                StopIRPID();
+                Left_Motor_PID(FORWARD, 0);
+                Right_Motor_PID(FORWARD, 0);
+            }
+            prev = END;
 			break;
 		}
 	}
@@ -178,14 +182,24 @@ void _state_machine_sweep(Lori_States * state, Lori_States * prev, struct StateM
         vTaskDelay(125);
         PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 1);
 		*prev = SWEEP;
+//        SetIRPID(FORWARD, 35, 50);
         SetIRPID(FORWARD, 35, (arg->current_row + 1) * 50);
 	}
-    if (GetFrontIR() > 750)
+    if (GetFrontIR() > 710)
     {
-//        StopIRPID();
-//        Left_Motor_PID(FORWARD, 0);
-//        Right_Motor_PID(FORWARD, 0);
+        StopIRPID();
+        Left_Motor_PID(FORWARD, 0);
+        Right_Motor_PID(FORWARD, 0);
+        int pwm = 300;
+        for(pwm = 300; pwm <=680; pwm += 10)
+        {
+            SetServo1PWM(pwm);
+            vTaskDelay(15);
+        }        
+        SetServo1PWM(780);
+//        PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);     
         *state = FORWARDTARE;
+        _state_machine_send_status(prev, state);
     }
 }
 
@@ -194,47 +208,41 @@ void _state_machine_forwardtare(Lori_States * state, Lori_States * prev, struct 
     if (*prev != FORWARDTARE)
     {
         *prev = FORWARDTARE;
-//        int pwm = 300;
-//        for(pwm = 300; pwm <=680; pwm += 10)
-//        {
-//            SetServo1PWM(pwm);
-//            vTaskDelay(15);
-//        }
-        vTaskDelay(400);
-        StopIRPID();
-        Left_Motor_PID(FORWARD, 0);
-        Right_Motor_PID(FORWARD, 0);
-        *state = BACK;
-        arg->bumper = false;
-//        SetServo1PWM(780);
+//        vTaskDelay(400);
+//        StopIRPID();
 //        Left_Motor_PID(FORWARD, 0);
 //        Right_Motor_PID(FORWARD, 0);
-//        PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);
-//        vTaskDelay(125);
+        
+        arg->bumper = false;
+        vTaskDelay(125);
+        PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);   
+        vTaskDelay(250);
+        *state = BACK;
+        _state_machine_send_status(prev, state);
     }
 }
 
 void _state_machine_back(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg)
 {
-    static bool isdown = true;
+//    static bool isdown = true;
     if(*prev != BACK)
     {
-        isdown = true;
+        arg->bumper = false;
         *prev = BACK;
         SetIRPID(BACKWARD, 35, (arg->current_row + 1) * 50);
     }
-    if (GetFrontIR() < 680 && isdown)
-    {
-        isdown = false;
-        int pwm = 300;
-        for(pwm = 300; pwm <=680; pwm += 10)
-        {
-            SetServo1PWM(pwm);
-            vTaskDelay(15);
-        }        
-        SetServo1PWM(780);
-        PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);        
-    }
+//    if (GetFrontIR() < 680)
+//    {
+//
+//        int pwm = 300;
+//        for(pwm = 300; pwm <=680; pwm += 10)
+//        {
+//            SetServo1PWM(pwm);
+//            vTaskDelay(15);
+//        }        
+//        SetServo1PWM(780);
+//        PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);        
+//    }
 	if (arg->bumper)
 	{
         vTaskDelay(100);
@@ -317,9 +325,9 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
         Left_Motor_PID(FORWARD, 0);
 		Right_Motor_PID(FORWARD, 0);
 	}	
-    if (arg->cipangoready && arg->bumper)
+    if (arg->bumper)
     {
-//        arg->cipangoready = false;
+
         Left_Motor_Distance(FORWARD,35,150);
         Right_Motor_Distance(FORWARD, 35, 150);
         while(!Left_Is_Finish() || !Right_Is_Finish());
@@ -342,8 +350,10 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
         arg->dump = false;
         arg->standby = false;
         *state = (arg->current_row >= 4) ? END : TURN_LEFT;
+        if(arg->status == 5)
+            *state = END;
         //struct JsonRequest jsr = {PIC_ID, 's', 0, 79, 0, 1, 0, 0, 0};
-        struct JsonRequest jsr1= {PIC_ID, 's', 0, 79, 0, 0, 0,-1,-1};
+        struct JsonRequest jsr1= {0, 's', 0, 79, 0, 0, 0,-1,-1};
         SendOverWiFi(jsr1);
         _state_machine_send_status(prev, state);
     }
@@ -352,15 +362,15 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
 
 void _state_machine_send_status(Lori_States * prev, Lori_States * curr)
 {
-    struct JsonRequest jsr = {PIC_ID, 's', 0, 62, 0, *curr, *prev, 0, 0};
+    struct JsonRequest jsr = {PIC_ID, 's', 0, 63, 0, *curr, *prev, 0, 0};
     SendOverWiFi(jsr);
 }
 
 void requeststatus(TimerHandle_t xTimer)
 {
-    struct JsonRequest jsr = {PIC_ID, 'r', 0, 60, 0, 0, 0, 0, 0};
-    SendOverWiFi(jsr);
-    jsr.tgt = 1;
-    jsr.tsk = 79;
+    struct JsonRequest jsr = {PIC_ID, 'r', 0, 79, 0, 0, 0, 0, 0};
+//    SendOverWiFi(jsr);
+//    jsr.tgt = 0;
+//    jsr.tsk = 79;
     SendOverWiFi(jsr);
 }
