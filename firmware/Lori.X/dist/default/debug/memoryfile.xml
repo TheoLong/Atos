@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <project>                                  
-  <executable name="dist/default/production/Lori.X.production.elf">                 
+  <executable name="dist/default/debug/Lori.X.debug.elf">                 
     <memory name="program">                 
       <units>bytes</units>                 
       <length>531968</length>                 
-      <used>37956</used>                     
-      <free>494012</free>                     
+      <used>38384</used>                     
+      <free>493584</free>                     
     </memory>                              
     <memory name="data">              
       <units>bytes</units>                 
-      <length>131072</length>                 
-      <used>104748</used>                     
-      <free>26324</free>                     
+      <length>131584</length>                 
+      <used>105772</used>                     
+      <free>25812</free>                     
     </memory>                              
   </executable>                            
 </project>                                 

@@ -45,6 +45,7 @@ void MOTOR_ENCODER_THREAD_Tasks ( void )
         flag.time_up = true;
         flag.counter_start = false;
     }
+    
     //----------------------------------read encoder data----------------------------------------------------------
     Encoder data;
     BaseType_t receive;

@@ -22,15 +22,15 @@ void Wait_Right()
 
 void Left_Turn()
 {
-    Right_Motor_Distance(FORWARD, 45, 540);
-    Left_Motor_Distance(BACKWARD, 45, 540);
+    Right_Motor_Distance(FORWARD, 30, 565);
+    Left_Motor_Distance(BACKWARD, 30, 565);
     Wait();
 }
 
 void Right_Turn()
 {
-    Right_Motor_Distance(BACKWARD, 45, 540);
-    Left_Motor_Distance(FORWARD, 45, 540);
+    Right_Motor_Distance(BACKWARD, 30, 565);
+    Left_Motor_Distance(FORWARD, 30, 565);
     Wait();
 }
 
