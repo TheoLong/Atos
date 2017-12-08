@@ -9,7 +9,7 @@
 #include "FreeRTOS.h"
 #include "timers.h"
 #include "queue.h"
-#define PIC_ID 3
+#define PIC_ID 1
 #define FORWARD false
 #define BACKWARD true
 struct JsonResponse
