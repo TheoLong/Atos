@@ -33,6 +33,7 @@ struct StateMachineParams
 	bool dump;
 	bool cipangoready;
     char status;
+    Lori_States resumed;
 };
 
 void lori_state_machine(struct StateMachineParams * arg);

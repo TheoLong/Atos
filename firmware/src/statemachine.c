@@ -6,6 +6,14 @@ extern QueueHandle_t receive_q;
 void lori_state_machine(struct StateMachineParams * arg)
 {
 	static Lori_States state = INIT, prev = INIT, paused = INIT;
+    if(arg->resumed < MAXSTATE && arg->resumed > INIT)
+    {
+        prev = INIT;
+        state = arg->resumed;
+        struct JsonRequest jsr = {PIC_ID, 's', 0, 64, 0, state, prev, arg->current_row, arg->bumper};
+        SendOverWiFi(jsr);
+        arg->resumed = -1;
+    }
     if(arg->status == 2)
     {
         if(state != PAUSED)
@@ -104,17 +112,17 @@ void lori_state_machine(struct StateMachineParams * arg)
 			break;
 		}
 	}
-    struct JsonResponse js;
-    BaseType_t ret = xQueueReceive(receive_q, &js, (TickType_t) 0);
-    if(ret == pdTRUE)
-    {
-        if(js.tsk == 61 && js.arg0 == 1)
-            arg->bumper = true;
-        else if(js.tsk == 60)
-            arg->status = js.arg0;
-        else if(js.tsk == 79)
-            arg->cipangoready = (js.arg0 == 0) ? true : false;
-    }
+//    struct JsonResponse js;
+//    BaseType_t ret = xQueueReceive(receive_q, &js, (TickType_t) 0);
+//    if(ret == pdTRUE)
+//    {
+//        if(js.tsk == 61 && js.arg0 == 1)
+//            arg->bumper = true;
+//        else if(js.tsk == 60)
+//            arg->status = js.arg0;
+//        else if(js.tsk == 79)
+//            arg->cipangoready = (js.arg0 == 0) ? true : false;
+//    }
 }
 
 void _state_machine_standby(Lori_States * state, Lori_States * prev, struct StateMachineParams * arg)
@@ -215,6 +223,7 @@ void _state_machine_forwardtare(Lori_States * state, Lori_States * prev, struct 
         
         arg->bumper = false;
         vTaskDelay(125);
+        SetServo1PWM(0);
         PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);   
         vTaskDelay(250);
         *state = BACK;
@@ -230,19 +239,10 @@ void _state_machine_back(Lori_States * state, Lori_States * prev, struct StateMa
         arg->bumper = false;
         *prev = BACK;
         SetIRPID(BACKWARD, 35, (arg->current_row + 1) * 50);
+        struct JsonRequest jsr = {PIC_ID, 's', PIC_ID, 66, 0, arg->bumper, 5, 5, 5};
+        SendOverWiFi(jsr);
     }
-//    if (GetFrontIR() < 680)
-//    {
-//
-//        int pwm = 300;
-//        for(pwm = 300; pwm <=680; pwm += 10)
-//        {
-//            SetServo1PWM(pwm);
-//            vTaskDelay(15);
-//        }        
-//        SetServo1PWM(780);
-//        PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, 6, 0);        
-//    }
+
 	if (arg->bumper)
 	{
         vTaskDelay(100);
@@ -356,6 +356,8 @@ void _state_machine_dump(Lori_States * state, Lori_States * prev, struct StateMa
         struct JsonRequest jsr1= {0, 's', 0, 79, 0, 0, 0,-1,-1};
         SendOverWiFi(jsr1);
         _state_machine_send_status(prev, state);
+        struct JsonRequest jsr = {PIC_ID, 's', 0, 63, 0, -1, -1, arg->current_row, -1};
+        SendOverWiFi(jsr);
     }
 }
 
@@ -368,7 +370,7 @@ void _state_machine_send_status(Lori_States * prev, Lori_States * curr)
 
 void requeststatus(TimerHandle_t xTimer)
 {
-    struct JsonRequest jsr = {PIC_ID, 'r', 0, 79, 0, 0, 0, 0, 0};
+    struct JsonRequest jsr = {PIC_ID, 'r', 0, 89, 0, 0, 0, 0, 0};
 //    SendOverWiFi(jsr);
 //    jsr.tgt = 0;
 //    jsr.tsk = 79;

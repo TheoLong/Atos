@@ -90,4 +90,7 @@ void StopIRPID(void);
 int GetFrontIR();
 int GetSideIRB();
 int GetSideIRF();
+
+
+//extern struct StateMachineParams smp;
 #endif /* _EXAMPLE_FILE_NAME_H */

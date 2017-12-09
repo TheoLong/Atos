@@ -67,6 +67,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "ir_pid.h"
 #include "system_definitions.h"
 #include "public.h"
+#include "statemachine.h"
 
 int bumper = 0;
 int ir_an0, ir_an1, ir_an2;
@@ -102,6 +103,9 @@ void IntHandlerExternalInterruptInstance0(void)
 {
     struct JsonResponse js = {61, 1, 1, 1, 1};
     SendToControlQueue(js);
+//    smp.bumper = true;
+    struct JsonRequest jsr = {PIC_ID, 's', PIC_ID, 65, 0, 5, 5, 5, 5};
+    SendOverWiFi(jsr);
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_EXTERNAL_3);
 }
  
