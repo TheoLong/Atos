@@ -123,6 +123,42 @@ _IntHandlerSPIInstance0:
     .end	_IntHandlerSPIInstance0
 
 
+
+/* SPI Instance 1 Interrupt */
+
+   .extern  IntHandlerSPIInstance1
+
+   .section	.vector_31,code, keep
+   .equ     __vector_dispatch_31, IntVectorSPIInstance1
+   .global  __vector_dispatch_31
+   .set     nomicromips
+   .set     noreorder
+   .set     nomips16
+   .set     noat
+   .ent  IntVectorSPIInstance1
+
+IntVectorSPIInstance1:
+    la    $26,  _IntHandlerSPIInstance1         
+    jr    $26
+    nop
+	.end	IntVectorSPIInstance1
+
+   .section	.SPIInstance1_vector_text, code, keep
+   .set     nomicromips
+   .set     noreorder
+   .set     nomips16
+   .set     noat
+   .ent  _IntHandlerSPIInstance1
+
+_IntHandlerSPIInstance1:
+    portSAVE_CONTEXT
+    la    s6,  IntHandlerSPIInstance1
+    jalr  s6
+    nop
+    portRESTORE_CONTEXT
+    .end	_IntHandlerSPIInstance1
+
+
 /*******************************************************************************
  End of File
  */

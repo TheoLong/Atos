@@ -46,9 +46,13 @@ uint8_t GetConnectionStatus();
 
 void SendToServoQueue(struct JsonResponse js);
 
+typedef struct
+{
+    uint16_t blue;
+    uint16_t red;
+}PixyReport_t;
 
-
-
+extern PixyReport_t PixyReport;
 
 struct MessageStat
 {

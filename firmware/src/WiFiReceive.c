@@ -214,8 +214,8 @@ struct MessageStat GetMessageStat()
 
 void Dispatch(struct JsonResponse js)
 {
-    if(js.tsk >= 80 && js.tsk <= 90)
-    {
-        SendToServoQueue(js);
-    }
+//    if(js.tsk >= 80 && js.tsk <= 90)
+//    {
+    SendToServoQueue(js);
+//    }
 }

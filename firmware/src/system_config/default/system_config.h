@@ -103,7 +103,7 @@ extern "C" {
 #define SYS_PORT_C_LAT          0x0000
 #define SYS_PORT_C_ODC          0x0000
 
-#define SYS_PORT_D_TRIS         0xFFFF
+#define SYS_PORT_D_TRIS         0xFFBF
 #define SYS_PORT_D_LAT          0x0000
 #define SYS_PORT_D_ODC          0x0000
 
@@ -141,13 +141,13 @@ extern "C" {
 #define DRV_SPI_RM 					1
 #define DRV_SPI_EBM 				0
 #define DRV_SPI_8BIT 				1
-#define DRV_SPI_16BIT 				0
+#define DRV_SPI_16BIT 				1
 #define DRV_SPI_32BIT 				0
 #define DRV_SPI_DMA 				0
 
 /*** SPI Driver Static Allocation Options ***/
-#define DRV_SPI_INSTANCES_NUMBER 		1
-#define DRV_SPI_CLIENTS_NUMBER 			1
+#define DRV_SPI_INSTANCES_NUMBER 		2
+#define DRV_SPI_CLIENTS_NUMBER 			2
 #define DRV_SPI_ELEMENTS_PER_QUEUE 		10
 /* SPI Driver Instance 0 Configuration */
 #define DRV_SPI_SPI_ID_IDX0 				SPI_ID_4
@@ -171,6 +171,28 @@ extern "C" {
 #define DRV_SPI_INT_SUB_PRIORITY_IDX0		INT_SUBPRIORITY_LEVEL0        
 #define DRV_SPI_QUEUE_SIZE_IDX0 			10
 #define DRV_SPI_RESERVED_JOB_IDX0 			1
+/* SPI Driver Instance 1 Configuration */
+#define DRV_SPI_SPI_ID_IDX1 				SPI_ID_2
+#define DRV_SPI_TASK_MODE_IDX1 				DRV_SPI_TASK_MODE_ISR
+#define DRV_SPI_SPI_MODE_IDX1				DRV_SPI_MODE_MASTER
+#define DRV_SPI_ALLOW_IDLE_RUN_IDX1			false
+#define DRV_SPI_SPI_PROTOCOL_TYPE_IDX1 		DRV_SPI_PROTOCOL_TYPE_STANDARD
+#define DRV_SPI_COMM_WIDTH_IDX1 			SPI_COMMUNICATION_WIDTH_16BITS
+#define DRV_SPI_SPI_CLOCK_IDX1 				CLK_BUS_PERIPHERAL_1
+#define DRV_SPI_BAUD_RATE_IDX1 				500000
+#define DRV_SPI_BUFFER_TYPE_IDX1 			DRV_SPI_BUFFER_TYPE_STANDARD
+#define DRV_SPI_CLOCK_MODE_IDX1 			DRV_SPI_CLOCK_MODE_IDLE_LOW_EDGE_FALL
+#define DRV_SPI_INPUT_PHASE_IDX1 			SPI_INPUT_SAMPLING_PHASE_IN_MIDDLE
+#define DRV_SPI_TRANSMIT_DUMMY_BYTE_VALUE_IDX1      0x5A00
+
+#define DRV_SPI_TX_INT_SOURCE_IDX1 			INT_SOURCE_SPI_2_TRANSMIT
+#define DRV_SPI_RX_INT_SOURCE_IDX1 			INT_SOURCE_SPI_2_RECEIVE
+#define DRV_SPI_ERROR_INT_SOURCE_IDX1 		INT_SOURCE_SPI_2_ERROR
+#define DRV_SPI_INT_VECTOR_IDX1				INT_VECTOR_SPI2
+#define DRV_SPI_INT_PRIORITY_IDX1			INT_PRIORITY_LEVEL2
+#define DRV_SPI_INT_SUB_PRIORITY_IDX1		INT_SUBPRIORITY_LEVEL0        
+#define DRV_SPI_QUEUE_SIZE_IDX1 			10
+#define DRV_SPI_RESERVED_JOB_IDX1 			1
 /*** Timer Driver Configuration ***/
 #define DRV_TMR_INTERRUPT_MODE             false
 
@@ -216,6 +238,8 @@ extern "C" {
 /*** Application Instance 1 Configuration ***/
 
 /*** Application Instance 2 Configuration ***/
+
+/*** Application Instance 3 Configuration ***/
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

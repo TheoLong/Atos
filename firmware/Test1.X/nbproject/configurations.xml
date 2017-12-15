@@ -42,6 +42,8 @@
         <itemPath>../src/public.h</itemPath>
         <itemPath>../src/jsmn.h</itemPath>
         <itemPath>../src/Accelerometer.h</itemPath>
+        <itemPath>../src/pixy.h</itemPath>
+        <itemPath>../src/app2.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="driver" projectFiles="true">
@@ -215,6 +217,8 @@
         <itemPath>../src/WiFiTransmit.c</itemPath>
         <itemPath>../src/jsmn.c</itemPath>
         <itemPath>../src/Accelerometer.c</itemPath>
+        <itemPath>../src/pixy.c</itemPath>
+        <itemPath>../src/app2.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="driver" projectFiles="true">

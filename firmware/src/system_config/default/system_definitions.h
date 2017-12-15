@@ -62,6 +62,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "app.h"
 #include "wifireceive.h"
 #include "wifitransmit.h"
+#include "app2.h"
 
 
 // DOM-IGNORE-BEGIN
@@ -100,6 +101,9 @@ typedef struct
 
     /*** SPI Object for Index 0 ***/
     SYS_MODULE_OBJ				spiObjectIdx0;
+    
+    /*** SPI Object for Index 1 ***/
+    SYS_MODULE_OBJ				spiObjectIdx1;
 
 } SYSTEM_OBJECTS;
 

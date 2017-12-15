@@ -125,3 +125,78 @@ int32_t DRV_SPI_MasterRMReceive8BitISR( struct DRV_SPI_DRIVER_OBJECT * pDrvInsta
     return 0;
 }
 
+int32_t DRV_SPI_MasterRMSend16BitISR( struct DRV_SPI_DRIVER_OBJECT * pDrvInstance )
+{
+    register SPI_MODULE_ID spiId = pDrvInstance->spiId;
+    register DRV_SPI_JOB_OBJECT * currentJob = pDrvInstance->currentJob;
+    /* Check to see if we have any more bytes to transmit */
+    if (currentJob->dataLeftToTx + currentJob->dummyLeftToTx == 0)
+    {
+        /* We don't have any more data to send make sure the transmit interrupt is disabled */
+        pDrvInstance->txEnabled = false;
+        return 0;
+    }
+    /* Check to see if the transmit buffer is empty*/
+    if (!PLIB_SPI_TransmitBufferIsEmpty(spiId))
+    {
+        return 0;
+    }
+    /* Make sure that we don't have something in progress and overrun the RX buffer */
+    if (pDrvInstance->symbolsInProgress != 0)
+    {
+        return 0;
+    }
+    if (currentJob->dataLeftToTx != 0)
+    {
+    /* Transmit the data & update the counts */
+        PLIB_SPI_BufferWrite16bit(spiId, ((uint16_t*)currentJob->txBuffer)[currentJob->dataTxed>>1]);
+        currentJob->dataTxed+=2;
+        currentJob->dataLeftToTx-=2;
+    }
+    else
+    {
+        /* Transmit the dummy data & update the counts */
+        PLIB_SPI_BufferWrite16bit(spiId, (uint16_t)pDrvInstance->dummyByteValue);
+        currentJob->dummyLeftToTx-=2;
+    }
+    /* We now have a symbol in progress*/
+    pDrvInstance->symbolsInProgress = 1;
+
+    return 0;
+}
+
+int32_t DRV_SPI_MasterRMReceive16BitISR( struct DRV_SPI_DRIVER_OBJECT * pDrvInstance )
+{
+    register SPI_MODULE_ID spiId = pDrvInstance->spiId;
+    register DRV_SPI_JOB_OBJECT * currentJob = pDrvInstance->currentJob;
+
+    if (currentJob == NULL)
+    {
+        return 0;
+    }
+    if (PLIB_SPI_ReceiverBufferIsFull(spiId))
+    {
+        /* We have data waiting in the SPI buffer */
+        if (currentJob->dataLeftToRx != 0)
+        {
+            /* Receive the data and updates the count */
+            ((uint16_t*)(currentJob->rxBuffer))[currentJob->dataRxed>>1] = PLIB_SPI_BufferRead16bit(spiId);
+            currentJob->dataRxed+=2;
+            currentJob->dataLeftToRx -=2;
+        }
+        else
+        {
+            /* No Data but dummy data: Note: We cannot just clear the
+               buffer because we have to keep track of how many symbols/units we
+               have received, and the number may have increased since we checked
+               how full the buffer is.*/
+            PLIB_SPI_BufferRead16bit(spiId);
+            currentJob->dummyLeftToRx-=2;
+        }
+        /* No longer have a symbol in progress */
+        pDrvInstance->symbolsInProgress = 0;
+    }
+
+    return 0;
+}
+

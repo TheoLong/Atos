@@ -89,6 +89,10 @@ void IntHandlerSPIInstance0(void)
 {
     DRV_SPI_Tasks(sysObj.spiObjectIdx0);
 }
+void IntHandlerSPIInstance1(void)
+{
+    DRV_SPI_Tasks(sysObj.spiObjectIdx1);
+}
  
 /*******************************************************************************
  End of File

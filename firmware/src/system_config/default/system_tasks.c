@@ -57,6 +57,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "app.h"
 #include "wifireceive.h"
 #include "wifitransmit.h"
+#include "app2.h"
 
 
 // *****************************************************************************
@@ -74,6 +75,7 @@ static void _SYS_Tasks ( void );
 static void _APP_Tasks(void);
 static void _WIFIRECEIVE_Tasks(void);
 static void _WIFITRANSMIT_Tasks(void);
+static void _APP2_Tasks(void);
 
 
 // *****************************************************************************
@@ -113,6 +115,11 @@ void SYS_Tasks ( void )
     /* Create OS Thread for WIFITRANSMIT Tasks. */
     xTaskCreate((TaskFunction_t) _WIFITRANSMIT_Tasks,
                 "WIFITRANSMIT Tasks",
+                1024, NULL, 1, NULL);
+
+    /* Create OS Thread for APP2 Tasks. */
+    xTaskCreate((TaskFunction_t) _APP2_Tasks,
+                "APP2 Tasks",
                 1024, NULL, 1, NULL);
 
     /**************
@@ -197,6 +204,23 @@ static void _WIFITRANSMIT_Tasks(void)
     while(1)
     {
         WIFITRANSMIT_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _APP2_Tasks ( void )
+
+  Summary:
+    Maintains state machine of APP2.
+*/
+
+static void _APP2_Tasks(void)
+{
+    while(1)
+    {
+        APP2_Tasks();
     }
 }
 
